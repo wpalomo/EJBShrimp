@@ -4,3 +4,4 @@
 /test/
 /vpproject/
 build.xml
+*.svn

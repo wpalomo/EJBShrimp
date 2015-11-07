@@ -1,37 +1,0 @@
-10
-
-dir
-575
-svn://192.168.0.244/root/subversionShrimpServidor/EJBShrimp/src/java/anexos/sri/comprobantes
-svn://192.168.0.244/root/subversionShrimpServidor
-
-
-
-2015-11-06T00:03:35.312189Z
-575
-carlos
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-40c4d061-270e-4dac-85de-4bac821d7467
-
-administracion
-dir
-
-modelo
-dir
-
-util
-dir
-
