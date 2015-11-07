@@ -1,0 +1,6 @@
+/dist/
+/build/
+/nbproject/
+/test/
+/vpproject/
+build.xml

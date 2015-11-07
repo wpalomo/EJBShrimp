@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+<!-- Java Transaction Api -->
+<persistence-unit name="EJBShrimpPU" transaction-type="JTA">
+<jta-data-source>jdbc/conexionTodocompu</jta-data-source>
+<exclude-unlisted-classes>false</exclude-unlisted-classes>
+<properties/>
+</persistence-unit>
+<!-- control manual -->
+<!-- <persistence-unit name="EJBShrimp-PU" transaction-type="RESOURCE_LOCAL">
+<non-jta-data-source>jdbc/conexionTodocompu</non-jta-data-source>
+<exclude-unlisted-classes>false</exclude-unlisted-classes>
+<properties/>
+</persistence-unit> -->
+</persistence>

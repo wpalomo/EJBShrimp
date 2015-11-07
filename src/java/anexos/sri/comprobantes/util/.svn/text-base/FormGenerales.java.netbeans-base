@@ -1,0 +1,164 @@
+package anexos.sri.comprobantes.util;
+
+import anexos.TO.anxUrlWebServicesTO;
+import sistema.TO.SisPckeystoreTO;
+import validaciones.OSValidator;
+
+//import ec.gob.sri.comprobantes.administracion.modelo.Proxy;
+//import ec.gob.sri.comprobantes.sql.ProxySQL;
+import java.awt.event.KeyEvent;
+import java.net.MalformedURLException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
+import javax.xml.ws.WebServiceException;
+import java.sql.*;
+
+public class FormGenerales {
+
+/*
+ * 
+import anexos.TO.anxUrlWebServicesTO;
+import anexos.sri.comprobantes.administracion.modelo.Emisor;
+import anexos.sri.comprobantes.modelo.ClaveContingencia;
+import java.net.MalformedURLException;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.xml.ws.WebServiceException;
+import sistema.TO.SisPckeystoreTO;
+import validaciones.OSValidator;
+ */
+    
+    //private static anxUrlWebServicesTO anxUrlWebServicesTO = new anxUrlWebServicesTO();
+
+    // <editor-fold defaultstate="collapsed" desc="respuestaAutoriz">
+    public static String devuelveUrlWs(
+            String ambiente, 
+            String nombreServicio, 
+            SisPckeystoreTO sisPckeystoreTO,
+            anxUrlWebServicesTO anxUrlWebServicesTO) {
+        System.out.println("\n\n-----------------devuelveUrlWs------------------");
+        System.out.println("1");
+        OSValidator oSValidator = new OSValidator();
+        StringBuilder url = new StringBuilder();
+        String direccionIPServicio = null;
+        
+//        System.out.println("oSValidator.isUnix() "+oSValidator.isUnix());
+//        if (oSValidator.isUnix()) {
+//            System.setProperty("javax.net.ssl.keyStore", sisPckeystoreTO.getInfKeystoreRuta());
+//            System.setProperty("javax.net.ssl.keyStorePassword", sisPckeystoreTO.getInfKeystorePassword());
+//        }
+//        System.setProperty("javax.net.ssl.trustStore", sisPckeystoreTO.getInfKeystoreRuta());
+//        System.setProperty("javax.net.ssl.trustStorePassword", sisPckeystoreTO.getInfKeystorePassword());
+        
+  
+        
+           
+        
+        System.out.println(sisPckeystoreTO.getInfKeystoreRuta());
+        System.out.println(sisPckeystoreTO.getInfKeystorePassword());
+        
+
+        if (anxUrlWebServicesTO != null) {
+            direccionIPServicio = ambiente.equals(TipoAmbienteEnum.PRODUCCION.getCode()) == true ? anxUrlWebServicesTO.getUrlAmbienteProduccion() : anxUrlWebServicesTO.getUrlAmbientePruebas();
+            url.append(direccionIPServicio);
+            url.append("/comprobantes-electronicos-ws/");
+            url.append(nombreServicio);
+            url.append("?wsdl");
+        }
+        System.out.println("ambiente "+ambiente);
+        System.out.println("1");
+        System.out.println("url:    "+url.toString());
+        return url.toString();
+    }
+    // </editor-fold>
+
+//    public static boolean existConnection(
+//            String tipoAmbiente, 
+//            String nombreServicio, 
+//            sistema.TO.SisPckeystoreTO sisPckeystoreTO,
+//            anxUrlWebServicesTO anxUrlWebServicesTO) {
+//        String url = devuelveUrlWs(tipoAmbiente, nombreServicio, sisPckeystoreTO, anxUrlWebServicesTO);
+//        int i = 0;
+//        boolean respuesta = false;
+//        while (i < 3) {
+//            Object c = EnvioComprobantesWs.webService(url);
+//            if (c == null) {
+//                respuesta = true;
+//                break;
+//            }
+//            if ((c instanceof WebServiceException)) {
+//                respuesta = false;
+//            }
+//            i++;
+//        }
+//        return respuesta;
+//    }
+//
+//    public static String validarUrl(
+//            String tipoAmbiente, 
+//            String nombreServicio, 
+//            sistema.TO.SisPckeystoreTO sisPckeystoreTO,
+//            anxUrlWebServicesTO anxUrlWebServicesTO) {
+//        String mensaje = null;
+//        String url = devuelveUrlWs(tipoAmbiente, nombreServicio, sisPckeystoreTO,anxUrlWebServicesTO);
+//        Object c = EnvioComprobantesWs.webService(url);
+//        if ((c instanceof MalformedURLException)) {
+//            mensaje = ((MalformedURLException) c).getMessage();
+//        }
+//        return mensaje;
+//    }
+//
+//    public static Date eliminaHora(Date date) {
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(date);
+//        cal.set(11, 0);
+//        cal.set(12, 0);
+//        cal.set(13, 0);
+//        cal.set(14, 0);
+//        return cal.getTime();
+//    }
+//
+//    public static String insertarCaracteres(String cadenaLarga, String aInsertar, int longitud) {
+//        StringBuilder sb = new StringBuilder(cadenaLarga);
+//
+//        int i = 0;
+//        while ((i = sb.indexOf(" ", i + longitud)) != -1) {
+//            sb.replace(i, i + 1, aInsertar);
+//        }
+//
+//        return sb.toString();
+//    }
+//
+//    public ClaveContingencia obtieneClaveDeAcceso(String secuencialComprobante, Emisor emisor, String serie, String claveDeAcceso, Date fechaEmision, String tipoComprobante) {
+//        ClaveContingencia clave = new ClaveContingencia();
+//        if (emisor != null) {
+//            serie = emisor.getCodigoEstablecimiento().concat(emisor.getCodPuntoEmision());
+//            if (emisor.getTipoEmision().equals("1")) {
+//                claveDeAcceso = new ClaveDeAcceso().generaClave(fechaEmision, tipoComprobante, emisor.getRuc(), emisor.getTipoAmbiente(), serie, secuencialComprobante, emisor.getClaveInterna(), "1");
+//                clave.setCodigoComprobante(claveDeAcceso);
+//            } else if ((emisor.getTipoEmision().equals("2")) || (emisor.getTipoEmision().equals("3"))) {
+//            }
+//        }
+//        return clave;
+//    }
+//
+//    public static String ingresaPassword() {
+//        String password = null;
+//
+//        JPasswordField pwd = new JPasswordField(20);
+//        int action = JOptionPane.showConfirmDialog(null, pwd, "Ingrese la Contraseña del token", 2);
+//        if (action < 0) {
+//            JOptionPane.showMessageDialog(new JFrame(), "Usted canceló la operación");
+//        } else {
+//            password = new String(pwd.getPassword());
+//        }
+//
+//        return password;
+//    }
+}
