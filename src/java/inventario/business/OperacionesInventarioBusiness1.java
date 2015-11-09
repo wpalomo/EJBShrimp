@@ -25,6 +25,8 @@ import inventario.reporte.ReporteVentaDetalle;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import net.sf.jasperreports.engine.JasperPrint;
 
@@ -2971,6 +2973,14 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
         }
     }
 
+    public Object[] getCompra(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception{
+         return operacionesInventarioDAOLocal.getCompra(empresa, perCodigo, motCodigo, compNumero);
+    }
+    
+    public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception{
+         return operacionesInventarioDAOLocal.getVenta(empresa, perCodigo, motCodigo, compNumero);
+    }
+    
     public inventario.TO.MensajeTO modificarInvComprasTO(
             InvComprasTO invComprasTO,
             List<InvComprasDetalleTO> listaInvComprasDetalleTO,

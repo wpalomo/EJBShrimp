@@ -476,6 +476,13 @@ public interface OperacionesInventarioBusinessLocal1 {
     JasperPrint generarReporteCompraDetalleImprimir(SisUsuarioEmpresaTO sisUsuarioEmpresaTO,
             List<ReporteCompraDetalle> reporteCompraDetalles,
             String cmFormaImprimir) throws Exception;
+
+    public Object[] getCompra(java.lang.String empresa, 
+            java.lang.String perCodigo, 
+            java.lang.String motCodigo, 
+            java.lang.String compNumero)throws Exception;
+
+    public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception;
  
     
     

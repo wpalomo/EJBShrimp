@@ -291,4 +291,10 @@ public interface OperacionesInventarioDAOLocal {
     java.util.List<inventario.TO.InvFunListaProductosSaldosGeneralTO> getInvFunListaProductosSaldosGeneralTO(String empresa, String producto, String fecha, boolean estado) throws Exception;
     java.util.List<inventario.TO.InvFunUltimasComprasTO> getInvFunUltimasComprasTOs(java.lang.String empresa, java.lang.String producto) throws Exception;
     inventario.TO.InvComprasTO getComprasTO (String empresa, String periodo, String motivo, String numeroCompra) throws Exception;
+
+    //public java.lang.String getCompra(java.lang.String empresa, java.lang.String periodo, java.lang.String conTipo, java.lang.String numero);
+
+    public Object[] getCompra(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception;
+
+    public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception;
 }

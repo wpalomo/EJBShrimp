@@ -1148,6 +1148,14 @@ public class OperacionesInventarioFacade1 implements OperacionesInventarioFacade
     public inventario.TO.InvComprasTO getComprasTO(String empresa, String periodo, String motivo, String numeroCompra) throws Exception {
         return operacionesInventarioBusinessLocal.getComprasTO(empresa, periodo, motivo, numeroCompra);
     }
+    
+    public Object[] getCompra(String empresa, String perCodigo, String motCodigo, String compNumero) throws Exception {
+        return operacionesInventarioBusinessLocal.getCompra(empresa, perCodigo, motCodigo, compNumero);
+    }
+    
+    public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero) throws Exception {
+        return operacionesInventarioBusinessLocal.getVenta(empresa, perCodigo, motCodigo, compNumero);
+    }
 
     public java.util.List<inventario.TO.InvListaProductosCompraSustentoConceptoTO> getInvProductoSustentoConcepto(String empresa, java.util.List<inventario.TO.InvListaProductosCompraSustentoConceptoTO> invListaProductosCompraTOs) throws Exception {
         return operacionesInventarioBusinessLocal.getInvProductoSustentoConcepto(

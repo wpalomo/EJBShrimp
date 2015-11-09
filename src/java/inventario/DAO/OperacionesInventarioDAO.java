@@ -217,6 +217,35 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
             return 0;
         }
     }
+    
+    public Object[] getCompra(String empresa, String periodo, String conTipo, String numero){          
+//            Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery("select comp_empresa || '|' || "
+//                    + "comp_periodo || '|' ||comp_motivo || '|' || comp_numero "+ 
+//            "from inventario.inv_compras where con_empresa='"+empresa+"' AND "+
+//                "con_periodo='"+periodo+"' AND con_tipo='"+conTipo+"' AND con_numero='"+numero+"';").getResultList(),0);
+            Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery("select comp_empresa, comp_periodo, comp_motivo, comp_numero "+ 
+            "from inventario.inv_compras where con_empresa='"+empresa+"' AND "+
+                "con_periodo='"+periodo+"' AND con_tipo='"+conTipo+"' AND con_numero='"+numero+"';").getResultList(),0);
+            if (array != null) {
+                return array;
+            } 
+            return null;
+        
+    }
+    
+    public Object[] getVenta(String empresa, String periodo, String conTipo, String numero){
+        Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery("select vta_empresa, vta_periodo, vta_motivo, vta_numero "+ 
+	"from inventario.inv_ventas where con_empresa='"+empresa+"' AND "+
+	     "con_periodo='"+periodo+"' AND con_tipo='"+conTipo+"' AND con_numero='"+numero+"';").getResultList(),0);
+//        System.out.println("array[0]: "+array[0].toString());
+//        System.out.println("array[1]: "+array[1].toString());
+//        System.out.println("array[2]: "+array[2].toString());
+//        System.out.println("array[3]: "+array[3].toString());
+            if (array != null) {
+                return array;
+            } 
+            return null;
+    }
 
     public inventario.TO.InvTransferenciasTO getInvTransferenciasCabeceraTO(String empresa, String periodo, String motivo, String numeroConsumo) throws Exception {
         return inventario.helper.ConversionesInventario.convertirInvTransferenciasCabecera_InvTransferenciasCabeceraTO(invTransferenciasFacadeLocal.find(new inventario.entity.InvTransferenciasPK(empresa, periodo, motivo, numeroConsumo)));

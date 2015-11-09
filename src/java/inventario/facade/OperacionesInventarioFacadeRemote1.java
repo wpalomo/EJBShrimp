@@ -856,6 +856,12 @@ public interface OperacionesInventarioFacadeRemote1 {
 
      JasperPrint generarReporteCompraDetalleImprimir(SisUsuarioEmpresaTO sisUsuarioEmpresaTO, 
             List<ReporteCompraDetalle> reporteCompraDetalles, String cmFormaImprimir)throws Exception;
+
+    public Object[] getCompra(java.lang.String empresa, 
+            java.lang.String perCodigo, java.lang.String motCodigo, 
+            java.lang.String compNumero) throws java.lang.Exception;
+
+    public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero) throws java.lang.Exception;
     
 
 
