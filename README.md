@@ -4,14 +4,26 @@ Servidor
 
 Comandos Git
 
-git clone https://github.com/todocompu/EJBShrimp.git
+Para clonar repositorio
 
-git add .
+git clone https://github.com/xxxxx.git
 
-git add -all
+Para añadir archivos para hacer commit
 
-git commit -m "mensaje"
+git add . o git add -all
+
+Para realizar el commit de manera local
+
+git commit -m 'mensaje'
+
+Para enviar los cambios o la rama seleccionada
 
 git push -u origin master
 
+Para sincronizar cambios
+
 git pull
+
+Para ver el estatus de la rama
+
+git status
