@@ -45,7 +45,8 @@ public class SisEmpresaTO implements Serializable {
     public SisEmpresaTO() {
     }
 
-    public SisEmpresaTO(String empCodigo, String empRuc, String empNombre, String empRazonSocial, String empDireccion, String empCiudad, String empTelefono, String empFax, String empEmail, String empClave, byte[] empLogo, String emResolucionContribuyenteEspecial, Boolean emObligadoLlevarContabilidad, String empGerente, Character empTipoIdGerente, String empIdGerente, String empContador, String empRucContador, Boolean empActiva, String usrInsertaUsuario, Date usrFechaInsertaUsuario, String parActividad, String parEscogerPrecioPor, String parFinanciero, String parFinancieroId, short parColumnasEstadosFinancieros, String parCodigoDinardap) {
+    public SisEmpresaTO(String empCodigo, String empRuc, String empNombre, String empRazonSocial, String empDireccion, 
+            String empCiudad, String empTelefono, String empFax, String empEmail, String empClave, byte[] empLogo, String emResolucionContribuyenteEspecial, Boolean emObligadoLlevarContabilidad, String empGerente, Character empTipoIdGerente, String empIdGerente, String empContador, String empRucContador, Boolean empActiva, String usrInsertaUsuario, Date usrFechaInsertaUsuario, String parActividad, String parEscogerPrecioPor, String parFinanciero, String parFinancieroId, short parColumnasEstadosFinancieros, String parCodigoDinardap) {
         this.empCodigo = empCodigo;
         this.empRuc = empRuc;
         this.empNombre = empNombre;

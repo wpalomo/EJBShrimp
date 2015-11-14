@@ -15,6 +15,7 @@ public class ReporteCuentasPorPagarDetallado implements Serializable {
 
     private String codigoCP;
     private String fechaHasta;
+    private String proveedor;
     /////////DETALLE
     private String cxpdPeriodo;
     private String cxpdMotivo;
@@ -39,6 +40,15 @@ public class ReporteCuentasPorPagarDetallado implements Serializable {
         this.cxpdSaldo = cxpdSaldo;
     }
 
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
+
+        
     public String getCodigoCP() {
         return codigoCP;
     }

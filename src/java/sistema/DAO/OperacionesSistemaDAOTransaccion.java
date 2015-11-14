@@ -174,7 +174,7 @@ public class OperacionesSistemaDAOTransaccion implements OperacionesSistemaDAOTr
         em.persist(sisEmpresaParametros);
         em.persist(sisSuceso);
         boolean creo = Boolean.parseBoolean(((List) em.createNativeQuery(
-                "select * from sistema.fun_registros_complementarios('"
+                "select * from sistemaweb.fun_registros_complementarios('"
                 + sisEmpresa.getEmpCodigo().trim() + "')").getResultList().
                 get(0)).get(0).toString());
         if (!creo) {
@@ -195,10 +195,19 @@ public class OperacionesSistemaDAOTransaccion implements OperacionesSistemaDAOTr
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override
-    public boolean modificarSisEmpresa(SisEmpresa sisEmpresa, SisSuceso sisSuceso, sistemaWeb.entity.SisEmpresaParametros sisEmpresaParametros) throws Exception {
-        em.persist(sisSuceso);
+    public boolean modificarSisEmpresa(SisEmpresa sisEmpresa, SisSuceso sisSuceso, 
+    sistemaWeb.entity.SisEmpresaParametros sisEmpresaParametros) throws Exception {        
         em.merge(sisEmpresa);
-        em.merge(sisEmpresaParametros);
+        em.merge(sisEmpresaParametros);        
+        em.persist(sisSuceso);
+//        boolean creo = Boolean.parseBoolean(((List) em.createNativeQuery(
+//                "select * from sistemaweb.fun_registros_complementarios('"
+//                + sisEmpresa.getEmpCodigo().trim() + "')").getResultList().
+//                get(0)).get(0).toString());
+//        if (!creo) {
+//            throw new NoCreationCompanyException("Empresa no fue modificada");
+//        }
+        
         em.flush();
         return true;
     }

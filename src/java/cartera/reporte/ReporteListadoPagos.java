@@ -13,6 +13,7 @@ import java.math.BigDecimal;
  */
 public class ReporteListadoPagos implements Serializable {
 
+    private String codigoCP;
     private String desde;
     private String hasta;
     private String proveedor;
@@ -29,6 +30,7 @@ public class ReporteListadoPagos implements Serializable {
     }
 
     public ReporteListadoPagos(String desde, String hasta, String proveedor, String pagNumeroSistema, String pagFecha, String pagProveedor, BigDecimal pagValor, String pagObservaciones, Boolean pagPendiente, Boolean pagAnulado) {
+//        this.codigoCP = codigoCP;
         this.desde = desde;
         this.hasta = hasta;
         this.proveedor = proveedor;
@@ -45,6 +47,15 @@ public class ReporteListadoPagos implements Serializable {
         return desde;
     }
 
+    public String getCodigoCP() {
+        return codigoCP;
+    }
+
+    public void setCodigoCP(String codigoCP) {
+        this.codigoCP = codigoCP;
+    }
+
+    
     public void setDesde(String desde) {
         this.desde = desde;
     }

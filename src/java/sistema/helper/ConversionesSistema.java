@@ -58,7 +58,7 @@ public class ConversionesSistema {
         sisEmpresa.setEmpRazonSocial(sisEmpresaTO.getEmpRazonSocial());
         sisEmpresa.setEmpDireccion(sisEmpresaTO.getEmpDireccion());
         sisEmpresa.setEmpCiudad(sisEmpresaTO.getEmpCiudad());
-        //sisEmpresa.setEmpActividad(sisEmpresaTO.getParActividad());
+//        sisEmpresa.setEmpActividad(sisEmpresaTO.getParActividad());
         sisEmpresa.setEmpTelefono(sisEmpresaTO.getEmpTelefono());
         sisEmpresa.setEmpFax(sisEmpresaTO.getEmpFax());
         sisEmpresa.setEmpEmail(sisEmpresaTO.getEmpEmail());

@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 public class ReporteMayorAuxiliarProveedorCliente implements Serializable {
 
     String tituloReporte;
+    private String codigoSector;
     String desde;
     String hasta;
     String id;
@@ -52,6 +53,16 @@ public class ReporteMayorAuxiliarProveedorCliente implements Serializable {
     public String getDesde() {
         return desde;
     }
+
+    public String getCodigoSector() {
+        return codigoSector;
+    }
+
+    public void setCodigoSector(String codigoSector) {
+        this.codigoSector = codigoSector;
+    }
+    
+    
 
     public void setDesde(String desde) {
         this.desde = desde;

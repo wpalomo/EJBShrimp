@@ -458,8 +458,8 @@ public class OperacionesCarBusiness implements OperacionesCarBusinessLocal {
     }
 
     @Override
-    public java.util.List<cartera.TO.CarFunPagosTO> getCarFunPagosTO(java.lang.String empresa, java.lang.String desde, java.lang.String hasta, java.lang.String proveedor) throws java.lang.Exception {
-        return operacionesCarDAOLocal.getCarFunPagosTO(empresa, desde, hasta, proveedor);
+    public java.util.List<cartera.TO.CarFunPagosTO> getCarFunPagosTO(java.lang.String empresa, String sector, java.lang.String desde, java.lang.String hasta, java.lang.String proveedor) throws java.lang.Exception {
+        return operacionesCarDAOLocal.getCarFunPagosTO(empresa, sector, desde, hasta, proveedor);
     }
 
     @Override
@@ -468,8 +468,8 @@ public class OperacionesCarBusiness implements OperacionesCarBusinessLocal {
     }
 
     @Override
-    public List<CarFunPagosDetalleTO> getCarFunPagosDetalleTO(String empresa, String desde, String hasta, String proveedor, String formaPago) throws Exception {
-        return operacionesCarDAOLocal.getCarFunPagosDetalleTO(empresa, desde, hasta, proveedor, formaPago);
+    public List<CarFunPagosDetalleTO> getCarFunPagosDetalleTO(String empresa, String sector, String desde, String hasta, String proveedor, String formaPago) throws Exception {
+        return operacionesCarDAOLocal.getCarFunPagosDetalleTO(empresa, sector, desde, hasta, proveedor, formaPago);
     }
 
     @Override
@@ -777,13 +777,17 @@ public class OperacionesCarBusiness implements OperacionesCarBusinessLocal {
     }
 
     @Override
-    public java.util.List<cartera.TO.CarFunCobrosTO> getCarFunCobrosTO(java.lang.String empresa, java.lang.String desde, java.lang.String hasta, java.lang.String cliente) throws java.lang.Exception {
-        return operacionesCarDAOLocal.getCarFunCobrosTO(empresa, desde, hasta, cliente);
+    public java.util.List<cartera.TO.CarFunCobrosTO> getCarFunCobrosTO(java.lang.String empresa, 
+    String sector,
+    java.lang.String desde, java.lang.String hasta, java.lang.String cliente) throws java.lang.Exception {
+        return operacionesCarDAOLocal.getCarFunCobrosTO(empresa, sector, desde, hasta, cliente);
     }
 
     @Override
-    public java.util.List<cartera.TO.CarFunCobrosDetalleTO> getCarFunCobrosDetalleTO(java.lang.String empresa, java.lang.String desde, java.lang.String hasta, java.lang.String cliente, java.lang.String formaPago) throws java.lang.Exception {
-        return operacionesCarDAOLocal.getCarFunCobrosDetalleTO(empresa, desde, hasta, cliente, formaPago);
+    public java.util.List<cartera.TO.CarFunCobrosDetalleTO> getCarFunCobrosDetalleTO(java.lang.String empresa, 
+    String sector,
+    java.lang.String desde, java.lang.String hasta, java.lang.String cliente, java.lang.String formaPago) throws java.lang.Exception {
+        return operacionesCarDAOLocal.getCarFunCobrosDetalleTO(empresa, sector, desde, hasta, cliente, formaPago);
     }
 
     @Override
@@ -1024,13 +1028,16 @@ public class OperacionesCarBusiness implements OperacionesCarBusinessLocal {
     }
 
     @Override
-    public java.util.List<cartera.TO.CarListaMayorAuxiliarClienteProveedorTO> getCarListaMayorAuxiliarClienteProveedorTO(java.lang.String empresa, java.lang.String proveedor, java.lang.String desde, java.lang.String hasta, char accion) throws java.lang.Exception {
-        return operacionesCarDAOLocal.getCarListaMayorAuxiliarClienteProveedorTO(empresa, proveedor, desde, hasta, accion);
+    public java.util.List<cartera.TO.CarListaMayorAuxiliarClienteProveedorTO> getCarListaMayorAuxiliarClienteProveedorTO(
+            java.lang.String empresa, String sector, java.lang.String proveedor, java.lang.String desde, java.lang.String hasta, char accion) throws java.lang.Exception {
+        return operacionesCarDAOLocal.getCarListaMayorAuxiliarClienteProveedorTO(empresa, sector, proveedor, desde, hasta, accion);
     }
 
     @Override
-    public List<CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorPagarDetalladoTO(String empresa, String sector, String hasta) throws Exception {
-        return operacionesCarDAOLocal.getCarListaCuentasPorPagarDetalladoTO(empresa, sector, hasta);
+    public List<CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorPagarDetalladoTO(String empresa, String sector, 
+    String proveedor,
+    String hasta) throws Exception {
+        return operacionesCarDAOLocal.getCarListaCuentasPorPagarDetalladoTO(empresa, sector, proveedor, hasta);
     }
 
     @Override
@@ -1051,10 +1058,11 @@ public class OperacionesCarBusiness implements OperacionesCarBusinessLocal {
     @Override
     public List<CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorCobrarDetalladoTO(String empresa,
             String sector,
+            String cliente,
             String desde,
             String hasta,
             boolean ichfa) throws Exception {
-        return operacionesCarDAOLocal.getCarListaCuentasPorCobrarDetalladoTO(empresa, sector, desde, hasta, ichfa);
+        return operacionesCarDAOLocal.getCarListaCuentasPorCobrarDetalladoTO(empresa, sector, cliente,  desde, hasta, ichfa);
     }
 
     @Override

@@ -58,8 +58,8 @@ public class GenerarReporteInventario implements GenerarReporteInventarioLocal {
                 reporteInvKardexDetalle.setkObservaciones(invKardexTO.getkObservaciones().toString());
                 listaReporteInvKardexDetalleParametro.add(reporteInvKardexDetalle);
             }
-
-            return generarReporte(sisUsuarioEmpresaTO, banderaCosto ? "reportInventarioKardexValorizado.jrxml" : "reportInventarioKardex.jrxml", new HashMap(), listaReporteInvKardexDetalleParametro);
+            
+     return generarReporte(sisUsuarioEmpresaTO, banderaCosto ? "reportInventarioKardexValorizado.jrxml" : "reportInventarioKardex.jrxml", new HashMap(), listaReporteInvKardexDetalleParametro);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -89,6 +89,7 @@ public class GenerarReporteInventario implements GenerarReporteInventarioLocal {
             return null;
         }
     }
+    
 
     public JasperPrint generarReporteListadoCompras(SisUsuarioEmpresaTO sisUsuarioEmpresaTO, String fechaDesde,
             String fechaHasta, String motivo, String proveedorId, String documento,
@@ -117,9 +118,8 @@ public class GenerarReporteInventario implements GenerarReporteInventarioLocal {
                 reporteListadoCompras.setCompAnulado(ifcto.getCompAnulado());
                 reporteListadoComprases.add(reporteListadoCompras);
             }
-
             return generarReporte(sisUsuarioEmpresaTO, "reportListadoCompras.jrxml", new HashMap(), reporteListadoComprases);
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -341,6 +341,7 @@ public class GenerarReporteInventario implements GenerarReporteInventarioLocal {
     private <T> JasperPrint generarReporte(SisUsuarioEmpresaTO sisUsuario, String nombreReporte, Map parametros, List<T> list) throws Exception {
         try {
             String rutaReportes = getRutaReportes() + "inventario/";
+            System.out.println("ruta rep: "+rutaReportes+nombreReporte);
             parametros.put("SUBREPORT_DIR", rutaReportes);
             parametros.put("p_empresa_nombre", sisUsuario.getEmpNombre());
             parametros.put("p_empresa_ruc", sisUsuario.getEmpRuc());
