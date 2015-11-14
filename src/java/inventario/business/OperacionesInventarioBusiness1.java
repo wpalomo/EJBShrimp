@@ -18,10 +18,7 @@ import inventario.entity.InvComprasMotivoAnulacion;
 import inventario.entity.InvProductoSaldos;
 import inventario.entity.InvVentasMotivoAnulacion;
 import inventario.helper.ConversionesInventario;
-import inventario.reporte.ReporteCompraDetalle;
-import inventario.reporte.ReporteConsumoDetalle;
-import inventario.reporte.ReporteTransferenciaDetalle;
-import inventario.reporte.ReporteVentaDetalle;
+import inventario.reporte.*;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
@@ -2228,59 +2225,59 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
 //
 //                                                        } else {
 
-                                                            List<inventario.entity.InvComprasDetalle> listadoDetalleCompra = agrupraProductosBodegaCompra(listInvComprasDetalle);
-                                                            for (int i = 0; i < listadoDetalleCompra.size(); i++) {
-                                                                //if (!listadoDetalleCompra.get(i).getInvProducto().getInvProductoTipo().getTipTipo().equals("COSTO O GASTO")) {
-                                                                if (!listadoDetalleCompra.get(i).getDetPendiente()) {
-                                                                    invProductoSaldos = new inventario.entity.InvProductoSaldos();
-                                                                    invProductoSaldos.setInvProductoSaldosPK(new inventario.entity.InvProductoSaldosPK(invCompras.getInvComprasPK().getCompEmpresa(), listadoDetalleCompra.get(i).getInvBodega().getInvBodegaPK().getBodCodigo(),
-                                                                            listadoDetalleCompra.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal()));
-                                                                    ////BUSCO LA BODEGA
-                                                                    invProductoSaldos.setInvBodega(operacionesInventarioDAOLocal.buscarInvBodega(
-                                                                            invCompras.getInvComprasPK().getCompEmpresa(),
-                                                                            listadoDetalleCompra.get(i).getInvBodega().getInvBodegaPK().getBodCodigo()));
-                                                                    ////PONGO EL PRODUCTO
-                                                                    invProductoSaldos.setInvProducto(listadoDetalleCompra.get(i).getInvProducto());
-                                                                    inventario.entity.InvProductoSaldos invProductoSaldosConsulta = operacionesInventarioDAOLocal.buscarProductosSaldos(invProductoSaldos.getInvProductoSaldosPK().getStkEmpresa(),
-                                                                            invProductoSaldos.getInvProductoSaldosPK().getStkBodega(),
-                                                                            invProductoSaldos.getInvProductoSaldosPK().getStkProducto());
-                                                                    if (invProductoSaldosConsulta == null) {
-                                                                        /////Cuando no existe el registro se pone crea la cantidad
-                                                                        //invProductoSaldos.setStkSaldoFinal(listadoDetalleCompra.get(i).getDetCantidad());
-                                                                        
-                                                                         invProductoSaldos.setStkSaldoFinal(listadoDetalleCompra.get(i).getInvProducto().getInvProductoTipo().getTipTipo().equals("COSTO O GASTO") ? cero
-                                                                                : listadoDetalleCompra.get(i).getDetCantidad());
+                                                        List<inventario.entity.InvComprasDetalle> listadoDetalleCompra = agrupraProductosBodegaCompra(listInvComprasDetalle);
+                                                        for (int i = 0; i < listadoDetalleCompra.size(); i++) {
+                                                            //if (!listadoDetalleCompra.get(i).getInvProducto().getInvProductoTipo().getTipTipo().equals("COSTO O GASTO")) {
+                                                            if (!listadoDetalleCompra.get(i).getDetPendiente()) {
+                                                                invProductoSaldos = new inventario.entity.InvProductoSaldos();
+                                                                invProductoSaldos.setInvProductoSaldosPK(new inventario.entity.InvProductoSaldosPK(invCompras.getInvComprasPK().getCompEmpresa(), listadoDetalleCompra.get(i).getInvBodega().getInvBodegaPK().getBodCodigo(),
+                                                                        listadoDetalleCompra.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal()));
+                                                                ////BUSCO LA BODEGA
+                                                                invProductoSaldos.setInvBodega(operacionesInventarioDAOLocal.buscarInvBodega(
+                                                                        invCompras.getInvComprasPK().getCompEmpresa(),
+                                                                        listadoDetalleCompra.get(i).getInvBodega().getInvBodegaPK().getBodCodigo()));
+                                                                ////PONGO EL PRODUCTO
+                                                                invProductoSaldos.setInvProducto(listadoDetalleCompra.get(i).getInvProducto());
+                                                                inventario.entity.InvProductoSaldos invProductoSaldosConsulta = operacionesInventarioDAOLocal.buscarProductosSaldos(invProductoSaldos.getInvProductoSaldosPK().getStkEmpresa(),
+                                                                        invProductoSaldos.getInvProductoSaldosPK().getStkBodega(),
+                                                                        invProductoSaldos.getInvProductoSaldosPK().getStkProducto());
+                                                                if (invProductoSaldosConsulta == null) {
+                                                                    /////Cuando no existe el registro se pone crea la cantidad
+                                                                    //invProductoSaldos.setStkSaldoFinal(listadoDetalleCompra.get(i).getDetCantidad());
 
+                                                                    invProductoSaldos.setStkSaldoFinal(listadoDetalleCompra.get(i).getInvProducto().getInvProductoTipo().getTipTipo().equals("COSTO O GASTO") ? cero
+                                                                            : listadoDetalleCompra.get(i).getDetCantidad());
+
+                                                                    invProductoSaldos.setStkValorUltimaCompraFinal(listadoDetalleCompra.get(i).getDetPrecio());
+                                                                    ///Se pone la fecha de la compra
+                                                                    invProductoSaldos.setStkFechaUltimaCompraFinal(invCompras.getCompFecha());
+                                                                    invProductoSaldos.setStkSaldoInicial(cero);
+                                                                    invProductoSaldos.setStkValorPromedioInicial(cero);
+                                                                    invProductoSaldos.setStkValorPromedioFinal(cero);
+                                                                    //invProductoSaldos.setStkSaldoFinal(cero);
+                                                                } else {
+                                                                    if (invProductoSaldosConsulta.getStkFechaUltimaCompraFinal() == null
+                                                                            || invCompras.getCompFecha().getTime() >= invProductoSaldosConsulta.getStkFechaUltimaCompraFinal().getTime()) {
                                                                         invProductoSaldos.setStkValorUltimaCompraFinal(listadoDetalleCompra.get(i).getDetPrecio());
-                                                                        ///Se pone la fecha de la compra
                                                                         invProductoSaldos.setStkFechaUltimaCompraFinal(invCompras.getCompFecha());
-                                                                        invProductoSaldos.setStkSaldoInicial(cero);
-                                                                        invProductoSaldos.setStkValorPromedioInicial(cero);
-                                                                        invProductoSaldos.setStkValorPromedioFinal(cero);
-                                                                        //invProductoSaldos.setStkSaldoFinal(cero);
                                                                     } else {
-                                                                        if (invProductoSaldosConsulta.getStkFechaUltimaCompraFinal() == null
-                                                                                || invCompras.getCompFecha().getTime() >= invProductoSaldosConsulta.getStkFechaUltimaCompraFinal().getTime()) {
-                                                                            invProductoSaldos.setStkValorUltimaCompraFinal(listadoDetalleCompra.get(i).getDetPrecio());
-                                                                            invProductoSaldos.setStkFechaUltimaCompraFinal(invCompras.getCompFecha());
-                                                                        } else {
-                                                                            invProductoSaldos.setStkValorUltimaCompraFinal(invProductoSaldosConsulta.getStkValorUltimaCompraFinal());
-                                                                            invProductoSaldos.setStkFechaUltimaCompraFinal(invProductoSaldosConsulta.getStkFechaUltimaCompraFinal());
-                                                                        }
-                                                                        invProductoSaldos.setStkSaldoInicial(invProductoSaldosConsulta.getStkSaldoInicial());
-                                                                        invProductoSaldos.setStkValorPromedioInicial(invProductoSaldosConsulta.getStkValorPromedioInicial());
-                                                                        invProductoSaldos.setStkValorPromedioFinal(invProductoSaldosConsulta.getStkValorPromedioFinal());
+                                                                        invProductoSaldos.setStkValorUltimaCompraFinal(invProductoSaldosConsulta.getStkValorUltimaCompraFinal());
+                                                                        invProductoSaldos.setStkFechaUltimaCompraFinal(invProductoSaldosConsulta.getStkFechaUltimaCompraFinal());
+                                                                    }
+                                                                    invProductoSaldos.setStkSaldoInicial(invProductoSaldosConsulta.getStkSaldoInicial());
+                                                                    invProductoSaldos.setStkValorPromedioInicial(invProductoSaldosConsulta.getStkValorPromedioInicial());
+                                                                    invProductoSaldos.setStkValorPromedioFinal(invProductoSaldosConsulta.getStkValorPromedioFinal());
 
-                                                                        ///Como si existe el dato se le suma la nueva cantidad con lo que se va a ingresar
+                                                                    ///Como si existe el dato se le suma la nueva cantidad con lo que se va a ingresar
 //                                                                            invProductoSaldos.setStkSaldoFinal(listadoDetalleCompra.get(i).getDetCantidad().
 //                                                                                    add(invProductoSaldosConsulta.getStkSaldoFinal()));
-                                                                        invProductoSaldos.setStkSaldoFinal(invProductoSaldosConsulta.getStkSaldoFinal().
-                                                                                add(listadoDetalleCompra.get(i).getInvProducto().getInvProductoTipo().getTipTipo().equals("COSTO O GASTO") ? cero
-                                                                                : listadoDetalleCompra.get(i).getDetCantidad()));
-                                                                    }
+                                                                    invProductoSaldos.setStkSaldoFinal(invProductoSaldosConsulta.getStkSaldoFinal().
+                                                                            add(listadoDetalleCompra.get(i).getInvProducto().getInvProductoTipo().getTipTipo().equals("COSTO O GASTO") ? cero
+                                                                            : listadoDetalleCompra.get(i).getDetCantidad()));
                                                                 }
-                                                                listaInvProductoSaldos.add(invProductoSaldos);
-                                                                // }
+                                                            }
+                                                            listaInvProductoSaldos.add(invProductoSaldos);
+                                                            // }
                                                             //}
                                                         }
                                                     }
@@ -2670,13 +2667,13 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                                                         listaInvProductoSaldos.add(invProductoSaldos);
                                                                                     } else {
                                                                                         retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                        mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo()+"|"+listadoDetalleVentas.get(i).getInvBodega().getBodNombre()+"\t\t"+
-                                                                                            listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                        mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleVentas.get(i).getInvBodega().getBodNombre() + "\t\t"
+                                                                                                + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
                                                                                     }
                                                                                 } else {
                                                                                     retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                    mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo()+"|"+listadoDetalleVentas.get(i).getInvBodega().getBodNombre()+"\t\t"+
-                                                                                            listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                    mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleVentas.get(i).getInvBodega().getBodNombre() + "\t\t"
+                                                                                            + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
                                                                                 }
                                                                             }
                                                                         }
@@ -2887,7 +2884,8 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                         invProformasTO.getProfMotivo()));
                                 ////// CREANDO PROFORMA
                                 inventario.entity.InvProformas invProformas = inventario.helper.ConversionesInventario.convertirInvProformasTO_InvProformas(invProformasTO);
-                                invProformas.setInvCliente(operacionesInventarioDAOLocal.buscarInvCliente(invProformasTO.getCliEmpresa(), invProformasTO.getCliCodigo()));
+                                //invProformas.setInvCliente(operacionesInventarioDAOLocal.buscarInvCliente(invProformasTO.getCliEmpresa(), invProformasTO.getCliCodigo()));
+                                invProformas.setInvCliente(invCliente);
                                 ////// CONVIRTIENDO A ENTIDAD EL DETALLE
                                 List<inventario.entity.InvProformasDetalle> listInvProformasDetalle = new ArrayList(0);
                                 inventario.entity.InvProformasDetalle invProformasDetalle = null;
@@ -2973,14 +2971,14 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
         }
     }
 
-    public Object[] getCompra(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception{
-         return operacionesInventarioDAOLocal.getCompra(empresa, perCodigo, motCodigo, compNumero);
+    public Object[] getCompra(String empresa, String perCodigo, String motCodigo, String compNumero) throws Exception {
+        return operacionesInventarioDAOLocal.getCompra(empresa, perCodigo, motCodigo, compNumero);
     }
-    
-    public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception{
-         return operacionesInventarioDAOLocal.getVenta(empresa, perCodigo, motCodigo, compNumero);
+
+    public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero) throws Exception {
+        return operacionesInventarioDAOLocal.getVenta(empresa, perCodigo, motCodigo, compNumero);
     }
-    
+
     public inventario.TO.MensajeTO modificarInvComprasTO(
             InvComprasTO invComprasTO,
             List<InvComprasDetalleTO> listaInvComprasDetalleTO,
@@ -3568,13 +3566,13 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                                                         listaInvProductoSaldos.add(invProductoSaldos);
                                                                                     } else {
                                                                                         retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                        mensajeClase.add(listadoDetalleCompras.get(i).getInvBodega().getInvBodegaPK().getBodCodigo()+"|"+listadoDetalleCompras.get(i).getInvBodega().getBodNombre()+"\t\t"+
-                                                                                                listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleCompras.get(i).getInvProducto().getProNombre());
+                                                                                        mensajeClase.add(listadoDetalleCompras.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleCompras.get(i).getInvBodega().getBodNombre() + "\t\t"
+                                                                                                + listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleCompras.get(i).getInvProducto().getProNombre());
                                                                                     }
                                                                                 } else {
                                                                                     retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                    mensajeClase.add(listadoDetalleCompras.get(i).getInvBodega().getInvBodegaPK().getBodCodigo()+"|"+listadoDetalleCompras.get(i).getInvBodega().getBodNombre()+"\t\t"+
-                                                                                            listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleCompras.get(i).getInvProducto().getProNombre());
+                                                                                    mensajeClase.add(listadoDetalleCompras.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleCompras.get(i).getInvBodega().getBodNombre() + "\t\t"
+                                                                                            + listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleCompras.get(i).getInvProducto().getProNombre());
                                                                                 }
                                                                             }
                                                                         }
@@ -4353,13 +4351,13 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                                                                 listaInvProductoSaldos.add(invProductoSaldos);
                                                                                             } else {
                                                                                                 retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                                mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo()+"\t"+
-                                                                                                        listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                                mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
+                                                                                                        + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
                                                                                             }
                                                                                         } else {
                                                                                             retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                            mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo()+"\t"+
-                                                                                                    listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                            mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
+                                                                                                    + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
                                                                                         }
                                                                                     }
                                                                                 }
@@ -4399,14 +4397,14 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                                                             } else {
                                                                                                 System.out.println("3");
                                                                                                 retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                                mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo()+"\t"+
-                                                                                                        listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                                mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
+                                                                                                        + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
                                                                                             }
                                                                                         } else {
                                                                                             System.out.println("4");
                                                                                             retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                            mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo()+"\t"+
-                                                                                                    listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                            mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
+                                                                                                    + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
                                                                                         }
                                                                                     }
                                                                                 }
@@ -5942,7 +5940,7 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
 //                                        periodo = sisListaPeriodoTO.getPerCodigo();
 //                                    }
 //                                }
-                            } 
+                            }
 //                            else {
 //                                periodo = invCompras.getInvComprasPK().getCompPeriodo();
 //                            }
@@ -9757,6 +9755,12 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
             SisUsuarioEmpresaTO sisUsuarioEmpresaTO, List<ReporteVentaDetalle> lista, String nombreCliente, String nombreReporte) throws Exception {
         return generarReporteInventarioLocal.generarReporteVentaDetalleImpresion(
                 sisUsuarioEmpresaTO, lista, nombreCliente, nombreReporte);
+    }
+
+    @Override
+    public JasperPrint generarReporteProformaDetalleImpresion(SisUsuarioEmpresaTO sisUsuarioEmpresaTO,
+            List<ReporteProformaDetalle> lista, String nombreReporte) throws Exception{
+        return generarReporteInventarioLocal.generarReporteProformaDetalleImpresion(sisUsuarioEmpresaTO, lista, nombreReporte);
     }
 
     @Override

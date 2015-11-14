@@ -17,20 +17,20 @@ import java.util.List;
  * @author jack
  */
 public class ConversionesInventario {
-    
+
     public static inventario.entity.InvProductoCategoria convertirInvProductoCategoria_InvProductoCategoria(inventario.entity.InvProductoCategoria invProductoCategoriaOrigen) {
         inventario.entity.InvProductoCategoria invProductoCategoria = new inventario.entity.InvProductoCategoria();
         invProductoCategoria.setInvProductoCategoriaPK(new inventario.entity.InvProductoCategoriaPK(invProductoCategoriaOrigen.getInvProductoCategoriaPK().getCatEmpresa(), invProductoCategoriaOrigen.getInvProductoCategoriaPK().getCatCodigo()));
         invProductoCategoria.setCatActiva(invProductoCategoriaOrigen.getCatActiva());
         invProductoCategoria.setCatDetalle(invProductoCategoriaOrigen.getCatDetalle());
         invProductoCategoria.setCatPrecioFijo(invProductoCategoriaOrigen.getCatPrecioFijo());
-        
+
         invProductoCategoria.setUsrEmpresa(invProductoCategoriaOrigen.getUsrEmpresa());
         invProductoCategoria.setUsrCodigo(invProductoCategoriaOrigen.getUsrCodigo());
         invProductoCategoria.setUsrFechaInserta(invProductoCategoriaOrigen.getUsrFechaInserta());
         return invProductoCategoria;
     }
-    
+
     public static java.util.List<inventario.TO.InvProductoCategoriaTO> convertirInvProductoCategoria_InvProductoCategoriaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -70,7 +70,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static inventario.entity.InvProductoCategoria convertirInvProductoCategoriaTO_InvProductoCategoria(inventario.TO.InvProductoCategoriaTO invProductoCategoriaTO) {
         inventario.entity.InvProductoCategoria invProductoCategoria = new inventario.entity.InvProductoCategoria();
         invProductoCategoria.setInvProductoCategoriaPK(
@@ -121,7 +121,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static inventario.entity.InvProductoMedida convertirInvProductoMedidaTO_InvProductoMedida(inventario.TO.InvProductoMedidaTO invProductoMedidaTO) {
         inventario.entity.InvProductoMedida invProductoMedida = new inventario.entity.InvProductoMedida();
         invProductoMedida.setInvProductoMedidaPK(
@@ -136,7 +136,7 @@ public class ConversionesInventario {
         invProductoMedida.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invProductoMedidaTO.getUsrFechaInserta()));
         return invProductoMedida;
     }
-    
+
     public static inventario.entity.InvProductoPresentacionUnidades convertirInvProductoPresentacionUnidadesTO_InvProductoPresentacionUnidades(inventario.TO.InvProductoPresentacionUnidadesTO invProductoPresentacionUnidadesTO) {
         inventario.entity.InvProductoPresentacionUnidades invProductoPresentacionUnidades = new inventario.entity.InvProductoPresentacionUnidades();
         invProductoPresentacionUnidades.setInvProductoPresentacionUnidadesPK(
@@ -150,7 +150,7 @@ public class ConversionesInventario {
         invProductoPresentacionUnidades.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invProductoPresentacionUnidadesTO.getUsrFechaInserta()));
         return invProductoPresentacionUnidades;
     }
-    
+
     public static inventario.entity.InvProductoMarca convertirInvProductoMarcaTO_InvProductoMarca(inventario.TO.InvProductoMarcaTO invProductoMarcaTO) {
         inventario.entity.InvProductoMarca invProductoMarca = new inventario.entity.InvProductoMarca();
         invProductoMarca.setInvProductoMarcaPK(
@@ -164,7 +164,7 @@ public class ConversionesInventario {
         invProductoMarca.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invProductoMarcaTO.getUsrFechaInserta()));
         return invProductoMarca;
     }
-    
+
     public static inventario.entity.InvVendedor convertirInvVendedorTO_InvVendedor(inventario.TO.InvVendedorTO invVendedorTO) {
         inventario.entity.InvVendedor invVendedor = new inventario.entity.InvVendedor();
         invVendedor.setInvVendedorPK(
@@ -177,7 +177,7 @@ public class ConversionesInventario {
         invVendedor.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invVendedorTO.getUsrFechaInserta()));
         return invVendedor;
     }
-    
+
     public static inventario.entity.InvProductoPresentacionCajas convertirInvProductoPresentacionCajasTO_InvProductoPresentacionCajas(inventario.TO.InvProductoPresentacionCajasTO invProductoPresentacionCajasTO) {
         inventario.entity.InvProductoPresentacionCajas invProductoPresentacionCajas = new inventario.entity.InvProductoPresentacionCajas();
         invProductoPresentacionCajas.setInvProductoPresentacionCajasPK(
@@ -191,7 +191,7 @@ public class ConversionesInventario {
         invProductoPresentacionCajas.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invProductoPresentacionCajasTO.getUsrFechaInserta()));
         return invProductoPresentacionCajas;
     }
-    
+
     public static inventario.entity.InvProductoTipo convertirInvProductoTipoTO_InvProductoTipo(inventario.TO.InvProductoTipoTO invProductoTipoTO) {
         inventario.entity.InvProductoTipo invProductoTipo = new inventario.entity.InvProductoTipo();
         invProductoTipo.setInvProductoTipoPK(
@@ -206,9 +206,9 @@ public class ConversionesInventario {
         invProductoTipo.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invProductoTipoTO.getUsrFechaInserta()));
         return invProductoTipo;
     }
-    
+
     public static inventario.entity.InvProducto convertirInvProductoTO_InvProducto(inventario.TO.InvProductoTO invProductoTO) {
-         
+
         inventario.entity.InvProducto invProducto = new inventario.entity.InvProducto();
         invProducto.setInvProductoPK(new inventario.entity.InvProductoPK(
                 invProductoTO.getProEmpresa(),
@@ -232,7 +232,7 @@ public class ConversionesInventario {
         invProducto.setProPrecio2(invProductoTO.getProPrecio2());
         invProducto.setProPrecio3(invProductoTO.getProPrecio3());
         invProducto.setProPrecio4(invProductoTO.getProPrecio4());
- 
+
         invProducto.setProPrecio5(invProductoTO.getProPrecio5());
         invProducto.setProDescuento1(invProductoTO.getProDescuento1());
         invProducto.setProDescuento2(invProductoTO.getProDescuento2());
@@ -254,40 +254,35 @@ public class ConversionesInventario {
         invProducto.setProCuentaEmpresa(invProductoTO.getProEmpresa());
         invProducto.setProCuentaInventario(invProductoTO.getProCuentaInventario());
         invProducto.setProCuentaGasto(invProductoTO.getProCuentaGasto());
-        
+
         invProducto.setProCuentaVenta(invProductoTO.getProCuentaVenta());
         invProducto.setProCuentaTransferenciaIpp(invProductoTO.getProCuentaTransferenciaIpp());
- 
-/*
 
-  cat_empresa character(7) NOT NULL,
-  cat_codigo character(10) NOT NULL,
-  mar_empresa character(7) NOT NULL,
-  mar_codigo character(7) NOT NULL,
-  presu_empresa character(7) NOT NULL,
-  presu_codigo character(7) NOT NULL,
-  presc_empresa character(7) NOT NULL,
-  presc_codigo character(7) NOT NULL,
-  tip_empresa character(7) NOT NULL,
-  tip_codigo character(25) NOT NULL,
-  med_empresa character(7) NOT NULL,
-  med_codigo character(7) NOT NULL,
-  
-*/
+        /*
+         *
+         * cat_empresa character(7) NOT NULL, cat_codigo character(10) NOT NULL,
+         * mar_empresa character(7) NOT NULL, mar_codigo character(7) NOT NULL,
+         * presu_empresa character(7) NOT NULL, presu_codigo character(7) NOT
+         * NULL, presc_empresa character(7) NOT NULL, presc_codigo character(7)
+         * NOT NULL, tip_empresa character(7) NOT NULL, tip_codigo character(25)
+         * NOT NULL, med_empresa character(7) NOT NULL, med_codigo character(7)
+         * NOT NULL,
+         *
+         */
 
-        
+
         invProducto.setConCodigo(invProductoTO.getConCodigo());
         invProducto.setSusCodigo(invProductoTO.getSusCodigo());
-          //invProducto.setProFactorConversion(invProductoTO.getProFactorConversion());
+        //invProducto.setProFactorConversion(invProductoTO.getProFactorConversion());
         invProducto.setProFactorCajaSacoBulto(invProductoTO.getProFactorCajabulto());
         invProducto.setUsrEmpresa(invProductoTO.getUsrEmpresa());
         invProducto.setUsrCodigo(invProductoTO.getUsrInsertaProducto());
         invProducto.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invProductoTO.getUsrFechaInsertaProducto()));
         return invProducto;
     }
-    
+
     public static inventario.entity.InvProducto convertirInvProducto_InvProducto(inventario.entity.InvProducto invProductoOrigen) {
-        
+
         inventario.entity.InvProducto invProducto = new inventario.entity.InvProducto();
         invProducto.setInvProductoPK(new inventario.entity.InvProductoPK(invProductoOrigen.getInvProductoPK().getProEmpresa(), invProductoOrigen.getInvProductoPK().getProCodigoPrincipal()));
         invProducto.setProCodigoAlterno(invProductoOrigen.getProCodigoAlterno());
@@ -296,8 +291,8 @@ public class ConversionesInventario {
         invProducto.setProCodigoBarra3(invProductoOrigen.getProCodigoBarra3());
         invProducto.setProCodigoBarra4(invProductoOrigen.getProCodigoBarra4());
         invProducto.setProCodigoBarra5(invProductoOrigen.getProCodigoBarra5());
-        
-        
+
+
         invProducto.setProEmpaque(invProductoOrigen.getProEmpaque());
         invProducto.setProNombre(invProductoOrigen.getProNombre());
         invProducto.setProDetalle(invProductoOrigen.getProDetalle());
@@ -322,14 +317,14 @@ public class ConversionesInventario {
         invProducto.setProMargenUtilidad3(invProductoOrigen.getProMargenUtilidad3());
         invProducto.setProMargenUtilidad4(invProductoOrigen.getProMargenUtilidad4());
         invProducto.setProMargenUtilidad5(invProductoOrigen.getProMargenUtilidad5());
-        
+
         invProducto.setProMinimo(invProductoOrigen.getProMinimo());
         invProducto.setProMaximo(invProductoOrigen.getProMaximo());
         invProducto.setProIva(invProductoOrigen.getProIva());
         invProducto.setProCreditoTributario(invProductoOrigen.getProCreditoTributario());
         invProducto.setProStockNegativo(invProductoOrigen.getProStockNegativo());
         invProducto.setProInactivo(invProductoOrigen.getProInactivo());
-        
+
         invProducto.setProCuentaEmpresa(invProductoOrigen.getProCuentaEmpresa());
         invProducto.setProCuentaInventario(invProductoOrigen.getProCuentaInventario());
         invProducto.setProCuentaGasto(invProductoOrigen.getProCuentaGasto());
@@ -352,10 +347,10 @@ public class ConversionesInventario {
         invProducto.setUsrFechaInserta(invProductoOrigen.getUsrFechaInserta());
         return invProducto;
     }
-    
+
     public static inventario.TO.InvProductoDAOTO convertirInvProducto_InvProductoDAOTO(inventario.entity.InvProducto invProducto) {
         inventario.TO.InvProductoDAOTO invProductoDAOTO = null;
-        
+
         if (invProducto != null) {
             invProductoDAOTO = new inventario.TO.InvProductoDAOTO();
             invProductoDAOTO.setProEmpresa(invProducto.getInvProductoPK().getProEmpresa());
@@ -366,10 +361,10 @@ public class ConversionesInventario {
             invProductoDAOTO.setProCodigoBarra3(invProducto.getProCodigoBarra3());
             invProductoDAOTO.setProCodigoBarra4(invProducto.getProCodigoBarra4());
             invProductoDAOTO.setProCodigoBarra5(invProducto.getProCodigoBarra5());
-            
+
             invProductoDAOTO.setProNombre(invProducto.getProNombre());
             invProductoDAOTO.setProDetalle(invProducto.getProDetalle());
-            
+
             invProductoDAOTO.setProCantidad1(invProducto.getProCantidad1());
             invProductoDAOTO.setProCantidad2(invProducto.getProCantidad2());
             invProductoDAOTO.setProCantidad3(invProducto.getProCantidad3());
@@ -390,14 +385,14 @@ public class ConversionesInventario {
             invProductoDAOTO.setProMargenUtilidad3(invProducto.getProMargenUtilidad3());
             invProductoDAOTO.setProMargenUtilidad4(invProducto.getProMargenUtilidad4());
             invProductoDAOTO.setProMargenUtilidad5(invProducto.getProMargenUtilidad5());
-            
+
             invProductoDAOTO.setProMinimo(invProducto.getProMinimo());
             invProductoDAOTO.setProMaximo(invProducto.getProMaximo());
             invProductoDAOTO.setProIva(invProducto.getProIva());
             invProductoDAOTO.setProCreditoTributario(invProducto.getProCreditoTributario());
             invProductoDAOTO.setProStockNegativo(invProducto.getProStockNegativo());
             invProductoDAOTO.setProInactivo(invProducto.getProInactivo());
-            
+
             invProductoDAOTO.setProCuentaInventario(invProducto.getProCuentaInventario());
             invProductoDAOTO.setProCuentaGasto(invProducto.getProCuentaGasto());
             invProductoDAOTO.setProCuentaVenta(invProducto.getProCuentaVenta());
@@ -440,7 +435,7 @@ public class ConversionesInventario {
         }
         return invProductoDAOTO;
     }
-    
+
     public static java.util.List<inventario.TO.InvClienteCategoriaTO> convertirInvClienteCategoria_InvClienteCategoriaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -469,12 +464,12 @@ public class ConversionesInventario {
              * (Exception e) { dato4 = null; } String dato5; try { dato5 =
              * array[4].toString(); } catch (Exception e) { dato5 = null; }
              */
-            
+
             lista.add(new inventario.TO.InvClienteCategoriaTO(null, dato1, dato2, dato3, null, null, null));
         }
         return lista;
     }
-    
+
     public static inventario.entity.InvClienteCategoria convertirInvClienteCategoriaTO_InvClienteCategoria(inventario.TO.InvClienteCategoriaTO invClienteCategoriaTO) {
         inventario.entity.InvClienteCategoria invClienteCategoria = new inventario.entity.InvClienteCategoria();
         invClienteCategoria.setInvClienteCategoriaPK(
@@ -490,7 +485,7 @@ public class ConversionesInventario {
         invClienteCategoria.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invClienteCategoriaTO.getUsrFechaInserta()));
         return invClienteCategoria;
     }
-    
+
     public static inventario.entity.InvCliente convertirInvClienteTO_InvCliente(inventario.TO.InvClienteTO invClienteTO) {
         inventario.entity.InvCliente invCliente = new inventario.entity.InvCliente();
         invCliente.setInvClientePK(new inventario.entity.InvClientePK(invClienteTO.getEmpCodigo(), invClienteTO.getCliCodigo()));
@@ -517,11 +512,11 @@ public class ConversionesInventario {
         invCliente.setCliSecuencia(invClienteTO.getCliSecuencia());
         invCliente.setUsrEmpresa(invClienteTO.getEmpCodigo());
         invCliente.setUsrCodigo(invClienteTO.getUsrInsertaCliente());
-        
+
         invCliente.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invClienteTO.getUsrFechaInsertaCliente()));
         return invCliente;
     }
-    
+
     public static java.util.List<inventario.TO.InvProveedorCategoriaTO> convertirInvProveedorCategoria_InvProveedorCategoriaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -545,12 +540,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato3 = null;
             }
-            
+
             lista.add(new inventario.TO.InvProveedorCategoriaTO(null, dato1, dato2, dato3, null, null, null));
         }
         return lista;
     }
-    
+
     public static inventario.entity.InvProveedorCategoria convertirInvProveedorCategoriaTO_InvProveedorCategoria(inventario.TO.InvProveedorCategoriaTO invProveedorCategoriaTO) {
         inventario.entity.InvProveedorCategoria invProveedorCategoria = new inventario.entity.InvProveedorCategoria();
         invProveedorCategoria.setInvProveedorCategoriaPK(
@@ -568,7 +563,7 @@ public class ConversionesInventario {
         invProveedorCategoria.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invProveedorCategoriaTO.getUsrFechaInserta()));
         return invProveedorCategoria;
     }
-    
+
     public static inventario.entity.InvProveedor convertirInvProveedorTO_InvProveedor(inventario.TO.InvProveedorTO invProveedorTO) {
         inventario.entity.InvProveedor invProveedor = new inventario.entity.InvProveedor();
         invProveedor.setInvProveedorPK(new inventario.entity.InvProveedorPK(invProveedorTO.getEmpCodigo(), invProveedorTO.getProvCodigo()));
@@ -589,15 +584,15 @@ public class ConversionesInventario {
         invProveedor.setProvRelacionado(invProveedorTO.getProvRelacionado());
         invProveedor.setProvInactivo(invProveedorTO.getProvInactivo());
         invProveedor.setProvSecuencia(invProveedorTO.getProvSecuencia());
-        
-        
-        
+
+
+
         invProveedor.setUsrEmpresa(invProveedorTO.getEmpCodigo());
         invProveedor.setUsrCodigo(invProveedorTO.getUsrInsertaProveedor());
         invProveedor.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invProveedorTO.getUsrFechaInsertaProveedor()));
         return invProveedor;
     }
-    
+
     public static inventario.entity.InvBodega convertirInvBodegaTO_InvBodega(inventario.TO.InvBodegaTO invBodegaTO) {
         inventario.entity.InvBodega invBodega = new inventario.entity.InvBodega();
         invBodega.setInvBodegaPK(new inventario.entity.InvBodegaPK(invBodegaTO.getEmpCodigo(), invBodegaTO.getBodCodigo()));
@@ -610,10 +605,10 @@ public class ConversionesInventario {
         invBodega.setUsrEmpresa(invBodegaTO.getUsrEmpresa());
         invBodega.setUsrCodigo(invBodegaTO.getUsrInsertaBodega());
         invBodega.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invBodegaTO.getUsrFechaInsertaBodega()));
-        
+
         return invBodega;
     }
-    
+
     public static inventario.entity.InvCompras convertirInvComprasTO_InvCompras(inventario.TO.InvComprasTO invComprasTO) {
         inventario.entity.InvCompras invCompras = new inventario.entity.InvCompras();
         invCompras.setInvComprasPK(new inventario.entity.InvComprasPK(
@@ -635,47 +630,47 @@ public class ConversionesInventario {
         invCompras.setCompActivoFijo(invComprasTO.getCompActivoFijo());
         invCompras.setCompImportacion(invComprasTO.getCompImportacion());
         invCompras.setCompPendiente(invComprasTO.getCompPendiente());
-        
+
         invCompras.setCompRevisado(invComprasTO.getCompRevisado());
         invCompras.setCompAnulado(invComprasTO.getCompAnulado());
         invCompras.setCompFormaPago(invComprasTO.getCompFormaPago());
         invCompras.setCompDocumentoFormaPago(invComprasTO.getCompDocumentoFormaPago());
-        
+
         invCompras.setCompBase0(invComprasTO.getCompBase0());
         invCompras.setCompBaseImponible(invComprasTO.getCompBaseImponible());
         invCompras.setCompBaseNoObjeto(invComprasTO.getCompBaseNoObjeto());
         invCompras.setCompBaseExenta(invComprasTO.getCompBaseExenta());
-        
+
         invCompras.setCompMontoIva(invComprasTO.getCompMontoIva());
         invCompras.setCompOtrosImpuestos(invComprasTO.getCompOtrosImpuestos());
         invCompras.setCompTotal(invComprasTO.getCompTotal());
         invCompras.setCompValorRetenido(invComprasTO.getCompValorRetenido());
         invCompras.setCompRetencionAsumida(invComprasTO.isCompRetencionAsumida());
         invCompras.setCompSaldo(invComprasTO.getCompSaldo());
-        
+
         //invCompras.setInvProveedor(new InvProveedor(invComprasTO.getProvEmpresa(),invComprasTO.getProvCodigo()));
-       // invCompras.setInvBodega(new inventario.entity.InvBodega(invComprasTO.getBodEmpresa(), invComprasTO.getEmpCodigo()));
-        
+        // invCompras.setInvBodega(new inventario.entity.InvBodega(invComprasTO.getBodEmpresa(), invComprasTO.getEmpCodigo()));
+
         invCompras.setSecEmpresa(invComprasTO.getEmpCodigo());
         invCompras.setSecCodigo(invComprasTO.getSecCodigo());
-        
+
         invCompras.setCtaEmpresa(invComprasTO.getCtaEmpresa());
         invCompras.setCtaCodigo(invComprasTO.getCtaCodigo());
-        
+
         invCompras.setConEmpresa(invComprasTO.getEmpCodigo());
         invCompras.setConPeriodo(invComprasTO.getContPeriodo());
         invCompras.setConTipo(invComprasTO.getContTipo());
         invCompras.setConNumero(invComprasTO.getContNumero());
-        
+
         invCompras.setEmpCodigo(invComprasTO.getEmpCodigo());
         invCompras.setUsrCodigo(invComprasTO.getUsrInsertaCompra());
         invCompras.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invComprasTO.getUsrFechaInsertaCompra()));
         return invCompras;
     }
-    
+
     public static inventario.entity.InvVentas convertirInvVentasTO_InvVentas(inventario.TO.InvVentasTO invVentasTO) {
         inventario.entity.InvVentas invVentas = new inventario.entity.InvVentas();
-        
+
         invVentas.setInvVentasPK(new inventario.entity.InvVentasPK(
                 invVentasTO.getVtaEmpresa(),
                 invVentasTO.getVtaPeriodo(),
@@ -713,7 +708,7 @@ public class ConversionesInventario {
 //        invVentas.setInvBodega(new inventario.entity.InvBodega(invVentasTO.getBodEmpresa(), invVentasTO.getBodCodigo()));
         invVentas.setBodCodigo(invVentasTO.getBodCodigo());
         invVentas.setBodEmpresa(invVentasTO.getBodEmpresa());
-        
+
         invVentas.setSecEmpresa(invVentasTO.getVtaEmpresa());
         invVentas.setSecCodigo(invVentasTO.getSecCodigo());
         invVentas.setCtaEmpresa(invVentasTO.getCtaEmpresa());
@@ -727,7 +722,7 @@ public class ConversionesInventario {
         invVentas.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invVentasTO.getUsrFechaInserta()));
         return invVentas;
     }
-    
+
     public static inventario.entity.InvProformas convertirInvProformasTO_InvProformas(inventario.TO.InvProformasTO invProformasTO) {
         inventario.entity.InvProformas invProformas = new inventario.entity.InvProformas();
         invProformas.setInvProformasPK(new inventario.entity.InvProformasPK(invProformasTO.getProfEmpresa(), invProformasTO.getProfPeriodo(),
@@ -738,10 +733,10 @@ public class ConversionesInventario {
         invProformas.setProfObservaciones(invProformasTO.getProfObservaciones());
         invProformas.setProfPendiente(invProformasTO.getProfPendiente());
         invProformas.setProfAnulado(invProformasTO.getProfAnulado());
-        
+
         invProformas.setProfBase0(invProformasTO.getProfBase0());
         invProformas.setProfBaseimponible(invProformasTO.getProfBaseImponible());
-        
+
         invProformas.setProfDescuentoBase0(invProformasTO.getProfDescuentoBase0());
         invProformas.setProfDescuentoBaseimponible(invProformasTO.getProfDescuentoBaseImponible());
         invProformas.setProfDescuentoGeneralBase0(invProformasTO.getProfDescuentoGeneralBase0());
@@ -749,7 +744,7 @@ public class ConversionesInventario {
         invProformas.setProfDescuentoIva(invProformasTO.getProfDescuentoIva());
         invProformas.setProfSubtotalBase0(invProformasTO.getProfSubtotalBase0());
         invProformas.setProfSubtotalBaseimponible(invProformasTO.getProfSubtotalBaseImponible());
-        
+
         invProformas.setProfMontoiva(invProformasTO.getProfMontoIva());
         invProformas.setProfTotal(invProformasTO.getProfTotal());
 
@@ -764,7 +759,7 @@ public class ConversionesInventario {
         invProformas.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invProformasTO.getUsrFechaInserta()));
         return invProformas;
     }
-    
+
     public static inventario.entity.InvCompras convertirInvCompras_InvCompras(inventario.entity.InvCompras invCompras) {
         inventario.entity.InvCompras invComprasAux = new inventario.entity.InvCompras();
         invComprasAux.setCompAnulado(invCompras.getCompAnulado());
@@ -810,7 +805,7 @@ public class ConversionesInventario {
         invComprasAux.setUsrFechaInserta(invCompras.getUsrFechaInserta());
         return invComprasAux;
     }
-    
+
     public static inventario.entity.InvVentas convertirInvVentas_InvVentas(inventario.entity.InvVentas invVentas) {
         inventario.entity.InvVentas invVentasAux = new inventario.entity.InvVentas();
         invVentasAux.setConEmpresa(invVentas.getConEmpresa());
@@ -825,17 +820,17 @@ public class ConversionesInventario {
         invVentasAux.setEmpCodigo(invVentas.getEmpCodigo());
         invVentasAux.setUsrFechaInserta(invVentas.getUsrFechaInserta());
         invVentasAux.setVtaAnulado(invVentas.getVtaAnulado());
-        
+
         invVentasAux.setVtaBase0(invVentas.getVtaBase0());
         invVentasAux.setVtaBaseExenta(invVentas.getVtaBaseExenta());
         invVentasAux.setVtaBaseNoObjeto(invVentas.getVtaBaseNoObjeto());
         invVentasAux.setVtaBaseImponible(invVentas.getVtaBaseImponible());
-        
+
         invVentasAux.setVtaDescuentoBase0(invVentas.getVtaDescuentoBase0());
         invVentasAux.setVtaDescuentoBaseImponible(invVentas.getVtaDescuentoBaseImponible());
         invVentasAux.setVtaDescuentoBaseExenta(invVentas.getVtaDescuentoBaseExenta());
         invVentasAux.setVtaDescuentoBaseNoObjeto(invVentas.getVtaDescuentoBaseNoObjeto());
-        
+
         invVentasAux.setVtaSubtotalBase0(invVentas.getVtaSubtotalBase0());
         invVentasAux.setVtaSubtotalBaseImponible(invVentas.getVtaSubtotalBaseImponible());
         invVentasAux.setVtaSubtotalBaseExenta(invVentas.getVtaSubtotalBaseExenta());
@@ -846,11 +841,11 @@ public class ConversionesInventario {
         invVentasAux.setBodEmpresa(invVentas.getBodEmpresa());
         invVentasAux.setSecEmpresa(invVentas.getSecEmpresa());
         invVentasAux.setSecCodigo(invVentas.getSecCodigo());
-        
+
         invVentasAux.setCtaEmpresa(invVentas.getCtaEmpresa());
         invVentasAux.setCtaCodigo(invVentas.getCtaCodigo());
-        
-        
+
+
         invVentasAux.setVtaDocumentoEmpresa(invVentas.getEmpCodigo());
         invVentasAux.setVtaDocumentoNumero(invVentas.getVtaDocumentoNumero());
         invVentasAux.setVtaDocumentoTipo(invVentas.getVtaDocumentoTipo());
@@ -867,7 +862,7 @@ public class ConversionesInventario {
         invVentasAux.setVtaPagado(invVentas.getVtaPagado());
         return invVentasAux;
     }
-    
+
     public static inventario.entity.InvComprasDetalle convertirInvCompraDetalle_InvCompraDetalle(inventario.entity.InvComprasDetalle invCompraDetalle) {
         inventario.entity.InvComprasDetalle invComprasDetalle = new inventario.entity.InvComprasDetalle();
         invComprasDetalle.setDetSecuencial(invCompraDetalle.getDetSecuencial());
@@ -877,7 +872,7 @@ public class ConversionesInventario {
         invComprasDetalle.setDetCantidad(invCompraDetalle.getDetCantidad());
         invComprasDetalle.setDetPrecio(invCompraDetalle.getDetPrecio());
         invComprasDetalle.setDetPorcentajeDescuento(invCompraDetalle.getDetPorcentajeDescuento());
-        
+
         invComprasDetalle.setDetOtrosImpuestos(invCompraDetalle.getDetOtrosImpuestos());
         invComprasDetalle.setDetValorPromedio(invCompraDetalle.getDetValorPromedio());
         invComprasDetalle.setDetValorUltimaCompra(invCompraDetalle.getDetValorUltimaCompra());
@@ -892,7 +887,7 @@ public class ConversionesInventario {
         invComprasDetalle.setInvProducto(invCompraDetalle.getInvProducto());
         return invComprasDetalle;
     }
-    
+
     public static inventario.entity.InvVentasDetalle convertirInvVentaDetalle_InvVentaDetalle(inventario.entity.InvVentasDetalle invVentaDetalle) {
         inventario.entity.InvVentasDetalle invVentasDetalle = new inventario.entity.InvVentasDetalle();
         invVentasDetalle.setDetSecuencial(invVentaDetalle.getDetSecuencial());
@@ -915,7 +910,7 @@ public class ConversionesInventario {
         invVentasDetalle.setInvProducto(invVentaDetalle.getInvProducto());
         return invVentasDetalle;
     }
-    
+
     public static inventario.entity.InvProformasDetalle convertirInvProformaDetalle_InvProformaDetalle(inventario.entity.InvProformasDetalle invProformaDetalle) {
         inventario.entity.InvProformasDetalle invProformasDetalle = new inventario.entity.InvProformasDetalle();
         invProformasDetalle.setDetSecuencial(invProformaDetalle.getDetSecuencial());
@@ -930,7 +925,7 @@ public class ConversionesInventario {
         invProformasDetalle.setInvProducto(invProformaDetalle.getInvProducto());
         return invProformasDetalle;
     }
-    
+
     public static inventario.entity.InvConsumosDetalle convertirInvConsumoDetalle_InvConsumoDetalle(inventario.entity.InvConsumosDetalle invConsumoDetalle) {
         inventario.entity.InvConsumosDetalle invConsumosDetalle = new inventario.entity.InvConsumosDetalle();
         invConsumosDetalle.setDetSecuencial(invConsumoDetalle.getDetSecuencial());
@@ -950,7 +945,7 @@ public class ConversionesInventario {
         invConsumosDetalle.setInvProducto(invConsumoDetalle.getInvProducto());
         return invConsumosDetalle;
     }
-    
+
     public static inventario.entity.InvTransferenciasDetalle convertirInvTransferenciasDetalle_InvTransferenciasDetalle(inventario.entity.InvTransferenciasDetalle invTransferenciaDetalle) {
         inventario.entity.InvTransferenciasDetalle invTransferenciasDetalle = new inventario.entity.InvTransferenciasDetalle();
         invTransferenciasDetalle.setDetSecuencial(invTransferenciaDetalle.getDetSecuencial());
@@ -970,7 +965,7 @@ public class ConversionesInventario {
         invTransferenciasDetalle.setInvProducto(invTransferenciaDetalle.getInvProducto());
         return invTransferenciasDetalle;
     }
-    
+
     public static inventario.entity.InvComprasDetalle convertirInvComprasDetalleTO_InvComprasDetalle(
             inventario.TO.InvComprasDetalleTO invComprasDetalleTO) {
         inventario.entity.InvComprasDetalle invComprasDetalle = new inventario.entity.InvComprasDetalle();
@@ -987,7 +982,7 @@ public class ConversionesInventario {
         invComprasDetalle.setDetValorUltimaCompra(invComprasDetalleTO.getDetValorUltimaCompra());
         invComprasDetalle.setDetValorPromedio(invComprasDetalleTO.getDetValorPromedio());
         invComprasDetalle.setDetOtrosImpuestos(invComprasDetalleTO.getDetOtrosImpuestos());
-        
+
         invComprasDetalle.setDetPorcentajeDescuento(invComprasDetalleTO.getDetPorcentajeDescuento());
         //invComprasDetalle.setInvBodega(new inventario.entity.InvBodega(invComprasDetalleTO.getBodEmpresa(), invComprasDetalleTO.getBodCodigo()));
 
@@ -1001,11 +996,11 @@ public class ConversionesInventario {
         invComprasDetalle.setPisNumero(invComprasDetalleTO.getPisNumero());
         return invComprasDetalle;
     }
-    
+
     public static inventario.entity.InvVentasDetalle convertirInvVentasDetalleTO_InvVentasDetalle(
             inventario.TO.InvVentasDetalleTO invVentasDetalleTO) {
-        
-         inventario.entity.InvVentasDetalle invVentasDetalle = new inventario.entity.InvVentasDetalle();
+
+        inventario.entity.InvVentasDetalle invVentasDetalle = new inventario.entity.InvVentasDetalle();
         invVentasDetalle.setDetSecuencial(invVentasDetalleTO.getDetSecuencia());
         invVentasDetalle.setDetOrden(invVentasDetalleTO.getDetOrden());
         invVentasDetalle.setDetPendiente(invVentasDetalleTO.getDetPendiente());
@@ -1014,9 +1009,9 @@ public class ConversionesInventario {
         invVentasDetalle.setDetPorcentajeRecargo(invVentasDetalleTO.getDetPorcentajeRecargo());
         invVentasDetalle.setDetPorcentajeDescuento(invVentasDetalleTO.getDetPorcentajeDescuento());
         invVentasDetalle.setDetValorPromedio(invVentasDetalleTO.getDetValorPromedio());
-        
+
         invVentasDetalle.setDetValorUltimaCompra(invVentasDetalleTO.getDetValorUltimaCompra());
-        
+
         invVentasDetalle.setDetSaldo(invVentasDetalleTO.getDetSaldo());
         //invVentasDetalle.setInvBodega(new inventario.entity.InvBodega(invVentasDetalleTO.getBodEmpresa(), invVentasDetalleTO.getBodCodigo()));
         invVentasDetalle.setProNombre(invVentasDetalleTO.getProNombre());
@@ -1037,7 +1032,7 @@ public class ConversionesInventario {
 
         return invVentasDetalle;
     }
-    
+
     public static inventario.entity.InvProformasDetalle convertirInvProformasDetalleTO_InvProformasDetalle(
             inventario.TO.InvProformasDetalleTO invProformasDetalleTO) {
         inventario.entity.InvProformasDetalle invProformasDetalle = new inventario.entity.InvProformasDetalle();
@@ -1054,11 +1049,11 @@ public class ConversionesInventario {
         invProformasDetalle.setProNombre(invProformasDetalleTO.getProNombre());
         return invProformasDetalle;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaProductosTO> convertirListaInvProducto_ListaInvProductoTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
-         
+
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
             String lpsp_codigo_principal;
@@ -1133,11 +1128,11 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 lpsp_medida = null;
             }
-               /*
-           
-                
-                + "lpsp_precio3 * lpsp_cantidad3 lpsp_precio_caja, "
-                + "lpsp_iva "
+            /*
+             *
+             *
+             * + "lpsp_precio3 * lpsp_cantidad3 lpsp_precio_caja, " + "lpsp_iva
+             * "
              */
             java.math.BigDecimal lpsp_precio1;
             try {
@@ -1181,7 +1176,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 lpsp_iva = null;
             }
-            
+
             lista.add(
                     new inventario.TO.InvListaProductosTO(
                     lpsp_codigo_principal, lpsp_codigo_barra, lpsp_codigo_barra2, lpsp_codigo_barra3, lpsp_codigo_barra4, lpsp_codigo_barra5, lpsp_nombre, lpsp_categoria,
@@ -1221,12 +1216,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato4 = null;
             }
-            
+
             lista.add(new inventario.TO.InvListaClienteTO(dato1, dato2, dato3, dato4));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaProveedoresTO> convertirListaInvProveedores_ListaInvProveedoresTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1256,12 +1251,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato4 = null;
             }
-            
+
             lista.add(new inventario.TO.InvListaProveedoresTO(dato1, dato2, dato3, dato4));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaBodegasTO> convertirListaInvBodegas_ListaInvBodegasTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1272,7 +1267,7 @@ public class ConversionesInventario {
              */
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
-            
+
             String bod_codigo;
             try {
                 bod_codigo = array[0].toString();
@@ -1297,7 +1292,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 bod_inactiva = null;
             }
-            
+
             String sec_codigo;
             try {
                 sec_codigo = array[4].toString();
@@ -1308,7 +1303,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvCategoriaComboProductoTO> convertirListaCategoriaCombo_ListaCategoriaComboTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1332,12 +1327,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato3 = null;
             }
-            
+
             lista.add(new inventario.TO.InvCategoriaComboProductoTO(dato1, dato2, dato3));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvProductoMarcaComboListadoTO> convertirListaComboMarca_ListaComboMarcaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1361,12 +1356,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato3 = null;
             }
-            
+
             lista.add(new inventario.TO.InvProductoMarcaComboListadoTO(dato1, dato2, dato3));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvProductoPresentacionUnidadesComboListadoTO> convertirListaComboPresentacionUnidad_ListaComboPresentacionUnidadTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1390,12 +1385,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato3 = null;
             }
-            
+
             lista.add(new inventario.TO.InvProductoPresentacionUnidadesComboListadoTO(dato1, dato2, dato3));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvProductoPresentacionCajasComboListadoTO> convertirListaComboPresentacionCaja_ListaComboPresentacionCajaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1419,12 +1414,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato3 = null;
             }
-            
+
             lista.add(new inventario.TO.InvProductoPresentacionCajasComboListadoTO(dato1, dato2, dato3));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvCompraMotivoComboTO> convertirListaCompraMotivoCombo_ListaCompraMotivoComboTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1460,12 +1455,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 cm_forma_imprimir = null;
             }
-            
+
             lista.add(new inventario.TO.InvCompraMotivoComboTO(cm_codigo, cm_detalle, tip_codigo, cm_forma_contabilizar, cm_forma_imprimir));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvVentaMotivoComboTO> convertirListaVentaMotivoCombo_ListaVentaMotivoComboTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1509,7 +1504,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvProformaMotivoComboTO> convertirListaProformaMotivoCombo_ListaProformaMotivoComboTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1527,12 +1522,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato2 = null;
             }
-            
+
             lista.add(new inventario.TO.InvProformaMotivoComboTO(dato1, dato2));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvCategoriaProveedorComboTO> convertirListaCategoriaProveedorCombo_ListaCategoriaProveedorComboTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1550,12 +1545,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato2 = null;
             }
-            
+
             lista.add(new inventario.TO.InvCategoriaProveedorComboTO(dato1, dato2));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvCategoriaClienteComboTO> convertirListaCategoriaClienteCombo_ListaCategoriaClienteComboTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1573,12 +1568,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato2 = null;
             }
-            
+
             lista.add(new inventario.TO.InvCategoriaClienteComboTO(dato1, dato2));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvBodegaTO> convertirListaBodega_ListaCategoriaBodegaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1610,13 +1605,13 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvProductoTO> convertirListaProducto_ListaProductoTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
-            
+
             String pro_empresa;
             try {
                 pro_empresa = array[0].toString();
@@ -1653,7 +1648,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 pro_codigo_barra3 = null;
             }
-            
+
             String pro_codigo_barra4;
             try {
                 pro_codigo_barra4 = array[6].toString();
@@ -1666,7 +1661,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 pro_codigo_barra5 = null;
             }
-            
+
             String pro_empaque;
             try {
                 pro_empaque = array[8].toString();
@@ -1685,7 +1680,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 pro_detalle = null;
             }
-            
+
             java.math.BigDecimal pro_cantidad1;
             try {
                 pro_cantidad1 = new java.math.BigDecimal(array[11].toString());
@@ -1806,7 +1801,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 pro_margen_utilidad5 = null;
             }
-            
+
             Integer pro_minimo;
             try {
                 pro_minimo = new Integer(array[31].toString());
@@ -1819,14 +1814,14 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 pro_maximo = null;
             }
-            
+
             String pro_iva;
             try {
                 pro_iva = array[33].toString();
             } catch (Exception e) {
                 pro_iva = null;
             }
-            
+
             Boolean pro_credito_tributario;
             try {
                 pro_credito_tributario = Boolean.valueOf(array[34].toString());
@@ -1845,7 +1840,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 pro_inactivo = null;
             }
-            
+
             String pro_cuenta_inventario;
             try {
                 pro_cuenta_inventario = array[37].toString();
@@ -1948,7 +1943,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 usr_empresa = null;
             }
-            
+
             String usr_codigo;
             try {
                 usr_codigo = array[54].toString();
@@ -1995,7 +1990,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvClienteTO> convertirListaCliente_ListaClienteTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -2188,7 +2183,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvProveedorTO> convertirListaProveedor_ListaProveedorTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -2284,7 +2279,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 prov_observaciones = null;
             }
-            
+
             Boolean prov_relacionado;
             try {
                 prov_relacionado = Boolean.valueOf(array[16].toString());
@@ -2303,7 +2298,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 prov_secuencia = null;
             }
-            
+
             String pc_codigo;
             try {
                 pc_codigo = array[20].toString();
@@ -2347,7 +2342,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static inventario.TO.InvProveedorTO convertirProveedor_ProveedorTO(java.util.List datos) {
         inventario.TO.InvProveedorTO invProveedorTO = null;
         if (datos.isEmpty()) {
@@ -2508,7 +2503,7 @@ public class ConversionesInventario {
         }
         return invProveedorTO;
     }
-    
+
     public static java.util.List<inventario.TO.InvComboFormaPagoTO> convertirInvComboFormaPago_InvComboFormaPagoTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -2536,12 +2531,12 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static inventario.TO.InvCompraCabeceraTO convertirInvCompraCabecera_InvCompraCabeceraTO(java.util.List datos) {
         inventario.TO.InvCompraCabeceraTO invCompraCabeceraTO = null;
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
 
-            
+
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
             String comp_numero_alterno;
@@ -2742,8 +2737,8 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 comp_otros_impuestos = java.math.BigDecimal.ZERO;
             }
-            
-            
+
+
             if (datos.isEmpty()) {
                 invCompraCabeceraTO = null;
             } else {
@@ -2786,7 +2781,7 @@ public class ConversionesInventario {
         }
         return invCompraCabeceraTO;
     }
-    
+
     public static inventario.TO.InvVentaCabeceraTO convertirInvVentaCabecera_InvVentaCabeceraTO(java.util.List datos) {
         inventario.TO.InvVentaCabeceraTO invVentaCabeceraTO = null;
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -2967,7 +2962,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 con_numero = null;
             }
-            
+
             String usr_codigo;
             try {
                 usr_codigo = array[28].toString();
@@ -2992,14 +2987,14 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 com_documento_numero = null;
             }
-            
+
             java.math.BigDecimal vta_pagado;
             try {
                 vta_pagado = new java.math.BigDecimal(array[32].toString());
             } catch (Exception e) {
                 vta_pagado = java.math.BigDecimal.ZERO;
             }
-            
+
             if (datos.isEmpty()) {
                 invVentaCabeceraTO = null;
             } else {
@@ -3046,7 +3041,7 @@ public class ConversionesInventario {
      * (inventario.entity.InvVentas invVentas){ inventario.entity.InvVentas
      * invVentasAux = new inventario.entity.InvVentas(); return invVentasAux; }
      */
-    
+
     public static inventario.TO.InvConsultaVentasFacturasPorNumeroTO convertirIInvConsultaVentasFacturasPorNumero_InvConsultaVentasFacturasPorNumeroTO(java.util.List datos) {
         inventario.TO.InvConsultaVentasFacturasPorNumeroTO consultaVentasFacturasPorNumeroTO = null;
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -3076,9 +3071,9 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato4 = null;
             }
-            
+
             if (datos.isEmpty()) {
-                
+
                 consultaVentasFacturasPorNumeroTO = null;
             } else {
                 //String empresa, String perCodigo, String motCodigo, String compNumero
@@ -3087,13 +3082,13 @@ public class ConversionesInventario {
                 consultaVentasFacturasPorNumeroTO.setVtaPeriodo(dato2);
                 consultaVentasFacturasPorNumeroTO.setVtaMotivo(dato3);
                 consultaVentasFacturasPorNumeroTO.setVtaNumero(dato4);
-                
-                
+
+
             }
         }
         return consultaVentasFacturasPorNumeroTO;
     }
-    
+
     public static inventario.TO.InvProformaCabeceraTO convertirInvProformaCabecera_InvProformaCabeceraTO(java.util.List datos) {
         inventario.TO.InvProformaCabeceraTO invProformaCabeceraTO = null;
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -3255,33 +3250,33 @@ public class ConversionesInventario {
         }
         return invProformaCabeceraTO;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaDetalleComprasTO> convertirInvListaDetalle_InvListaDetalleTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
             /*
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
+             *
              */
             Integer cd_secuencial;
             try {
@@ -3403,7 +3398,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 lvd_presentacion_Caja = null;
             }
-            
+
             lista.add(new inventario.TO.InvListaDetalleComprasTO(
                     cd_secuencial,
                     cd_bodega_codigo,
@@ -3428,7 +3423,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaDetalleVentasTO> convertirInvListaVentasDetalle_InvListaVentasDetalleTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -3593,89 +3588,141 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaDetalleProformasTO> convertirInvListaProformasDetalle_InvListaProformasDetalleTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
-            Integer dato1;
+            Integer lpdSecuencial;
             try {
-                dato1 = Integer.parseInt(array[0].toString());
+                lpdSecuencial = Integer.parseInt(array[0].toString());
             } catch (Exception e) {
-                dato1 = null;
+                lpdSecuencial = null;
             }
-            String dato2;
+            String lpdProductoCodigo;
             try {
-                dato2 = array[1].toString();
+                lpdProductoCodigo = array[1].toString();
             } catch (Exception e) {
-                dato2 = null;
+                lpdProductoCodigo = null;
             }
-            String dato3;
+            String lpdProductoNombre;
             try {
-                dato3 = array[2].toString();
+                lpdProductoNombre = array[2].toString();
             } catch (Exception e) {
-                dato3 = null;
+                lpdProductoNombre = null;
             }
-            java.math.BigDecimal dato4;
+            java.math.BigDecimal lpdCantidad;
             try {
-                dato4 = new java.math.BigDecimal(array[3].toString());
+                lpdCantidad = new java.math.BigDecimal(array[3].toString());
             } catch (Exception e) {
-                dato4 = java.math.BigDecimal.ZERO;
+                lpdCantidad = java.math.BigDecimal.ZERO;
             }
-            String dato5;
+            String lpdMedida;
             try {
-                dato5 = array[4].toString();
+                lpdMedida = array[4].toString();
             } catch (Exception e) {
-                dato5 = null;
+                lpdMedida = null;
             }
-            java.math.BigDecimal dato6;
+            java.math.BigDecimal lpdPrecio;
             try {
-                dato6 = new java.math.BigDecimal(array[5].toString());
+                lpdPrecio = new java.math.BigDecimal(array[5].toString());
             } catch (Exception e) {
-                dato6 = java.math.BigDecimal.ZERO;
+                lpdPrecio = java.math.BigDecimal.ZERO;
             }
-            java.math.BigDecimal dato7;
+            java.math.BigDecimal lpdParcial;
             try {
-                dato7 = new java.math.BigDecimal(array[6].toString());
+                lpdParcial = new java.math.BigDecimal(array[6].toString());
             } catch (Exception e) {
-                dato7 = java.math.BigDecimal.ZERO;
+                lpdParcial = java.math.BigDecimal.ZERO;
             }
-            java.math.BigDecimal dato8;
+            java.math.BigDecimal lpdDescuentoPorcentaje;
             try {
-                dato8 = new java.math.BigDecimal(array[7].toString());
+                lpdDescuentoPorcentaje = new java.math.BigDecimal(array[7].toString());
             } catch (Exception e) {
-                dato8 = java.math.BigDecimal.ZERO;
+                lpdDescuentoPorcentaje = java.math.BigDecimal.ZERO;
             }
-            java.math.BigDecimal dato9;
+            java.math.BigDecimal lpdDescuentoValor;
             try {
-                dato9 = new java.math.BigDecimal(array[8].toString());
+                lpdDescuentoValor = new java.math.BigDecimal(array[8].toString());
             } catch (Exception e) {
-                dato9 = java.math.BigDecimal.ZERO;
+                lpdDescuentoValor = java.math.BigDecimal.ZERO;
             }
-            java.math.BigDecimal dato10;
+            java.math.BigDecimal lpdSubtotal;
             try {
-                dato10 = new java.math.BigDecimal(array[9].toString());
+                lpdSubtotal = new java.math.BigDecimal(array[9].toString());
             } catch (Exception e) {
-                dato10 = java.math.BigDecimal.ZERO;
+                lpdSubtotal = java.math.BigDecimal.ZERO;
             }
-            Boolean dato11;
+            Boolean lpdIva;
             try {
-                dato11 = Boolean.parseBoolean(array[10].toString());
+                lpdIva = Boolean.parseBoolean(array[10].toString());
             } catch (Exception e) {
-                dato11 = null;
+                lpdIva = null;
             }
-            Boolean dato12;
+
+            Boolean lpdModificarPrecio;
             try {
-                dato12 = Boolean.parseBoolean(array[11].toString());
+                lpdModificarPrecio = Boolean.parseBoolean(array[11].toString());
             } catch (Exception e) {
-                dato12 = null;
+                lpdModificarPrecio = null;
             }
-            lista.add(new inventario.TO.InvListaDetalleProformasTO(dato1, dato2, dato3, dato4, dato5, dato6, dato7, dato8, dato9, dato10, dato11, dato12));
+
+            java.math.BigDecimal lpdCantidadCaja;
+            try {
+                lpdCantidadCaja = new java.math.BigDecimal(array[12].toString());
+            } catch (Exception e) {
+                lpdCantidadCaja = java.math.BigDecimal.ZERO;
+            }
+
+            String lvdEmpaque;
+            try {
+                lvdEmpaque = array[13].toString();
+            } catch (Exception e) {
+                lvdEmpaque = null;
+            }
+
+            String lvdLvdPresentacionUnidad;
+            try {
+                lvdLvdPresentacionUnidad = array[14].toString();
+            } catch (Exception e) {
+                lvdLvdPresentacionUnidad = null;
+            }
+            String lvdPresentacionCaja;
+            try {
+                lvdPresentacionCaja = array[15].toString();
+            } catch (Exception e) {
+                lvdPresentacionCaja = null;
+            }
+            String lvdProductoTipo;
+            try {
+                lvdProductoTipo = array[16].toString();
+            } catch (Exception e) {
+                lvdProductoTipo = null;
+            }
+
+            lista.add(new inventario.TO.InvListaDetalleProformasTO(
+                    lpdSecuencial,
+                    lpdProductoCodigo,
+                    lpdProductoNombre,
+                    lpdCantidad,
+                    lpdMedida,
+                    lpdPrecio,
+                    lpdParcial,
+                    lpdDescuentoPorcentaje,
+                    lpdDescuentoValor,
+                    lpdSubtotal,
+                    lpdIva,
+                    lpdModificarPrecio,
+                    lpdCantidadCaja,
+                    lvdEmpaque,
+                    lvdLvdPresentacionUnidad,
+                    lvdPresentacionCaja,
+                    lvdProductoTipo));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaDetalleConsumoTO> convertirInvListaDetalleConsumo_InvListaDetalleConsumoTO(java.util.List datos) {
         /*
          * java.util.List lista = new java.util.ArrayList(1);//interface que
@@ -3764,7 +3811,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static List<inventario.TO.InvListaConsultaCompraTO> convertirInvListaConsultaCompra_InvListaConsultaCompraTO(java.util.List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -3787,7 +3834,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     private static String obtenerDatoString(Object obj) {
         try {
             return obj.toString();
@@ -3795,7 +3842,7 @@ public class ConversionesInventario {
             return null;
         }
     }
-    
+
     public static List<InvListaConsultaVentaTO> convertirInvListaConsultaVenta_InvListaConsultaVentaTO(List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -3818,7 +3865,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaConsultaProformaTO> convertirInvListaConsultaVProforma_InvListaConsultaProformaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -3906,7 +3953,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static List<inventario.TO.InvListaConsultaConsumosTO> convertirInvListaConsultaConsumos_InvListaConsultaConsumosTO(java.util.List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -3920,7 +3967,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvConsumosImportarExportarTO> convertirListaInvConsumosImportarExportar_ListaInvConsumosImportarExportarTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -4028,7 +4075,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato17 = null;
             }
-            
+
             Integer dato18;
             try {
                 dato18 = new Integer(array[17].toString());
@@ -4119,8 +4166,8 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato32 = null;
             }
-            
-            
+
+
             lista.add(new inventario.TO.InvConsumosImportarExportarTO(dato1,
                     dato2, dato3, dato4, dato5, dato6, dato7, dato8, dato9,
                     dato10, dato11, dato12, dato13, dato14, dato15, dato16, dato17,
@@ -4129,7 +4176,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvConsumosMotivoComboTO> convertirListaConsumosMotivoCombo_ListaConsumosMotivoComboTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -4147,12 +4194,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato2 = null;
             }
-            
+
             lista.add(new inventario.TO.InvConsumosMotivoComboTO(dato1, dato2));
         }
         return lista;
     }
-    
+
     public static inventario.entity.InvConsumos convertirInvConsumosTO_InvConsumos(inventario.TO.InvConsumosTO invConsumosTO) {
         inventario.entity.InvConsumos invConsumos = new inventario.entity.InvConsumos();
         invConsumos.setInvConsumosPK(new inventario.entity.InvConsumosPK(invConsumosTO.getConsEmpresa(), invConsumosTO.getConsPeriodo(),
@@ -4169,16 +4216,16 @@ public class ConversionesInventario {
         invConsumos.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invConsumosTO.getUsrFechaInserta()));
         return invConsumos;
     }
-    
+
     public static inventario.TO.InvConsumosTO convertirInvConsumosCabecera_InvConsumosCabeceraTO(inventario.entity.InvConsumos invConsumos) {
         inventario.TO.InvConsumosTO invConsumosTO = new inventario.TO.InvConsumosTO();
         invConsumosTO.setConsEmpresa(invConsumos.getInvConsumosPK().getConsEmpresa());
         invConsumosTO.setConsPeriodo(invConsumos.getInvConsumosPK().getConsPeriodo());
         invConsumosTO.setConsMotivo(invConsumos.getInvConsumosPK().getConsMotivo());
         invConsumosTO.setConsNumero(invConsumos.getInvConsumosPK().getConsNumero());
-        
+
         invConsumosTO.setConsReferencia(invConsumos.getConsReferencia());
-        
+
         invConsumosTO.setConsFecha(validaciones.Validacion.fecha(invConsumos.getConsFecha(), "yyyy-MM-dd"));
         invConsumosTO.setConsObservaciones(invConsumos.getConsObservaciones());
         invConsumosTO.setConsPendiente(invConsumos.getConsPendiente());
@@ -4217,7 +4264,7 @@ public class ConversionesInventario {
      * private String usrEmpresa;// private String usrCodigo;// private String
      * usrFechaInserta;
      */
-    
+
     public static inventario.TO.InvVentaRetencionesTO convertirInvVentaRetenciones_InvVentaRetencionesTO(inventario.entity.InvVentas invVentas) {
         inventario.TO.InvVentaRetencionesTO invVentaRetencionesTO = new inventario.TO.InvVentaRetencionesTO();
         invVentaRetencionesTO.setCliCodigo(invVentas.getInvCliente().getInvClientePK().getCliCodigo());
@@ -4225,7 +4272,7 @@ public class ConversionesInventario {
         invVentaRetencionesTO.setCliCedula(invVentas.getInvCliente().getCliIdNumero());
         invVentaRetencionesTO.setCliDireccion(invVentas.getInvCliente().getCliDireccion());
         invVentaRetencionesTO.setCliTelefono(invVentas.getInvCliente().getCliTelefono());
-        
+
         invVentaRetencionesTO.setVenEmpresa(invVentas.getInvVentasPK().getVtaEmpresa());
         invVentaRetencionesTO.setVenPeriodo(invVentas.getInvVentasPK().getVtaPeriodo());
         invVentaRetencionesTO.setVenMotivo(invVentas.getInvVentasPK().getVtaMotivo());
@@ -4244,17 +4291,17 @@ public class ConversionesInventario {
         //invVentaRetencionesTO.setVenValorRetenidoIva(invVentas.getVtaMontoiva());
         //invVentaRetencionesTO.setVenValorRetenidoRenta(invVentas.getVtaMontoiva());
 
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
         return invVentaRetencionesTO;
-        
+
     }
-    
+
     public static inventario.entity.InvConsumosDetalle convertirInvConsumosDetalleTO_InvConsumosDetalle(
             inventario.TO.InvConsumosDetalleTO invConsumosDetalleTO) {
         inventario.entity.InvConsumosDetalle invConsumosDetalle = new inventario.entity.InvConsumosDetalle();
@@ -4275,7 +4322,7 @@ public class ConversionesInventario {
         invConsumosDetalle.setPisNumero(invConsumosDetalleTO.getPisNumero());
         return invConsumosDetalle;
     }
-    
+
     public static java.util.List<inventario.TO.InvMedidaComboTO> convertirListaMedida_ListaMedidaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -4299,12 +4346,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 convLibras = null;
             }
-            
-            lista.add(new inventario.TO.InvMedidaComboTO(codigo,detalle, convLibras));
+
+            lista.add(new inventario.TO.InvMedidaComboTO(codigo, detalle, convLibras));
         }
         return lista;
     }
-    
+
     public static inventario.entity.InvConsumosMotivo convertirInvConsumosMotivoTO_InvConsumosMotivo(
             inventario.TO.InvConsumosMotivoTO invConsumosMotivoTO) {
         inventario.entity.InvConsumosMotivo invConsumosMotivo = new inventario.entity.InvConsumosMotivo();
@@ -4319,7 +4366,7 @@ public class ConversionesInventario {
         invConsumosMotivo.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invConsumosMotivoTO.getUsrFechaInserta()));
         return invConsumosMotivo;
     }
-    
+
     public static inventario.TO.InvConsumosMotivoTO convertirInvConsumosMotivo_InvConsumosMotivoTO(
             inventario.entity.InvConsumosMotivo invConsumosMotivo) {
         inventario.TO.InvConsumosMotivoTO invConsumosMotivoTO = new inventario.TO.InvConsumosMotivoTO();
@@ -4332,7 +4379,7 @@ public class ConversionesInventario {
         invConsumosMotivoTO.setUsrFechaInserta(validaciones.Validacion.fecha(invConsumosMotivo.getUsrFechaInserta(), "yyyy-MM-dd"));
         return invConsumosMotivoTO;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaConsumosMotivoTO> convertirInvListaConsumosMotivoTO_InvListaConsumosMotivo(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -4362,7 +4409,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato4 = null;
             }
-            
+
             lista.add(new inventario.TO.InvListaConsumosMotivoTO(dato1, dato2, dato3, dato4));
         }
         return lista;
@@ -4383,7 +4430,7 @@ public class ConversionesInventario {
         invComprasFormaPago.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invComprasFormaPagoTO.getUsrFechaInserta()));
         return invComprasFormaPago;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaComprasFormaPagoTO> convertirInvListaComprasFormaPago_InvListaComprasFormaPagoTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -4439,7 +4486,7 @@ public class ConversionesInventario {
         invVentasFormaPago.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invVentasFormaPagoTO.getUsrFechaInserta()));
         return invVentasFormaPago;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaVentasFormaPagoTO> convertirInvListaVentasFormaPago_InvListaVentasFormaPagoTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -4495,7 +4542,7 @@ public class ConversionesInventario {
         invComprasMotivo.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invComprasMotivoTO.getUsrFechaInserta()));
         return invComprasMotivo;
     }
-    
+
     public static inventario.TO.InvComprasMotivoTO convertirInvComprasMotivo_InvComprasMotivoTO(inventario.entity.InvComprasMotivo invComprasMotivo) {
         inventario.TO.InvComprasMotivoTO invComprasMotivoTO = new inventario.TO.InvComprasMotivoTO();
         invComprasMotivoTO.setCmEmpresa(invComprasMotivo.getInvComprasMotivoPK().getCmEmpresa());
@@ -4510,7 +4557,7 @@ public class ConversionesInventario {
         invComprasMotivoTO.setUsrFechaInserta(validaciones.Validacion.fecha(invComprasMotivo.getUsrFechaInserta(), "yyyy-MM-dd"));
         return invComprasMotivoTO;
     }
-    
+
     public static java.util.List<inventario.TO.InvCompraMotivoTablaTO> convertirListaInvComprasMotivo_ListaInvComprasMotivoTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -4534,12 +4581,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato3 = null;
             }
-            
+
             lista.add(new inventario.TO.InvCompraMotivoTablaTO(dato1, dato2, dato3));
         }
         return lista;
     }
-    
+
     public static inventario.entity.InvVentasMotivo convertirInvVentasMotivoTO_InvVentasMotivo(inventario.TO.InvVentaMotivoTO invVentasMotivoTO) {
         inventario.entity.InvVentasMotivo invVentasMotivo = new inventario.entity.InvVentasMotivo();
         invVentasMotivo.setInvVentasMotivoPK(new inventario.entity.InvVentasMotivoPK(invVentasMotivoTO.getVmEmpresa(), invVentasMotivoTO.getVmCodigo()));
@@ -4554,7 +4601,7 @@ public class ConversionesInventario {
         invVentasMotivo.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invVentasMotivoTO.getUsrFechaInserta()));
         return invVentasMotivo;
     }
-    
+
     public static inventario.entity.InvProformasMotivo convertirInvProformasMotivoTO_InvProformasMotivo(inventario.TO.InvProformaMotivoTO invProformaMotivoTO) {
         inventario.entity.InvProformasMotivo invProformasMotivo = new inventario.entity.InvProformasMotivo();
         invProformasMotivo.setInvProformasMotivoPK(new inventario.entity.InvProformasMotivoPK(invProformaMotivoTO.getpmEmpresa(), invProformaMotivoTO.getpmCodigo()));
@@ -4565,7 +4612,7 @@ public class ConversionesInventario {
         invProformasMotivo.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invProformaMotivoTO.getUsrFechaInserta()));
         return invProformasMotivo;
     }
-    
+
     public static inventario.TO.InvVentaMotivoTO convertirInvVentasMotivo_InvVentasMotivoTO(inventario.entity.InvVentasMotivo invVentasMotivo) {
         inventario.TO.InvVentaMotivoTO invVentaMotivoTO = new inventario.TO.InvVentaMotivoTO();
         invVentaMotivoTO.setVmEmpresa(invVentasMotivo.getInvVentasMotivoPK().getVmEmpresa());
@@ -4580,7 +4627,7 @@ public class ConversionesInventario {
         invVentaMotivoTO.setUsrFechaInserta(validaciones.Validacion.fecha(invVentasMotivo.getUsrFechaInserta(), "yyyy-MM-dd"));
         return invVentaMotivoTO;
     }
-    
+
     public static inventario.TO.InvProformaMotivoTO convertirInvProformaMotivo_InvProformaMotivoTO(inventario.entity.InvProformasMotivo invProformasMotivo) {
         inventario.TO.InvProformaMotivoTO invProformaMotivoTO = new inventario.TO.InvProformaMotivoTO();
         invProformaMotivoTO.setpmEmpresa(invProformasMotivo.getInvProformasMotivoPK().getPmEmpresa());
@@ -4591,7 +4638,7 @@ public class ConversionesInventario {
         invProformaMotivoTO.setUsrFechaInserta(validaciones.Validacion.fecha(invProformasMotivo.getUsrFechaInserta(), "yyyy-MM-dd"));
         return invProformaMotivoTO;
     }
-    
+
     public static java.util.List<inventario.TO.InvVentaMotivoTablaTO> convertirListaInvVentasMotivo_ListaInvVentasMotivoTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -4615,12 +4662,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato3 = null;
             }
-            
+
             lista.add(new inventario.TO.InvVentaMotivoTablaTO(dato1, dato2, dato3));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvProformaMotivoTablaTO> convertirListaInvProformaMotivo_ListaInvProformasMotivoTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -4644,12 +4691,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato3 = null;
             }
-            
+
             lista.add(new inventario.TO.InvProformaMotivoTablaTO(dato1, dato2, dato3));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvNumeracionCompraTO> convertirListaInvNumeracionCompra_ListaInvNumeracionCompraTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {
@@ -4683,7 +4730,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvNumeracionVentaTO> convertirListaInvNumeracionVenta_ListaInvNumeracionVentaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {
@@ -4717,7 +4764,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvNumeracionConsumoTO> convertirListaInvNumeracionConsumo_ListaInvNumeracionConsumoTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {
@@ -4751,7 +4798,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvComboBodegaTO> convertirInvComboBodega_InvComboBodegaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {
@@ -4779,7 +4826,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvKardexTO> convertirListaInvKardex_ListaInvKardexTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {
@@ -4875,7 +4922,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.SaldoBodegaTO> convertirListaSaldoBodega_ListaSaldoBodegaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {
@@ -4928,7 +4975,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static inventario.TO.InvComprasRecepcionTO convertirInvComprasRecepcion_InvComprasRecepcionTO(java.util.List datos) {
         inventario.TO.InvComprasRecepcionTO invComprasRecepcionTO = null;
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5006,7 +5053,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato12 = null;
             }
-            
+
             if (datos.isEmpty()) {
                 invComprasRecepcionTO = null;
             } else {
@@ -5028,7 +5075,7 @@ public class ConversionesInventario {
         }
         return invComprasRecepcionTO;
     }
-    
+
     public static inventario.entity.InvComprasRecepcion convertirInvComprasRecepcion_InvComprasRecepcionTO(inventario.TO.InvComprasRecepcionTO invComprasRecepcionTO) {
         inventario.entity.InvComprasRecepcion invComprasRecepcion = new inventario.entity.InvComprasRecepcion();
         invComprasRecepcion.setInvComprasRecepcionPK(new inventario.entity.InvComprasRecepcionPK(invComprasRecepcionTO.getRecepEmpresa(), invComprasRecepcionTO.getRecepPeriodo(), invComprasRecepcionTO.getRecepMotivo(), invComprasRecepcionTO.getRecepNumero()));
@@ -5038,7 +5085,7 @@ public class ConversionesInventario {
         invComprasRecepcion.setUsrFechaInserta(validaciones.Validacion.fecha(invComprasRecepcionTO.getUsrFechaInserta(), "yyyy-MM-dd"));
         return invComprasRecepcion;
     }
-    
+
     public static java.util.List<inventario.TO.InvProductosConErrorTO> convertirInvListaProductosConError_InvListaProductosConErrorTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5091,14 +5138,14 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static inventario.TO.InvTransferenciasTO convertirInvTransferenciasCabecera_InvTransferenciasCabeceraTO(inventario.entity.InvTransferencias invTransferencias) {
         inventario.TO.InvTransferenciasTO invTransferenciasTO = new inventario.TO.InvTransferenciasTO();
         invTransferenciasTO.setTransEmpresa(invTransferencias.getInvTransferenciasPK().getTransEmpresa());
         invTransferenciasTO.setTransPeriodo(invTransferencias.getInvTransferenciasPK().getTransPeriodo());
         invTransferenciasTO.setTransMotivo(invTransferencias.getInvTransferenciasPK().getTransMotivo());
         invTransferenciasTO.setTransNumero(invTransferencias.getInvTransferenciasPK().getTransNumero());
-        
+
         invTransferenciasTO.setTransFecha(validaciones.Validacion.fecha(invTransferencias.getTransFecha(), "yyyy-MM-dd"));
         invTransferenciasTO.setTransObservaciones(invTransferencias.getTransObservaciones());
         invTransferenciasTO.setTransPendiente(invTransferencias.getTransPendiente());
@@ -5108,7 +5155,7 @@ public class ConversionesInventario {
         invTransferenciasTO.setUsrFechaInserta(validaciones.Validacion.fecha(invTransferencias.getUsrFechaInserta(), "yyyy-MM-dd hh:mm:ss"));
         return invTransferenciasTO;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaDetalleTransferenciaTO> convertirInvListaDetalleTransferencia_InvListaDetalleTransferenciaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5198,7 +5245,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static List<InvListaConsultaTransferenciaTO> convertirInvListaConsultaTransferencia_InvListaConsultaTransferenciaTO(java.util.List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5212,7 +5259,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvTransferenciaMotivoComboTO> convertirListaTransferenciaMotivoCombo_ListaTransferenciaMotivoComboTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5230,12 +5277,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato2 = null;
             }
-            
+
             lista.add(new inventario.TO.InvTransferenciaMotivoComboTO(dato1, dato2));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaTransferenciaMotivoTO> convertirInvListaTransferenciaMotivoTO_InvListaTransferenciaMotivo(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5259,12 +5306,12 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato3 = null;
             }
-            
+
             lista.add(new inventario.TO.InvListaTransferenciaMotivoTO(dato1, dato2, dato3));
         }
         return lista;
     }
-    
+
     public static inventario.TO.InvTransferenciaMotivoTO convertirInvTransferenciaMotivo_InvTransferenciaMotivoTO(
             inventario.entity.InvTransferenciasMotivo invTransferenciasMotivo) {
         inventario.TO.InvTransferenciaMotivoTO invTransferenciaMotivoTO = new inventario.TO.InvTransferenciaMotivoTO();
@@ -5276,7 +5323,7 @@ public class ConversionesInventario {
         invTransferenciaMotivoTO.setUsrFechaInserta(validaciones.Validacion.fecha(invTransferenciasMotivo.getUsrFechaInserta(), "yyyy-MM-dd"));
         return invTransferenciaMotivoTO;
     }
-    
+
     public static java.util.List<inventario.TO.InvNumeracionTransferenciaTO> convertirListaInvNumeracionTransferencia_ListaInvNumeracionTransferenciaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {
@@ -5310,7 +5357,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static inventario.entity.InvTransferencias convertirInvTransferenciasTO_InvTransferencias(inventario.TO.InvTransferenciasTO invTransferenciasTO) {
         inventario.entity.InvTransferencias invTransferencias = new inventario.entity.InvTransferencias();
         invTransferencias.setInvTransferenciasPK(new inventario.entity.InvTransferenciasPK(invTransferenciasTO.getTransEmpresa(), invTransferenciasTO.getTransPeriodo(),
@@ -5330,7 +5377,7 @@ public class ConversionesInventario {
         invTransferencias.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invTransferenciasTO.getUsrFechaInserta()));
         return invTransferencias;
     }
-    
+
     public static inventario.entity.InvTransferenciasDetalle convertirInvTransferenciasDetalleTO_InvTransferenciasDetalle(
             inventario.TO.InvTransferenciasDetalleTO invTransferenciasDetalleTO) {
         inventario.entity.InvTransferenciasDetalle invTransferenciasDetalle = new inventario.entity.InvTransferenciasDetalle();
@@ -5347,7 +5394,7 @@ public class ConversionesInventario {
         invTransferenciasDetalle.setSecOrigenCodigo(invTransferenciasDetalleTO.getSecOrigenCodigo());
         return invTransferenciasDetalle;
     }
-    
+
     public static inventario.entity.InvNumeracionVarios convertirInvNumeracionVarios_InvNumeracionVarios(inventario.entity.InvNumeracionVarios invNumeracionVariosAux) {
         inventario.entity.InvNumeracionVarios invNumeracionVarios = new inventario.entity.InvNumeracionVarios();
         if (invNumeracionVariosAux != null) {
@@ -5359,10 +5406,10 @@ public class ConversionesInventario {
         } else {
             invNumeracionVarios = null;
         }
-        
+
         return invNumeracionVarios;
     }
-    
+
     public static inventario.entity.InvTransferenciasMotivo convertirInvTransferenciasMotivoTO_InvTransferenciasMotivo(
             inventario.TO.InvTransferenciaMotivoTO invTransferenciaMotivoTO) {
         inventario.entity.InvTransferenciasMotivo invTransferenciasMotivo = new inventario.entity.InvTransferenciasMotivo();
@@ -5376,7 +5423,7 @@ public class ConversionesInventario {
         invTransferenciasMotivo.setUsrFechaInserta(validaciones.Validacion.fechaString_Date(invTransferenciaMotivoTO.getUsrFechaInserta()));
         return invTransferenciasMotivo;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaProductosCambiarPrecioTO> convertirListaInvProductoCambiarPrecio_ListaInvProductoCambiarPrecioTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5385,10 +5432,10 @@ public class ConversionesInventario {
             String dato1 = array[0] == null ? null : array[0].toString();
             String dato2 = array[1] == null ? null : array[1].toString();
             String dato3 = array[2] == null ? null : array[2].toString();
-            java.math.BigDecimal dato4 = array[3] == null ? null:new java.math.BigDecimal(array[3].toString());
-            java.math.BigDecimal dato5 = array[4] == null ? null : new java.math.BigDecimal( array[4].toString());
+            java.math.BigDecimal dato4 = array[3] == null ? null : new java.math.BigDecimal(array[3].toString());
+            java.math.BigDecimal dato5 = array[4] == null ? null : new java.math.BigDecimal(array[4].toString());
             String dato6 = array[5] == null ? null : array[5].toString();
-            java.math.BigDecimal dato7 = array[6] == null ? null : new java.math.BigDecimal( array[6].toString());
+            java.math.BigDecimal dato7 = array[6] == null ? null : new java.math.BigDecimal(array[6].toString());
             java.math.BigDecimal dato8 = array[7] == null ? null : new java.math.BigDecimal(array[7].toString());
             java.math.BigDecimal dato9 = array[8] == null ? null : new java.math.BigDecimal(array[8].toString());
             java.math.BigDecimal dato10 = array[9] == null ? null : new java.math.BigDecimal(array[9].toString());
@@ -5404,7 +5451,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvListaProductosCambiarPrecioCantidadTO> convertirListaInvProductoCambiarPrecioCantidad_ListaInvProductoCambiarPrecioCantidadTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5416,8 +5463,8 @@ public class ConversionesInventario {
             java.math.BigDecimal dato4 = array[3] == null ? null : new java.math.BigDecimal(array[3].toString());
             java.math.BigDecimal dato5 = array[4] == null ? null : new java.math.BigDecimal(array[4].toString());
             String dato6 = array[5] == null ? null : array[5].toString();
-            java.math.BigDecimal dato7 =  array[6] == null ? null : new java.math.BigDecimal(array[6].toString());
-            java.math.BigDecimal dato8 = array[7] == null ? null :  new java.math.BigDecimal(array[7] == null ? null : array[7].toString());
+            java.math.BigDecimal dato7 = array[6] == null ? null : new java.math.BigDecimal(array[6].toString());
+            java.math.BigDecimal dato8 = array[7] == null ? null : new java.math.BigDecimal(array[7] == null ? null : array[7].toString());
             java.math.BigDecimal dato9 = array[8] == null ? null : new java.math.BigDecimal(array[8] == null ? null : array[8].toString());
             java.math.BigDecimal dato10 = array[9] == null ? null : new java.math.BigDecimal(array[9] == null ? null : array[9].toString());
             java.math.BigDecimal dato11 = array[10] == null ? null : new java.math.BigDecimal(array[10] == null ? null : array[10].toString());
@@ -5427,12 +5474,12 @@ public class ConversionesInventario {
             java.math.BigDecimal dato15 = array[14] == null ? null : new java.math.BigDecimal(array[14] == null ? null : array[14].toString());
             java.math.BigDecimal dato16 = array[15] == null ? null : new java.math.BigDecimal(array[15] == null ? null : array[15].toString());
             String dato17 = array[16] == null ? null : array[16].toString();
-            
+
             lista.add(new inventario.TO.InvListaProductosCambiarPrecioCantidadTO(dato1, dato2, dato3, dato4, dato5, dato6, dato7, dato8, dato9, dato10, dato11, dato12, dato13, dato14, dato15, dato16, dato17));
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvProductoSincronizarTO> convertirInvProductoSincronizar_InvProductoSincronizarTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5460,7 +5507,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvCategoriaSincronizarTO> convertirInvCategoriaSincronizar_InvCategoriaSincronizarTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5488,7 +5535,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static inventario.entity.InvProductoSaldos convertirInvProductoSaldosConsultaStock_InvProductoSaldosStock(java.util.List datos) {
         inventario.entity.InvProductoSaldos invProductoSaldos = null;
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5500,7 +5547,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato1 = null;
             }
-            
+
             if (datos.isEmpty()) {
                 invProductoSaldos = null;
             } else {
@@ -5510,7 +5557,7 @@ public class ConversionesInventario {
         }
         return invProductoSaldos;
     }
-    
+
     public static inventario.TO.InvEstadoCCCVT convertirInvEstadoCCVTConsulta_InvEstadoCCVT(java.util.List datos) {
         inventario.TO.InvEstadoCCCVT invEstadoCCVT = null;
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5540,7 +5587,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato4 = null;
             }
-            
+
             if (datos.isEmpty()) {
                 invEstadoCCVT = null;
             } else {
@@ -5549,7 +5596,7 @@ public class ConversionesInventario {
         }
         return invEstadoCCVT;
     }
-    
+
     public static java.util.List<inventario.TO.InvListadoPagosTO> convertirInvListadoPagos_InvListadoPagosTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5607,7 +5654,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvListadoCobrosTO> convertirInvListadoCobros_InvListadoCobrosTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5665,7 +5712,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunComprasTO> convertirInvFunCompras_InvFunComprasTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5749,7 +5796,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunVentasTO> convertirInvFunVentas_InvFunVentasTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5833,7 +5880,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunComprasConsolidandoProductosTO> convertirInvFunComprasConsolidandoProductos_InvFunComprasConsolidandoProductosTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5880,7 +5927,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunConsumosConsolidandoProductosTO> convertirInvFunConsumosConsolidandoProductos_InvFunConsumosConsolidandoProductosTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5921,7 +5968,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunVentasConsolidandoProductosTO> convertirInvFunVentasConsolidandoProductos_InvFunVentasConsolidandoProductosTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -5968,7 +6015,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunVentasVsCostoTO> convertirInvFunVentasVsCosto_InvFunVentasVsCostoTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -6021,7 +6068,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunListadoProductosTO> convertirInvFunListadoProductos_InvFunListadoProductosTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -6191,7 +6238,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunListadoClientesTO> convertirInvFunListadoClientes_InvFunListadoClientesTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -6293,7 +6340,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunListadoProveedoresTO> convertirInvFunListadoProveedores_InvFunListadoProveedoresTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -6395,7 +6442,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvSecuenciaComprobanteTO> convertirInvSecuenciaComprobante_InvSecuenciaComprobanteTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -6448,7 +6495,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvProductoTipoComboTO> convertirInvProductoTipoCombo_InvProductoTipoComboTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -6482,7 +6529,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static inventario.entity.InvVentasComplemento convertirInvVentasComplemento_InvVentasComplemento(java.util.List datos) {
         inventario.entity.InvVentasComplemento invVentasComplemento = null;
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -6500,7 +6547,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato2 = null;
             }
-            
+
             if (datos.isEmpty()) {
                 invVentasComplemento = null;
             } else {
@@ -6511,7 +6558,7 @@ public class ConversionesInventario {
         }
         return invVentasComplemento;
     }
-    
+
     public static java.util.List<inventario.TO.SaldoBodegaComprobacionTO> convertirInvFunSaldoBodegaComprobacion_InvFunSaldoBodegaComprobacionTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -6601,7 +6648,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunConsumosTO> convertirInvFunConsumos_InvFunConsumosTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -6625,7 +6672,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato4 = null;
             }
-            
+
             Boolean dato5;
             try {
                 dato5 = Boolean.parseBoolean(array[4].toString());
@@ -6643,13 +6690,13 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvVendedorComboListadoTO> convertirInvListaVendedor_invListaVendedorTOs(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
-            
+
             String dato1;
             try {
                 dato1 = array[0].toString();
@@ -6678,7 +6725,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunListaProductosImpresionPlacasTO> convertirInvFunListaProductosImpresionPlacas_InvFunListaProductosImpresionPlacasTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -6731,7 +6778,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunListaProductosSaldosGeneralTO> convertirInvFunListaProductosSaldosGeneral_InvFunListaProductosSaldosGeneralTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
 
@@ -6762,7 +6809,7 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato4 = null;
             }
-            
+
             Boolean dato5;//private Boolean lpspIva;
             try {
                 dato5 = Boolean.valueOf(array[3].toString());
@@ -6774,7 +6821,7 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static java.util.List<inventario.TO.InvFunUltimasComprasTO> convertirInvFunUltimasCompras_InvFunUltimasComprasTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -6852,12 +6899,12 @@ public class ConversionesInventario {
         }
         return lista;
     }
-    
+
     public static inventario.TO.InvComprasTO convertirInvCompras_InvComprasTO(inventario.entity.InvCompras invCompras) {
         if (invCompras != null) {
-            
+
             inventario.TO.InvComprasTO invComprasTO = new inventario.TO.InvComprasTO();
-            
+
             invComprasTO.setEmpCodigo(invCompras.getInvComprasPK().getCompEmpresa());
             invComprasTO.setContPeriodo(invCompras.getInvComprasPK().getCompPeriodo());
             invComprasTO.setCompMotivo(invCompras.getInvComprasPK().getCompMotivo());
@@ -6867,7 +6914,7 @@ public class ConversionesInventario {
             invComprasTO.setCompFecha(invCompras.getCompFecha() != null ? validaciones.Validacion.fecha(invCompras.getCompFecha(), "dd-MM-yyyy") : null);
 //            invComprasTO.setCompFecha(invCompras.getCompFecha().toString());
             invComprasTO.setCompFechaVencimiento(invCompras.getCompFechaVencimiento().toString());
-            
+
             invComprasTO.setCompIvaVigente(invCompras.getCompIvaVigente());
             invComprasTO.setCompObservaciones(invCompras.getCompObservaciones());
             invComprasTO.setCompElectronica(invCompras.getCompElectronica());
@@ -6877,7 +6924,7 @@ public class ConversionesInventario {
             invComprasTO.setCompAnulado(invCompras.getCompAnulado());
             invComprasTO.setCompFormaPago(invCompras.getCompFormaPago());
             invComprasTO.setCompDocumentoFormaPago(invCompras.getCompDocumentoFormaPago());
-            
+
             invComprasTO.setCompBase0(invCompras.getCompBase0());
             invComprasTO.setCompBaseImponible(invCompras.getCompBaseImponible());
             invComprasTO.setCompMontoIva(invCompras.getCompMontoIva());
@@ -6889,16 +6936,16 @@ public class ConversionesInventario {
             invComprasTO.setProvCodigo(invCompras.getInvProveedor().getInvProveedorPK().getProvCodigo());
             invComprasTO.setContTipo(invCompras.getConTipo());
             invComprasTO.setContNumero(invCompras.getConNumero());
-            
+
             invComprasTO.setUsrInsertaCompra(invCompras.getUsrCodigo());
             invComprasTO.setUsrFechaInsertaCompra(validaciones.Validacion.fecha(invCompras.getUsrFechaInserta(), "dd-MM-yyyy HH:mm:ss.SS"));
             invComprasTO.setCompPeriodo(invCompras.getConPeriodo());
-            
+
             return invComprasTO;
         } else {
             return null;
         }
-        
-        
+
+
     }
 }

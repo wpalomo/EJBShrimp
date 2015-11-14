@@ -5,10 +5,7 @@
 package inventario.business;
 
 import inventario.TO.*;
-import inventario.reporte.ReporteCompraDetalle;
-import inventario.reporte.ReporteConsumoDetalle;
-import inventario.reporte.ReporteTransferenciaDetalle;
-import inventario.reporte.ReporteVentaDetalle;
+import inventario.reporte.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -469,6 +466,9 @@ public interface OperacionesInventarioBusinessLocal1 {
     JasperPrint generarReporteVentaDetalleImpresion(
             SisUsuarioEmpresaTO sisUsuarioEmpresaTO, List<ReporteVentaDetalle> lista, String nombreCliente, String nombreReporte) throws Exception ;
 
+     JasperPrint generarReporteProformaDetalleImpresion(SisUsuarioEmpresaTO sisUsuarioEmpresaTO, 
+            List<ReporteProformaDetalle> lista, String nombreReporte)throws Exception;
+      
     JasperPrint generarReporteInvFunVentasVsCosto(SisUsuarioEmpresaTO sisUsuarioEmpresaTO,
             String fechaDesde, String fechaHasta, String bodega, String clienteId,
             List<InvFunVentasVsCostoTO> invFunVentasVsCostoTO) throws Exception ;

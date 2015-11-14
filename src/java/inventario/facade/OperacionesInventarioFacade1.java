@@ -7,10 +7,7 @@ package inventario.facade;
 import anexos.TO.AnxVentaTO;
 import inventario.TO.*;
 import inventario.entity.InvVentasMotivoAnulacion;
-import inventario.reporte.ReporteCompraDetalle;
-import inventario.reporte.ReporteConsumoDetalle;
-import inventario.reporte.ReporteTransferenciaDetalle;
-import inventario.reporte.ReporteVentaDetalle;
+import inventario.reporte.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -1249,6 +1246,11 @@ public class OperacionesInventarioFacade1 implements OperacionesInventarioFacade
             SisUsuarioEmpresaTO sisUsuarioEmpresaTO, List<ReporteVentaDetalle> lista, String nombreCliente, String nombreReporte) throws Exception {
         return operacionesInventarioBusinessLocal.generarReporteVentaDetalleImpresion(
                 sisUsuarioEmpresaTO, lista, nombreCliente, nombreReporte);
+    }
+    public JasperPrint generarReporteProformaDetalleImpresion(SisUsuarioEmpresaTO sisUsuarioEmpresaTO, 
+            List<ReporteProformaDetalle> lista, String nombreReporte)throws Exception{
+        return operacionesInventarioBusinessLocal.generarReporteProformaDetalleImpresion(sisUsuarioEmpresaTO, lista, nombreReporte);
+        
     }
 
     public JasperPrint generarReporteInvFunVentasVsCosto(SisUsuarioEmpresaTO sisUsuarioEmpresaTO,

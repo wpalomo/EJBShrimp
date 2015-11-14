@@ -419,6 +419,19 @@ public class GenerarReporteInventario implements GenerarReporteInventarioLocal {
             return null;
         }
     }
+    public JasperPrint generarReporteProformaDetalleImpresion(SisUsuarioEmpresaTO sisUsuarioEmpresaTO,
+            List<ReporteProformaDetalle> lista, String nombreReporte) throws Exception {
+        try {
+            
+             return generarReporte(sisUsuarioEmpresaTO, "reportConsolidadoProducto.jrxml", new HashMap(), lista);
+            
+            
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public JasperPrint generarReporteCompraDetalleImprimir(SisUsuarioEmpresaTO sisUsuarioEmpresaTO,
             List<ReporteCompraDetalle> reporteCompraDetalles, String cmFormaImprimir) throws Exception {

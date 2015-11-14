@@ -11,6 +11,7 @@ import anexos.sri.ws.recepcion.RespuestaSolicitud;
 import java.net.URL;
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
+import javax.xml.ws.WebServiceException;
 import sistema.TO.SisPckeystoreTO;
 //import anexos.sri.recepcion.RecepcionComprobantes;
 //import anexos.sri.recepcion.RecepcionComprobantesService;
@@ -56,7 +57,7 @@ public class UtilsWebService {
             passwordKeystore = sisPckeystoreTO.getInfKeystorePassword();
 
             if (anxUrlWebServicesTO != null) {
-                direccionIPServicio = tipoAmbiente.equals(TipoAmbienteEnum.PRODUCCION.getCode())? anxUrlWebServicesTO.getUrlAmbienteProduccion() : anxUrlWebServicesTO.getUrlAmbientePruebas();
+                direccionIPServicio = tipoAmbiente.equals(TipoAmbienteEnum.PRODUCCION.getCode()) ? anxUrlWebServicesTO.getUrlAmbienteProduccion() : anxUrlWebServicesTO.getUrlAmbientePruebas();
                 url.append(direccionIPServicio);
                 url.append("/comprobantes-electronicos-ws/");
                 url.append(nombreServicio);
@@ -117,5 +118,37 @@ public class UtilsWebService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /////////////////////////////////////////////////////
+    public static boolean existConnection(String tipoAmbiente, String nombreServicio, anxUrlWebServicesTO anxUrlWebServicesTO, sistema.TO.SisPckeystoreTO sisPckeystoreTO) {
+
+        devuelveUrlWs(tipoAmbiente, nombreServicio, anxUrlWebServicesTO, sisPckeystoreTO);
+        int i = 0;
+        boolean respuesta = false;
+        while (i < 3) {
+            Object c = webService(serviceUrlWS);
+            if (c == null) {
+                respuesta = true;
+                break;
+            }
+            if ((c instanceof WebServiceException)) {
+                respuesta = false;
+            }
+            i++;
+        }
+        return respuesta;
+    }
+
+    public static final Object webService(String wsdlLocation) {
+        try {
+            QName qname = new QName("http://ec.gob.sri.ws.recepcion", "RecepcionComprobantesService");
+            URL url = new URL(wsdlLocation);
+            RecepcionComprobantesService service = new RecepcionComprobantesService(url, qname);
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e;
+        } 
     }
 }

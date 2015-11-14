@@ -2,18 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package inventario.reporte;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  *
  * @author jack
  */
-public class ReporteProformaDetalle {
-    
-  
+public class ReporteProformaDetalle implements Serializable{
+
     ////////////////////COMPRAS CABECERA
     private String empCodigo;//
     private String perCodigo;//
@@ -25,7 +24,6 @@ public class ReporteProformaDetalle {
     private Boolean profPendiente;//--
     private java.math.BigDecimal profBase0;//--
     private java.math.BigDecimal profBaseimponible;//--
-    
     private java.math.BigDecimal profDescuentoBase0;
     private java.math.BigDecimal profDescuentoBaseImponible;
     private java.math.BigDecimal profDescuentoGeneralBase0;
@@ -33,7 +31,6 @@ public class ReporteProformaDetalle {
     private java.math.BigDecimal profDescuentoIva;
     private java.math.BigDecimal profSubtotalBase0;
     private java.math.BigDecimal profSubtotalBaseImponible;
-    
     private java.math.BigDecimal profMontoiva;//
     private java.math.BigDecimal profTotal;//
     private String cliCodigo;//
@@ -44,9 +41,6 @@ public class ReporteProformaDetalle {
     private String cliCiudad; //
     private String usrInsertaCompra;//--
     private String usrFechaInsertaCompra;//
-    
-
-
     /////////////////VENTAS DETALLE
     private String bodCodigo;//
     private Boolean detPendiente;//
@@ -59,16 +53,17 @@ public class ReporteProformaDetalle {
     private java.math.BigDecimal detPorcentaje;//--
     private java.math.BigDecimal detDescuento;//
     private java.math.BigDecimal detSubtotal;//--
+    private Boolean detIva;
+    private java.math.BigDecimal detCantidadCaja;
+    private String detEmpaque;
+    private String detPresentacionUnidad;
+    private String detPresentacionCaja;
     private String pisNumero;//
-  
-
-    
-      
 
     public ReporteProformaDetalle() {
     }
 
-    public ReporteProformaDetalle(String empCodigo, String perCodigo, String motCodigo, String profNumero, String profFecha, BigDecimal profIvaVigente, String profObservaciones, Boolean profPendiente, BigDecimal profBase0, BigDecimal profBaseimponible, BigDecimal profDescuentoBase0, BigDecimal profDescuentoBaseImponible, BigDecimal profDescuentoGeneralBase0, BigDecimal profDescuentoGeneralBaseImponible, BigDecimal profDescuentoIva, BigDecimal profSubtotalBase0, BigDecimal profSubtotalBaseImponible, BigDecimal profMontoiva, BigDecimal profTotal, String cliCodigo, String cliNombre, String cliDireccion, String cliTelefono, String cliRuc, String cliCiudad, String usrInsertaCompra, String usrFechaInsertaCompra, String bodCodigo, Boolean detPendiente, String proCodigoPrincipal, String proNombre, BigDecimal detCantidad, String detMedida, BigDecimal detPrecio, BigDecimal detParcial, BigDecimal detPorcentaje, BigDecimal detDescuento, BigDecimal detSubtotal, String pisNumero) {
+    public ReporteProformaDetalle(String empCodigo, String perCodigo, String motCodigo, String profNumero, String profFecha, BigDecimal profIvaVigente, String profObservaciones, Boolean profPendiente, BigDecimal profBase0, BigDecimal profBaseimponible, BigDecimal profDescuentoBase0, BigDecimal profDescuentoBaseImponible, BigDecimal profDescuentoGeneralBase0, BigDecimal profDescuentoGeneralBaseImponible, BigDecimal profDescuentoIva, BigDecimal profSubtotalBase0, BigDecimal profSubtotalBaseImponible, BigDecimal profMontoiva, BigDecimal profTotal, String cliCodigo, String cliNombre, String cliDireccion, String cliTelefono, String cliRuc, String cliCiudad, String usrInsertaCompra, String usrFechaInsertaCompra, String bodCodigo, Boolean detPendiente, String proCodigoPrincipal, String proNombre, BigDecimal detCantidad, String detMedida, BigDecimal detPrecio, BigDecimal detParcial, BigDecimal detPorcentaje, BigDecimal detDescuento, BigDecimal detSubtotal, Boolean detIva, BigDecimal detCantidadCaja, String detEmpaque, String detPresentacionUnidad, String detPresentacionCaja, String pisNumero) {
         this.empCodigo = empCodigo;
         this.perCodigo = perCodigo;
         this.motCodigo = motCodigo;
@@ -107,8 +102,15 @@ public class ReporteProformaDetalle {
         this.detPorcentaje = detPorcentaje;
         this.detDescuento = detDescuento;
         this.detSubtotal = detSubtotal;
+        this.detIva = detIva;
+        this.detCantidadCaja = detCantidadCaja;
+        this.detEmpaque = detEmpaque;
+        this.detPresentacionUnidad = detPresentacionUnidad;
+        this.detPresentacionCaja = detPresentacionCaja;
         this.pisNumero = pisNumero;
     }
+
+    
 
     public String getEmpCodigo() {
         return empCodigo;
@@ -420,5 +422,45 @@ public class ReporteProformaDetalle {
 
     public void setPisNumero(String pisNumero) {
         this.pisNumero = pisNumero;
+    }
+
+    public BigDecimal getDetCantidadCaja() {
+        return detCantidadCaja;
+    }
+
+    public void setDetCantidadCaja(BigDecimal detCantidadCaja) {
+        this.detCantidadCaja = detCantidadCaja;
+    }
+
+    public String getDetEmpaque() {
+        return detEmpaque;
+    }
+
+    public void setDetEmpaque(String detEmpaque) {
+        this.detEmpaque = detEmpaque;
+    }
+
+    public Boolean getDetIva() {
+        return detIva;
+    }
+
+    public void setDetIva(Boolean detIva) {
+        this.detIva = detIva;
+    }
+
+    public String getDetPresentacionCaja() {
+        return detPresentacionCaja;
+    }
+
+    public void setDetPresentacionCaja(String detPresentacionCaja) {
+        this.detPresentacionCaja = detPresentacionCaja;
+    }
+
+    public String getDetPresentacionUnidad() {
+        return detPresentacionUnidad;
+    }
+
+    public void setDetPresentacionUnidad(String detPresentacionUnidad) {
+        this.detPresentacionUnidad = detPresentacionUnidad;
     }
 }
