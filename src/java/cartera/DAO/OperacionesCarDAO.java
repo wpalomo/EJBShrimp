@@ -266,12 +266,29 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
      * @throws Exception Cualquier error inesperado
      */
     @Override
-    public List<CarFunPagosTO> getCarFunPagosTO(String empresa, String desde, String hasta, String proveedor) throws Exception {
+    public List<CarFunPagosTO> getCarFunPagosTO(String empresa, String sector, String desde, String hasta, String proveedor) throws Exception {
         desde = desde == null ? desde : "'" + desde + "'";
         hasta = hasta == null ? hasta : "'" + hasta + "'";
         proveedor = proveedor == null ? proveedor : "'" + proveedor + "'";
-        return ConversionesCar.convertirCarFunPagos_CarFunPagosTO(em.createNativeQuery("SELECT * FROM cartera.fun_Pagos('" + empresa + "', " + desde + ", " + hasta + ", " + proveedor + ");").getResultList());
+        sector = sector == null ? sector : "'" + sector + "'";
+        return ConversionesCar.convertirCarFunPagos_CarFunPagosTO(
+                em.createNativeQuery("SELECT * FROM cartera.fun_Pagos('" + empresa + "', " 
+//                + sector + "', "     //Cuando ya este lista la función, descomentar esta linea
+                + desde + ", " + hasta + ", " +
+                proveedor + ");").getResultList());
     }
+    
+    /////////////////////NNOOOOOOOOOOOOOOOOOOOOOO
+//     public List<CarFunCuentasPorPagarListadoComprasTO> getCarFunCuentasPorPagarListadoComprasTO(String empresa, String sector, String proveedor, String desde, String hasta) throws Exception {
+//        hasta = hasta == null ? hasta : "'" + hasta + "'";
+//        desde = desde == null ? desde : "'" + desde + "'";
+//        proveedor = proveedor == null ? proveedor : "'" + proveedor + "'";
+//        sector = sector == null ? sector : "'" + sector + "'";
+//        return ConversionesCar.convertirCarFunCuentasPorPagarListadoCompras_CarFunCuentasPorPagarListadoComprasTO(
+//    em.createNativeQuery("SELECT * FROM cartera.fun_cuentas_por_pagar_listado_compras('" + empresa + "', "
+//                + "" + sector + ", " + proveedor + ", " + desde + ", " + hasta + ")").getResultList());
+//    }
+
 
     @Override
     public List<CarFunPagosPruebaTO> getCarFunPagosPruebaTO(String empresa, String desde, String hasta, String proveedor) throws Exception {
@@ -292,13 +309,17 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
      * @throws Exception Cualquier error inesperado
      */
     @Override
-    public List<CarFunPagosDetalleTO> getCarFunPagosDetalleTO(String empresa, String desde, String hasta, String proveedor, String formaPago) throws Exception {
+    public List<CarFunPagosDetalleTO> getCarFunPagosDetalleTO(String empresa, String sector, String desde, 
+    String hasta, String proveedor, String formaPago) throws Exception {
         desde = desde == null ? desde : "'" + desde + "'";
         hasta = hasta == null ? hasta : "'" + hasta + "'";
         proveedor = proveedor == null ? proveedor : "'" + proveedor + "'";
+        sector = sector == null ? sector : "'" + sector + "'";
         formaPago = formaPago == null ? formaPago : "'" + formaPago + "'";
-        return ConversionesCar.convertirCarFunPagosDetalle_CarFunPagosDetalleTO(em.createNativeQuery("SELECT * FROM cartera.fun_pagos_detalle('"
+        return ConversionesCar.convertirCarFunPagosDetalle_CarFunPagosDetalleTO(em.createNativeQuery(
+                "SELECT * FROM cartera.fun_pagos_detalle('"
                 + empresa + "', "
+                //+ sector + ", "    //Cuando ya este lista la función, descomentar esta linea
                 + desde + ", "
                 + hasta + ", "
                 + proveedor + ", "
@@ -544,11 +565,18 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
      * @throws Exception Cualquier error inesperado
      */
     @Override
-    public List<CarFunCobrosTO> getCarFunCobrosTO(String empresa, String desde, String hasta, String cliente) throws Exception {
+    public List<CarFunCobrosTO> getCarFunCobrosTO(String empresa, 
+    String sector,
+    String desde, String hasta, String cliente) throws Exception {
         desde = desde == null ? desde : "'" + desde + "'";
         hasta = hasta == null ? hasta : "'" + hasta + "'";
         cliente = cliente == null ? cliente : "'" + cliente + "'";
-        return ConversionesCar.convertirCarFunCobros_CarFunCobrosTO(em.createNativeQuery("SELECT * FROM cartera.fun_cobros('" + empresa + "', " + desde + ", " + hasta + ", " + cliente + ");").getResultList());
+        sector = sector == null ? sector : "'" + sector + "'";
+        return ConversionesCar.convertirCarFunCobros_CarFunCobrosTO(em.createNativeQuery(
+                "SELECT * FROM cartera.fun_cobros('" + empresa + "', " 
+                //+ sector + ", "    //Descomentar esta linea cuando ya esta la lista la funcion correspondiente.
+                + desde + ", "
+                + hasta + ", " + cliente + ");").getResultList());
     }
 
     /**
@@ -562,13 +590,18 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
      * @throws Exception Cualquier error inesperado
      */
     @Override
-    public List<CarFunCobrosDetalleTO> getCarFunCobrosDetalleTO(String empresa, String desde, String hasta, String cliente, String formaPago) throws Exception {
+    public List<CarFunCobrosDetalleTO> getCarFunCobrosDetalleTO(String empresa, 
+    String sector,    
+    String desde, String hasta, String cliente, String formaPago) throws Exception {
         desde = desde == null ? desde : "'" + desde + "'";
         hasta = hasta == null ? hasta : "'" + hasta + "'";
         cliente = cliente == null ? cliente : "'" + cliente + "'";
         formaPago = formaPago == null ? formaPago : "'" + formaPago + "'";
-        return ConversionesCar.convertirCarFunCobrosDetalle_CarFunCobrosDetalleTO(em.createNativeQuery("SELECT * FROM cartera.fun_cobros_detalle('"
+        sector = sector == null ? sector : "'" + sector + "'";
+        return ConversionesCar.convertirCarFunCobrosDetalle_CarFunCobrosDetalleTO(em.createNativeQuery(
+                "SELECT * FROM cartera.fun_cobros_detalle('"
                 + empresa + "', "
+//                + sector + ", "   //Descomentar esta linea cuando ya esta la lista la funcion correspondiente.
                 + desde + ", "
                 + hasta + ", "
                 + cliente + ", "
@@ -767,16 +800,19 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
      * @throws Exception Cualquier error inesperado
      */
     @Override
-    public List<CarListaMayorAuxiliarClienteProveedorTO> getCarListaMayorAuxiliarClienteProveedorTO(String empresa, String codigo, String desde, String hasta, char accion) throws Exception {
+    public List<CarListaMayorAuxiliarClienteProveedorTO> getCarListaMayorAuxiliarClienteProveedorTO(String empresa, String sector, String codigo, String desde, String hasta, char accion) throws Exception {
         desde = desde == null ? desde : "'" + desde + "'";
         hasta = hasta == null ? hasta : "'" + hasta + "'";
+        sector = sector == null ? sector : "'" + sector + "'";
         if (accion == 'P') {
             return ConversionesCar.convertirCarListaMayorAuxiliarClienteProveedor_CarListaMayorAuxiliarClienteProveedorTO(em.createNativeQuery("SELECT * FROM cartera."
                     + "fun_mayor_auxiliar_proveedor('" + empresa + "', '" + codigo + "', "
                     + desde + ", " + hasta + ");").getResultList());
         } else {
             return ConversionesCar.convertirCarListaMayorAuxiliarClienteProveedor_CarListaMayorAuxiliarClienteProveedorTO(em.createNativeQuery("SELECT * FROM cartera."
-                    + "fun_mayor_auxiliar_cliente('" + empresa + "', '" + codigo + "', "
+                    + "fun_mayor_auxiliar_cliente('" + empresa + "', " 
+                    //+ sector + ", '"     //Cuando ya este lista la función, descomentar esta linea
+                    + codigo + "', "
                     + desde + ", " + hasta + ");").getResultList());
         }
     }
@@ -825,10 +861,17 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
      * @throws Exception Cualquier error inesperado
      */
     @Override
-    public List<CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorPagarDetalladoTO(String empresa, String sector, String hasta) throws Exception {
+    public List<CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorPagarDetalladoTO(String empresa, String sector, 
+    String proveedor,
+    String hasta) throws Exception {
         hasta = hasta == null ? hasta : "'" + hasta + "'";
         sector = sector == null ? sector : "'" + sector + "'";
-        return ConversionesCar.convertirCarListaCuentasPorPagarDetallado_CarCuentasPorPagarDetalladoTO(em.createNativeQuery("SELECT * FROM cartera.fun_cuentas_por_pagar_detallado('" + empresa + "', " + sector + ", " + hasta + ")").getResultList());
+        proveedor = proveedor == null ? proveedor : "'" + proveedor + "'";
+        return ConversionesCar.convertirCarListaCuentasPorPagarDetallado_CarCuentasPorPagarDetalladoTO(em.createNativeQuery(
+                "SELECT * FROM cartera.fun_cuentas_por_pagar_detallado('" + empresa + "', " 
+                + sector + ", " 
+                //+ proveedor + ", " // Descomentar esta linea cuando este lista la funcion respectiva
+                + hasta + ")").getResultList());
     }
 
     /**
@@ -873,16 +916,19 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
     @Override
     public List<CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorCobrarDetalladoTO(String empresa,
             String sector,
+            String cliente,
             String desde,
             String hasta,
             boolean ichfa) throws Exception {
         sector = sector == null ? sector : "'" + sector + "'";
         desde = desde == null ? desde : "'" + desde + "'";
         hasta = hasta == null ? hasta : "'" + hasta + "'";
-
-        return ConversionesCar.convertirCarListaCuentasPorPagarDetallado_CarCuentasPorPagarDetalladoTO(em.createNativeQuery("SELECT * FROM cartera.fun_cuentas_por_cobrar_detallado("
+        cliente = cliente == null ? cliente : "'" + cliente + "'";
+        return ConversionesCar.convertirCarListaCuentasPorPagarDetallado_CarCuentasPorPagarDetalladoTO(em.createNativeQuery(
+                "SELECT * FROM cartera.fun_cuentas_por_cobrar_detallado("
                 + "'" + empresa + "', "
                 + sector + ", "
+                //+ cliente + ", " // Descomentar esta linea cuando este lista la funcion respectiva
                 + desde + ", "
                 + hasta + ", "
                 + ichfa + ")").getResultList());

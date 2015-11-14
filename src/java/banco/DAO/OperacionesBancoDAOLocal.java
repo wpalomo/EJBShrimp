@@ -80,4 +80,6 @@ public interface OperacionesBancoDAOLocal {
     banco.entity.BanPreavisos getBanPreavisos(java.lang.String empresa, java.lang.String cuentaContable) throws java.lang.Exception;
 
     String getNombreBanco(java.lang.String empresa, java.lang.String cuentaContable) throws Exception;
+
+    public Object getBanChequeSecuencial(String empresa, String cuenta)throws Exception;
 }

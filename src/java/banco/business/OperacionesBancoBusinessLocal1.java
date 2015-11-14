@@ -229,4 +229,6 @@ public interface OperacionesBancoBusinessLocal1 {
     JasperPrint generarReporteCheque(SisUsuarioEmpresaTO sisUsuarioEmpresaTO,
             BanChequeTO banChequeTO, String valorLetra1, String valorLetra2,
             String nombreReporteCheque, ConDetalle conDetalle, String cuentaCodigo) throws java.lang.Exception;
+
+    public Object getBanChequeSecuencial(String empresa, String cuenta)throws java.lang.Exception;
 }

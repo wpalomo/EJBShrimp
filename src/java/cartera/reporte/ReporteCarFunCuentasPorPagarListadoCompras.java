@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 public class ReporteCarFunCuentasPorPagarListadoCompras implements Serializable {
 
     private String codigoCP;
+    private String proveedor;
     private String fechaHasta;
     /////////DETALLE
     private String cxpdPeriodo;
@@ -39,6 +40,16 @@ public class ReporteCarFunCuentasPorPagarListadoCompras implements Serializable 
         this.cxpdSaldo = cxpdSaldo;
     }
 
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
+    
+    
+    
     public String getCodigoCP() {
         return codigoCP;
     }

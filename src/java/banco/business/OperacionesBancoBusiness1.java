@@ -1525,4 +1525,8 @@ public class OperacionesBancoBusiness1 implements OperacionesBancoBusinessLocal1
         return generarReporteBancoLocal.generarReporteCheque(sisUsuarioEmpresaTO, banChequeTO, valorLetra1,
                 valorLetra2, nombreReporteCheque, conDetalle, cuentaCodigo);
     }
+
+    public Object getBanChequeSecuencial(String empresa, String cuenta) throws Exception {
+        return operacionesBancoDAOLocal.getBanChequeSecuencial(empresa, cuenta);
+    }
 }

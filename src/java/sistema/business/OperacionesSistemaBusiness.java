@@ -870,14 +870,23 @@ public class OperacionesSistemaBusiness implements OperacionesSistemaBusinessLoc
 
                 SisEmpresaParametros sisEmpresaParametros = new SisEmpresaParametros();
                 sisEmpresaParametros.setEmpCodigo(sisEmpresa);
-                sisEmpresaParametros.setParActividad(sisEmpresaTO.getParActividad());
                 sisEmpresaParametros.setParEmpresa(sisEmpresaTO.getEmpCodigo());
-                sisEmpresaParametros.setParEscogerPrecioPor(sisEmpresaTO.getParEscogerPrecioPor());
-                sisEmpresaParametros.setParResolucionContribuyenteEspecial(sisEmpresaTO.getEmResolucionContribuyenteEspecial());
+                sisEmpresaParametros.setParGerente(sisEmpresaTO.getEmpGerente());                
+                sisEmpresaParametros.setParGerenteTipoId(sisEmpresaTO.getEmpTipoIdGerente());
+                sisEmpresaParametros.setParGerenteId(sisEmpresaTO.getEmpIdGerente());                
+                sisEmpresaParametros.setParContador(sisEmpresaTO.getEmpContador());
+                sisEmpresaParametros.setParContadorRuc(sisEmpresaTO.getEmpRucContador());
                 sisEmpresaParametros.setParFinanciero(sisEmpresaTO.getParFinanciero());
                 sisEmpresaParametros.setParFinancieroId(sisEmpresaTO.getParFinancieroId());
+                sisEmpresaParametros.setParActividad(sisEmpresaTO.getParActividad());
+                sisEmpresaParametros.setParEscogerPrecioPor(sisEmpresaTO.getParEscogerPrecioPor());
+                //sisEmpresaParametros.setParObligadoLlevarContabilidad(true);                
+                sisEmpresaParametros.setParResolucionContribuyenteEspecial(sisEmpresaTO.getEmResolucionContribuyenteEspecial());                                               
                 sisEmpresaParametros.setParColumnasEstadosFinancieros(sisEmpresaTO.getParColumnasEstadosFinancieros());
-                sisEmpresaParametros.setParCodigoDinardap(sisEmpresaTO.getParCodigoDinardap());
+                sisEmpresaParametros.setParCodigoDinardap(sisEmpresaTO.getParCodigoDinardap());                                                                                
+                //(sisEmpresaParametros.setParWebDocumentosElectronicos(sisEmpresaTO.get);
+                
+                
                 comprobar = operacionesDAOTransaccionLocal.insertarSisEmpresa(
                         sisEmpresa, sisSuceso, sisEmpresaParametros);
             }
@@ -932,13 +941,9 @@ public class OperacionesSistemaBusiness implements OperacionesSistemaBusinessLoc
         try {
             sisEmpresaTO.setUsrFechaInsertaUsuario(Validacion.fechaString_Date(Validacion.fechaSistema()));
             comprobar = false;
-            if (operacionesSistemaDAOLocal.buscarEmpresa(sisEmpresaTO.getEmpCodigo()) != null) {
-                SisEmpresa sisEmpresaAux = operacionesSistemaDAOLocal.buscarEmpresa(sisEmpresaTO.getEmpCodigo());
-                sisEmpresaTO.setUsrInsertaUsuario(sisEmpresaAux.getUsrCodigo());
-                sisEmpresaTO.setUsrFechaInsertaUsuario(sisEmpresaAux.getUsrFechaInsertaEmpresa());
+            if (operacionesSistemaDAOLocal.buscarEmpresa(sisEmpresaTO.getEmpCodigo()) != null) {                
                 SisEmpresa sisEmpresa = ConversionesSistema.ConvertirSisEmpresaTO_SisEmpresa(sisEmpresaTO);
 
-                //SUCESO
                 susClave = sisEmpresaTO.getEmpCodigo();
                 susTabla = "sistemaWeb.sis_empresa";
                 susDetalle = "Se modifico datos de la empresa " + sisEmpresaTO.getEmpCodigo();
@@ -950,17 +955,23 @@ public class OperacionesSistemaBusiness implements OperacionesSistemaBusinessLoc
                         susDetalle,
                         sisInfoTO);
 
-                sistemaWeb.entity.SisEmpresaParametros sisEmpresaParametros = operacionesSistemaDAOLocal.buscarEmpresaParametros(sisInfoTO.getInfEmpresa());
-                sisEmpresaParametros.setEmpCodigo(sisEmpresa);
-                sisEmpresaParametros.setParActividad(sisEmpresaTO.getParActividad());
-                sisEmpresaParametros.setParEmpresa(sisEmpresaTO.getEmpCodigo());
-                sisEmpresaParametros.setParEscogerPrecioPor(sisEmpresaTO.getParEscogerPrecioPor());
-                sisEmpresaParametros.setParResolucionContribuyenteEspecial(sisEmpresaTO.getEmResolucionContribuyenteEspecial());
-                sisEmpresaParametros.setParObligadoLlevarContabilidad(sisEmpresaTO.getEmObligadoLlevarContabilidad());
+                sistemaWeb.entity.SisEmpresaParametros sisEmpresaParametros = operacionesSistemaDAOLocal.buscarEmpresaParametros(sisEmpresaTO.getEmpCodigo());                
+                sisEmpresaParametros.setEmpCodigo(sisEmpresa);                
+//                sisEmpresaParametros.setParEmpresa(sisEmpresaTO.getEmpCodigo());
+                sisEmpresaParametros.setParGerente(sisEmpresaTO.getEmpGerente());                
+                sisEmpresaParametros.setParGerenteTipoId(sisEmpresaTO.getEmpTipoIdGerente());
+                sisEmpresaParametros.setParGerenteId(sisEmpresaTO.getEmpIdGerente());                
+                sisEmpresaParametros.setParContador(sisEmpresaTO.getEmpContador());
+                sisEmpresaParametros.setParContadorRuc(sisEmpresaTO.getEmpRucContador());
                 sisEmpresaParametros.setParFinanciero(sisEmpresaTO.getParFinanciero());
                 sisEmpresaParametros.setParFinancieroId(sisEmpresaTO.getParFinancieroId());
+                sisEmpresaParametros.setParActividad(sisEmpresaTO.getParActividad());
+                sisEmpresaParametros.setParEscogerPrecioPor(sisEmpresaTO.getParEscogerPrecioPor());
+                //sisEmpresaParametros.setParObligadoLlevarContabilidad(true);                
+                sisEmpresaParametros.setParResolucionContribuyenteEspecial(sisEmpresaTO.getEmResolucionContribuyenteEspecial());                                               
                 sisEmpresaParametros.setParColumnasEstadosFinancieros(sisEmpresaTO.getParColumnasEstadosFinancieros());
-                sisEmpresaParametros.setParCodigoDinardap(sisEmpresaTO.getParCodigoDinardap());
+                sisEmpresaParametros.setParCodigoDinardap(sisEmpresaTO.getParCodigoDinardap());                                                                                
+                //(sisEmpresaParametros.setPa
 
                 comprobar = operacionesDAOTransaccionLocal.modificarSisEmpresa(sisEmpresa, sisSuceso, sisEmpresaParametros);
             }

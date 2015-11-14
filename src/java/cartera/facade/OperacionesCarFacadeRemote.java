@@ -84,6 +84,7 @@ public interface OperacionesCarFacadeRemote {
 
     java.util.List<cartera.TO.CarFunPagosTO> getCarFunPagosTO(
             java.lang.String empresa,
+            String sector,
             java.lang.String desde,
             java.lang.String hasta,
             java.lang.String proveedor) throws java.lang.Exception;
@@ -96,6 +97,7 @@ public interface OperacionesCarFacadeRemote {
 
     List<CarFunPagosDetalleTO> getCarFunPagosDetalleTO(
             String empresa,
+            String sector,
             String desde,
             String hasta,
             String proveedor,
@@ -145,12 +147,14 @@ public interface OperacionesCarFacadeRemote {
 
     java.util.List<cartera.TO.CarFunCobrosTO> getCarFunCobrosTO(
             java.lang.String empresa,
+            String sector,
             java.lang.String desde,
             java.lang.String hasta,
             java.lang.String cliente) throws java.lang.Exception;
 
     java.util.List<cartera.TO.CarFunCobrosDetalleTO> getCarFunCobrosDetalleTO(
             java.lang.String empresa,
+            String sector,
             java.lang.String desde,
             java.lang.String hasta,
             java.lang.String cliente,
@@ -180,6 +184,7 @@ public interface OperacionesCarFacadeRemote {
 
     java.util.List<cartera.TO.CarListaMayorAuxiliarClienteProveedorTO> getCarListaMayorAuxiliarClienteProveedorTO(
             java.lang.String empresa,
+            String sector,
             java.lang.String proveedor,
             java.lang.String desde,
             java.lang.String hasta,
@@ -195,6 +200,7 @@ public interface OperacionesCarFacadeRemote {
     java.util.List<cartera.TO.CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorPagarDetalladoTO(
             String empresa,
             String sector,
+            String proveedor,
             String hasta) throws Exception;
 
     java.util.List<cartera.TO.CarCuentasPorPagarCobrarGeneralTO> getCarListaCuentasPorPagarGeneralTO(
@@ -215,6 +221,7 @@ public interface OperacionesCarFacadeRemote {
     java.util.List<cartera.TO.CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorCobrarDetalladoTO(
             String empresa,
             String sector,
+            String cliente,
             String desde,
             String hasta,
             boolean ichfa) throws Exception;

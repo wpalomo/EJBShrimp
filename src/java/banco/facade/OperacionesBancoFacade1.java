@@ -414,4 +414,10 @@ public class OperacionesBancoFacade1 implements OperacionesBancoFacadeRemote1 {
                 sisUsuarioEmpresaTO, banChequeTO, valorLetra1,
                 valorLetra2, nombreReporteCheque, conDetalle, cuentaCodigo);
     }
+
+    public Object getBanChequeSecuencial(String empresa, String cuenta)throws Exception {
+        return operacionesBancoBusinessLocal.getBanChequeSecuencial(empresa, cuenta);
+    }
+    
+    
 }

@@ -43,11 +43,11 @@ public interface OperacionesCarDAOLocal {
 
     java.util.List<cartera.TO.CarListaPagosCobrosDetalleFormaTO> getPagosConsultaDetalleForma(java.lang.String empresa, java.lang.String periodo, java.lang.String numero) throws java.lang.Exception;
 
-    java.util.List<cartera.TO.CarFunPagosTO> getCarFunPagosTO(java.lang.String empresa, java.lang.String desde, java.lang.String hasta, java.lang.String proveedor) throws java.lang.Exception;
+    java.util.List<cartera.TO.CarFunPagosTO> getCarFunPagosTO(java.lang.String empresa, String sector, java.lang.String desde, java.lang.String hasta, java.lang.String proveedor) throws java.lang.Exception;
 
     java.util.List<CarFunPagosPruebaTO> getCarFunPagosPruebaTO(String empresa, String desde, String hasta, String proveedor) throws Exception;
 
-    java.util.List<cartera.TO.CarFunPagosDetalleTO> getCarFunPagosDetalleTO(java.lang.String empresa, java.lang.String desde, java.lang.String hasta, java.lang.String proveedor, java.lang.String formaPago) throws java.lang.Exception;
+    java.util.List<cartera.TO.CarFunPagosDetalleTO> getCarFunPagosDetalleTO(java.lang.String empresa, String sector, java.lang.String desde, java.lang.String hasta, java.lang.String proveedor, java.lang.String formaPago) throws java.lang.Exception;
 
     java.util.List<cartera.TO.CarFunPagosSaldoAnticipoTO> getCarFunPagosSaldoAnticipoTO(java.lang.String empresa, java.lang.String proveedor) throws java.lang.Exception;
 
@@ -77,9 +77,13 @@ public interface OperacionesCarDAOLocal {
     
     java.util.List<cartera.TO.CarListaPagosCobrosDetalleAnticipoTO> getCobrosConsultaDetalleAnticipo(String empresa, String periodo, String numero) throws Exception ;
 
-    java.util.List<cartera.TO.CarFunCobrosTO> getCarFunCobrosTO(java.lang.String empresa, java.lang.String desde, java.lang.String hasta, java.lang.String cliente) throws java.lang.Exception;
+    java.util.List<cartera.TO.CarFunCobrosTO> getCarFunCobrosTO(java.lang.String empresa, 
+            String sector,
+            java.lang.String desde, java.lang.String hasta, java.lang.String cliente) throws java.lang.Exception;
 
-    java.util.List<cartera.TO.CarFunCobrosDetalleTO> getCarFunCobrosDetalleTO(java.lang.String empresa, java.lang.String desde, java.lang.String hasta, java.lang.String cliente, java.lang.String formaPago) throws java.lang.Exception;
+    java.util.List<cartera.TO.CarFunCobrosDetalleTO> getCarFunCobrosDetalleTO(java.lang.String empresa, 
+            String sector,
+            java.lang.String desde, java.lang.String hasta, java.lang.String cliente, java.lang.String formaPago) throws java.lang.Exception;
 
     java.util.List<cartera.TO.CarFunCobrosSaldoAnticipoTO> getCarFunCobrosSaldoAnticipoTO(java.lang.String empresa, java.lang.String cliente) throws java.lang.Exception;
 
@@ -87,11 +91,14 @@ public interface OperacionesCarDAOLocal {
 
     java.util.List<cartera.TO.CarListaPagosCobrosFormaTO> getCarListaPagosCobrosForma(java.lang.String empresa, char accion) throws java.lang.Exception;
 
-    java.util.List<cartera.TO.CarListaMayorAuxiliarClienteProveedorTO> getCarListaMayorAuxiliarClienteProveedorTO(java.lang.String empresa, java.lang.String proveedor, java.lang.String desde, java.lang.String hasta, char accion) throws java.lang.Exception;
+    java.util.List<cartera.TO.CarListaMayorAuxiliarClienteProveedorTO> getCarListaMayorAuxiliarClienteProveedorTO(
+            java.lang.String empresa, String sector, java.lang.String proveedor, java.lang.String desde, java.lang.String hasta, char accion) throws java.lang.Exception;
 
     cartera.TO.CarPagosCobrosAnticipoTO getCarPagosCobrosAnticipoTO(String empresa, String periodo, String tipo, String numero, char accion) throws Exception;
 
-    java.util.List<cartera.TO.CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorPagarDetalladoTO(String empresa, String sector, String hasta) throws Exception;
+    java.util.List<cartera.TO.CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorPagarDetalladoTO(String empresa, String sector, 
+            String proveedor,
+            String hasta) throws Exception;
 
     java.util.List<cartera.TO.CarCuentasPorPagarCobrarGeneralTO> getCarListaCuentasPorPagarGeneralTO(String empresa, String sector, String hasta) throws Exception;
 
@@ -101,6 +108,7 @@ public interface OperacionesCarDAOLocal {
 
     java.util.List<cartera.TO.CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorCobrarDetalladoTO(String empresa,
             String sector,
+            String cliente,
             String desde,
             String hasta,
             boolean ichfa) throws Exception;
