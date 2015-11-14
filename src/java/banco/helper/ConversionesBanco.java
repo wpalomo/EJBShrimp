@@ -2,9 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package banco.helper;
-
 
 import banco.TO.BanFunChequesNoEntregadosTO;
 import banco.TO.BanFunChequesNoRevisadosTO;
@@ -18,6 +16,7 @@ import validaciones.Validacion;
  * @author jack
  */
 public class ConversionesBanco {
+
     private static java.math.BigDecimal cero = new java.math.BigDecimal("0.00");
 
     // <editor-fold defaultstate="collapsed" desc="CONVERSIONES BANCO">
@@ -30,7 +29,16 @@ public class ConversionesBanco {
         banBanco.setUsrFechaInserta(Validacion.fechaString_Date(banBancoTO.getUsrFechaInsertaBanco()));
         return banBanco;
     }
-    
+
+    public static banco.entity.BanChequeNumeracion convertirChequesNumeracionTO_BanChequesNumeracion(banco.TO.BanChequesNumeracionTO banBancoTO) {
+        banco.entity.BanChequeNumeracion banBanco = new banco.entity.BanChequeNumeracion();
+        banBanco.setBanDesde(banBancoTO.getBanDesde());
+        banBanco.setBanHasta(banBancoTO.getBanHasta());
+        banBanco.setBanCtaEmpresa(banBancoTO.getBanCtaEmpresa());
+        banBanco.setBanCtaContable(banBancoTO.getBanCtaContable());
+        return banBanco;
+    }
+
     public static banco.entity.BanConciliacion convertirBanConciliacionTO_BanConciliacion(banco.TO.BanConciliacionTO banConciliacionTO) {
         banco.entity.BanConciliacion banConciliacion = new banco.entity.BanConciliacion();
         banConciliacion.setBanConciliacionPK(new banco.entity.BanConciliacionPK(
@@ -52,7 +60,7 @@ public class ConversionesBanco {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -70,6 +78,47 @@ public class ConversionesBanco {
         }
         return lista;
     }// </editor-fold>
+
+    public static List<banco.TO.ListaBanChequesNumeracionTO> convertirListaChequesImpresos_ListaChequesImpresosTO(List datos) {
+        List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
+        for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
+            Object obj = i$.next();
+            Object[] array = ((java.util.List) obj).toArray();
+            //Object[] array = (Object[]) obj;
+            Integer secuencial;
+            try {
+                secuencial = Integer.parseInt(array[0].toString());
+            } catch (Exception e) {
+                secuencial = null;
+            }
+            Integer desde;
+            try {
+                desde = Integer.parseInt(array[1].toString());
+            } catch (Exception e) {
+                desde = null;
+            }
+            Integer hasta;
+            try {
+                hasta = Integer.parseInt(array[2].toString());
+            } catch (Exception e) {
+                hasta = null;
+            }
+            String ctaEmpresa;
+            try {
+                ctaEmpresa = array[3].toString();
+            } catch (Exception e) {
+                ctaEmpresa = null;
+            }
+            String ctaContable;
+            try {
+                ctaContable = array[4].toString();
+            } catch (Exception e) {
+                ctaContable = null;
+            }
+            lista.add(new banco.TO.ListaBanChequesNumeracionTO(secuencial, desde, hasta, ctaEmpresa, ctaContable));
+        }
+        return lista;
+    }
 
     // <editor-fold defaultstate="collapsed" desc="CONVERSIONES CAJA">
     public static banco.entity.BanCaja convertirBanCajaTO_BanCaja(banco.TO.BanCajaTO banCajaTO) {
@@ -89,7 +138,7 @@ public class ConversionesBanco {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -119,7 +168,7 @@ public class ConversionesBanco {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -161,11 +210,12 @@ public class ConversionesBanco {
         }
         return lista;
     }
+
     public static List<banco.TO.BanListaConciliacionTO> convertirBanListaConciliacion_BanListaConciliacionTO(List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -219,11 +269,12 @@ public class ConversionesBanco {
         }
         return lista;
     }
+
     public static List<banco.TO.BanListaConciliacionBancariaTO> convertirBanListaConciliacionBancaria_BanListaConciliacionBancariaTO(List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -279,16 +330,17 @@ public class ConversionesBanco {
             } catch (Exception e) {
                 dato9 = null;
             }
-            lista.add(new banco.TO.BanListaConciliacionBancariaTO(dato1, dato2, 
+            lista.add(new banco.TO.BanListaConciliacionBancariaTO(dato1, dato2,
                     dato3, dato4, dato5, dato6, dato7, dato8, dato9));
         }
         return lista;
     }
+
     public static List<banco.TO.BanListaChequeTO> convertirBanListaCheque_BanListaChequeTO(List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -352,13 +404,13 @@ public class ConversionesBanco {
             }
             String dato11;
             try {
-                dato11 = array[10].toString()+" | ";
+                dato11 = array[10].toString() + " | ";
             } catch (Exception e) {
                 dato11 = null;
             }
             String dato12;
             try {
-                dato12 = array[11].toString()+" | ";
+                dato12 = array[11].toString() + " | ";
             } catch (Exception e) {
                 dato12 = null;
             }
@@ -380,17 +432,18 @@ public class ConversionesBanco {
             } catch (Exception e) {
                 dato15 = null;
             }
-            lista.add(new banco.TO.BanListaChequeTO(dato1, dato2, dato3, dato4, 
-                    dato5, dato6, dato7, dato8, dato9, dato10, dato11, dato12, 
+            lista.add(new banco.TO.BanListaChequeTO(dato1, dato2, dato3, dato4,
+                    dato5, dato6, dato7, dato8, dato9, dato10, dato11, dato12,
                     dato13, dato14, dato15));
         }
         return lista;
     }
+
     public static List<banco.TO.BanComboCuentaTO> convertirBanComboCuentaTO_BanComboCuentaTO(List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -413,9 +466,9 @@ public class ConversionesBanco {
     // <editor-fold defaultstate="collapsed" desc="CONVERSIONES CUENTA">
     public static banco.TO.BanChequeTO convertirBanCheque_BanChequeTO(List datos) {
         banco.TO.BanChequeTO banChequeTO = new banco.TO.BanChequeTO();
-        for (Iterator i$ = datos.iterator(); i$.hasNext();){//clase iteracion(no todo se puede iterar, solo listas)
+        for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             Long dato1;
             try {
@@ -423,7 +476,7 @@ public class ConversionesBanco {
             } catch (Exception e) {
                 dato1 = null;
             }
-           
+
             String dato2;
             try {
                 dato2 = array[1].toString();
@@ -448,7 +501,7 @@ public class ConversionesBanco {
             } catch (Exception e) {
                 dato5 = null;
             }
-                        
+
             Boolean dato6;
             try {
                 dato6 = Boolean.valueOf(array[5].toString());
@@ -473,63 +526,63 @@ public class ConversionesBanco {
             } catch (Exception e) {
                 dato9 = false;
             }
-            
+
             //S S B S
-            
+
             String dato10;
             try {
                 dato10 = array[9].toString();
             } catch (Exception e) {
                 dato10 = null;
             }
-            
+
             String dato11;
             try {
                 dato11 = array[10].toString();
             } catch (Exception e) {
                 dato11 = null;
             }
-            
+
             Boolean dato12;
             try {
                 dato12 = Boolean.valueOf(array[11].toString());
             } catch (Exception e) {
                 dato12 = false;
             }
-                                  
+
             String dato13;
             try {
                 dato13 = array[12].toString();
             } catch (Exception e) {
                 dato13 = null;
             }
-            
+
             ///sbss
-             String dato14;
+            String dato14;
             try {
                 dato14 = array[13].toString();
             } catch (Exception e) {
                 dato14 = null;
-            }            
-             Boolean dato15;
+            }
+            Boolean dato15;
             try {
                 dato15 = Boolean.valueOf(array[14].toString());
             } catch (Exception e) {
                 dato15 = false;
             }
-             String dato16;
+            String dato16;
             try {
                 dato16 = array[15].toString();
             } catch (Exception e) {
                 dato16 = null;
-            }                        
+            }
             String dato17;
             try {
                 dato17 = array[16].toString();
             } catch (Exception e) {
                 dato17 = null;
             }
-            
+
             //bssb            
             Boolean dato18;
             try {
@@ -537,32 +590,32 @@ public class ConversionesBanco {
             } catch (Exception e) {
                 dato18 = false;
             }
-             String dato19;
+            String dato19;
             try {
                 dato19 = array[18].toString();
             } catch (Exception e) {
                 dato19 = null;
-            }                        
+            }
             String dato20;
             try {
                 dato20 = array[19].toString();
             } catch (Exception e) {
                 dato20 = null;
             }
-             Boolean dato21;
+            Boolean dato21;
             try {
                 dato21 = Boolean.valueOf(array[20].toString());
             } catch (Exception e) {
                 dato21 = false;
             }
-            
+
             //sss
-             String dato22;
+            String dato22;
             try {
                 dato22 = array[21].toString();
             } catch (Exception e) {
                 dato22 = null;
-            }                        
+            }
             String dato23;
             try {
                 dato23 = array[22].toString();
@@ -575,14 +628,14 @@ public class ConversionesBanco {
             } catch (Exception e) {
                 dato24 = null;
             }
-            
-             Long dato25;
+
+            Long dato25;
             try {
                 dato25 = new Long(array[24].toString());
             } catch (Exception e) {
                 dato25 = null;
             }
-          
+
             banChequeTO.setChqSecuencia(dato1);
             banChequeTO.setChqBeneficiario(dato2);
             banChequeTO.setChqCantidad(dato3);
@@ -603,7 +656,7 @@ public class ConversionesBanco {
             banChequeTO.setChqAnulado(dato18);
             banChequeTO.setChqAnuladooFecha(dato19);
             banChequeTO.setChqAnuladoObservacion(dato20);
-            banChequeTO.setChqNoCheque(dato21);            
+            banChequeTO.setChqNoCheque(dato21);
             banChequeTO.setConcEmpresa(dato22);
             banChequeTO.setConcCuentaContable(dato23);
             banChequeTO.setConcCodigo(dato24);
@@ -611,7 +664,7 @@ public class ConversionesBanco {
         }
         return banChequeTO;
     }
-    
+
     public static banco.entity.BanCheque convertirBanChequeTO_BanCheque(banco.TO.BanChequeTO banChequeTO) {
         banco.entity.BanCheque banCheque = new banco.entity.BanCheque();
 
@@ -622,13 +675,13 @@ public class ConversionesBanco {
 //                banChequeTO.getCbDc()));
 
         banCheque.setChqCruzado(banChequeTO.isChqCruzado());
-        banCheque.setChqNoEsCheque(banChequeTO.isChqNoCheque());        
+        banCheque.setChqNoEsCheque(banChequeTO.isChqNoCheque());
         banCheque.setChqBeneficiario(banChequeTO.getChqBeneficiario());
         banCheque.setChqCantidad(banChequeTO.getChqCantidad());
         banCheque.setChqCiudad(banChequeTO.getChqCiudad());
         banCheque.setChqFecha(validaciones.Validacion.fecha(banChequeTO.getChqFecha(), "yyyy-MM-dd"));
         banCheque.setChqImpreso(banChequeTO.isChqImpreso());
-        banCheque.setChqRevisado(banChequeTO.isChqRevisado());        
+        banCheque.setChqRevisado(banChequeTO.isChqRevisado());
         banCheque.setChqEntregado(banChequeTO.isChqEntregado());
         banCheque.setChqEntregadoFecha(validaciones.Validacion.fecha(banChequeTO.getChqEntregadoFecha(), "yyyy-MM-dd"));
         banCheque.setChqEntregadoObservacion(banChequeTO.getChqEntregadoObservacion());
@@ -639,20 +692,20 @@ public class ConversionesBanco {
         banCheque.setConcEmpresa(banChequeTO.getConcEmpresa());
         banCheque.setChqImpresoFecha(validaciones.Validacion.fecha(banChequeTO.getChqImpresoFecha(), "yyyy-MM-dd"));
         banCheque.setChqRevisadoFecha(validaciones.Validacion.fecha(banChequeTO.getChqRevisadoFecha(), "yyyy-MM-dd"));
-        banCheque.setChqRevisadoObservacion(banChequeTO.getChqRevisadoObservacion());        
+        banCheque.setChqRevisadoObservacion(banChequeTO.getChqRevisadoObservacion());
         banCheque.setChqReversado(banChequeTO.isChqReversado());
         banCheque.setChqReversadoFecha(validaciones.Validacion.fecha(banChequeTO.getChqReversadoFecha(), "yyyy-MM-dd"));
-        banCheque.setChqReversadoObservacion(banChequeTO.getChqReversadoObservacion());        
+        banCheque.setChqReversadoObservacion(banChequeTO.getChqReversadoObservacion());
         banCheque.setChqAnulado(banChequeTO.getChqAnulado());
         banCheque.setChqAnuladoFecha(validaciones.Validacion.fecha(banChequeTO.getChqAnuladooFecha(), "yyyy-MM-dd"));
         banCheque.setChqAnuladoObservacion(banChequeTO.getChqAnuladoObservacion());
-        
+
         return banCheque;
     }
-    
+
     public static banco.entity.BanCheque convertirBanCheque_BanCheque(banco.entity.BanCheque banCheque) {
         banco.entity.BanCheque banChequeAux = new banco.entity.BanCheque();
-        
+
         banChequeAux.setChqSecuencia(banCheque.getChqSecuencia());
         banChequeAux.setChqBeneficiario(banCheque.getChqBeneficiario());
         banChequeAux.setChqCantidad(banCheque.getChqCantidad());
@@ -678,7 +731,7 @@ public class ConversionesBanco {
         banChequeAux.setConcCodigo(banCheque.getConcCodigo());
         banChequeAux.setConcCuentaContable(banCheque.getConcCuentaContable());
         banChequeAux.setConcEmpresa(banCheque.getConcEmpresa());
-        
+
         return banChequeAux;
     }
 
@@ -692,7 +745,7 @@ public class ConversionesBanco {
         banCuenta.setCtaTitular(banCuentaTO.getCtaTitular());
         banCuenta.setCtaOficial(banCuentaTO.getCtaOficial());
         banCuenta.setCtaFormatoCheque(banCuentaTO.getCtaFormatoCheque());
-        
+
         banCuenta.setCtaCodigoBancario(banCuentaTO.getCtaCodigoBancario());
         banCuenta.setCtaPrefijoBancario(banCuentaTO.getCtaPrefijoBancario());
 //        banCuenta.setCtaCuenta(banCuentaTO.getCtaCuenta());
@@ -706,7 +759,7 @@ public class ConversionesBanco {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -765,7 +818,7 @@ public class ConversionesBanco {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -846,9 +899,9 @@ public class ConversionesBanco {
 
     public static List<BanFunChequesNoEntregadosTO> convertirBanFunChequesNoEntregados_BanFunChequesNoEntregadosTO(List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
-        for (Iterator i$ = datos.iterator(); i$.hasNext();){//clase iteracion(no todo se puede iterar, solo listas)
+        for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -940,17 +993,18 @@ public class ConversionesBanco {
             } catch (Exception e) {
                 dato15 = null;
             }
-            lista.add(new BanFunChequesNoEntregadosTO(dato1, dato2, dato3, dato4, 
-                    dato5, dato6, dato7, dato8, dato9, dato10, dato11, dato12, 
+            lista.add(new BanFunChequesNoEntregadosTO(dato1, dato2, dato3, dato4,
+                    dato5, dato6, dato7, dato8, dato9, dato10, dato11, dato12,
                     dato13, dato14, dato15));
         }
         return lista;
     }
+
     public static List<BanFunChequesNoRevisadosTO> convertirBanFunChequesNoRevisados_BanFunChequesNoRevisadosTO(List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
-        for (Iterator i$ = datos.iterator(); i$.hasNext();){//clase iteracion(no todo se puede iterar, solo listas)
+        for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -1042,17 +1096,18 @@ public class ConversionesBanco {
             } catch (Exception e) {
                 dato15 = null;
             }
-            lista.add(new BanFunChequesNoRevisadosTO(dato1, dato2, dato3, dato4, 
-                    dato5, dato6, dato7, dato8, dato9, dato10, dato11, dato12, 
+            lista.add(new BanFunChequesNoRevisadosTO(dato1, dato2, dato3, dato4,
+                    dato5, dato6, dato7, dato8, dato9, dato10, dato11, dato12,
                     dato13, dato14, dato15));
         }
         return lista;
     }
+
     public static List<String> convertirCuentasContablesConsulta_CuentasContablesString(List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
-        for (Iterator i$ = datos.iterator(); i$.hasNext();){//clase iteracion(no todo se puede iterar, solo listas)
+        for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -1064,11 +1119,12 @@ public class ConversionesBanco {
         }
         return lista;
     }
+
     public static List<banco.TO.BanChequePreavisadoTO> convertirChequePreavisado_ChequePreavisadoTO(List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
-        for (Iterator i$ = datos.iterator(); i$.hasNext();){//clase iteracion(no todo se puede iterar, solo listas)
+        for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -1184,46 +1240,46 @@ public class ConversionesBanco {
             } catch (Exception e) {
                 dato19 = null;
             }
-            lista.add(new banco.TO.BanChequePreavisadoTO(dato1, dato2, dato3, dato4, dato5, dato6, 
-                    dato7, dato8, dato9, dato10, dato11, dato12, dato13, dato14, 
+            lista.add(new banco.TO.BanChequePreavisadoTO(dato1, dato2, dato3, dato4, dato5, dato6,
+                    dato7, dato8, dato9, dato10, dato11, dato12, dato13, dato14,
                     dato15, dato16, dato17, dato18, dato19));
         }
-        if (lista.size() > 0){
-            ((banco.TO.BanChequePreavisadoTO)lista.get(lista.size() - 1)).setChqFechaRevision(
-                    ((banco.TO.BanChequePreavisadoTO)lista.get(lista.size() - 1)).getChqFechaRevision() == null ? 
-                    validaciones.Validacion.fechaSistema("yyyy-MM-dd HH:mm:ss") : 
-                    ((banco.TO.BanChequePreavisadoTO)lista.get(lista.size() - 1)).getChqFechaRevision());
+        if (lista.size() > 0) {
+            ((banco.TO.BanChequePreavisadoTO) lista.get(lista.size() - 1)).setChqFechaRevision(
+                    ((banco.TO.BanChequePreavisadoTO) lista.get(lista.size() - 1)).getChqFechaRevision() == null
+                    ? validaciones.Validacion.fechaSistema("yyyy-MM-dd HH:mm:ss")
+                    : ((banco.TO.BanChequePreavisadoTO) lista.get(lista.size() - 1)).getChqFechaRevision());
 
             lista.add(new banco.TO.BanChequePreavisadoTO(
-                    validaciones.Validacion.fechaSistema("yyyy"), 
-                    validaciones.Validacion.fechaSistema("MM"), 
-                    validaciones.Validacion.fechaSistema("dd"), 
-                    validaciones.Validacion.fechaSistema("dd-MM-yyyy HH:mm:ss"), 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
-                    "", 
+                    validaciones.Validacion.fechaSistema("yyyy"),
+                    validaciones.Validacion.fechaSistema("MM"),
+                    validaciones.Validacion.fechaSistema("dd"),
+                    validaciones.Validacion.fechaSistema("dd-MM-yyyy HH:mm:ss"),
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
                     ""));
         }
-        
+
         return lista;
     }
-    
+
     public static banco.entity.BanPreavisos convertirBanPreavisosTO_BanPreavisos(List datos) {
         banco.entity.BanPreavisos banPreavisos = null;
-        for (Iterator i$ = datos.iterator(); i$.hasNext();){//clase iteracion(no todo se puede iterar, solo listas)
+        for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
-            Object[] array = ((java.util.List) obj).toArray(); 
+            Object[] array = ((java.util.List) obj).toArray();
             //Object[] array = (Object[]) obj;
             String dato1;
             try {
@@ -1279,17 +1335,17 @@ public class ConversionesBanco {
         }
         return banPreavisos;
     }
-    
+
     public static banco.entity.BanPreavisos convertirBanPreavisosTO_BanPreavisos(
             banco.TO.BanPreavisosTO banPreavisosTO) {
-        
-       banco.entity.BanPreavisos banPreavisos = new banco.entity.BanPreavisos();
-       
-       banPreavisos.setBanPreavisosPK(new banco.entity.BanPreavisosPK(
+
+        banco.entity.BanPreavisos banPreavisos = new banco.entity.BanPreavisos();
+
+        banPreavisos.setBanPreavisosPK(new banco.entity.BanPreavisosPK(
                 banPreavisosTO.getPreEmpresa(),
                 banPreavisosTO.getPreCuentaContable(),
                 banPreavisosTO.getPreNombreArchivoGenerado()));
-        
+
         banPreavisos.setPreFechaRevisionUltimoCheque(validaciones.Validacion.fecha(banPreavisosTO.getPreFechaRevisionUltimoCheque(), "yyyy-MM-dd HH:mm:ss"));
         banPreavisos.setUsrEmpresa(banPreavisosTO.getUsrEmpresa());
         banPreavisos.setUsrCodigo(banPreavisosTO.getUsrCodigo());

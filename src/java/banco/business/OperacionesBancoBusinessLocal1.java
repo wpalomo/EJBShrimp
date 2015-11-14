@@ -23,6 +23,9 @@ public interface OperacionesBancoBusinessLocal1 {
     java.util.List<banco.TO.ListaBanBancoTO> getListaBanBancoTO(
             String empresa) throws Exception;
 
+    java.util.List<banco.TO.ListaBanChequesNumeracionTO> getListaChequesNumeracionTO(
+            String empresa) throws Exception;
+
     java.util.List<banco.TO.ListaBanCajaTO> getListaBanCajaTO(
             String empresa) throws Exception;
 
@@ -35,6 +38,10 @@ public interface OperacionesBancoBusinessLocal1 {
 
     boolean insertarBanBancoTO(
             banco.TO.BanBancoTO banBancoTO,
+            sistema.TO.SisInfoTO sisInfoTO) throws java.lang.Exception;
+
+    boolean insertarBanChequeNumeracionTO(
+            banco.TO.BanChequesNumeracionTO banBancoTO,
             sistema.TO.SisInfoTO sisInfoTO) throws java.lang.Exception;
 
     boolean insertarBanCajaTO(

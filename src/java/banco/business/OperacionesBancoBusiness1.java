@@ -62,6 +62,12 @@ public class OperacionesBancoBusiness1 implements OperacionesBancoBusinessLocal1
     }
 
     @Override
+    public java.util.List<banco.TO.ListaBanChequesNumeracionTO> getListaChequesNumeracionTO(
+            String empresa) throws Exception {
+        return operacionesBancoDAOLocal.getListaChequesNumeracionTO(empresa);
+    }
+
+    @Override
     public java.util.List<banco.TO.ListaBanCajaTO> getListaBanCajaTO(
             String empresa) throws Exception {
         return operacionesBancoDAOLocal.getListaBanCajaTO(empresa);
@@ -132,6 +138,39 @@ public class OperacionesBancoBusiness1 implements OperacionesBancoBusinessLocal1
                     e,
                     getClass().getName(),
                     "insertarBanBancoTO",
+                    sisInfoTO,
+                    operacionesSistemaDAOTransaccionLocal);
+        } finally {
+            return comprobar;
+        }
+    }
+
+    @Override
+    public boolean insertarBanChequeNumeracionTO(
+            banco.TO.BanChequesNumeracionTO banBancoTO,
+            sistema.TO.SisInfoTO sisInfoTO) throws java.lang.Exception {
+        comprobar = false;
+        try {
+            susClave = banBancoTO.getBanCtaEmpresa() + " " + banBancoTO.getBanCtaContable();
+            susDetalle = "Se ingreso la chequera desde " + banBancoTO.getBanDesde() + " hasta " + banBancoTO.getBanHasta();
+            susSuceso = "INSERT";
+            susTabla = "banco.ban_cheques_numeracion";
+            sistemaWeb.entity.SisSuceso sisSuceso = validaciones.Suceso.crearSisSuceso(
+                    susTabla,
+                    susClave,
+                    susSuceso,
+                    susDetalle,
+                    sisInfoTO);
+            if (operacionesBancoDAOLocal.buscarBanChequeNumeracion(banBancoTO.getBanSecuencial()) == null) {
+                banco.entity.BanChequeNumeracion banBanco = banco.helper.ConversionesBanco.convertirChequesNumeracionTO_BanChequesNumeracion(banBancoTO);
+                //comprobar = operacionesBancoDAOTransaccionLocal.insertarBanChequesNumeracion(banBanco, sisSuceso);
+            }
+        } catch (Exception e) {
+            comprobar = false;
+            validaciones.Excepciones.guardarExcepcionesEJB(
+                    e,
+                    getClass().getName(),
+                    "insertarBanChequeNumeracionTO",
                     sisInfoTO,
                     operacionesSistemaDAOTransaccionLocal);
         } finally {
@@ -377,13 +416,13 @@ public class OperacionesBancoBusiness1 implements OperacionesBancoBusinessLocal1
                         conDetalle.setDetDocumento(numeroNuevo);
                         boolean comprobar1 = operacionesContabilidadDAOTransaccionLocal.modificarConDetalleTO(conDetalle, sisSuceso);
                         if (comprobar && comprobar1) {
-                             retorno = "T<html>Se modificó correctamente el CHEQUE: " + numero + " al numero " + numeroNuevo + "<br><br>"
-                                                    + "Periodo: <font size = 5>" + conDetalle.getConContable().getConContablePK().getConPeriodo()
-                                                    + "</font>.<br> Tipo: <font size = 5>" + conDetalle.getConContable().getConContablePK().getConTipo()
-                                                    + "</font>.<br> Número: <font size = 5>" + conDetalle.getConContable().getConContablePK().getConNumero() + "</font>.</html>"
-                                                    + conDetalle.getConContable().getConContablePK().getConPeriodo() + ", " + conDetalle.getConContable().getConContablePK().getConNumero();
-                            
-                            
+                            retorno = "T<html>Se modificó correctamente el CHEQUE: " + numero + " al numero " + numeroNuevo + "<br><br>"
+                                    + "Periodo: <font size = 5>" + conDetalle.getConContable().getConContablePK().getConPeriodo()
+                                    + "</font>.<br> Tipo: <font size = 5>" + conDetalle.getConContable().getConContablePK().getConTipo()
+                                    + "</font>.<br> Número: <font size = 5>" + conDetalle.getConContable().getConContablePK().getConNumero() + "</font>.</html>"
+                                    + conDetalle.getConContable().getConContablePK().getConPeriodo() + ", " + conDetalle.getConContable().getConContablePK().getConNumero();
+
+
                             //retorno = "TSe modifico el numero del cheque " + numero + " al numero " + numeroNuevo + "...";
                         } else {
                             retorno = "F<html>Hubo un error al modificar el numero del cheque " + numero + "...</html>";

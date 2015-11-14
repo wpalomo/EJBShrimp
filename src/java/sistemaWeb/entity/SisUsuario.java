@@ -28,6 +28,7 @@ import javax.persistence.*;
     @NamedQuery(name = "SisUsuario.findByUsrCodigoInserta", query = "SELECT s FROM SisUsuario s WHERE s.usrCodigoInserta = :usrCodigoInserta"),
     @NamedQuery(name = "SisUsuario.findByUsrFechaInsertaUsuario", query = "SELECT s FROM SisUsuario s WHERE s.usrFechaInsertaUsuario = :usrFechaInsertaUsuario")})
 public class SisUsuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -52,14 +53,16 @@ public class SisUsuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "usr_cambiar_contrasenia")
     private boolean usrCambiarContrasenia;
+    @Column(name = "usr_email_usuario")
+    private String usrEmail;
+    @Column(name = "usr_email_password")
+    private String usrPasswordEmail;
     @Column(name = "usr_codigo_inserta")
     private String usrCodigoInserta;
     @Basic(optional = false)
     @Column(name = "usr_fecha_inserta_usuario")
     @Temporal(TemporalType.TIMESTAMP)
     private Date usrFechaInsertaUsuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrCodigo")
-    private List<SisUsuarioDetalle> sisUsuarioDetalleList;
 
     public SisUsuario() {
     }
@@ -68,13 +71,15 @@ public class SisUsuario implements Serializable {
         this.usrCodigo = usrCodigo;
     }
 
-    public SisUsuario(String usrCodigo, String usrNick, String usrPassword, boolean usrActivo, boolean usrCambiarContrasenia, Date usrFechaInsertaUsuario) {
+    public SisUsuario(String usrCodigo, String usrNick, String usrPassword, boolean usrActivo, boolean usrCambiarContrasenia, Date usrFechaInsertaUsuario, String usrEmail, String usrPasswordEmail) {
         this.usrCodigo = usrCodigo;
         this.usrNick = usrNick;
         this.usrPassword = usrPassword;
         this.usrActivo = usrActivo;
         this.usrCambiarContrasenia = usrCambiarContrasenia;
         this.usrFechaInsertaUsuario = usrFechaInsertaUsuario;
+        this.usrEmail = usrEmail;
+        this.usrPasswordEmail = usrPasswordEmail;
     }
 
     public String getUsrCodigo() {
@@ -157,12 +162,20 @@ public class SisUsuario implements Serializable {
         this.usrFechaInsertaUsuario = usrFechaInsertaUsuario;
     }
 
-    public List<SisUsuarioDetalle> getSisUsuarioDetalleList() {
-        return sisUsuarioDetalleList;
+    public void setUsrEmail(String usrEmail) {
+        this.usrEmail = usrEmail;
     }
 
-    public void setSisUsuarioDetalleList(List<SisUsuarioDetalle> sisUsuarioDetalleList) {
-        this.sisUsuarioDetalleList = sisUsuarioDetalleList;
+    public String getUsrEmail() {
+        return usrEmail;
+    }
+
+    public void setUsrPasswordEmail(String usrPasswordEmail) {
+        this.usrPasswordEmail = usrPasswordEmail;
+    }
+
+    public String getUsrPasswordEmail() {
+        return usrPasswordEmail;
     }
 
     @Override
@@ -189,5 +202,4 @@ public class SisUsuario implements Serializable {
     public String toString() {
         return "sistemaWeb.entity.SisUsuario[ usrCodigo=" + usrCodigo + " ]";
     }
-    
 }

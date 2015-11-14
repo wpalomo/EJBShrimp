@@ -37,6 +37,11 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
     }
 
     @Override
+    public banco.entity.BanBanco buscarBanChequeNumeracion(Integer secuencial) throws Exception {
+        return banBancoFacadeLocal.find(new banco.entity.BanChequeNumeracion_());
+    }
+
+    @Override
     public banco.entity.BanConciliacion buscarBanConciliacion(String concEmpresa, String concCuentaContable, String concCodigo) throws Exception {
         return banBanConciliacionFacadeLocal.find(new banco.entity.BanConciliacionPK(concEmpresa, concCuentaContable, concCodigo));
     }
@@ -63,6 +68,14 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
                 + "FROM banco.ban_banco "
                 + "WHERE (ban_empresa = '" + empresa + "') "
                 + "ORDER BY ban_nombre").getResultList());
+    }
+
+    @Override
+    public java.util.List<banco.TO.ListaBanChequesNumeracionTO> getListaChequesNumeracionTO(String empresa) throws Exception {
+        return banco.helper.ConversionesBanco.convertirListaChequesImpresos_ListaChequesImpresosTO(
+                em.createNativeQuery("SELECT * "
+                + "FROM banco.ban_cheques_numeracion "
+                + "ORDER BY chq_secuencial").getResultList());
     }
 
     @Override
@@ -389,7 +402,7 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
                     + "'" + empresa + "', "
                     + "'" + cuenta + "', "
                     + "'" + hasta + "');").getResultList(), 0)[0].toString());
-        } catch (Exception e) {            
+        } catch (Exception e) {
             return new java.math.BigDecimal("0.00");
         }
     }

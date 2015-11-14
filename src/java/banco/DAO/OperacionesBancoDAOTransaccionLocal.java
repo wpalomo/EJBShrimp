@@ -22,6 +22,8 @@ public interface OperacionesBancoDAOTransaccionLocal {
 
     boolean insertarBanBanco(BanBanco banBanco, SisSuceso sisSuceso) throws Exception;
 
+//    boolean insertarBanChequesNumeracion(BanChequeNumeracion banBanco, SisSuceso sisSuceso) throws Exception;
+
     boolean insertarBanCaja(BanCaja banCaja, SisSuceso sisSuceso) throws Exception;
 
     boolean insertarBanCuenta(BanCuenta banCuenta, SisSuceso sisSuceso) throws Exception;
