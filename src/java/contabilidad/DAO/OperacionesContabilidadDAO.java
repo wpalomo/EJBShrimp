@@ -186,7 +186,7 @@ public class OperacionesContabilidadDAO implements OperacionesContabilidadDAOLoc
     @Override
     public List<ConTipoTO> getListaConTipoTO(String empresa) throws Exception {
         return ConversionesContabilidad.convertirListaConTipo_ListaConTipoTO(em.createNativeQuery("SELECT * FROM contabilidad.con_tipo WHERE "
-                + "tip_empresa = ('" + empresa + "')").getResultList());
+                + "tip_empresa = ('" + empresa + "') ORDER BY tip_detalle").getResultList());
     }
 
     @Override

@@ -31,6 +31,12 @@ public class OperacionesBancoFacade1 implements OperacionesBancoFacadeRemote1 {
             String empresa) throws Exception {
         return operacionesBancoBusinessLocal.getListaBanBancoTO(empresa);
     }
+    
+    @Override
+    public java.util.List<banco.TO.ListaBanChequesNumeracionTO> getListaChequesNumeracionTO(
+            String empresa) throws Exception {
+        return operacionesBancoBusinessLocal.getListaChequesNumeracionTO(empresa);
+    }
 
     @Override
     public java.util.List<banco.TO.ListaBanCajaTO> getListaBanCajaTO(
@@ -81,6 +87,13 @@ public class OperacionesBancoFacade1 implements OperacionesBancoFacadeRemote1 {
             banco.TO.BanBancoTO banBancoTO,
             sistema.TO.SisInfoTO sisInfoTO) throws Exception {
         return operacionesBancoBusinessLocal.insertarBanBancoTO(banBancoTO, sisInfoTO);
+    }
+    
+    @Override
+    public boolean insertarBanChequeNumeracionTO(
+            banco.TO.BanChequesNumeracionTO banBancoTO,
+            sistema.TO.SisInfoTO sisInfoTO) throws Exception {
+        return operacionesBancoBusinessLocal.insertarBanChequeNumeracionTO(banBancoTO, sisInfoTO);
     }
 
     @Override
@@ -414,4 +427,10 @@ public class OperacionesBancoFacade1 implements OperacionesBancoFacadeRemote1 {
                 sisUsuarioEmpresaTO, banChequeTO, valorLetra1,
                 valorLetra2, nombreReporteCheque, conDetalle, cuentaCodigo);
     }
+
+    public Object getBanChequeSecuencial(String empresa, String cuenta)throws Exception {
+        return operacionesBancoBusinessLocal.getBanChequeSecuencial(empresa, cuenta);
+    }
+    
+    
 }

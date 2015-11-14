@@ -58,7 +58,7 @@ public class ConversionesSistema {
         sisEmpresa.setEmpRazonSocial(sisEmpresaTO.getEmpRazonSocial());
         sisEmpresa.setEmpDireccion(sisEmpresaTO.getEmpDireccion());
         sisEmpresa.setEmpCiudad(sisEmpresaTO.getEmpCiudad());
-        //sisEmpresa.setEmpActividad(sisEmpresaTO.getParActividad());
+//        sisEmpresa.setEmpActividad(sisEmpresaTO.getParActividad());
         sisEmpresa.setEmpTelefono(sisEmpresaTO.getEmpTelefono());
         sisEmpresa.setEmpFax(sisEmpresaTO.getEmpFax());
         sisEmpresa.setEmpEmail(sisEmpresaTO.getEmpEmail());
@@ -655,21 +655,33 @@ public class ConversionesSistema {
             } catch (Exception e) {
                 usrCambiarContrasenia = null;
             }
+            String usrEmail;
+            try {
+                usrEmail = array[8].toString().trim();
+            } catch (Exception e) {
+                usrEmail = null;
+            }
+            String usrPasswordEmail;
+            try {
+                usrPasswordEmail = array[9].toString().trim();
+            } catch (Exception e) {
+                usrPasswordEmail = null;
+            }
             String usrCodigoInserta;
             try {
-                usrCodigoInserta = array[8].toString().trim();
+                usrCodigoInserta = array[10].toString().trim();
             } catch (Exception e) {
                 usrCodigoInserta = null;
             }
             String usrFechaInsertaUsuario;
             try {
-                usrFechaInsertaUsuario = array[9].toString().trim();
+                usrFechaInsertaUsuario = array[11].toString().trim();
             } catch (Exception e) {
                 usrFechaInsertaUsuario = null;
             }
             String gruCodigo;
             try {
-                gruCodigo = array[10].toString().trim();
+                gruCodigo = array[12].toString().trim();
             } catch (Exception e) {
                 gruCodigo = null;
             }
@@ -684,7 +696,7 @@ public class ConversionesSistema {
                     usrCambiarContrasenia,
                     usrCodigoInserta,
                     usrFechaInsertaUsuario,
-                    gruCodigo));
+                    gruCodigo, usrEmail, usrPasswordEmail));
         }
 
         return lista;
@@ -1002,6 +1014,9 @@ public class ConversionesSistema {
         sisUsuario.setUsrCaduca(Validacion.fechaString_Date(sisUsuarioTO.getUsrCaduca()));
         sisUsuario.setUsrActivo(sisUsuarioTO.getUsrActivo());
         
+        sisUsuario.setUsrEmail(sisUsuarioTO.getUsrEmail());
+        sisUsuario.setUsrPasswordEmail(sisUsuarioTO.getUsrPasswordEmail());
+
         sisUsuario.setUsrCambiarContrasenia(sisUsuarioTO.getUsrCambiarContrasenia());
         sisUsuario.setUsrCodigoInserta(sisUsuarioTO.getUsrInsertaUsuario());
         sisUsuario.setUsrFechaInsertaUsuario(Validacion.fechaString_Date(sisUsuarioTO.getUsrFechaInsertaUsuario()));

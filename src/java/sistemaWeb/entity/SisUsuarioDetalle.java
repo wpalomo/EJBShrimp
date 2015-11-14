@@ -23,6 +23,7 @@ import javax.persistence.*;
     @NamedQuery(name = "SisUsuarioDetalle.findByDetActivo", query = "SELECT s FROM SisUsuarioDetalle s WHERE s.detActivo = :detActivo"),
     @NamedQuery(name = "SisUsuarioDetalle.findByUsrFechaInsertaUsuario", query = "SELECT s FROM SisUsuarioDetalle s WHERE s.usrFechaInsertaUsuario = :usrFechaInsertaUsuario")})
 public class SisUsuarioDetalle implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected SisUsuarioDetallePK sisUsuarioDetallePK;
@@ -46,8 +47,6 @@ public class SisUsuarioDetalle implements Serializable {
         @JoinColumn(name = "gru_codigo", referencedColumnName = "gru_codigo")})
     @ManyToOne(optional = false)
     private SisGrupo sisGrupo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sisUsuarioDetalle")
-    private List<SisError> sisErrorList;
 
     public SisUsuarioDetalle() {
     }
@@ -123,14 +122,6 @@ public class SisUsuarioDetalle implements Serializable {
         this.sisGrupo = sisGrupo;
     }
 
-    public List<SisError> getSisErrorList() {
-        return sisErrorList;
-    }
-
-    public void setSisErrorList(List<SisError> sisErrorList) {
-        this.sisErrorList = sisErrorList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -155,5 +146,4 @@ public class SisUsuarioDetalle implements Serializable {
     public String toString() {
         return "sistemaWeb.entity.SisUsuarioDetalle[ sisUsuarioDetallePK=" + sisUsuarioDetallePK + " ]";
     }
-    
 }

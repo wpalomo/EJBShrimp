@@ -140,10 +140,11 @@ public class OperacionesCarFacade implements OperacionesCarFacadeRemote {
     @Override
     public java.util.List<cartera.TO.CarFunPagosTO> getCarFunPagosTO(
             java.lang.String empresa,
+            String sector,
             java.lang.String desde,
             java.lang.String hasta,
             java.lang.String proveedor) throws java.lang.Exception {
-        return operacionesCarBusinessLocal.getCarFunPagosTO(empresa, desde, hasta, proveedor);
+        return operacionesCarBusinessLocal.getCarFunPagosTO(empresa, sector, desde, hasta, proveedor);
     }
 
     @Override
@@ -158,11 +159,12 @@ public class OperacionesCarFacade implements OperacionesCarFacadeRemote {
     @Override
     public List<CarFunPagosDetalleTO> getCarFunPagosDetalleTO(
             String empresa,
+            String sector,
             String desde,
             String hasta,
             String proveedor,
             String formaPago) throws Exception {
-        return operacionesCarBusinessLocal.getCarFunPagosDetalleTO(empresa, desde, hasta, proveedor, formaPago);
+        return operacionesCarBusinessLocal.getCarFunPagosDetalleTO(empresa, sector, desde, hasta, proveedor, formaPago);
     }
 
     @Override
@@ -235,20 +237,22 @@ public class OperacionesCarFacade implements OperacionesCarFacadeRemote {
     @Override
     public java.util.List<cartera.TO.CarFunCobrosTO> getCarFunCobrosTO(
             java.lang.String empresa,
+            String sector,
             java.lang.String desde,
             java.lang.String hasta,
             java.lang.String cliente) throws java.lang.Exception {
-        return operacionesCarBusinessLocal.getCarFunCobrosTO(empresa, desde, hasta, cliente);
+        return operacionesCarBusinessLocal.getCarFunCobrosTO(empresa, sector, desde, hasta, cliente);
     }
 
     @Override
     public java.util.List<cartera.TO.CarFunCobrosDetalleTO> getCarFunCobrosDetalleTO(
             java.lang.String empresa,
+            String sector,
             java.lang.String desde,
             java.lang.String hasta,
             java.lang.String cliente,
             java.lang.String formaPago) throws java.lang.Exception {
-        return operacionesCarBusinessLocal.getCarFunCobrosDetalleTO(empresa, desde, hasta, cliente, formaPago);
+        return operacionesCarBusinessLocal.getCarFunCobrosDetalleTO(empresa, sector, desde, hasta, cliente, formaPago);
     }
 
     @Override
@@ -304,19 +308,21 @@ public class OperacionesCarFacade implements OperacionesCarFacadeRemote {
     @Override
     public java.util.List<cartera.TO.CarListaMayorAuxiliarClienteProveedorTO> getCarListaMayorAuxiliarClienteProveedorTO(
             java.lang.String empresa,
+            String sector,
             java.lang.String proveedor,
             java.lang.String desde,
             java.lang.String hasta,
             char accion) throws java.lang.Exception {
-        return operacionesCarBusinessLocal.getCarListaMayorAuxiliarClienteProveedorTO(empresa, proveedor, desde, hasta, accion);
+        return operacionesCarBusinessLocal.getCarListaMayorAuxiliarClienteProveedorTO(empresa, sector, proveedor, desde, hasta, accion);
     }
 
     @Override
     public List<CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorPagarDetalladoTO(
             String empresa,
             String sector,
+            String proveedor,
             String hasta) throws Exception {
-        return operacionesCarBusinessLocal.getCarListaCuentasPorPagarDetalladoTO(empresa, sector, hasta);
+        return operacionesCarBusinessLocal.getCarListaCuentasPorPagarDetalladoTO(empresa, sector, proveedor, hasta);
     }
 
     @Override
@@ -347,10 +353,11 @@ public class OperacionesCarFacade implements OperacionesCarFacadeRemote {
     public List<CarCuentasPorPagarCobrarDetalladoTO> getCarListaCuentasPorCobrarDetalladoTO(
             String empresa,
             String sector,
+            String cliente,
             String desde,
             String hasta,
             boolean ichfa) throws Exception {
-        return operacionesCarBusinessLocal.getCarListaCuentasPorCobrarDetalladoTO(empresa, sector, desde, hasta, ichfa);
+        return operacionesCarBusinessLocal.getCarListaCuentasPorCobrarDetalladoTO(empresa, sector, cliente, desde, hasta, ichfa);
     }
 
     @Override

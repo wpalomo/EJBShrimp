@@ -24,6 +24,9 @@ public interface OperacionesBancoFacadeRemote1 {
     java.util.List<banco.TO.ListaBanBancoTO> getListaBanBancoTO(
             String empresa) throws Exception;
 
+    java.util.List<banco.TO.ListaBanChequesNumeracionTO> getListaChequesNumeracionTO(
+            String empresa) throws Exception;
+
     java.util.List<banco.TO.ListaBanCajaTO> getListaBanCajaTO(
             String empresa) throws Exception;
 
@@ -35,6 +38,10 @@ public interface OperacionesBancoFacadeRemote1 {
 
     boolean insertarBanBancoTO(
             banco.TO.BanBancoTO banBancoTO,
+            sistema.TO.SisInfoTO sisInfoTO) throws Exception;
+
+    boolean insertarBanChequeNumeracionTO(
+            banco.TO.BanChequesNumeracionTO banBancoTO,
             sistema.TO.SisInfoTO sisInfoTO) throws Exception;
 
     boolean insertarBanCajaTO(
@@ -229,4 +236,6 @@ public interface OperacionesBancoFacadeRemote1 {
     JasperPrint generarReporteCheque(SisUsuarioEmpresaTO sisUsuarioEmpresaTO,
             BanChequeTO banChequeTO, String valorLetra1, String valorLetra2,
             String nombreReporteCheque, ConDetalle conDetalle, String cuentaCodigo) throws java.lang.Exception;
+
+    public Object getBanChequeSecuencial(String empresa, String cuenta)throws java.lang.Exception;
 }
