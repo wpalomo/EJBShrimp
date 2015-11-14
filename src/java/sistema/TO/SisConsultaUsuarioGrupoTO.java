@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sistema.TO;
 
 import java.io.Serializable;
@@ -12,6 +11,7 @@ import java.io.Serializable;
  * @author jack
  */
 public class SisConsultaUsuarioGrupoTO implements Serializable {
+
     private String usrCodigo;
     private String usrNick;
     private String usrNombre;
@@ -23,11 +23,13 @@ public class SisConsultaUsuarioGrupoTO implements Serializable {
     private String usrCodigoInserta;
     private String usrFechaInsertaUsuario;
     private String gruCodigo;
+    private String usrEmail;
+    private String usrPasswordEmail;
 
     public SisConsultaUsuarioGrupoTO() {
     }
 
-    public SisConsultaUsuarioGrupoTO(String usrCodigo, String usrNick, String usrNombre, String usrApellido, String usrPassword, String usrCaduca, Boolean usrActivo, Boolean usrCambiarContraseña, String usrCodigoInserta, String usrFechaInsertaUsuario, String gruCodigo) {
+    public SisConsultaUsuarioGrupoTO(String usrCodigo, String usrNick, String usrNombre, String usrApellido, String usrPassword, String usrCaduca, Boolean usrActivo, Boolean usrCambiarContraseña, String usrCodigoInserta, String usrFechaInsertaUsuario, String gruCodigo, String usrEmail, String usrPasswordEmail) {
         this.usrCodigo = usrCodigo;
         this.usrNick = usrNick;
         this.usrNombre = usrNombre;
@@ -39,6 +41,8 @@ public class SisConsultaUsuarioGrupoTO implements Serializable {
         this.usrCodigoInserta = usrCodigoInserta;
         this.usrFechaInsertaUsuario = usrFechaInsertaUsuario;
         this.gruCodigo = gruCodigo;
+        this.usrEmail = usrEmail;
+        this.usrPasswordEmail = usrPasswordEmail;
     }
 
     public Boolean getUsrActivo() {
@@ -127,5 +131,21 @@ public class SisConsultaUsuarioGrupoTO implements Serializable {
 
     public void setGruCodigo(String gruCodigo) {
         this.gruCodigo = gruCodigo;
+    }
+
+    public String getUsrEmail() {
+        return usrEmail;
+    }
+
+    public String setUsrEmail(String usrEmail) {
+        return this.usrEmail = usrEmail;
+    }
+
+    public String getUsrPasswordEmail() {
+        return usrPasswordEmail;
+    }
+
+    public String setUsrPasswordEmail(String usrPasswordEmail) {
+        return this.usrPasswordEmail = usrPasswordEmail;
     }
 }
