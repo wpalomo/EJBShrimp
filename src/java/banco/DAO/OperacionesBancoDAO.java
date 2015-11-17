@@ -92,7 +92,10 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
             String cuentaContable,
             String numeroCheque) throws Exception {
         numeroCheque = numeroCheque.compareToIgnoreCase("") == 0 ? null : numeroCheque;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f754750dd0e57070a47c64ff988c790fc4628de
         int i = Integer.parseInt(ConvertirListaObject.convertirListToArray(em.createNativeQuery("SELECT COUNT(det_secuencia) "
                 + "FROM contabilidad.con_contable INNER JOIN contabilidad.con_detalle "
                 + "ON con_contable.con_empresa = con_detalle.con_empresa AND "
