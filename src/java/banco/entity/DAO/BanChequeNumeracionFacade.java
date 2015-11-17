@@ -5,6 +5,7 @@
 package banco.entity.DAO;
 
 import banco.entity.BanBanco;
+import banco.entity.BanChequeNumeracion;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +15,8 @@ import javax.persistence.PersistenceContext;
  * @author developer2
  */
 @Stateless
-public class BanBancoFacade extends AbstractFacade<BanBanco> implements BanBancoFacadeLocal {
+public class BanChequeNumeracionFacade extends AbstractFacade<BanChequeNumeracion> implements BanChequeNumeracionFacadeLocal {
+
     @PersistenceContext(unitName = "EJBShrimpPU")
     private EntityManager em;
 
@@ -23,7 +25,7 @@ public class BanBancoFacade extends AbstractFacade<BanBanco> implements BanBanco
         return em;
     }
 
-    public BanBancoFacade() {
-        super(BanBanco.class);
+    public BanChequeNumeracionFacade() {
+        super(BanChequeNumeracion.class);
     }
 }

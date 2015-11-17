@@ -6,6 +6,7 @@ package banco.DAO;
 
 import banco.TO.BanFunChequesNoEntregadosTO;
 import banco.TO.BanFunChequesNoRevisadosTO;
+import banco.entity.BanChequeNumeracion;
 import banco.entity.DAO.*;
 import banco.helper.ConversionesBanco;
 import javax.ejb.Stateless;
@@ -20,6 +21,8 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
 
     @javax.ejb.EJB
     BanBancoFacadeLocal banBancoFacadeLocal;
+    @javax.ejb.EJB
+    BanChequeNumeracionFacadeLocal banChequeNumeracionFacadeLocal;
     @javax.ejb.EJB
     BanConciliacionFacadeLocal banBanConciliacionFacadeLocal;
     @javax.ejb.EJB
@@ -37,8 +40,8 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
     }
 
     @Override
-    public banco.entity.BanBanco buscarBanChequeNumeracion(Integer secuencial) throws Exception {
-        return banBancoFacadeLocal.find(new banco.entity.BanChequeNumeracion_());
+    public banco.entity.BanChequeNumeracion buscarBanChequeNumeracion(Integer secuencial) throws Exception {
+        return banChequeNumeracionFacadeLocal.find(secuencial);
     }
 
     @Override
@@ -89,7 +92,7 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
             String cuentaContable,
             String numeroCheque) throws Exception {
         numeroCheque = numeroCheque.compareToIgnoreCase("") == 0 ? null : numeroCheque;
-       
+
         int i = Integer.parseInt(ConvertirListaObject.convertirListToArray(em.createNativeQuery("SELECT COUNT(det_secuencia) "
                 + "FROM contabilidad.con_contable INNER JOIN contabilidad.con_detalle "
                 + "ON con_contable.con_empresa = con_detalle.con_empresa AND "
@@ -585,21 +588,19 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
     }
 
     public Object getBanChequeSecuencial(String empresa, String cuenta) throws Exception {
-        try
-        {
+        try {
             Object[] array = validaciones.ConvertirListaObject.convertirListToArray(
-                    em.createNativeQuery("SELECT * FROM banco.fun_cheque_obtener_secuencial('" 
+                    em.createNativeQuery("SELECT * FROM banco.fun_cheque_obtener_secuencial('"
                     + empresa + "', '" + cuenta + "');").getResultList(), 0);
-    
-            if (array.length >0) {
-                if(array[0] == null){
+
+            if (array.length > 0) {
+                if (array[0] == null) {
                     return 0;
                 }
                 return Integer.parseInt(array[0].toString().trim());
             }
             return null;
-        }
-        catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return null;
         }
     }

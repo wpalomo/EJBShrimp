@@ -4,10 +4,7 @@
  */
 package banco.DAO;
 
-import banco.entity.BanBanco;
-import banco.entity.BanCaja;
-import banco.entity.BanCheque;
-import banco.entity.BanCuenta;
+import banco.entity.*;
 import contabilidad.entity.ConContable;
 import contabilidad.entity.ConDetalle;
 import javax.ejb.Local;
@@ -22,7 +19,7 @@ public interface OperacionesBancoDAOTransaccionLocal {
 
     boolean insertarBanBanco(BanBanco banBanco, SisSuceso sisSuceso) throws Exception;
 
-//    boolean insertarBanChequesNumeracion(BanChequeNumeracion banBanco, SisSuceso sisSuceso) throws Exception;
+    boolean insertarBanChequesNumeracion(BanChequeNumeracion banBanco, SisSuceso sisSuceso) throws Exception;
 
     boolean insertarBanCaja(BanCaja banCaja, SisSuceso sisSuceso) throws Exception;
 
@@ -34,6 +31,8 @@ public interface OperacionesBancoDAOTransaccionLocal {
 
     boolean modificarBanBanco(BanBanco banBanco, SisSuceso sisSuceso) throws Exception;
 
+    boolean modificarBanChequeNumeracion(BanChequeNumeracion banBanco, SisSuceso sisSuceso) throws Exception;
+
     boolean modificarBanCaja(BanCaja banCaja, SisSuceso sisSuceso) throws Exception;
 
     boolean modificarBanCuenta(BanCuenta banCuenta, SisSuceso sisSuceso) throws Exception;
@@ -41,6 +40,8 @@ public interface OperacionesBancoDAOTransaccionLocal {
     boolean modificarBanCheque(BanCheque banCheque, SisSuceso sisSuceso) throws Exception;
 
     boolean eliminarBanBanco(BanBanco banBanco, SisSuceso sisSuceso) throws Exception;
+
+    boolean eliminarBanChequeNumeracion(BanChequeNumeracion banBanco, SisSuceso sisSuceso) throws Exception;
 
     boolean eliminarBanCaja(BanCaja banCaja, SisSuceso sisSuceso) throws Exception;
 
