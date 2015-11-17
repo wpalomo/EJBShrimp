@@ -38,7 +38,7 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
 
     @Override
     public banco.entity.BanBanco buscarBanChequeNumeracion(Integer secuencial) throws Exception {
-        return banBancoFacadeLocal.find(new banco.entity.BanChequeNumeracion_());
+        return banBancoFacadeLocal.find(new banco.entity.BanChequeNumeracion());
     }
 
     @Override

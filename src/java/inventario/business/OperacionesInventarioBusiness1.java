@@ -2921,11 +2921,10 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                             sisSuceso, invProformasNumeracion);
                                     if (comprobar) {
                                         sistemaWeb.entity.SisPeriodo sisPeriodo = operacionesSistemaDAOLocal.buscarPeriodo(invProformasTO.getProfEmpresa(), invProformas.getInvProformasPK().getProfPeriodo());
-
+                                        inventario.entity.InvProformasMotivo invProformaMotivo = operacionesInventarioDAOLocal.getInvProformasMotivo(invProformasTO.getProfEmpresa(),  invProformas.getInvProformasPK().getProfMotivo());
                                         retorno = "T<html>Se ingresó la proforma con la siguiente información:<br><br>"
                                                 + "Periodo: <font size = 5>" + sisPeriodo.getPerDetalle()
-                                                + "</font>.<br> Motivo: <font size = 5>" + invProformas.getInvProformasPK().
-                                                getProfMotivo()
+                                                + "</font>.<br> Motivo: <font size = 5>" + invProformaMotivo.getPmDetalle()
                                                 + "</font>.<br> Número: <font size = 5>" + invProformas.getInvProformasPK().getProfNumero() + "</font>.</html>"
                                                 + invProformas.getInvProformasPK().getProfNumero() + "," + sisPeriodo.getSisPeriodoPK().getPerCodigo();
                                     } else {
@@ -4826,7 +4825,12 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                 if (comprobar) {
 
                                                     sistemaWeb.entity.SisPeriodo sisPeriodo = operacionesSistemaDAOLocal.buscarPeriodo(invProformasTO.getProfEmpresa(), invProformas.getInvProformasPK().getProfPeriodo());
-                                                    retorno = "T<html>Se  " + (invProformasTO.getProfAnulado() ? "anuló" : "modificó") + "  la Proforma con la siguiente información:<br><br>" + "Periodo: <font size = 5>" + sisPeriodo.getPerDetalle() + "</font>.<br> Motivo: <font size = 5>" + invProformas.getInvProformasPK().getProfMotivo() + "</font>.<br> Número: <font size = 5>" + invProformas.getInvProformasPK().getProfNumero() + "</font>.</html>" + invProformas.getInvProformasPK().getProfNumero() + "," + sisPeriodo.getSisPeriodoPK().getPerCodigo();
+                                                    inventario.entity.InvProformasMotivo invProformaMotivo = operacionesInventarioDAOLocal.getInvProformasMotivo(invProformasTO.getProfEmpresa(),  invProformas.getInvProformasPK().getProfMotivo());
+                                                    retorno = "T<html>Se  " + (invProformasTO.getProfAnulado() ? "anuló" : "modificó") + "  la Proforma con la siguiente información:<br><br>" + 
+                                                            "Periodo: <font size = 5>" + sisPeriodo.getPerDetalle() + 
+                                                            "</font>.<br> Motivo: <font size = 5>" + invProformaMotivo.getPmDetalle()+ 
+                                                            "</font>.<br> Número: <font size = 5>" + invProformas.getInvProformasPK().getProfNumero() + 
+                                                            "</font>.</html>" + invProformas.getInvProformasPK().getProfNumero() + "," + sisPeriodo.getSisPeriodoPK().getPerCodigo();
                                                     mensajeTO.setFechaCreacion(invProformas.getUsrFechaInserta().toString());
                                                 } else {
                                                     retorno = "FHubo un error al modificar la Proforma...\nIntente de nuevo o contacte con el administrador";

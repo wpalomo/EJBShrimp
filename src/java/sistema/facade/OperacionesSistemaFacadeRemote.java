@@ -26,7 +26,8 @@ public interface OperacionesSistemaFacadeRemote {
 
     SisLoginTO getSisAccesoTO(
             String nick,
-            String password) throws Exception;
+            String password,
+            String empresa) throws Exception;
 
     SisLoginTO getPermisoInventarioTO(sistema.TO.SisInfoTO sisInfoTO) throws Exception;
 

@@ -118,11 +118,12 @@ public class OperacionesSistemaBusiness implements OperacionesSistemaBusinessLoc
     @Override
     public SisLoginTO getSisAccesoTO(
             String nick,
-            String password) throws Exception {
+            String password,
+            String empresa) throws Exception {
 
         String nickApp = nick;
         String passwordApp = password;
-        return operacionesSistemaDAOLocal.getSisAcceso(nickApp, passwordApp);
+        return operacionesSistemaDAOLocal.getSisAcceso(nickApp, passwordApp, empresa);
     }
 
     @Override

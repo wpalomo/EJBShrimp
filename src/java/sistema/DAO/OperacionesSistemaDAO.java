@@ -125,20 +125,26 @@ public class OperacionesSistemaDAO implements OperacionesSistemaDAOLocal {
      * @return Un objeto con el contenido del usuario que exista en la BD
      * @throws Exception Cualquier error inesperado
      */
+   
     @Override
     public SisLoginTO getSisAcceso(
             String nick,
-            String password) throws Exception {
+            String password,
+            String empresa) throws Exception {
         SisLoginTO sisLoginTO = new SisLoginTO();
         Desencriptar desencriptar = new Desencriptar();
         String loginPassword = "";
         Boolean loginActivo = null;
         Boolean loginCaducado = null;
         Boolean loginCambiarPassword = null;
+        String completarWhere="";
         try {
+            if(empresa != null){
+                completarWhere = "AND  login_empresa=('" + empresa + "')";
+            }
             Object[] array = validaciones.ConvertirListaObject.convertirListToArray(
                     em.createNativeQuery(
-                    "SELECT * FROM sistemaweb.sis_login WHERE login_nick=('" + nick + "')").getResultList(), 0);
+                    "SELECT * FROM sistemaweb.sis_login WHERE login_nick=('" + nick + "')"+completarWhere).getResultList(), 0);
             if (array != null) {
                 sisLoginTO.setUsrCodigo((String) array[1].toString().trim());
                 sisLoginTO.setUsrNick((String) array[2].toString().trim());

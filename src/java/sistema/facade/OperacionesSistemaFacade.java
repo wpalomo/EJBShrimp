@@ -60,10 +60,12 @@ public class OperacionesSistemaFacade implements OperacionesSistemaFacadeRemote 
     @Override
     public SisLoginTO getSisAccesoTO(
             String nick,
-            String password) throws Exception {
+            String password,
+            String empresa) throws Exception {
         return operacionesSistemaBusinessLocal.getSisAccesoTO(
                 nick,
-                password);
+                password, 
+                empresa);
     }
 
     @Override

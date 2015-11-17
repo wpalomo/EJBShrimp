@@ -21,7 +21,7 @@ import javax.persistence.*;
     @NamedQuery(name = "BanBanco.findByBanDesde", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banDesde = :banDesde"),
     @NamedQuery(name = "BanBanco.findByBanHasta", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banHasta = :banHasta"),
     @NamedQuery(name = "BanBanco.findByBanCtaEmpresa", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banCtaEmpresa = :banCtaEmpresa"),
-    @NamedQuery(name = "BanBanco.findBybanCtaContable", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banCtaContable = :banCtaContable"),})
+    @NamedQuery(name = "BanBanco.findBybanCtaContable", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banCtaContable = :banCtaContable")})
 public class BanChequeNumeracion implements Serializable {
 
     private static final long serialVersionUID = 1L;

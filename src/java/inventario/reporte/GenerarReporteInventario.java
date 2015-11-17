@@ -341,7 +341,6 @@ public class GenerarReporteInventario implements GenerarReporteInventarioLocal {
     private <T> JasperPrint generarReporte(SisUsuarioEmpresaTO sisUsuario, String nombreReporte, Map parametros, List<T> list) throws Exception {
         try {
             String rutaReportes = getRutaReportes() + "inventario/";
-            System.out.println("ruta rep: "+rutaReportes+nombreReporte);
             parametros.put("SUBREPORT_DIR", rutaReportes);
             parametros.put("p_empresa_nombre", sisUsuario.getEmpNombre());
             parametros.put("p_empresa_ruc", sisUsuario.getEmpRuc());
@@ -424,7 +423,7 @@ public class GenerarReporteInventario implements GenerarReporteInventarioLocal {
             List<ReporteProformaDetalle> lista, String nombreReporte) throws Exception {
         try {
             
-             return generarReporte(sisUsuarioEmpresaTO, "reportConsolidadoProducto.jrxml", new HashMap(), lista);
+             return generarReporte(sisUsuarioEmpresaTO, "reportComprobanteProforma.jrxml", new HashMap(), lista);
             
             
            
