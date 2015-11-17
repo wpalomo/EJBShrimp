@@ -579,14 +579,14 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
                     + empresa + "', '" + cuenta + "');").getResultList(), 0);
     
             if (array.length >0) {
-                if(array[0] == null){
+                if(array[0] == null){                    
                     return 0;
-                }
+                }                
                 return Integer.parseInt(array[0].toString().trim());
-            }
+            }            
             return null;
         }
-        catch(NumberFormatException e){
+        catch(NumberFormatException e){            
             return null;
         }
     }
