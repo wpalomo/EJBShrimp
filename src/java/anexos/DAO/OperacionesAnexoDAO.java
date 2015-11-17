@@ -485,8 +485,7 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
     @Override
     public java.util.List<anexos.TO.AnxTalonResumenVentaTO> getAnexoTalonResumenVentaTO(String empresa, String fechaDesde, String fechaHasta) throws Exception {
         String sql = "SELECT * FROM anexo.fun_talon_resumen_ventas"
-                + "('" + empresa + "',null, null, null, '" + fechaDesde + "', '" + fechaHasta + "')";
-        System.out.println("sql " + sql);
+                + "('" + empresa + "',null, null, null, '" + fechaDesde + "', '" + fechaHasta + "')";        
         return anexos.helper.ConversionesAnexos.convertirTalonResumenVenta_ListaTalonResumenVentaTO(
                 em.createNativeQuery(sql).getResultList());
     }
@@ -1077,8 +1076,7 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
     @Override
     public java.util.List<anexos.TO.AnxListaRetencionesPendientesTO> getAnexoListaRetencionesPendienteTO(String empresa) throws Exception {
         String sql = "SELECT * FROM anexo.fun_listado_retenciones_pendientes"
-                + "('" + empresa + "')";
-        System.out.println(sql);
+                + "('" + empresa + "')";        
         return anexos.helper.ConversionesAnexos.convertirListaRetencionesPendientesAutorizacion_ListaRetencionesPendientesAutorizacionTO(
                 em.createNativeQuery(sql).getResultList());
     }

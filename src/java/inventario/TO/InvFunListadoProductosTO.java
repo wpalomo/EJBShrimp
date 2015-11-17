@@ -34,7 +34,8 @@ public class InvFunListadoProductosTO implements java.io.Serializable{
     private String prdNombreGasto;
     private String prdCuentaVenta;
     private String prdNombreVenta;
-    private Boolean prdIva;
+//    private Boolean prdIva;
+    private String prdIva;
     private Boolean prdCreditoTributario;
     private Boolean prdStockNegativo;
     private Boolean prdInactivo;
@@ -42,7 +43,15 @@ public class InvFunListadoProductosTO implements java.io.Serializable{
     public InvFunListadoProductosTO() {
     }
 
-    public InvFunListadoProductosTO(String prdCodigoPrincipal, String prdCodigoAlterno, String prdCodigoBarra, String prdNombre, String prdDetalle, String prdMedida, String prdMarca, String prdCategoria, BigDecimal prdPrecio1, BigDecimal prdPrecio2, BigDecimal prdPrecio3, BigDecimal prdPrecio4, BigDecimal prdPrecio5, Integer prdMinimo, Integer prdMaximo, String prdTipo, String prdCuentaInventario, String prdNombreInventario, String prdCuentaGasto, String prdNombreGasto, String prdCuentaVenta, String prdNombreVenta, Boolean prdIva, Boolean prdCreditoTributario, Boolean prdStockNegativo, Boolean prdInactivo) {
+    public InvFunListadoProductosTO(
+            String prdCodigoPrincipal, String prdCodigoAlterno, String prdCodigoBarra, String prdNombre, 
+            String prdDetalle, String prdMedida, String prdMarca, String prdCategoria, BigDecimal prdPrecio1, 
+            BigDecimal prdPrecio2, BigDecimal prdPrecio3, BigDecimal prdPrecio4, BigDecimal prdPrecio5, 
+            Integer prdMinimo, Integer prdMaximo, String prdTipo, String prdCuentaInventario, String prdNombreInventario, 
+            String prdCuentaGasto, String prdNombreGasto, String prdCuentaVenta, String prdNombreVenta, 
+//            Boolean prdIva, 
+            String prdIva,
+            Boolean prdCreditoTributario, Boolean prdStockNegativo, Boolean prdInactivo) {
         this.prdCodigoPrincipal = prdCodigoPrincipal;
         this.prdCodigoAlterno = prdCodigoAlterno;
         this.prdCodigoBarra = prdCodigoBarra;
@@ -151,11 +160,14 @@ public class InvFunListadoProductosTO implements java.io.Serializable{
         this.prdInactivo = prdInactivo;
     }
 
-    public Boolean getPrdIva() {
+    
+//    public Boolean getPrdIva() {
+    public String getPrdIva() {
         return prdIva;
     }
 
-    public void setPrdIva(Boolean prdIva) {
+//    public void setPrdIva(Boolean prdIva) {
+     public void setPrdIva(String prdIva) { 
         this.prdIva = prdIva;
     }
 

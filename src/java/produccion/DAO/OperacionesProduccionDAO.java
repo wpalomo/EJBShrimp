@@ -430,12 +430,7 @@ public class OperacionesProduccionDAO implements OperacionesProduccionDAOLocal {
                 + "IS NULL THEN '' ELSE max(gra_fecha)::TEXT END from produccion.prd_grameaje "
                 + "where TRIM(BOTH ' ' FROM gra_empresa) || TRIM(BOTH ' ' FROM gra_sector) || "
                 + "TRIM(BOTH ' ' FROM gra_piscina) = ('" + empresa + sector + numPiscina + "')").
-                getResultList(), 0)[0].toString());
-        System.out.println("select CASE WHEN max(gra_fecha) "
-                + "IS NULL THEN '' ELSE max(gra_fecha)::TEXT END from produccion.prd_grameaje "
-                + "where TRIM(BOTH ' ' FROM gra_empresa) || TRIM(BOTH ' ' FROM gra_sector) || "
-                + "TRIM(BOTH ' ' FROM gra_piscina) = ('" + empresa + sector + numPiscina + "')");
-        System.out.println("fechaConsulta " + fechaConsulta);
+                getResultList(), 0)[0].toString());        
 //        String fechaConsulta = (((List) em.createNativeQuery("select substring(max(gra_fecha)::text, 1, 10) from "
 //                + "produccion.prd_grameaje where TRIM(BOTH ' ' FROM gra_empresa) "
 //                + "|| TRIM(BOTH ' ' FROM gra_sector) || TRIM(BOTH ' ' FROM "
@@ -447,15 +442,13 @@ public class OperacionesProduccionDAO implements OperacionesProduccionDAOLocal {
             retorno = true;
         } else {
             Date fechaBD = validaciones.Validacion.fecha(fechaConsulta, "yyyy-MM-dd");
-            retorno = (fechaCliente.getTime() > fechaBD.getTime()) ? true : false;
-            System.out.println("fechaBD " + fechaBD);
+            retorno = (fechaCliente.getTime() > fechaBD.getTime()) ? true : false;            
         }
 
 
 
 //        Date fechaBD = validaciones.Validacion.fecha(fechaConsulta);
-
-        System.out.println("retorno " + retorno);
+        
         return retorno;
     }
 
@@ -484,10 +477,6 @@ public class OperacionesProduccionDAO implements OperacionesProduccionDAOLocal {
 
     @Override
     public produccion.TO.PrdCorridaTO getPrdCorridaTO(String empresa, String sector, String piscina, String fecha) throws Exception {
-        System.out.println("SELECT * FROM produccion.prd_corrida WHERE cor_empresa = ('" + empresa + "') AND "
-                + "cor_sector = ('" + sector + "') AND cor_piscina = ('" + piscina + "') AND "
-                + "(('" + fecha + "' >= prd_corrida.cor_fecha_desde AND '" + fecha + "' <= prd_corrida.cor_fecha_hasta) OR "
-                + "('" + fecha + "' >= prd_corrida.cor_fecha_desde AND prd_corrida.cor_fecha_hasta IS NULL)) ORDER BY cor_numero");
         return ConversionesProduccion.convertirPrdCorrida_PrdCorridaTO(em.createNativeQuery("SELECT * FROM produccion.prd_corrida WHERE cor_empresa = ('" + empresa + "') AND "
                 + "cor_sector = ('" + sector + "') AND cor_piscina = ('" + piscina + "') AND "
                 + "(('" + fecha + "' >= prd_corrida.cor_fecha_desde AND '" + fecha + "' <= prd_corrida.cor_fecha_hasta) OR "
@@ -507,11 +496,6 @@ public class OperacionesProduccionDAO implements OperacionesProduccionDAOLocal {
 
     @Override
     public produccion.TO.PrdGrameajeTO getPrdGrameajeTO(String empresa, String sector, String piscina, String desde, String hasta) throws Exception {
-        System.out.println("SELECT * FROM produccion.prd_grameaje WHERE gra_empresa = '" + empresa + "' "
-                + "AND gra_sector = '" + sector + "' AND "
-                + "gra_piscina = '" + piscina + "' AND ((gra_fecha >= " + desde + " AND gra_fecha <= " + hasta + ") "
-                + "OR (gra_fecha >= " + desde + " AND " + hasta + " IS NULL)) AND "
-                + "(NOT gra_anulado OR gra_anulado IS NULL) ORDER BY gra_fecha DESC LIMIT 1");
         return ConversionesProduccion.convertirPrdGrameaje_PrdGrameajeTO(em.createNativeQuery("SELECT * FROM produccion.prd_grameaje WHERE gra_empresa = '" + empresa + "' "
                 + "AND gra_sector = '" + sector + "' AND "
                 + "gra_piscina = '" + piscina + "' AND ((gra_fecha >= " + desde + " AND gra_fecha <= " + hasta + ") "
@@ -522,10 +506,6 @@ public class OperacionesProduccionDAO implements OperacionesProduccionDAOLocal {
     @Override
     public java.util.List<produccion.TO.MultiplePiscinaCorrida> getCostoDetallePersonalizado(String empresa, String sector, String fecha) {
         sector = sector.trim().isEmpty() ? null : "'" + sector + "'";
-        System.out.println("SELECT cor_empresa, cor_sector, cor_piscina, cor_numero, cor_fecha_desde, cor_fecha_hasta"
-                + " FROM produccion.prd_corrida WHERE cor_empresa = ('" + empresa + "') AND CASE WHEN " + sector + " IS NULL THEN TRUE ELSE cor_sector = (" + sector + ") END AND "
-                + "(('" + fecha + "' >= prd_corrida.cor_fecha_desde AND '" + fecha + "' <= prd_corrida.cor_fecha_hasta) OR "
-                + "('" + fecha + "' >= prd_corrida.cor_fecha_desde AND prd_corrida.cor_fecha_hasta IS NULL)) ORDER BY 1,2,3,4;");
         return ConversionesProduccion.convertirMultiplePiscinaCorrida_MultiplePiscinaCorridaPersonalizadoTO(em.createNativeQuery("SELECT cor_empresa, cor_sector, cor_piscina, cor_numero, cor_fecha_desde, cor_fecha_hasta"
                 + " FROM produccion.prd_corrida WHERE cor_empresa = ('" + empresa + "') AND CASE WHEN " + sector + " IS NULL THEN TRUE ELSE cor_sector = (" + sector + ") END AND "
                 + "(('" + fecha + "' >= prd_corrida.cor_fecha_desde AND '" + fecha + "' <= prd_corrida.cor_fecha_hasta) OR "
@@ -867,7 +847,6 @@ public class OperacionesProduccionDAO implements OperacionesProduccionDAOLocal {
     }
 
     public List<String> getFunFechaSemanas(String empresa, String sector, String fechaHasta) throws Exception {
-        System.out.println(empresa + "-" + sector + "-" + fechaHasta);
         return produccion.helper.ConversionesProduccion.convertirFechaSemanas(em.createNativeQuery(
                 "SELECT ap_fecha "
                 + "FROM produccion.fun_analisis_pesos_complemento('" + empresa + "', '" + sector + "', " + fechaHasta + " ) WHERE ap_fecha!='Inc. Promedio' GROUP BY ap_fecha ORDER BY  ap_fecha DESC").getResultList());

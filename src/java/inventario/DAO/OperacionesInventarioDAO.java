@@ -1209,8 +1209,7 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
     }
 
     public java.util.List<inventario.TO.InvListaConsultaProformaTO> getListaInvConsultaProforma(String empresa, String periodo, String motivo, String busqueda) throws Exception {
-        String sql = "SELECT * FROM inventario.fun_proformas_listado('" + empresa + "', '" + periodo + "', '" + motivo + "', '" + busqueda + "')";
-        System.out.println("sql Proforma  "+sql);
+        String sql = "SELECT * FROM inventario.fun_proformas_listado('" + empresa + "', '" + periodo + "', '" + motivo + "', '" + busqueda + "')";        
         return inventario.helper.ConversionesInventario.convertirInvListaConsultaVProforma_InvListaConsultaProformaTO(em.createNativeQuery(sql).getResultList());
     }
 

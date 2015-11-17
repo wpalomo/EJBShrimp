@@ -80,6 +80,10 @@ public interface OperacionesBancoBusinessLocal1 {
             banco.TO.BanBancoTO banBancoTO,
             sistema.TO.SisInfoTO sisInfoTO) throws java.lang.Exception;
 
+    boolean modificarBanChequeNumeracionTO(
+            banco.TO.BanChequesNumeracionTO banBancoTO,
+            sistema.TO.SisInfoTO sisInfoTO) throws java.lang.Exception;
+
     boolean modificarBanCajaTO(
             BanCajaTO banCajaTO,
             sistema.TO.SisInfoTO sisInfoTO) throws Exception;
@@ -91,6 +95,10 @@ public interface OperacionesBancoBusinessLocal1 {
 
     boolean eliminarBanBancoTO(
             banco.TO.BanBancoTO banBancoTO,
+            sistema.TO.SisInfoTO sisInfoTO) throws java.lang.Exception;
+
+    boolean eliminarBanChequeNumeracionTO(
+            banco.TO.BanChequesNumeracionTO banBancoTO,
             sistema.TO.SisInfoTO sisInfoTO) throws java.lang.Exception;
 
     boolean eliminarBanCajaTO(
@@ -237,5 +245,5 @@ public interface OperacionesBancoBusinessLocal1 {
             BanChequeTO banChequeTO, String valorLetra1, String valorLetra2,
             String nombreReporteCheque, ConDetalle conDetalle, String cuentaCodigo) throws java.lang.Exception;
 
-    public Object getBanChequeSecuencial(String empresa, String cuenta)throws java.lang.Exception;
+    public Object getBanChequeSecuencial(String empresa, String cuenta) throws java.lang.Exception;
 }

@@ -403,8 +403,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + "WHERE car_cobros_anticipos.ant_empresa = '" + empresa + "' AND "
                 + "car_cobros_anticipos.ant_periodo = '" + periodo + "' AND "
                 + "car_cobros_anticipos.ant_tipo = '" + tipo + "' AND "
-                + "car_cobros_anticipos.ant_numero = '" + numero + "';";
-        System.out.println(""+sql);
+                + "car_cobros_anticipos.ant_numero = '" + numero + "';";        
         return ConversionesCar.convertirCarListaCobrosCliente_CarListaCobrosClienteTO(em.createNativeQuery(sql).
                 getResultList());
     }

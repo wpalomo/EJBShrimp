@@ -21,6 +21,8 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
     @javax.ejb.EJB
     BanBancoFacadeLocal banBancoFacadeLocal;
     @javax.ejb.EJB
+    BanChequeNumeracionFacadeLocal banChequeNumeracionFacadeLocal;
+    @javax.ejb.EJB
     BanConciliacionFacadeLocal banBanConciliacionFacadeLocal;
     @javax.ejb.EJB
     BanCajaFacadeLocal banCajaFacadeLocal;
@@ -37,8 +39,8 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
     }
 
     @Override
-    public banco.entity.BanBanco buscarBanChequeNumeracion(Integer secuencial) throws Exception {
-        return banBancoFacadeLocal.find(new banco.entity.BanChequeNumeracion_());
+    public banco.entity.BanChequeNumeracion buscarBanChequeNumeracion(Integer secuencial) throws Exception {
+        return banChequeNumeracionFacadeLocal.find(secuencial);
     }
 
     @Override
@@ -584,21 +586,20 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
     }
 
     public Object getBanChequeSecuencial(String empresa, String cuenta) throws Exception {
-        try
-        {
+        try {
             Object[] array = validaciones.ConvertirListaObject.convertirListToArray(
-                    em.createNativeQuery("SELECT * FROM banco.fun_cheque_obtener_secuencial('" 
+                    em.createNativeQuery("SELECT * FROM banco.fun_cheque_obtener_secuencial('"
                     + empresa + "', '" + cuenta + "');").getResultList(), 0);
-    
-            if (array.length >0) {
-                if(array[0] == null){                    
+
+            if (array.length > 0) {
+                if (array[0] == null) {
                     return 0;
                 }                
                 return Integer.parseInt(array[0].toString().trim());
             }            
             return null;
         }
-        catch(NumberFormatException e){            
+        catch (NumberFormatException e) {
             return null;
         }
     }

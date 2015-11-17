@@ -475,8 +475,7 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
                 + "'" + fechaDesde + "', "
                 + "'" + fechaHasta + "', "
                 + "" + categoria + ", "
-                + "" + sector + ");";
-        System.out.println("" + sql);
+                + "" + sector + ");";        
         return ConversionesRRHH.convertirRhFunPlantillaSueldosLotePreliminar_RhFunPlantillaSueldosLotePreliminarTO(em.createNativeQuery(
                 sql).getResultList());
     }

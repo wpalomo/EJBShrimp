@@ -4286,6 +4286,9 @@ public class ConversionesInventario {
         invVentaRetencionesTO.setVtaFechaVencimiento(validaciones.Validacion.fecha(invVentas.getVtaFechaVencimiento(), "yyyy-MM-dd"));
         invVentaRetencionesTO.setVenBase0(invVentas.getVtaBase0());
         invVentaRetencionesTO.setVenBaseImponible(invVentas.getVtaBaseImponible());
+        
+//        invVentaRetencionesTO.setVenRecargo0(invVentas.getvt);
+//        invVentaRetencionesTO.setVenRecargoBaseImponible(BaseImponible(invVentas.getVtaBaseImponible());
         //invVentaRetencionesTO.setVenBaseNoObjetoIva(invVentas.getVtaBaseimponible());
         invVentaRetencionesTO.setVenMontoIva(invVentas.getVtaMontoiva());
         //invVentaRetencionesTO.setVenValorRetenidoIva(invVentas.getVtaMontoiva());
@@ -6206,9 +6209,11 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 dato22 = null;
             }
-            Boolean dato23;
+//            Boolean dato23;
+            String dato23;
             try {
-                dato23 = Boolean.valueOf(array[22].toString());
+//                dato23 = Boolean.valueOf(array[22].toString());
+                    dato23 = array[22].toString();
             } catch (Exception e) {
                 dato23 = null;
             }

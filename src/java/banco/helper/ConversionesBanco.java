@@ -32,6 +32,7 @@ public class ConversionesBanco {
 
     public static banco.entity.BanChequeNumeracion convertirChequesNumeracionTO_BanChequesNumeracion(banco.TO.BanChequesNumeracionTO banBancoTO) {
         banco.entity.BanChequeNumeracion banBanco = new banco.entity.BanChequeNumeracion();
+        banBanco.setBanSecuencial(banBancoTO.getBanSecuencial());
         banBanco.setBanDesde(banBancoTO.getBanDesde());
         banBanco.setBanHasta(banBancoTO.getBanHasta());
         banBanco.setBanCtaEmpresa(banBancoTO.getBanCtaEmpresa());
