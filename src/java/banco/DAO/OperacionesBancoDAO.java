@@ -37,6 +37,11 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
     }
 
     @Override
+    public banco.entity.BanBanco buscarBanChequeNumeracion(Integer secuencial) throws Exception {
+        return banBancoFacadeLocal.find(new banco.entity.BanChequeNumeracion_());
+    }
+
+    @Override
     public banco.entity.BanConciliacion buscarBanConciliacion(String concEmpresa, String concCuentaContable, String concCodigo) throws Exception {
         return banBanConciliacionFacadeLocal.find(new banco.entity.BanConciliacionPK(concEmpresa, concCuentaContable, concCodigo));
     }
@@ -66,6 +71,14 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
     }
 
     @Override
+    public java.util.List<banco.TO.ListaBanChequesNumeracionTO> getListaChequesNumeracionTO(String empresa) throws Exception {
+        return banco.helper.ConversionesBanco.convertirListaChequesImpresos_ListaChequesImpresosTO(
+                em.createNativeQuery("SELECT * "
+                + "FROM banco.ban_cheques_numeracion "
+                + "ORDER BY chq_secuencial").getResultList());
+    }
+
+    @Override
     public boolean isExisteChequeAimprimir(String empresa, String cuentaContable, String numeroCheque, Long detSecuencia) throws Exception {
         return Boolean.parseBoolean(ConvertirListaObject.convertirListToArray(em.createNativeQuery("SELECT * FROM banco."
                 + "fun_sw_cheque_repetido('" + empresa + "', '" + cuentaContable + "', '" + numeroCheque + "' , " + detSecuencia + ")").getResultList(), 0)[0].toString());
@@ -76,7 +89,6 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
             String cuentaContable,
             String numeroCheque) throws Exception {
         numeroCheque = numeroCheque.compareToIgnoreCase("") == 0 ? null : numeroCheque;
-       
         int i = Integer.parseInt(ConvertirListaObject.convertirListToArray(em.createNativeQuery("SELECT COUNT(det_secuencia) "
                 + "FROM contabilidad.con_contable INNER JOIN contabilidad.con_detalle "
                 + "ON con_contable.con_empresa = con_detalle.con_empresa AND "
@@ -379,7 +391,7 @@ public class OperacionesBancoDAO implements OperacionesBancoDAOLocal {
                     + "'" + empresa + "', "
                     + "'" + cuenta + "', "
                     + "'" + hasta + "');").getResultList(), 0)[0].toString());
-        } catch (Exception e) {            
+        } catch (Exception e) {
             return new java.math.BigDecimal("0.00");
         }
     }

@@ -66,6 +66,9 @@ public interface GenerarReporteInventarioLocal {
 
     public JasperPrint generarReporteVentaDetalleImpresion(SisUsuarioEmpresaTO sisUsuarioEmpresaTO, 
             List<ReporteVentaDetalle> lista, String nombreCliente, String nombreReporte)throws Exception;
+    
+    public JasperPrint generarReporteProformaDetalleImpresion(SisUsuarioEmpresaTO sisUsuarioEmpresaTO, 
+            List<ReporteProformaDetalle> lista, String nombreReporte)throws Exception;
 
     public JasperPrint generarReporteInvFunVentasVsCosto(SisUsuarioEmpresaTO sisUsuarioEmpresaTO, 
             String fechaDesde, String fechaHasta, String bodega, String clienteId, 

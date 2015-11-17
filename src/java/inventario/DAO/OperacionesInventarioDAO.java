@@ -1068,8 +1068,8 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
     }
 
     public java.util.List<inventario.TO.InvListaDetalleProformasTO> getListaInvProformasDetalleTO(String empresa, String periodo, String motivo, String numeroProformas) throws Exception {        
-        return inventario.helper.ConversionesInventario.convertirInvListaProformasDetalle_InvListaProformasDetalleTO(em.createNativeQuery("SELECT * FROM inventario.fun_listado_proformas_detalle('" + empresa + "', "
-                + "'" + periodo + "', '" + motivo + "', '" + numeroProformas + "')").getResultList());
+        String sql = "SELECT * FROM inventario.fun_listado_proformas_detalle('" + empresa + "', "+ "'" + periodo + "', '" + motivo + "', '" + numeroProformas + "')";
+        return inventario.helper.ConversionesInventario.convertirInvListaProformasDetalle_InvListaProformasDetalleTO(em.createNativeQuery(sql).getResultList());
 //        return inventario.helper.ConversionesInventario.convertirInvListaVentasDetalle_InvListaVentasDetalleTO(em.
 //                createNativeQuery("SELECT inv_ventas_detalle.det_secuencial, inv_ventas_detalle.bod_codigo, "
 //                + "inv_ventas_detalle.det_pendiente, inv_ventas_detalle.pro_codigo_principal, inv_producto.pro_nombre, "
@@ -1209,7 +1209,9 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
     }
 
     public java.util.List<inventario.TO.InvListaConsultaProformaTO> getListaInvConsultaProforma(String empresa, String periodo, String motivo, String busqueda) throws Exception {
-        return inventario.helper.ConversionesInventario.convertirInvListaConsultaVProforma_InvListaConsultaProformaTO(em.createNativeQuery("SELECT * FROM inventario.fun_proformas_listado('" + empresa + "', '" + periodo + "', '" + motivo + "', '" + busqueda + "')").getResultList());
+        String sql = "SELECT * FROM inventario.fun_proformas_listado('" + empresa + "', '" + periodo + "', '" + motivo + "', '" + busqueda + "')";
+        System.out.println("sql Proforma  "+sql);
+        return inventario.helper.ConversionesInventario.convertirInvListaConsultaVProforma_InvListaConsultaProformaTO(em.createNativeQuery(sql).getResultList());
     }
 
     public java.util.List<inventario.TO.InvListaConsultaConsumosTO> getFunConsumosListado(String empresa, String fechaDesde, String fechaHasta, String status) throws Exception {

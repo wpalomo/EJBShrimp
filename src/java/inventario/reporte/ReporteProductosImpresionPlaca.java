@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  *
  * @author charly
  */
-public class ReporteProductosImpresionPlaca {
+public class ReporteProductosImpresionPlaca implements java.io.Serializable{
     private String lpspCodigoPrincipal;
     private String lpspCodigoBarra;
     private String lpspNombre;

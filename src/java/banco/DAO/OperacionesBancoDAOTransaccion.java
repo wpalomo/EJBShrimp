@@ -35,6 +35,14 @@ public class OperacionesBancoDAOTransaccion implements OperacionesBancoDAOTransa
         return true;
     }
 
+//    @javax.ejb.TransactionAttribute(javax.ejb.TransactionAttributeType.REQUIRED)
+//    public boolean insertarBanChequesNumeracion(BanChequeNumeracion banBanco, SisSuceso sisSuceso) throws Exception {
+//        em.persist(sisSuceso);
+//        em.persist(banBanco);
+//        em.flush();
+//        return true;
+//    }
+
     @javax.ejb.TransactionAttribute(javax.ejb.TransactionAttributeType.REQUIRED)
     public boolean insertarBanCaja(BanCaja banCaja, SisSuceso sisSuceso) throws Exception {
         em.persist(sisSuceso);

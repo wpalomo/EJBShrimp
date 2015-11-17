@@ -12,6 +12,7 @@ import java.math.BigDecimal;
  * @author jack
  */
 public class InvListaDetalleProformasTO implements java.io.Serializable {
+    
     private Integer secuencial;
     private String codigoProducto;
     private String nombreProducto;
@@ -20,15 +21,31 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
     private java.math.BigDecimal precioProducto;
     private java.math.BigDecimal parcialProducto;
     private java.math.BigDecimal porcentajeDescuento;
-    private java.math.BigDecimal detalleDescuento;
-    private java.math.BigDecimal detalleSubtotal;
-    private Boolean gravaIva;
+    private java.math.BigDecimal valordescuento;//10
+    private java.math.BigDecimal detalleSubTotal;
+    private Boolean grabaIva;
     private Boolean editarFila;
+    private java.math.BigDecimal detCantidadCaja;
+    private String detEmpaque;
+    private String detPresentacionUnidad;
+    private String detPresentacionCaja;
+    private String detProductoTipo;
+    
 
     public InvListaDetalleProformasTO() {
     }
+    
+    
 
-    public InvListaDetalleProformasTO(Integer secuencial, String codigoProducto, String nombreProducto, BigDecimal cantidadProducto, String medidaDetalle, BigDecimal precioProducto, BigDecimal parcialProducto, BigDecimal porcentajeDescuento, BigDecimal detalleDescuento, BigDecimal detalleSubtotal, Boolean gravaIva, Boolean editarFila) {
+  
+//    @Override
+//    public String toString(){
+//        return this.secuencial + " " +this.codigoProducto + " " + this.nombreProducto + " " + this.cantidadProducto + " " + this.medidaDetalle + " " +
+//                " " + this.precioProducto + " " + this.parcialProducto + " " + this.porcentajeDescuento + " " +
+//                this.detalleDescuento + this.detalleSubtotal + " " + this.gravaIva;
+//    }
+
+    public InvListaDetalleProformasTO(Integer secuencial, String codigoProducto, String nombreProducto, BigDecimal cantidadProducto, String medidaDetalle, BigDecimal precioProducto, BigDecimal parcialProducto, BigDecimal porcentajeDescuento, BigDecimal valordescuento, BigDecimal detalleSubTotal, boolean grabaIva, Boolean editarFila, BigDecimal detCantidadCaja, String detEmpaque, String detPresentacionUnidad, String detPresentacionCaja, String detProductoTipo) {
         this.secuencial = secuencial;
         this.codigoProducto = codigoProducto;
         this.nombreProducto = nombreProducto;
@@ -37,10 +54,15 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
         this.precioProducto = precioProducto;
         this.parcialProducto = parcialProducto;
         this.porcentajeDescuento = porcentajeDescuento;
-        this.detalleDescuento = detalleDescuento;
-        this.detalleSubtotal = detalleSubtotal;
-        this.gravaIva = gravaIva;
+        this.valordescuento = valordescuento;
+        this.detalleSubTotal = detalleSubTotal;
+        this.grabaIva = grabaIva;
         this.editarFila = editarFila;
+        this.detCantidadCaja = detCantidadCaja;
+        this.detEmpaque = detEmpaque;
+        this.detPresentacionUnidad = detPresentacionUnidad;
+        this.detPresentacionCaja = detPresentacionCaja;
+        this.detProductoTipo = detProductoTipo;
     }
 
     public BigDecimal getCantidadProducto() {
@@ -59,20 +81,52 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
         this.codigoProducto = codigoProducto;
     }
 
-    public BigDecimal getDetalleDescuento() {
-        return detalleDescuento;
+    public BigDecimal getDetCantidadCaja() {
+        return detCantidadCaja;
     }
 
-    public void setDetalleDescuento(BigDecimal detalleDescuento) {
-        this.detalleDescuento = detalleDescuento;
+    public void setDetCantidadCaja(BigDecimal detCantidadCaja) {
+        this.detCantidadCaja = detCantidadCaja;
     }
 
-    public BigDecimal getDetalleSubtotal() {
-        return detalleSubtotal;
+    public String getDetEmpaque() {
+        return detEmpaque;
     }
 
-    public void setDetalleSubtotal(BigDecimal detalleSubtotal) {
-        this.detalleSubtotal = detalleSubtotal;
+    public void setDetEmpaque(String detEmpaque) {
+        this.detEmpaque = detEmpaque;
+    }
+
+    public String getDetPresentacionCaja() {
+        return detPresentacionCaja;
+    }
+
+    public void setDetPresentacionCaja(String detPresentacionCaja) {
+        this.detPresentacionCaja = detPresentacionCaja;
+    }
+
+    public String getDetPresentacionUnidad() {
+        return detPresentacionUnidad;
+    }
+
+    public void setDetPresentacionUnidad(String detPresentacionUnidad) {
+        this.detPresentacionUnidad = detPresentacionUnidad;
+    }
+
+    public String getDetProductoTipo() {
+        return detProductoTipo;
+    }
+
+    public void setDetProductoTipo(String detProductoTipo) {
+        this.detProductoTipo = detProductoTipo;
+    }
+
+    public BigDecimal getDetalleSubTotal() {
+        return detalleSubTotal;
+    }
+
+    public void setDetalleSubTotal(BigDecimal detalleSubTotal) {
+        this.detalleSubTotal = detalleSubTotal;
     }
 
     public Boolean getEditarFila() {
@@ -83,12 +137,12 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
         this.editarFila = editarFila;
     }
 
-    public Boolean getGravaIva() {
-        return gravaIva;
+    public Boolean getGrabaIva() {
+        return grabaIva;
     }
 
-    public void setGravaIva(Boolean gravaIva) {
-        this.gravaIva = gravaIva;
+    public void setGrabaIva(Boolean grabaIva) {
+        this.grabaIva = grabaIva;
     }
 
     public String getMedidaDetalle() {
@@ -138,10 +192,13 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
     public void setSecuencial(Integer secuencial) {
         this.secuencial = secuencial;
     }
-    @Override
-    public String toString(){
-        return this.secuencial + " " +this.codigoProducto + " " + this.nombreProducto + " " + this.cantidadProducto + " " + this.medidaDetalle + " " +
-                " " + this.precioProducto + " " + this.parcialProducto + " " + this.porcentajeDescuento + " " +
-                this.detalleDescuento + this.detalleSubtotal + " " + this.gravaIva;
+
+    public BigDecimal getValordescuento() {
+        return valordescuento;
     }
+
+    public void setValordescuento(BigDecimal valordescuento) {
+        this.valordescuento = valordescuento;
+    }
+    
 }

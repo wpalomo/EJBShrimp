@@ -15,6 +15,8 @@ public interface OperacionesBancoDAOLocal {
 
     java.util.List<banco.TO.ListaBanBancoTO> getListaBanBancoTO(String empresa) throws Exception;
 
+    java.util.List<banco.TO.ListaBanChequesNumeracionTO> getListaChequesNumeracionTO(String empresa) throws Exception;
+
     banco.entity.BanConciliacion buscarBanConciliacion(java.lang.String concEmpresa, java.lang.String concCuentaContable, java.lang.String concCodigo) throws java.lang.Exception;
 
     java.util.List<banco.TO.ListaBanCajaTO> getListaBanCajaTO(String empresa) throws Exception;
@@ -22,6 +24,8 @@ public interface OperacionesBancoDAOLocal {
     java.util.List<banco.TO.ListaBanCuentaTO> getListaBanCuentaTO(String empresa) throws Exception;
 
     banco.entity.BanBanco buscarBanBanco(String empresa, String codigo) throws Exception;
+
+    banco.entity.BanBanco buscarBanChequeNumeracion(Integer secuencial) throws Exception;
 
     banco.entity.BanCaja buscarBanCaja(String empresa, String codigo) throws Exception;
 

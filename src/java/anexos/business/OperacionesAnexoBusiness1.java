@@ -1671,7 +1671,7 @@ public class OperacionesAnexoBusiness1 implements OperacionesAnexoBusinessLocal1
                 anxFunListadoDevolucionIvaTOs);
     }
     //////////////////////////////////////////////////////////////// comprobantes Electronicos ///////////////////////////////////
-
+    
     @Override
     public RespuestaSolicitud getRecepcionComprobantes(byte[] eXmlFirmado, String tipoAmbiente, sistema.TO.SisInfoTO sisInfoTO) throws Exception {
 
