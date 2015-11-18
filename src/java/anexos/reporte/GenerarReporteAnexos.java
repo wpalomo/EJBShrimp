@@ -41,7 +41,7 @@ public class GenerarReporteAnexos implements GenerarReporteAnexosLocal {
         try {
 
             String rutaReportes = getRutaReportes() + "anexos/";
-
+            System.out.println("ruta anexos: "+rutaReportes+nombreReporte);
             parametros.put("SUBREPORT_DIR", rutaReportes);
             parametros.put("p_empresa_nombre", sisUsuario.getEmpNombre());
             parametros.put("p_empresa_ruc", sisUsuario.getEmpRuc());
@@ -115,8 +115,11 @@ public class GenerarReporteAnexos implements GenerarReporteAnexosLocal {
             for (AnxListaRetencionesTO plgTO : listaAnxListaRetencionesTO) {
                 ReporteAnxListaRetenciones reporteAnxListaRetencion = new ReporteAnxListaRetenciones();
 
-                reporteAnxListaRetencion.setRetSustentoTributario((plgTO.getRetSustentoTributario() == null ? "" : plgTO.getRetSustentoTributario()));
-                reporteAnxListaRetencion.setRetProveedorTipo((plgTO.getRetProveedorTipo() == null ? "" : plgTO.getRetProveedorTipo()));
+//                reporteAnxListaRetencion.setRetSustentoTributario((plgTO.getRetSustentoTributario() == null ? "" : plgTO.getRetSustentoTributario()));
+                reporteAnxListaRetencion.setRetProveedorId(plgTO.getRetProveedorId());
+                System.out.println("id: "+plgTO.getRetProveedorId());
+                System.out.println("nombre prov.: "+plgTO.getRetProveedorNombre());
+                reporteAnxListaRetencion.setRetProveedorNombre((plgTO.getRetProveedorNombre() == null ? "" : plgTO.getRetProveedorNombre()));
                 reporteAnxListaRetencion.setRetDocumentoNombre((plgTO.getRetDocumentoNombre() == null ? "" : plgTO.getRetDocumentoNombre()));
                 reporteAnxListaRetencion.setRetDocumentoNumero((plgTO.getRetDocumentoNumero() == null ? "" : plgTO.getRetDocumentoNumero()));
                 reporteAnxListaRetencion.setRetCompraFecha((plgTO.getRetCompraFecha() == null ? "" : plgTO.getRetCompraFecha()));
