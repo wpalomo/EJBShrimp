@@ -41,7 +41,7 @@ public class GenerarReporteAnexos implements GenerarReporteAnexosLocal {
         try {
 
             String rutaReportes = getRutaReportes() + "anexos/";
-            System.out.println("ruta anexos: "+rutaReportes+nombreReporte);
+            System.out.println("ruta anexos: " + rutaReportes + nombreReporte);
             parametros.put("SUBREPORT_DIR", rutaReportes);
             parametros.put("p_empresa_nombre", sisUsuario.getEmpNombre());
             parametros.put("p_empresa_ruc", sisUsuario.getEmpRuc());
@@ -81,6 +81,7 @@ public class GenerarReporteAnexos implements GenerarReporteAnexosLocal {
             return null;
         }
     }
+
     public JasperPrint generarReporteTalonResumenVentas(SisUsuarioEmpresaTO sisUsuarioEmpresaTO,
             String desde, String hasta, List<AnxTalonResumenVentaTO> listaAnxTalonResumenVentaTO) throws Exception {
         try {
@@ -116,8 +117,6 @@ public class GenerarReporteAnexos implements GenerarReporteAnexosLocal {
                 ReporteAnxListaRetenciones reporteAnxListaRetencion = new ReporteAnxListaRetenciones();
 
                 reporteAnxListaRetencion.setRetProveedorId((plgTO.getRetProveedorId() == null ? "" : plgTO.getRetProveedorId()));
-                System.out.println("id: "+plgTO.getRetProveedorId());
-                System.out.println("nombre prov.: "+plgTO.getRetProveedorNombre());
                 reporteAnxListaRetencion.setRetProveedorNombre((plgTO.getRetProveedorNombre() == null ? "" : plgTO.getRetProveedorNombre()));
                 reporteAnxListaRetencion.setRetDocumentoNombre((plgTO.getRetDocumentoNombre() == null ? "" : plgTO.getRetDocumentoNombre()));
                 reporteAnxListaRetencion.setRetDocumentoNumero((plgTO.getRetDocumentoNumero() == null ? "" : plgTO.getRetDocumentoNumero()));
