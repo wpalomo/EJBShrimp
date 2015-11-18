@@ -4,10 +4,7 @@
  */
 package banco.DAO;
 
-import banco.entity.BanBanco;
-import banco.entity.BanCaja;
-import banco.entity.BanCheque;
-import banco.entity.BanCuenta;
+import banco.entity.*;
 import contabilidad.entity.ConContable;
 import contabilidad.entity.ConDetalle;
 import javax.ejb.Stateless;
@@ -35,14 +32,13 @@ public class OperacionesBancoDAOTransaccion implements OperacionesBancoDAOTransa
         return true;
     }
 
-//    @javax.ejb.TransactionAttribute(javax.ejb.TransactionAttributeType.REQUIRED)
-//    public boolean insertarBanChequesNumeracion(BanChequeNumeracion banBanco, SisSuceso sisSuceso) throws Exception {
-//        em.persist(sisSuceso);
-//        em.persist(banBanco);
-//        em.flush();
-//        return true;
-//    }
-
+    @javax.ejb.TransactionAttribute(javax.ejb.TransactionAttributeType.REQUIRED)
+    public boolean insertarBanChequesNumeracion(BanChequeNumeracion banBanco, SisSuceso sisSuceso) throws Exception {
+        em.persist(sisSuceso);
+        em.persist(banBanco);
+        em.flush();
+        return true;
+    }
     @javax.ejb.TransactionAttribute(javax.ejb.TransactionAttributeType.REQUIRED)
     public boolean insertarBanCaja(BanCaja banCaja, SisSuceso sisSuceso) throws Exception {
         em.persist(sisSuceso);
@@ -91,6 +87,14 @@ public class OperacionesBancoDAOTransaccion implements OperacionesBancoDAOTransa
     }
 
     @javax.ejb.TransactionAttribute(javax.ejb.TransactionAttributeType.REQUIRED)
+    public boolean modificarBanChequeNumeracion(BanChequeNumeracion banBanco, SisSuceso sisSuceso) throws Exception {
+        em.persist(sisSuceso);
+        em.merge(banBanco);
+        em.flush();
+        return true;
+    }
+
+    @javax.ejb.TransactionAttribute(javax.ejb.TransactionAttributeType.REQUIRED)
     public boolean modificarBanCaja(BanCaja banCaja, SisSuceso sisSuceso) throws Exception {
         em.persist(sisSuceso);
         em.merge(banCaja);
@@ -116,6 +120,14 @@ public class OperacionesBancoDAOTransaccion implements OperacionesBancoDAOTransa
 
     @javax.ejb.TransactionAttribute(javax.ejb.TransactionAttributeType.REQUIRED)
     public boolean eliminarBanBanco(BanBanco banBanco, SisSuceso sisSuceso) throws Exception {
+        em.persist(sisSuceso);
+        em.remove(em.merge(banBanco));
+        em.flush();
+        return true;
+    }
+
+    @javax.ejb.TransactionAttribute(javax.ejb.TransactionAttributeType.REQUIRED)
+    public boolean eliminarBanChequeNumeracion(BanChequeNumeracion banBanco, SisSuceso sisSuceso) throws Exception {
         em.persist(sisSuceso);
         em.remove(em.merge(banBanco));
         em.flush();

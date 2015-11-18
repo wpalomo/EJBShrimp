@@ -5,30 +5,37 @@
 package banco.entity;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 import javax.persistence.*;
 
 /**
  *
- * @author jack
+ * @author andres
  */
 @Entity
-@Table(name = "banco.ban_cheques_numeracion", schema = "banco")
+@Table(name = "ban_cheques_numeracion", schema = "banco")
 @NamedQueries({
-    @NamedQuery(name = "BanBanco.findAll", query = "SELECT b FROM BanChequeNumeracion b"),
-    @NamedQuery(name = "BanBanco.findByBanSecuencial", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banSecuencial = :banSecuencial"),
-    @NamedQuery(name = "BanBanco.findByBanDesde", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banDesde = :banDesde"),
-    @NamedQuery(name = "BanBanco.findByBanHasta", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banHasta = :banHasta"),
-    @NamedQuery(name = "BanBanco.findByBanCtaEmpresa", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banCtaEmpresa = :banCtaEmpresa"),
-    @NamedQuery(name = "BanBanco.findBybanCtaContable", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banCtaContable = :banCtaContable")})
+//<<<<<<< HEAD
+//    @NamedQuery(name = "BanBanco.findAll", query = "SELECT b FROM BanChequeNumeracion b"),
+//    @NamedQuery(name = "BanBanco.findByBanSecuencial", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banSecuencial = :banSecuencial"),
+//    @NamedQuery(name = "BanBanco.findByBanDesde", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banDesde = :banDesde"),
+//    @NamedQuery(name = "BanBanco.findByBanHasta", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banHasta = :banHasta"),
+//    @NamedQuery(name = "BanBanco.findByBanCtaEmpresa", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banCtaEmpresa = :banCtaEmpresa"),
+//    @NamedQuery(name = "BanBanco.findBybanCtaContable", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banCtaContable = :banCtaContable")})
+//=======
+    @NamedQuery(name = "BanChequeNumeracion.findAll", query = "SELECT b FROM BanChequeNumeracion b"),
+    @NamedQuery(name = "BanChequeNumeracion.findByBanSecuencial", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banSecuencial = :banSecuencial"),
+    @NamedQuery(name = "BanChequeNumeracion.findByBanDesde", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banDesde = :banDesde"),
+    @NamedQuery(name = "BanChequeNumeracion.findByBanHasta", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banHasta = :banHasta"),
+    @NamedQuery(name = "BanChequeNumeracion.findByBanCtaEmpresa", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banCtaEmpresa = :banCtaEmpresa"),
+    @NamedQuery(name = "BanChequeNumeracion.findBybanCtaContable", query = "SELECT b FROM BanChequeNumeracion b WHERE b.banCtaContable = :banCtaContable")})
+//>>>>>>> b22bcf6482e6de9c23edbd80109f074d1753832a
 public class BanChequeNumeracion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "chq_secuencial serial")
+    @Column(name = "chq_secuencial")
     private Integer banSecuencial;
     @Column(name = "chq_desde")
     private Integer banDesde;

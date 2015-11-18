@@ -115,8 +115,8 @@ public class GenerarReporteAnexos implements GenerarReporteAnexosLocal {
             for (AnxListaRetencionesTO plgTO : listaAnxListaRetencionesTO) {
                 ReporteAnxListaRetenciones reporteAnxListaRetencion = new ReporteAnxListaRetenciones();
 
-                reporteAnxListaRetencion.setRetSustentoTributario((plgTO.getRetSustentoTributario() == null ? "" : plgTO.getRetSustentoTributario()));
-                reporteAnxListaRetencion.setRetProveedorTipo((plgTO.getRetProveedorTipo() == null ? "" : plgTO.getRetProveedorTipo()));
+                reporteAnxListaRetencion.setRetProveedorId((plgTO.getRetProveedorId() == null ? "" : plgTO.getRetProveedorId()));
+                reporteAnxListaRetencion.setRetProveedorNombre((plgTO.getRetProveedorNombre() == null ? "" : plgTO.getRetProveedorNombre()));
                 reporteAnxListaRetencion.setRetDocumentoNombre((plgTO.getRetDocumentoNombre() == null ? "" : plgTO.getRetDocumentoNombre()));
                 reporteAnxListaRetencion.setRetDocumentoNumero((plgTO.getRetDocumentoNumero() == null ? "" : plgTO.getRetDocumentoNumero()));
                 reporteAnxListaRetencion.setRetCompraFecha((plgTO.getRetCompraFecha() == null ? "" : plgTO.getRetCompraFecha()));

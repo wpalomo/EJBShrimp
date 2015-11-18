@@ -151,7 +151,7 @@ public class OperacionesBancoBusiness1 implements OperacionesBancoBusinessLocal1
             sistema.TO.SisInfoTO sisInfoTO) throws java.lang.Exception {
         comprobar = false;
         try {
-            susClave = banBancoTO.getBanCtaEmpresa() + " " + banBancoTO.getBanCtaContable();
+            susClave = banBancoTO.getBanSecuencial().toString();
             susDetalle = "Se ingreso la chequera desde " + banBancoTO.getBanDesde() + " hasta " + banBancoTO.getBanHasta();
             susSuceso = "INSERT";
             susTabla = "banco.ban_cheques_numeracion";
@@ -163,7 +163,7 @@ public class OperacionesBancoBusiness1 implements OperacionesBancoBusinessLocal1
                     sisInfoTO);
             if (operacionesBancoDAOLocal.buscarBanChequeNumeracion(banBancoTO.getBanSecuencial()) == null) {
                 banco.entity.BanChequeNumeracion banBanco = banco.helper.ConversionesBanco.convertirChequesNumeracionTO_BanChequesNumeracion(banBancoTO);
-                //comprobar = operacionesBancoDAOTransaccionLocal.insertarBanChequesNumeracion(banBanco, sisSuceso);
+                comprobar = operacionesBancoDAOTransaccionLocal.insertarBanChequesNumeracion(banBanco, sisSuceso);
             }
         } catch (Exception e) {
             comprobar = false;
@@ -489,6 +489,43 @@ public class OperacionesBancoBusiness1 implements OperacionesBancoBusinessLocal1
     }
 
     @Override
+    public boolean modificarBanChequeNumeracionTO(
+            banco.TO.BanChequesNumeracionTO banBancoTO,
+            sistema.TO.SisInfoTO sisInfoTO) throws java.lang.Exception {
+        comprobar = false;
+        try {
+            susClave = banBancoTO.getBanSecuencial().toString();
+            susDetalle = "Se modifico la numeracion desde " + banBancoTO.getBanDesde() + " ,hasta " + banBancoTO.getBanHasta();
+            susSuceso = "UPDATE";
+            susTabla = "banco.ban_cheques_numeracion";
+            sistemaWeb.entity.SisSuceso sisSuceso = validaciones.Suceso.crearSisSuceso(
+                    susTabla,
+                    susClave,
+                    susSuceso,
+                    susDetalle,
+                    sisInfoTO);
+            banco.entity.BanChequeNumeracion banBancoModificar = operacionesBancoDAOLocal.buscarBanChequeNumeracion(banBancoTO.getBanSecuencial());
+            if (banBancoModificar != null) {
+
+                banco.entity.BanChequeNumeracion banBanco = banco.helper.ConversionesBanco.convertirChequesNumeracionTO_BanChequesNumeracion(banBancoTO);
+                comprobar = operacionesBancoDAOTransaccionLocal.modificarBanChequeNumeracion(banBanco, sisSuceso);
+            }
+
+        } catch (Exception e) {
+            comprobar = false;
+            validaciones.Excepciones.guardarExcepcionesEJB(
+                    e,
+                    getClass().getName(),
+                    "modificarBanChequeNumeracionTO",
+                    sisInfoTO,
+                    operacionesSistemaDAOTransaccionLocal);
+
+        } finally {
+            return comprobar;
+        }
+    }
+
+    @Override
     public boolean modificarBanCajaTO(
             BanCajaTO banCajaTO,
             sistema.TO.SisInfoTO sisInfoTO) throws Exception {
@@ -594,6 +631,42 @@ public class OperacionesBancoBusiness1 implements OperacionesBancoBusinessLocal1
                 banBancoTO.setUsrFechaInsertaBanco(validaciones.Validacion.fecha(banBancoModificar.getUsrFechaInserta(), "yyyy-MM-dd HH:mm:ss"));
                 banco.entity.BanBanco banBanco = banco.helper.ConversionesBanco.convertirBanBancoTO_BanBanco(banBancoTO);
                 comprobar = operacionesBancoDAOTransaccionLocal.eliminarBanBanco(banBanco, sisSuceso);
+            }
+        } catch (Exception e) {
+            comprobar = false;
+            validaciones.Excepciones.guardarExcepcionesEJB(
+                    e,
+                    getClass().getName(),
+                    "eliminarBanBancoTO",
+                    sisInfoTO,
+                    operacionesSistemaDAOTransaccionLocal);
+        } finally {
+            return comprobar;
+        }
+    }
+
+    @Override
+    public boolean eliminarBanChequeNumeracionTO(
+            BanChequesNumeracionTO banBancoTO,
+            sistema.TO.SisInfoTO sisInfoTO) throws Exception {
+        comprobar = false;
+        try {
+            susClave = banBancoTO.getBanSecuencial().toString();
+            susDetalle = "Se eliminó la numeracion de cheques desde " + banBancoTO.getBanDesde() + " hasta " + banBancoTO.getBanHasta();
+            susSuceso = "UPDATE";
+            susTabla = "banco.ban_banco";
+            sistemaWeb.entity.SisSuceso sisSuceso = validaciones.Suceso.crearSisSuceso(
+                    susTabla,
+                    susClave,
+                    susSuceso,
+                    susDetalle,
+                    sisInfoTO);
+            banco.entity.BanChequeNumeracion banBancoModificar = operacionesBancoDAOLocal.buscarBanChequeNumeracion(banBancoTO.getBanSecuencial());
+            if (banBancoModificar != null) {
+
+
+                banco.entity.BanChequeNumeracion banBanco = banco.helper.ConversionesBanco.convertirChequesNumeracionTO_BanChequesNumeracion(banBancoTO);
+                comprobar = operacionesBancoDAOTransaccionLocal.eliminarBanChequeNumeracion(banBanco, sisSuceso);
             }
         } catch (Exception e) {
             comprobar = false;

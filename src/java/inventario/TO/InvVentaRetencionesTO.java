@@ -36,6 +36,11 @@ public class InvVentaRetencionesTO implements java.io.Serializable{
     
     private java.math.BigDecimal venBase0;//
     private java.math.BigDecimal venBaseImponible;//
+    
+    
+    
+    private java.math.BigDecimal venRecargo0;//
+    private java.math.BigDecimal venRecargoBaseImponible;//
     //****private java.math.BigDecimal venBaseNoObjetoIva;//
     private java.math.BigDecimal venMontoIva;//
     //private java.math.BigDecimal venValorRetenidoIva;//
@@ -44,7 +49,21 @@ public class InvVentaRetencionesTO implements java.io.Serializable{
     public InvVentaRetencionesTO() {
     }
 
-    public InvVentaRetencionesTO(String cliCodigo, String cliNombre, String cliCedula, String cliDireccion, String cliTelefono, String venEmpresa, String venPeriodo, String venMotivo, String venNumero, Boolean vtaPendiente, Boolean vtaRevisado, Boolean vtaAnulado, String vtaDocumentoNumero, String vtaFecha, String vtaFechaVencimiento, BigDecimal venBase0, BigDecimal venBaseImponible, BigDecimal venMontoIva, BigDecimal venValorRetenidoRenta) {
+    
+    
+    /*
+    @Override
+    public String toString(){
+        return this.vtaNumeroAlterno + " " + this.vtaDocumentoTipo + " " + this.vtaDocumentoNumero +
+                " " + this.vtaFecha + " " + this.vtaFechaVencimiento + " " + this.vtaIvaVigente +
+                " " + this.vtaObservaciones + " " + this.vtaPendiente + " " + this.vtaRevisado +
+                " " + this.vtaAnulado + " " + this.vtaFormaPago + " " + this.vtaBase0 + " " + this.vtaBaseimponible +
+                " " + this.vtaDescuentoBase0 + " " + this.vtaMontoiva + " " + this.vtaTotal + " " + this.cliCodigo +
+                " " + this.secCodigo  + " " + this.conPeriodo  + " " + this.conTipo  + " " + this.conNumero + " " + 
+                this.comDocumentoTipo + " " + this.comDocumentoNumero;
+    }*/
+
+    public InvVentaRetencionesTO(String cliCodigo, String cliNombre, String cliCedula, String cliDireccion, String cliTelefono, String venEmpresa, String venPeriodo, String venMotivo, String venNumero, Boolean vtaPendiente, Boolean vtaRevisado, Boolean vtaAnulado, String vtaDocumentoNumero, String vtaFecha, String vtaFechaVencimiento, BigDecimal venBase0, BigDecimal venBaseImponible, BigDecimal venRecargo0, BigDecimal venRecargoBaseImponible, BigDecimal venMontoIva, BigDecimal venValorRetenidoRenta) {
         this.cliCodigo = cliCodigo;
         this.cliNombre = cliNombre;
         this.cliCedula = cliCedula;
@@ -62,8 +81,18 @@ public class InvVentaRetencionesTO implements java.io.Serializable{
         this.vtaFechaVencimiento = vtaFechaVencimiento;
         this.venBase0 = venBase0;
         this.venBaseImponible = venBaseImponible;
+        this.venRecargo0 = venRecargo0;
+        this.venRecargoBaseImponible = venRecargoBaseImponible;
         this.venMontoIva = venMontoIva;
         this.venValorRetenidoRenta = venValorRetenidoRenta;
+    }
+
+    public String getCliCedula() {
+        return cliCedula;
+    }
+
+    public void setCliCedula(String cliCedula) {
+        this.cliCedula = cliCedula;
     }
 
     public String getCliCodigo() {
@@ -82,30 +111,20 @@ public class InvVentaRetencionesTO implements java.io.Serializable{
         this.cliDireccion = cliDireccion;
     }
 
-    public String getCliTelefono() {
-        return cliTelefono;
-    }
-
-    public void setCliTelefono(String cliTelefono) {
-        this.cliTelefono = cliTelefono;
-    }
-
-   
-
-    public String getCliCedula() {
-        return cliCedula;
-    }
-
-    public void setCliCedula(String cliCedula) {
-        this.cliCedula = cliCedula;
-    }
-
     public String getCliNombre() {
         return cliNombre;
     }
 
     public void setCliNombre(String cliNombre) {
         this.cliNombre = cliNombre;
+    }
+
+    public String getCliTelefono() {
+        return cliTelefono;
+    }
+
+    public void setCliTelefono(String cliTelefono) {
+        this.cliTelefono = cliTelefono;
     }
 
     public BigDecimal getVenBase0() {
@@ -164,6 +183,22 @@ public class InvVentaRetencionesTO implements java.io.Serializable{
         this.venPeriodo = venPeriodo;
     }
 
+    public BigDecimal getVenRecargo0() {
+        return venRecargo0;
+    }
+
+    public void setVenRecargo0(BigDecimal venRecargo0) {
+        this.venRecargo0 = venRecargo0;
+    }
+
+    public BigDecimal getVenRecargoBaseImponible() {
+        return venRecargoBaseImponible;
+    }
+
+    public void setVenRecargoBaseImponible(BigDecimal venRecargoBaseImponible) {
+        this.venRecargoBaseImponible = venRecargoBaseImponible;
+    }
+
     public BigDecimal getVenValorRetenidoRenta() {
         return venValorRetenidoRenta;
     }
@@ -219,21 +254,6 @@ public class InvVentaRetencionesTO implements java.io.Serializable{
     public void setVtaRevisado(Boolean vtaRevisado) {
         this.vtaRevisado = vtaRevisado;
     }
-
-   
     
     
-    
-    
-    /*
-    @Override
-    public String toString(){
-        return this.vtaNumeroAlterno + " " + this.vtaDocumentoTipo + " " + this.vtaDocumentoNumero +
-                " " + this.vtaFecha + " " + this.vtaFechaVencimiento + " " + this.vtaIvaVigente +
-                " " + this.vtaObservaciones + " " + this.vtaPendiente + " " + this.vtaRevisado +
-                " " + this.vtaAnulado + " " + this.vtaFormaPago + " " + this.vtaBase0 + " " + this.vtaBaseimponible +
-                " " + this.vtaDescuentoBase0 + " " + this.vtaMontoiva + " " + this.vtaTotal + " " + this.cliCodigo +
-                " " + this.secCodigo  + " " + this.conPeriodo  + " " + this.conTipo  + " " + this.conNumero + " " + 
-                this.comDocumentoTipo + " " + this.comDocumentoNumero;
-    }*/
 }

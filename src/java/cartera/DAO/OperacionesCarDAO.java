@@ -403,8 +403,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + "WHERE car_cobros_anticipos.ant_empresa = '" + empresa + "' AND "
                 + "car_cobros_anticipos.ant_periodo = '" + periodo + "' AND "
                 + "car_cobros_anticipos.ant_tipo = '" + tipo + "' AND "
-                + "car_cobros_anticipos.ant_numero = '" + numero + "';";
-        System.out.println(""+sql);
+                + "car_cobros_anticipos.ant_numero = '" + numero + "';";        
         return ConversionesCar.convertirCarListaCobrosCliente_CarListaCobrosClienteTO(em.createNativeQuery(sql).
                 getResultList());
     }
@@ -810,7 +809,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                     + desde + ", " + hasta + ");").getResultList());
         } else {
             return ConversionesCar.convertirCarListaMayorAuxiliarClienteProveedor_CarListaMayorAuxiliarClienteProveedorTO(em.createNativeQuery("SELECT * FROM cartera."
-                    + "fun_mayor_auxiliar_cliente('" + empresa + "', " 
+                    + "fun_mayor_auxiliar_cliente('" + empresa + "', '" 
                     //+ sector + ", '"     //Cuando ya este lista la función, descomentar esta linea
                     + codigo + "', "
                     + desde + ", " + hasta + ");").getResultList());

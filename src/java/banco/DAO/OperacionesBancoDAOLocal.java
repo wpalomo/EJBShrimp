@@ -25,7 +25,7 @@ public interface OperacionesBancoDAOLocal {
 
     banco.entity.BanBanco buscarBanBanco(String empresa, String codigo) throws Exception;
 
-    banco.entity.BanBanco buscarBanChequeNumeracion(Integer secuencial) throws Exception;
+    banco.entity.BanChequeNumeracion buscarBanChequeNumeracion(Integer secuencial) throws Exception;
 
     banco.entity.BanCaja buscarBanCaja(String empresa, String codigo) throws Exception;
 
@@ -85,5 +85,5 @@ public interface OperacionesBancoDAOLocal {
 
     String getNombreBanco(java.lang.String empresa, java.lang.String cuentaContable) throws Exception;
 
-    public Object getBanChequeSecuencial(String empresa, String cuenta)throws Exception;
+    public Object getBanChequeSecuencial(String empresa, String cuenta) throws Exception;
 }

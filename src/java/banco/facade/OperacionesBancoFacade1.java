@@ -31,7 +31,7 @@ public class OperacionesBancoFacade1 implements OperacionesBancoFacadeRemote1 {
             String empresa) throws Exception {
         return operacionesBancoBusinessLocal.getListaBanBancoTO(empresa);
     }
-    
+
     @Override
     public java.util.List<banco.TO.ListaBanChequesNumeracionTO> getListaChequesNumeracionTO(
             String empresa) throws Exception {
@@ -88,7 +88,7 @@ public class OperacionesBancoFacade1 implements OperacionesBancoFacadeRemote1 {
             sistema.TO.SisInfoTO sisInfoTO) throws Exception {
         return operacionesBancoBusinessLocal.insertarBanBancoTO(banBancoTO, sisInfoTO);
     }
-    
+
     @Override
     public boolean insertarBanChequeNumeracionTO(
             banco.TO.BanChequesNumeracionTO banBancoTO,
@@ -153,6 +153,13 @@ public class OperacionesBancoFacade1 implements OperacionesBancoFacadeRemote1 {
     }
 
     @Override
+    public boolean modificarBanChequeNumeracionTO(
+            banco.TO.BanChequesNumeracionTO banBancoTO,
+            sistema.TO.SisInfoTO sisInfoTO) throws Exception {
+        return operacionesBancoBusinessLocal.modificarBanChequeNumeracionTO(banBancoTO, sisInfoTO);
+    }
+
+    @Override
     public boolean modificarBanCajaTO(
             BanCajaTO banCajaTO,
             sistema.TO.SisInfoTO sisInfoTO) throws Exception {
@@ -174,6 +181,13 @@ public class OperacionesBancoFacade1 implements OperacionesBancoFacadeRemote1 {
             banco.TO.BanBancoTO banBancoTO,
             sistema.TO.SisInfoTO sisInfoTO) throws Exception {
         return operacionesBancoBusinessLocal.eliminarBanBancoTO(banBancoTO, sisInfoTO);
+    }
+
+    @Override
+    public boolean eliminarBanChequeNumeracionTO(
+            banco.TO.BanChequesNumeracionTO banBancoTO,
+            sistema.TO.SisInfoTO sisInfoTO) throws Exception {
+        return operacionesBancoBusinessLocal.eliminarBanChequeNumeracionTO(banBancoTO, sisInfoTO);
     }
 
     @Override
@@ -428,9 +442,7 @@ public class OperacionesBancoFacade1 implements OperacionesBancoFacadeRemote1 {
                 valorLetra2, nombreReporteCheque, conDetalle, cuentaCodigo);
     }
 
-    public Object getBanChequeSecuencial(String empresa, String cuenta)throws Exception {
+    public Object getBanChequeSecuencial(String empresa, String cuenta) throws Exception {
         return operacionesBancoBusinessLocal.getBanChequeSecuencial(empresa, cuenta);
     }
-    
-    
 }
