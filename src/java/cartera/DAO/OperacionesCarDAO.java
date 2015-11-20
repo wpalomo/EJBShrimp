@@ -869,7 +869,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
         return ConversionesCar.convertirCarListaCuentasPorPagarDetallado_CarCuentasPorPagarDetalladoTO(em.createNativeQuery(
                 "SELECT * FROM cartera.fun_cuentas_por_pagar_detallado('" + empresa + "', " 
                 + sector + ", " 
-                //+ proveedor + ", " // Descomentar esta linea cuando este lista la funcion respectiva
+                + proveedor + ", " 
                 + hasta + ")").getResultList());
     }
 
@@ -927,7 +927,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 "SELECT * FROM cartera.fun_cuentas_por_cobrar_detallado("
                 + "'" + empresa + "', "
                 + sector + ", "
-                //+ cliente + ", " // Descomentar esta linea cuando este lista la funcion respectiva
+                + cliente + ", " 
                 + desde + ", "
                 + hasta + ", "
                 + ichfa + ")").getResultList());
