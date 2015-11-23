@@ -109,7 +109,9 @@ public class ConversionesAnexos {
                 anxCompraReembolsoTO.getReembBaseimpgrav(),
                 anxCompraReembolsoTO.getReembBasenograiva(),
                 anxCompraReembolsoTO.getReembMontoice(),
-                anxCompraReembolsoTO.getReembMontoiva());
+                anxCompraReembolsoTO.getReembMontoiva(),
+                anxCompraReembolsoTO.getProvEmpresa(),
+                anxCompraReembolsoTO.getProvCodigo());
         anxCompraReembolso.setAnxCompra(
                 new AnxCompra(new anexos.entity.AnxCompraPK(anxCompraReembolsoTO.getCompEmpresa(), anxCompraReembolsoTO.getCompPeriodo(), anxCompraReembolsoTO.getCompMotivo(), anxCompraReembolsoTO.getCompNumero())));
         return anxCompraReembolso;
@@ -1317,9 +1319,10 @@ public class ConversionesAnexos {
         }
         return lista;
     }
+
     public static java.util.List<anexos.TO.AnxListaRetencionesFuenteIvaTO> convertirListaRetencionesFuenteIva_ListaRetencionesFuenteIvaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
-           
+
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
@@ -1407,7 +1410,7 @@ public class ConversionesAnexos {
                 ret_retencionfecha = null;
             }
 
-             java.math.BigDecimal ret_valorretenidoir;
+            java.math.BigDecimal ret_valorretenidoir;
             try {
                 ret_valorretenidoir = new java.math.BigDecimal(array[13].toString());
             } catch (Exception e) {
@@ -1852,6 +1855,7 @@ public class ConversionesAnexos {
         }
         return lista;
     }
+
     public static java.util.List<anexos.TO.AnxTalonResumenVentaTO> convertirTalonResumenVenta_ListaTalonResumenVentaTO(java.util.List datos) {
         java.util.List lista = new java.util.ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
@@ -1876,7 +1880,7 @@ public class ConversionesAnexos {
             } catch (Exception e) {
                 ven_punto_emision = null;
             }
-          
+
             java.math.BigDecimal ven_basenoobjetoiva;
             try {
                 ven_basenoobjetoiva = new java.math.BigDecimal(array[3].toString());
@@ -1915,8 +1919,8 @@ public class ConversionesAnexos {
             }
 
             lista.add(new anexos.TO.AnxTalonResumenVentaTO(
-                    ven_comprobante, ven_establecimiento, ven_punto_emision, 
-                    ven_basenoobjetoiva, ven_base0, ven_baseimponible, ven_motivoiva, 
+                    ven_comprobante, ven_establecimiento, ven_punto_emision,
+                    ven_basenoobjetoiva, ven_base0, ven_baseimponible, ven_motivoiva,
                     ven_valorretenidoIva, ven_valorretenidorenta));
         }
         return lista;
