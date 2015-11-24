@@ -706,8 +706,9 @@ public class ConversionesInventario {
         invVentas.setVtaPagado(invVentasTO.getVtaPagado());
         invVentas.setInvCliente(new inventario.entity.InvCliente(invVentasTO.getCliEmpresa(), invVentasTO.getCliCodigo()));
 //        invVentas.setInvBodega(new inventario.entity.InvBodega(invVentasTO.getBodEmpresa(), invVentasTO.getBodCodigo()));
-        invVentas.setBodCodigo(invVentasTO.getBodCodigo());
-        invVentas.setBodEmpresa(invVentasTO.getBodEmpresa());
+        invVentas.setInvBodega(new  inventario.entity.InvBodega(invVentasTO.getBodEmpresa(), invVentasTO.getBodCodigo()));
+//        invVentas.setBodCodigo(invVentasTO.getBodCodigo());
+//        invVentas.setBodEmpresa(invVentasTO.getBodEmpresa());
 
         invVentas.setSecEmpresa(invVentasTO.getVtaEmpresa());
         invVentas.setSecCodigo(invVentasTO.getSecCodigo());
@@ -725,6 +726,15 @@ public class ConversionesInventario {
 
     public static inventario.entity.InvProformas convertirInvProformasTO_InvProformas(inventario.TO.InvProformasTO invProformasTO) {
         inventario.entity.InvProformas invProformas = new inventario.entity.InvProformas();
+        
+        /*         
+  cli_empresa character(7) NOT NULL,
+  cli_codigo character(7) NOT NULL,
+  usr_empresa character(7) NOT NULL,
+  usr_codigo character(7) NOT NULL,
+  usr_fecha_inserta timestamp without time zone NOT NULL,
+         */
+        
         invProformas.setInvProformasPK(new inventario.entity.InvProformasPK(invProformasTO.getProfEmpresa(), invProformasTO.getProfPeriodo(),
                 invProformasTO.getProfMotivo(), invProformasTO.getProfNumero()));
 //        invCompras.setProvCodigo(invComprasTO.getProvCodigo());
@@ -739,20 +749,13 @@ public class ConversionesInventario {
 
         invProformas.setProfDescuentoBase0(invProformasTO.getProfDescuentoBase0());
         invProformas.setProfDescuentoBaseimponible(invProformasTO.getProfDescuentoBaseImponible());
-        invProformas.setProfDescuentoGeneralBase0(invProformasTO.getProfDescuentoGeneralBase0());
-        invProformas.setProfDescuentoGeneralBaseimponible(invProformasTO.getProfDescuentoGeneralBaseImponible());
-        invProformas.setProfDescuentoIva(invProformasTO.getProfDescuentoIva());
+        
         invProformas.setProfSubtotalBase0(invProformasTO.getProfSubtotalBase0());
         invProformas.setProfSubtotalBaseimponible(invProformasTO.getProfSubtotalBaseImponible());
 
         invProformas.setProfMontoiva(invProformasTO.getProfMontoIva());
         invProformas.setProfTotal(invProformasTO.getProfTotal());
-
-//
-//        invProformas.setCon2Empresa(invProformasTO.getCon2Empresa());
-//        invProformas.setCon2Periodo(invProformasTO.getCon2Periodo());
-//        invProformas.setCon2Tipo(invProformasTO.getCon1Tipo());
-//        invProformas.setCon2Numero(invProformasTO.getCon1Numero());
+        //invProformas.setInvCliente(null);
 
         invProformas.setUsrEmpresa(invProformasTO.getUsrEmpresa());
         invProformas.setUsrCodigo(invProformasTO.getUsrCodigo());
@@ -836,9 +839,9 @@ public class ConversionesInventario {
         invVentasAux.setVtaSubtotalBaseExenta(invVentas.getVtaSubtotalBaseExenta());
         invVentasAux.setVtaSubtotalBaseNoObjeto(invVentas.getVtaSubtotalBaseNoObjeto());
 
-//        invVentasAux.setInvBodega(invVentas.getInvBodega());
-        invVentasAux.setBodCodigo(invVentas.getBodCodigo());
-        invVentasAux.setBodEmpresa(invVentas.getBodEmpresa());
+        invVentasAux.setInvBodega(invVentas.getInvBodega());
+//        invVentasAux.setBodCodigo(invVentas.getInvBodega().getInvBodegaPK().getBodCodigo());
+//        invVentasAux.setBodEmpresa(invVentas.getBodEmpresa());
         invVentasAux.setSecEmpresa(invVentas.getSecEmpresa());
         invVentasAux.setSecCodigo(invVentas.getSecCodigo());
 

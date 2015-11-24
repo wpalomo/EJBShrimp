@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -15,6 +16,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "inv_producto_presentacion_unidades", schema = "inventario")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "InvProductoPresentacionUnidades.findAll", query = "SELECT i FROM InvProductoPresentacionUnidades i"),
     @NamedQuery(name = "InvProductoPresentacionUnidades.findByPresuEmpresa", query = "SELECT i FROM InvProductoPresentacionUnidades i WHERE i.invProductoPresentacionUnidadesPK.presuEmpresa = :presuEmpresa"),

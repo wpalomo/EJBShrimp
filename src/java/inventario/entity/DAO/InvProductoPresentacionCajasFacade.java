@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 /**
  *
  * @author developer1
+ * 
  */
 @Stateless
 public class InvProductoPresentacionCajasFacade extends AbstractFacade<InvProductoPresentacionCajas> implements InvProductoPresentacionCajasFacadeLocal {

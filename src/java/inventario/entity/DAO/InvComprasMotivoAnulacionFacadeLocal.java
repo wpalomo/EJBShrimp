@@ -12,6 +12,7 @@ import javax.ejb.Local;
  *
  * @author developer1
  */
+
 @Local
 public interface InvComprasMotivoAnulacionFacadeLocal {
 

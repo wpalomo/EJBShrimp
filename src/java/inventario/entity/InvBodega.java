@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 package inventario.entity;
-
+//1309201507099251398500120010020000013701234567811 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -74,6 +74,8 @@ public class InvBodega implements Serializable {
     private List<InvCompras> invComprasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invBodega")
     private List<InvComprasDetalle> invComprasDetalleList;
+    @OneToMany(mappedBy = "invBodega")
+    private List<InvVentas> invVentasList;
 
     public InvBodega() {
     }
@@ -251,6 +253,14 @@ public class InvBodega implements Serializable {
 
     public void setInvComprasDetalleList(List<InvComprasDetalle> invComprasDetalleList) {
         this.invComprasDetalleList = invComprasDetalleList;
+    }
+
+    public List<InvVentas> getInvVentasList() {
+        return invVentasList;
+    }
+
+    public void setInvVentasList(List<InvVentas> invVentasList) {
+        this.invVentasList = invVentasList;
     }
 
     @Override

@@ -31,9 +31,6 @@ import javax.persistence.*;
     @NamedQuery(name = "InvProformas.findByProfBaseimponible", query = "SELECT i FROM InvProformas i WHERE i.profBaseimponible = :profBaseimponible"),
     @NamedQuery(name = "InvProformas.findByProfDescuentoBase0", query = "SELECT i FROM InvProformas i WHERE i.profDescuentoBase0 = :profDescuentoBase0"),
     @NamedQuery(name = "InvProformas.findByProfDescuentoBaseimponible", query = "SELECT i FROM InvProformas i WHERE i.profDescuentoBaseimponible = :profDescuentoBaseimponible"),
-    @NamedQuery(name = "InvProformas.findByProfDescuentoGeneralBase0", query = "SELECT i FROM InvProformas i WHERE i.profDescuentoGeneralBase0 = :profDescuentoGeneralBase0"),
-    @NamedQuery(name = "InvProformas.findByProfDescuentoGeneralBaseimponible", query = "SELECT i FROM InvProformas i WHERE i.profDescuentoGeneralBaseimponible = :profDescuentoGeneralBaseimponible"),
-    @NamedQuery(name = "InvProformas.findByProfDescuentoIva", query = "SELECT i FROM InvProformas i WHERE i.profDescuentoIva = :profDescuentoIva"),
     @NamedQuery(name = "InvProformas.findByProfSubtotalBase0", query = "SELECT i FROM InvProformas i WHERE i.profSubtotalBase0 = :profSubtotalBase0"),
     @NamedQuery(name = "InvProformas.findByProfSubtotalBaseimponible", query = "SELECT i FROM InvProformas i WHERE i.profSubtotalBaseimponible = :profSubtotalBaseimponible"),
     @NamedQuery(name = "InvProformas.findByProfMontoiva", query = "SELECT i FROM InvProformas i WHERE i.profMontoiva = :profMontoiva"),
@@ -74,15 +71,6 @@ public class InvProformas implements Serializable {
     @Column(name = "prof_descuento_baseimponible")
     private BigDecimal profDescuentoBaseimponible;
     @Basic(optional = false)
-    @Column(name = "prof_descuento_general_base0")
-    private BigDecimal profDescuentoGeneralBase0;
-    @Basic(optional = false)
-    @Column(name = "prof_descuento_general_baseimponible")
-    private BigDecimal profDescuentoGeneralBaseimponible;
-    @Basic(optional = false)
-    @Column(name = "prof_descuento_iva")
-    private BigDecimal profDescuentoIva;
-    @Basic(optional = false)
     @Column(name = "prof_subtotal_base0")
     private BigDecimal profSubtotalBase0;
     @Basic(optional = false)
@@ -119,7 +107,7 @@ public class InvProformas implements Serializable {
         this.invProformasPK = invProformasPK;
     }
 
-    public InvProformas(InvProformasPK invProformasPK, Date profFecha, BigDecimal profIvaVigente, boolean profPendiente, boolean profAnulado, BigDecimal profBase0, BigDecimal profBaseimponible, BigDecimal profDescuentoBase0, BigDecimal profDescuentoBaseimponible, BigDecimal profDescuentoGeneralBase0, BigDecimal profDescuentoGeneralBaseimponible, BigDecimal profDescuentoIva, BigDecimal profSubtotalBase0, BigDecimal profSubtotalBaseimponible, BigDecimal profMontoiva, BigDecimal profTotal, String usrEmpresa, String usrCodigo, Date usrFechaInserta) {
+    public InvProformas(InvProformasPK invProformasPK, Date profFecha, BigDecimal profIvaVigente, boolean profPendiente, boolean profAnulado, BigDecimal profBase0, BigDecimal profBaseimponible, BigDecimal profDescuentoBase0, BigDecimal profDescuentoBaseimponible, BigDecimal profSubtotalBase0, BigDecimal profSubtotalBaseimponible, BigDecimal profMontoiva, BigDecimal profTotal, String usrEmpresa, String usrCodigo, Date usrFechaInserta) {
         this.invProformasPK = invProformasPK;
         this.profFecha = profFecha;
         this.profIvaVigente = profIvaVigente;
@@ -129,9 +117,6 @@ public class InvProformas implements Serializable {
         this.profBaseimponible = profBaseimponible;
         this.profDescuentoBase0 = profDescuentoBase0;
         this.profDescuentoBaseimponible = profDescuentoBaseimponible;
-        this.profDescuentoGeneralBase0 = profDescuentoGeneralBase0;
-        this.profDescuentoGeneralBaseimponible = profDescuentoGeneralBaseimponible;
-        this.profDescuentoIva = profDescuentoIva;
         this.profSubtotalBase0 = profSubtotalBase0;
         this.profSubtotalBaseimponible = profSubtotalBaseimponible;
         this.profMontoiva = profMontoiva;
@@ -223,30 +208,6 @@ public class InvProformas implements Serializable {
 
     public void setProfDescuentoBaseimponible(BigDecimal profDescuentoBaseimponible) {
         this.profDescuentoBaseimponible = profDescuentoBaseimponible;
-    }
-
-    public BigDecimal getProfDescuentoGeneralBase0() {
-        return profDescuentoGeneralBase0;
-    }
-
-    public void setProfDescuentoGeneralBase0(BigDecimal profDescuentoGeneralBase0) {
-        this.profDescuentoGeneralBase0 = profDescuentoGeneralBase0;
-    }
-
-    public BigDecimal getProfDescuentoGeneralBaseimponible() {
-        return profDescuentoGeneralBaseimponible;
-    }
-
-    public void setProfDescuentoGeneralBaseimponible(BigDecimal profDescuentoGeneralBaseimponible) {
-        this.profDescuentoGeneralBaseimponible = profDescuentoGeneralBaseimponible;
-    }
-
-    public BigDecimal getProfDescuentoIva() {
-        return profDescuentoIva;
-    }
-
-    public void setProfDescuentoIva(BigDecimal profDescuentoIva) {
-        this.profDescuentoIva = profDescuentoIva;
     }
 
     public BigDecimal getProfSubtotalBase0() {

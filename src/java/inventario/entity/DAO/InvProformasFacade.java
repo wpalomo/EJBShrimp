@@ -12,7 +12,12 @@ import javax.persistence.PersistenceContext;
 /**
  *
  * @author developer1
+ 
+ 
  */
+
+
+
 @Stateless
 public class InvProformasFacade extends AbstractFacade<InvProformas> implements InvProformasFacadeLocal {
     @PersistenceContext(unitName = "EJBShrimpPU")

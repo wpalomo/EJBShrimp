@@ -16,6 +16,7 @@ import sistema.TO.SisUsuarioEmpresaTO;
  *
  * @author jack
  */
+
 @Local
 public interface OperacionesCajaBusinessLocal {
 

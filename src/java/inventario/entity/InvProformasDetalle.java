@@ -20,6 +20,7 @@ import javax.persistence.*;
     @NamedQuery(name = "InvProformasDetalle.findByDetOrden", query = "SELECT i FROM InvProformasDetalle i WHERE i.detOrden = :detOrden"),
     @NamedQuery(name = "InvProformasDetalle.findByDetCantidad", query = "SELECT i FROM InvProformasDetalle i WHERE i.detCantidad = :detCantidad"),
     @NamedQuery(name = "InvProformasDetalle.findByDetPrecio", query = "SELECT i FROM InvProformasDetalle i WHERE i.detPrecio = :detPrecio"),
+    @NamedQuery(name = "InvProformasDetalle.findByDetPorcentajeRecargo", query = "SELECT i FROM InvProformasDetalle i WHERE i.detPorcentajeRecargo = :detPorcentajeRecargo"),
     @NamedQuery(name = "InvProformasDetalle.findByDetPorcentajeDescuento", query = "SELECT i FROM InvProformasDetalle i WHERE i.detPorcentajeDescuento = :detPorcentajeDescuento"),
     @NamedQuery(name = "InvProformasDetalle.findByProNombre", query = "SELECT i FROM InvProformasDetalle i WHERE i.proNombre = :proNombre")})
 public class InvProformasDetalle implements Serializable {
@@ -36,6 +37,8 @@ public class InvProformasDetalle implements Serializable {
     private BigDecimal detCantidad;
     @Column(name = "det_precio")
     private BigDecimal detPrecio;
+    @Column(name = "det_porcentaje_recargo")
+    private BigDecimal detPorcentajeRecargo;
     @Column(name = "det_porcentaje_descuento")
     private BigDecimal detPorcentajeDescuento;
     @Basic(optional = false)
@@ -96,6 +99,14 @@ public class InvProformasDetalle implements Serializable {
 
     public void setDetPrecio(BigDecimal detPrecio) {
         this.detPrecio = detPrecio;
+    }
+
+    public BigDecimal getDetPorcentajeRecargo() {
+        return detPorcentajeRecargo;
+    }
+
+    public void setDetPorcentajeRecargo(BigDecimal detPorcentajeRecargo) {
+        this.detPorcentajeRecargo = detPorcentajeRecargo;
     }
 
     public BigDecimal getDetPorcentajeDescuento() {

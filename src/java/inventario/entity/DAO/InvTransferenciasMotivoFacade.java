@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author developer1
  */
+//--
 @Stateless
 public class InvTransferenciasMotivoFacade extends AbstractFacade<InvTransferenciasMotivo> implements InvTransferenciasMotivoFacadeLocal {
     @PersistenceContext(unitName = "EJBShrimpPU")

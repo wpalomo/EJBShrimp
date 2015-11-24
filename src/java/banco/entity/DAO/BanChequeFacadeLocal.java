@@ -15,6 +15,7 @@ import javax.ejb.Local;
 @Local
 public interface BanChequeFacadeLocal {
 
+    
     void create(BanCheque banCheque);
 
     void edit(BanCheque banCheque);

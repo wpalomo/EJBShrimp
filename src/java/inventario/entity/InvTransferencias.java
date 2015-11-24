@@ -71,13 +71,13 @@ public class InvTransferencias implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date usrFechaInserta;
     @JoinColumns({
-        @JoinColumn(name = "bod_destino_empresa", referencedColumnName = "bod_empresa"),
-        @JoinColumn(name = "bod_destino_codigo", referencedColumnName = "bod_codigo")})
+        @JoinColumn(name = "bod_origen_empresa", referencedColumnName = "bod_empresa"),
+        @JoinColumn(name = "bod_origen_codigo", referencedColumnName = "bod_codigo")})
     @ManyToOne
     private InvBodega invBodega;
     @JoinColumns({
-        @JoinColumn(name = "bod_origen_empresa", referencedColumnName = "bod_empresa"),
-        @JoinColumn(name = "bod_origen_codigo", referencedColumnName = "bod_codigo")})
+        @JoinColumn(name = "bod_destino_empresa", referencedColumnName = "bod_empresa"),
+        @JoinColumn(name = "bod_destino_codigo", referencedColumnName = "bod_codigo")})
     @ManyToOne
     private InvBodega invBodega1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "invTransferencias")

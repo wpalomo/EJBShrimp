@@ -20,6 +20,7 @@ import sistema.DAO.OperacionesSistemaDAOTransaccionLocal;
 import sistema.TO.SisErrorTO;
 import sistemaWeb.entity.SisSuceso;
 
+
 /**
  *
  * @author jack

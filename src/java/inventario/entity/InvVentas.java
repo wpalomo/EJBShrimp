@@ -50,8 +50,6 @@ import javax.persistence.*;
     @NamedQuery(name = "InvVentas.findByVtaMontoiva", query = "SELECT i FROM InvVentas i WHERE i.vtaMontoiva = :vtaMontoiva"),
     @NamedQuery(name = "InvVentas.findByVtaTotal", query = "SELECT i FROM InvVentas i WHERE i.vtaTotal = :vtaTotal"),
     @NamedQuery(name = "InvVentas.findByVtaPagado", query = "SELECT i FROM InvVentas i WHERE i.vtaPagado = :vtaPagado"),
-    @NamedQuery(name = "InvVentas.findByBodEmpresa", query = "SELECT i FROM InvVentas i WHERE i.bodEmpresa = :bodEmpresa"),
-    @NamedQuery(name = "InvVentas.findByBodCodigo", query = "SELECT i FROM InvVentas i WHERE i.bodCodigo = :bodCodigo"),
     @NamedQuery(name = "InvVentas.findBySecEmpresa", query = "SELECT i FROM InvVentas i WHERE i.secEmpresa = :secEmpresa"),
     @NamedQuery(name = "InvVentas.findBySecCodigo", query = "SELECT i FROM InvVentas i WHERE i.secCodigo = :secCodigo"),
     @NamedQuery(name = "InvVentas.findByCtaEmpresa", query = "SELECT i FROM InvVentas i WHERE i.ctaEmpresa = :ctaEmpresa"),
@@ -148,10 +146,6 @@ public class InvVentas implements Serializable {
     @Basic(optional = false)
     @Column(name = "vta_pagado")
     private BigDecimal vtaPagado;
-    @Column(name = "bod_empresa")
-    private String bodEmpresa;
-    @Column(name = "bod_codigo")
-    private String bodCodigo;
     @Basic(optional = false)
     @Column(name = "sec_empresa")
     private String secEmpresa;
@@ -193,6 +187,11 @@ public class InvVentas implements Serializable {
         @JoinColumn(name = "cli_codigo", referencedColumnName = "cli_codigo")})
     @ManyToOne(optional = false)
     private InvCliente invCliente;
+    @JoinColumns({
+        @JoinColumn(name = "bod_empresa", referencedColumnName = "bod_empresa"),
+        @JoinColumn(name = "bod_codigo", referencedColumnName = "bod_codigo")})
+    @ManyToOne
+    private InvBodega invBodega;
 
     public InvVentas() {
     }
@@ -468,22 +467,6 @@ public class InvVentas implements Serializable {
         this.vtaPagado = vtaPagado;
     }
 
-    public String getBodEmpresa() {
-        return bodEmpresa;
-    }
-
-    public void setBodEmpresa(String bodEmpresa) {
-        this.bodEmpresa = bodEmpresa;
-    }
-
-    public String getBodCodigo() {
-        return bodCodigo;
-    }
-
-    public void setBodCodigo(String bodCodigo) {
-        this.bodCodigo = bodCodigo;
-    }
-
     public String getSecEmpresa() {
         return secEmpresa;
     }
@@ -610,6 +593,14 @@ public class InvVentas implements Serializable {
 
     public void setInvCliente(InvCliente invCliente) {
         this.invCliente = invCliente;
+    }
+
+    public InvBodega getInvBodega() {
+        return invBodega;
+    }
+
+    public void setInvBodega(InvBodega invBodega) {
+        this.invBodega = invBodega;
     }
 
     @Override
