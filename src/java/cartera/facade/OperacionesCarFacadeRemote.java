@@ -138,7 +138,8 @@ public interface OperacionesCarFacadeRemote {
     java.util.List<cartera.TO.CarListaPagosCobrosDetalleFormaTO> getCobrosConsultaDetalleFormaTO(
             java.lang.String empresa,
             java.lang.String periodo,
-            java.lang.String numero) throws java.lang.Exception;
+            java.lang.String numero,
+            boolean hayPostfechados) throws java.lang.Exception;
     
     java.util.List<cartera.TO.CarListaPagosCobrosDetalleAnticipoTO> getCobrosConsultaDetalleAnticipo(
             String empresa, 

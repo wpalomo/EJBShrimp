@@ -39,11 +39,13 @@ public class ListaBanBancoTO implements java.io.Serializable {
 
     public String retornoDatos(){
         return this.banCodigo + " " + this.banNombre + " ";
-    }
+    }   
+    
+    
 
     @Override
     public String toString(){
         return this.banCodigo + " " + this.banNombre + " ";
     }
-
+    
 }

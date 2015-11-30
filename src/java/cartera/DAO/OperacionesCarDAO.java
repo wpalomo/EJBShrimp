@@ -252,7 +252,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + "car_pagos.pag_periodo = '" + periodo + "' AND "
                 + "car_pagos.pag_tipo = 'C-PAG' AND "
                 + "car_pagos.pag_numero = '" + numero + "';").
-                getResultList());
+                getResultList(), false);
     }
 
     /**
@@ -500,25 +500,21 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
      * @throws Exception Cualquier error inesperado
      */
     @Override
-    public List<CarListaPagosCobrosDetalleFormaTO> getCobrosConsultaDetalleForma(String empresa, String periodo, String numero) throws Exception {
-        String sql = "SELECT car_cobros_forma.fp_detalle as forma, "
-                + "car_cobros_detalle_forma.det_referencia as referencia, "
-                + "car_cobros_detalle_forma.det_valor as valor, "
-                + "car_cobros_detalle_forma.det_observaciones as observaciones "
-                + "FROM cartera.car_cobros "
-                + "INNER JOIN cartera.car_cobros_detalle_forma "
-                + "INNER JOIN cartera.car_cobros_forma "
-                + "ON car_cobros_detalle_forma.fp_secuencial = car_cobros_forma.fp_secuencial "
-                + "ON car_cobros.cob_empresa = car_cobros_detalle_forma.cob_empresa "
-                + "AND car_cobros.cob_periodo = car_cobros_detalle_forma.cob_periodo "
-                + "AND car_cobros.cob_tipo = car_cobros_detalle_forma.cob_tipo "
-                + "AND car_cobros.cob_numero = car_cobros_detalle_forma.cob_numero "
-                + "WHERE car_cobros.cob_empresa = '" + empresa + "' "
-                + "AND car_cobros.cob_periodo = '" + periodo + "' "
-                + "AND car_cobros.cob_tipo = 'C-COB' "
-                + "AND car_cobros.cob_numero = '" + numero + "';";
+    public List<CarListaPagosCobrosDetalleFormaTO> getCobrosConsultaDetalleForma(String empresa, String periodo, String numero, boolean hayPostfechados) throws Exception {
+        String sql = "SELECT car_cobros_forma.fp_detalle as forma, replace(ban_nombre,'BANCO ','') as banco, "
+                + "car_cobros_detalle_forma.det_cuenta as cuenta, car_cobros_detalle_forma.det_fecha_vencimiento "
+                + "as fecha, car_cobros_detalle_forma.det_referencia as referencia, car_cobros_detalle_forma.det_valor as valor, "
+                + "car_cobros_detalle_forma.det_observaciones as observaciones FROM cartera.car_cobros INNER JOIN "
+                + "cartera.car_cobros_detalle_forma INNER JOIN cartera.car_cobros_forma ON car_cobros_detalle_forma.fp_secuencial "
+                + "= car_cobros_forma.fp_secuencial ON car_cobros.cob_empresa = car_cobros_detalle_forma.cob_empresa AND "
+                + "car_cobros.cob_periodo = car_cobros_detalle_forma.cob_periodo AND car_cobros.cob_tipo = "
+                + "car_cobros_detalle_forma.cob_tipo AND car_cobros.cob_numero = car_cobros_detalle_forma.cob_numero LEFT "
+                + "JOIN banco.ban_banco ON car_cobros_detalle_forma.ban_empresa = ban_banco.ban_empresa AND "
+                + "car_cobros_detalle_forma.ban_codigo = ban_banco.ban_codigo WHERE car_cobros.cob_empresa ="
+                + " '"+empresa+"' AND  car_cobros.cob_periodo = '"+periodo+"' AND  car_cobros.cob_tipo = 'C-COB' AND"
+                + " car_cobros.cob_numero = '"+numero+"';";                                       
         return ConversionesCar.convertirCarListaPagosCobrosDetalleForma_CarListaPagosCobrosDetalleFormaTO(em.createNativeQuery(sql).
-                getResultList());
+                getResultList(), hayPostfechados);
     }
     /**
      * @autor carlos
@@ -548,7 +544,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + "WHERE car_cobros.cob_empresa = '"+ empresa + "' "
                 + "AND car_cobros.cob_periodo = '"+ periodo + "' "
                 + "AND car_cobros.cob_tipo = 'C-COB' "
-                + "AND car_cobros.cob_numero = '" + numero + "';";
+                + "AND car_cobros.cob_numero = '" + numero + "';";        
         return ConversionesCar.convertirCarListaPagosCobrosDetalleAnticipo_CarListaPagosCobrosDetalleAnticipoTO(em.createNativeQuery(sql).
                 getResultList());
     }
@@ -757,9 +753,15 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
         //                    + "FROM cartera.car_pagos_forma WHERE (usr_empresa = '"+empresa+"') AND "
         //                    + "(NOT fp_inactivo OR fp_inactivo IS NULL);").getResultList());
         else {
-            return ConversionesCar.convertirCarComboPagosCobrosForma_CarComboPagosCobrosFormaTO(em.createNativeQuery("SELECT fp_secuencial, sec_codigo || ' | ' || fp_detalle fp_detalle FROM cartera.car_cobros_forma LEFT JOIN banco.ban_cuenta "
-                    + "ON car_cobros_forma.cta_empresa = ban_cuenta.cta_empresa AND car_cobros_forma.cta_codigo = ban_cuenta.cta_cuenta_contable "
-                    + "WHERE car_cobros_forma.cta_empresa = '" + empresa + "' AND NOT fp_inactivo ORDER BY sec_codigo, fp_detalle;").getResultList());
+            return ConversionesCar.convertirCarComboPagosCobrosForma_CarComboPagosCobrosFormaTO(em.createNativeQuery(
+                    "SELECT fp_secuencial, sec_codigo || ' | ' || fp_detalle fp_detalle, det_cuenta IS NOT NULL "
+                    + "fp_necesita_informacion_complementaria FROM cartera.car_cobros_forma LEFT JOIN "
+                    + "banco.ban_cuenta_caja_cheques ON car_cobros_forma.sec_empresa = ban_cuenta_caja_cheques.det_empresa "
+                    + "AND car_cobros_forma.sec_codigo = ban_cuenta_caja_cheques.det_sector AND car_cobros_forma.cta_codigo "
+                    + "= ban_cuenta_caja_cheques.det_cuenta WHERE car_cobros_forma.sec_empresa = '"+empresa+"' AND NOT "
+                    + "fp_inactivo ORDER BY sec_codigo, fp_detalle;"
+//                    "SELECT fp_secuencial, sec_codigo || ' | ' || fp_detalle fp_detalle FROM cartera.car_cobros_forma LEFT JOIN banco.ban_cuenta ON car_cobros_forma.cta_empresa = ban_cuenta.cta_empresa AND car_cobros_forma.cta_codigo = ban_cuenta.cta_cuenta_contable WHERE car_cobros_forma.cta_empresa = '"+empresa+"' AND NOT fp_inactivo ORDER BY sec_codigo, fp_detalle;"
+                    ).getResultList());
         }
 //            return ConversionesCar.convertirCarComboPagosCobrosForma_CarComboPagosCobrosFormaTO(em.
 //                    createNativeQuery("SELECT fp_secuencial, fp_detalle, sec_codigo "
@@ -834,6 +836,12 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
         tipo = tipo == null ? tipo : "'" + tipo + "'";
         numero = numero == null ? numero : "'" + numero + "'";
         if (accion == 'P') {
+            System.out.println("sql\n: "+"SELECT ant_valor, fp_secuencial, sec_codigo "
+                    + "FROM cartera.car_pagos_anticipos "
+                    + "WHERE ant_empresa = " + empresa + " AND "
+                    + "ant_periodo = " + periodo + " AND "
+                    + "ant_tipo = " + tipo + " AND "
+                    + "ant_numero = " + numero + ";");
             return ConversionesCar.convertirCarPagosCobrosAnticipo_CarPagosCobrosAnticipoTO(em.createNativeQuery("SELECT ant_valor, fp_secuencial, sec_codigo "
                     + "FROM cartera.car_pagos_anticipos "
                     + "WHERE ant_empresa = " + empresa + " AND "
@@ -841,6 +849,12 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                     + "ant_tipo = " + tipo + " AND "
                     + "ant_numero = " + numero + ";").getResultList());
         } else {
+            System.out.println("SQL: \n"+ "SELECT ant_valor, fp_secuencial, sec_codigo "
+                    + "FROM cartera.car_cobros_anticipos "
+                    + "WHERE ant_empresa = " + empresa + " AND "
+                    + "ant_periodo = " + periodo + " AND "
+                    + "ant_tipo = " + tipo + " AND "
+                    + "ant_numero = " + numero + ";");
             return ConversionesCar.convertirCarPagosCobrosAnticipo_CarPagosCobrosAnticipoTO(em.createNativeQuery("SELECT ant_valor, fp_secuencial, sec_codigo "
                     + "FROM cartera.car_cobros_anticipos "
                     + "WHERE ant_empresa = " + empresa + " AND "
@@ -923,6 +937,13 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
         desde = desde == null ? desde : "'" + desde + "'";
         hasta = hasta == null ? hasta : "'" + hasta + "'";
         cliente = cliente == null ? cliente : "'" + cliente + "'";
+        String sql = "SELECT * FROM cartera.fun_cuentas_por_cobrar_detallado("
+                + "'" + empresa + "', "
+                + sector + ", "
+                + cliente + ", " 
+                + desde + ", "
+                + hasta + ", "
+                + ichfa + ")";        
         return ConversionesCar.convertirCarListaCuentasPorPagarDetallado_CarCuentasPorPagarDetalladoTO(em.createNativeQuery(
                 "SELECT * FROM cartera.fun_cuentas_por_cobrar_detallado("
                 + "'" + empresa + "', "

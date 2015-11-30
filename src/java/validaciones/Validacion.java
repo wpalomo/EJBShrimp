@@ -246,6 +246,25 @@ public class Validacion {
         return formato.format(fecha);
     }
 
+    public static String fechaDiaMesAnio(String fecha, String mascara){
+//        String fechaDevolver = "";
+        Date fecha2 = new Date();
+        java.text.SimpleDateFormat formato = new java.text.SimpleDateFormat(mascara);
+        
+        return formato.format(fecha2);
+//        java.text.SimpleDateFormat formatoFecha2 = new java.text.SimpleDateFormat(mascara2);
+//        try {            
+//            SimpleDateFormat formato = new SimpleDateFormat(mascara, locale);
+//            return formato.format(fecha);
+            
+//            formatoFecha1.parse(fecha);
+            //fechaDevolver = formatoFecha1.parse(fecha);
+//            fechaDevolver = formatoFecha2.format(formatoFecha1.getCalendar().getTime());
+//        } catch (java.text.ParseException ex) {
+//        }
+//        return fechaDevolver;
+    }
+    
     public static String fecha(String fecha, String mascara1, String mascara2) {
         String fechaDevolver = "";
         java.text.SimpleDateFormat formatoFecha1 = new java.text.SimpleDateFormat(mascara1);

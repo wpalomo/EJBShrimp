@@ -216,8 +216,9 @@ public class OperacionesCarFacade implements OperacionesCarFacadeRemote {
     public List<CarListaPagosCobrosDetalleFormaTO> getCobrosConsultaDetalleFormaTO(
             String empresa,
             String periodo,
-            String numero) throws Exception {
-        return operacionesCarBusinessLocal.getCobrosConsultaDetalleFormaTO(empresa, periodo, numero);
+            String numero,
+            boolean hayPostfechados) throws Exception {
+        return operacionesCarBusinessLocal.getCobrosConsultaDetalleFormaTO(empresa, periodo, numero, hayPostfechados);
     }
 
     @Override
