@@ -20,6 +20,7 @@ import sistema.TO.SisUsuarioEmpresaTO;
  *
  * @author jack
  */
+
 @Stateless
 public class OperacionesInventarioFacade1 implements OperacionesInventarioFacadeRemote1 {
 

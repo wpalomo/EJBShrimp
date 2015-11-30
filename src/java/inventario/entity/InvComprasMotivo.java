@@ -47,10 +47,8 @@ public class InvComprasMotivo implements Serializable {
     @Basic(optional = false)
     @Column(name = "cm_inactivo")
     private boolean cmInactivo;
-    @Basic(optional = false)
     @Column(name = "tip_empresa")
     private String tipEmpresa;
-    @Basic(optional = false)
     @Column(name = "tip_codigo")
     private String tipCodigo;
     @Basic(optional = false)
@@ -71,15 +69,13 @@ public class InvComprasMotivo implements Serializable {
         this.invComprasMotivoPK = invComprasMotivoPK;
     }
 
-    public InvComprasMotivo(InvComprasMotivoPK invComprasMotivoPK, String cmDetalle, String cmFormaContabilizar, String cmFormaImprimir, boolean cmAjustesDeInventario, boolean cmInactivo, String tipEmpresa, String tipCodigo, String usrEmpresa, String usrCodigo, Date usrFechaInserta) {
+    public InvComprasMotivo(InvComprasMotivoPK invComprasMotivoPK, String cmDetalle, String cmFormaContabilizar, String cmFormaImprimir, boolean cmAjustesDeInventario, boolean cmInactivo, String usrEmpresa, String usrCodigo, Date usrFechaInserta) {
         this.invComprasMotivoPK = invComprasMotivoPK;
         this.cmDetalle = cmDetalle;
         this.cmFormaContabilizar = cmFormaContabilizar;
         this.cmFormaImprimir = cmFormaImprimir;
         this.cmAjustesDeInventario = cmAjustesDeInventario;
         this.cmInactivo = cmInactivo;
-        this.tipEmpresa = tipEmpresa;
-        this.tipCodigo = tipCodigo;
         this.usrEmpresa = usrEmpresa;
         this.usrCodigo = usrCodigo;
         this.usrFechaInserta = usrFechaInserta;

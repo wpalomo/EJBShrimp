@@ -31,6 +31,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author misael
  */
+
 @Stateless
 public class OperacionesCarDAO implements OperacionesCarDAOLocal {
 

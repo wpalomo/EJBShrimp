@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author fconza
  */
 @Entity
-@Table(name = "anx_compra_reembolso",  schema = "anexo")
+@Table(name = "anx_compra_reembolso", schema = "anexo")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "AnxCompraReembolso.findAll", query = "SELECT a FROM AnxCompraReembolso a"),
@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "AnxCompraReembolso.findByProvEmpresa", query = "SELECT a FROM AnxCompraReembolso a WHERE a.provEmpresa = :provEmpresa"),
     @NamedQuery(name = "AnxCompraReembolso.findByProvCodigo", query = "SELECT a FROM AnxCompraReembolso a WHERE a.provCodigo = :provCodigo")})
 public class AnxCompraReembolso implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
@@ -94,7 +95,7 @@ public class AnxCompraReembolso implements Serializable {
         this.reembSecuencial = reembSecuencial;
     }
 
-    public AnxCompraReembolso(Integer reembSecuencial, String reembDocumentoEmpresa, String reembDocumentoProveedor, String reembDocumentoTipo, String reembDocumentoNumero, Date reembFechaemision, String reembAutorizacion, BigDecimal reembBaseimponible, BigDecimal reembBaseimpgrav, BigDecimal reembBasenograiva, BigDecimal reembMontoice, BigDecimal reembMontoiva) {
+    public AnxCompraReembolso(Integer reembSecuencial, String reembDocumentoEmpresa, String reembDocumentoProveedor, String reembDocumentoTipo, String reembDocumentoNumero, Date reembFechaemision, String reembAutorizacion, BigDecimal reembBaseimponible, BigDecimal reembBaseimpgrav, BigDecimal reembBasenograiva, BigDecimal reembMontoice, BigDecimal reembMontoiva, String provEmpresa, String provCodigo) {
         this.reembSecuencial = reembSecuencial;
         this.reembDocumentoEmpresa = reembDocumentoEmpresa;
         this.reembDocumentoProveedor = reembDocumentoProveedor;
@@ -107,6 +108,8 @@ public class AnxCompraReembolso implements Serializable {
         this.reembBasenograiva = reembBasenograiva;
         this.reembMontoice = reembMontoice;
         this.reembMontoiva = reembMontoiva;
+        this.provEmpresa = provEmpresa;
+        this.provCodigo = provCodigo;
     }
 
     public Integer getReembSecuencial() {
@@ -253,5 +256,4 @@ public class AnxCompraReembolso implements Serializable {
     public String toString() {
         return "anexos.entity.AnxCompraReembolso[ reembSecuencial=" + reembSecuencial + " ]";
     }
-    
 }

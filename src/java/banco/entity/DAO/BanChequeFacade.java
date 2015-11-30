@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class BanChequeFacade extends AbstractFacade<BanCheque> implements BanChequeFacadeLocal {
+    
     @PersistenceContext(unitName = "EJBShrimpPU")
     private EntityManager em;
 

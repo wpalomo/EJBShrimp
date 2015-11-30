@@ -39,7 +39,7 @@ public interface OperacionesBancoDAOLocal {
 
     boolean isExisteChequeAimprimir(String empresa, String cuentaContable, String numeroCheque, Long detSecuencia) throws Exception;
 
-    public boolean isExisteCheque(
+    boolean isExisteCheque(
             String empresa,
             String cuentaContable,
             String numeroCheque) throws Exception;
@@ -85,5 +85,5 @@ public interface OperacionesBancoDAOLocal {
 
     String getNombreBanco(java.lang.String empresa, java.lang.String cuentaContable) throws Exception;
 
-    public Object getBanChequeSecuencial(String empresa, String cuenta) throws Exception;
+    Object getBanChequeSecuencial(String empresa, String cuenta) throws Exception;
 }

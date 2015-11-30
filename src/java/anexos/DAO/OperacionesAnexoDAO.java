@@ -336,6 +336,7 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
     public java.util.List<anexos.TO.AnxListaRetencionesFuenteIvaTO> getAnexoListaRetencionesFuenteIvaTO(String empresa, String fechaDesde, String fechaHasta) throws Exception {
         String sql = "SELECT * FROM anexo.fun_listado_retenciones_iva"
                 + "('" + empresa + "', '" + fechaDesde + "', '" + fechaHasta + "')";
+        System.out.println(""+sql);
         return anexos.helper.ConversionesAnexos.convertirListaRetencionesFuenteIva_ListaRetencionesFuenteIvaTO(
                 em.createNativeQuery(sql).getResultList());
     }

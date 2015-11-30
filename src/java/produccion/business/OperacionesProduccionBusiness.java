@@ -25,6 +25,7 @@ import validaciones.Validacion;
  *
  * @author misael
  */
+
 @Stateless
 public class OperacionesProduccionBusiness implements OperacionesProduccionBusinessLocal {
 

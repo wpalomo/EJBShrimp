@@ -17,6 +17,7 @@ import sistema.TO.SisUsuarioEmpresaTO;
  *
  * @author jack
  */
+
 @Stateless
 public class OperacionesCajaBusiness implements OperacionesCajaBusinessLocal {
 

@@ -12,56 +12,6 @@ import java.math.BigDecimal;
  * @author jack
  */
 public class InvVentasTO implements java.io.Serializable {
-    /*
-   vta_empresa character(7) NOT NULL,
-  vta_periodo character(7) NOT NULL,
-  vta_motivo character(7) NOT NULL,
-  vta_numero character(7) NOT NULL,
-  vta_numero_alterno character(7) NOT NULL,
-  vta_documento_empresa character(7),
-  vta_documento_tipo character(2),
-  vta_documento_numero character(17),
-  vta_fecha date NOT NULL,
-  vta_fecha_vencimiento date NOT NULL,
-  vta_iva_vigente numeric(5,2) NOT NULL,
-  vta_observaciones text,
-  vta_informacion_adicional text,
-  vta_pendiente boolean NOT NULL,
-  vta_revisado boolean NOT NULL,
-  vta_anulado boolean NOT NULL,
-  vta_forma_pago text,
-  * 
-  vta_base0 numeric(25,15) NOT NULL,
-  vta_base_imponible numeric(25,15) NOT NULL,
-  vta_base_no_objeto numeric(25,15) NOT NULL,
-  vta_base_exenta numeric(25,15) NOT NULL,
-  vta_descuento_base0 numeric(25,15) NOT NULL,
-  vta_descuento_base_imponible numeric(25,15) NOT NULL,
-  vta_descuento_base_no_objeto numeric(25,15) NOT NULL,
-  vta_descuento_base_exenta numeric(25,15) NOT NULL,
-  vta_subtotal_base0 numeric(25,15) NOT NULL,
-  vta_subtotal_base_imponible numeric(25,15) NOT NULL,
-  vta_subtotal_base_no_objeto numeric(25,15) NOT NULL,
-  vta_subtotal_base_exenta numeric(25,15) NOT NULL,
-  vta_montoiva numeric(13,2) NOT NULL,
-  vta_total numeric(13,2) NOT NULL,
-  vta_pagado numeric(13,2) NOT NULL,
-  cli_empresa character(7) NOT NULL,
-  cli_codigo character(13) NOT NULL,
-  bod_empresa character(7),
-  bod_codigo character(7),
-  sec_empresa character(7) NOT NULL,
-  sec_codigo character(7) NOT NULL,
-  cta_empresa character(7),
-  cta_codigo character(7),
-  con_empresa character(7),
-  con_periodo character(7),
-  con_tipo character(7),
-  con_numero character(7),
-  emp_codigo character(7) NOT NULL,
-  usr_codigo character(7) NOT NULL,
-     
-     */
     private String vtaEmpresa;
     private String vtaPeriodo;
     private String vtaMotivo;

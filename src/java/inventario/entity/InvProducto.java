@@ -157,12 +157,15 @@ public class InvProducto implements Serializable {
     @Basic(optional = false)
     @Column(name = "pro_iva")
     private String proIva;
+    @Basic(optional = false)
     @Column(name = "pro_credito_tributario")
-    private Boolean proCreditoTributario;
+    private boolean proCreditoTributario;
+    @Basic(optional = false)
     @Column(name = "pro_stock_negativo")
-    private Boolean proStockNegativo;
+    private boolean proStockNegativo;
+    @Basic(optional = false)
     @Column(name = "pro_inactivo")
-    private Boolean proInactivo;
+    private boolean proInactivo;
     @Column(name = "pro_cuenta_empresa")
     private String proCuentaEmpresa;
     @Column(name = "pro_cuenta_inventario")
@@ -239,7 +242,7 @@ public class InvProducto implements Serializable {
         this.invProductoPK = invProductoPK;
     }
 
-    public InvProducto(InvProductoPK invProductoPK, String proNombre, BigDecimal proCantidad1, BigDecimal proCantidad2, BigDecimal proCantidad3, BigDecimal proCantidad4, BigDecimal proCantidad5, BigDecimal proPrecio1, BigDecimal proPrecio2, BigDecimal proPrecio3, BigDecimal proPrecio4, BigDecimal proPrecio5, BigDecimal proDescuento1, BigDecimal proDescuento2, BigDecimal proDescuento3, BigDecimal proDescuento4, BigDecimal proDescuento5, BigDecimal proMargenUtilidad1, BigDecimal proMargenUtilidad2, BigDecimal proMargenUtilidad3, BigDecimal proMargenUtilidad4, BigDecimal proMargenUtilidad5, String proIva, String usrEmpresa, String usrCodigo, Date usrFechaInserta) {
+    public InvProducto(InvProductoPK invProductoPK, String proNombre, BigDecimal proCantidad1, BigDecimal proCantidad2, BigDecimal proCantidad3, BigDecimal proCantidad4, BigDecimal proCantidad5, BigDecimal proPrecio1, BigDecimal proPrecio2, BigDecimal proPrecio3, BigDecimal proPrecio4, BigDecimal proPrecio5, BigDecimal proDescuento1, BigDecimal proDescuento2, BigDecimal proDescuento3, BigDecimal proDescuento4, BigDecimal proDescuento5, BigDecimal proMargenUtilidad1, BigDecimal proMargenUtilidad2, BigDecimal proMargenUtilidad3, BigDecimal proMargenUtilidad4, BigDecimal proMargenUtilidad5, String proIva, boolean proCreditoTributario, boolean proStockNegativo, boolean proInactivo, String usrEmpresa, String usrCodigo, Date usrFechaInserta) {
         this.invProductoPK = invProductoPK;
         this.proNombre = proNombre;
         this.proCantidad1 = proCantidad1;
@@ -263,6 +266,9 @@ public class InvProducto implements Serializable {
         this.proMargenUtilidad4 = proMargenUtilidad4;
         this.proMargenUtilidad5 = proMargenUtilidad5;
         this.proIva = proIva;
+        this.proCreditoTributario = proCreditoTributario;
+        this.proStockNegativo = proStockNegativo;
+        this.proInactivo = proInactivo;
         this.usrEmpresa = usrEmpresa;
         this.usrCodigo = usrCodigo;
         this.usrFechaInserta = usrFechaInserta;
@@ -536,27 +542,27 @@ public class InvProducto implements Serializable {
         this.proIva = proIva;
     }
 
-    public Boolean getProCreditoTributario() {
+    public boolean getProCreditoTributario() {
         return proCreditoTributario;
     }
 
-    public void setProCreditoTributario(Boolean proCreditoTributario) {
+    public void setProCreditoTributario(boolean proCreditoTributario) {
         this.proCreditoTributario = proCreditoTributario;
     }
 
-    public Boolean getProStockNegativo() {
+    public boolean getProStockNegativo() {
         return proStockNegativo;
     }
 
-    public void setProStockNegativo(Boolean proStockNegativo) {
+    public void setProStockNegativo(boolean proStockNegativo) {
         this.proStockNegativo = proStockNegativo;
     }
 
-    public Boolean getProInactivo() {
+    public boolean getProInactivo() {
         return proInactivo;
     }
 
-    public void setProInactivo(Boolean proInactivo) {
+    public void setProInactivo(boolean proInactivo) {
         this.proInactivo = proInactivo;
     }
 

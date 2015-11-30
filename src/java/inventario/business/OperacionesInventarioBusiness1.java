@@ -2125,6 +2125,7 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                     }
                                                     if (invComprasTO.getCompDocumentoTipo().equals("41")) {
                                                         for (anexos.TO.AnxCompraReembolsoTO o : anxCompraReembolsoTO) {
+                                                            System.out.println("o.getProvCodigo() " + o.getProvCodigo());
                                                             anxCompraReembolso = anexos.helper.ConversionesAnexos.convertirAnxCompraReembolsoTO_AnxCompraReembolso(o);
                                                             anxCompraReembolsos.add(anxCompraReembolso);
                                                         }
@@ -2921,7 +2922,7 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                             sisSuceso, invProformasNumeracion);
                                     if (comprobar) {
                                         sistemaWeb.entity.SisPeriodo sisPeriodo = operacionesSistemaDAOLocal.buscarPeriodo(invProformasTO.getProfEmpresa(), invProformas.getInvProformasPK().getProfPeriodo());
-                                        inventario.entity.InvProformasMotivo invProformaMotivo = operacionesInventarioDAOLocal.getInvProformasMotivo(invProformasTO.getProfEmpresa(),  invProformas.getInvProformasPK().getProfMotivo());
+                                        inventario.entity.InvProformasMotivo invProformaMotivo = operacionesInventarioDAOLocal.getInvProformasMotivo(invProformasTO.getProfEmpresa(), invProformas.getInvProformasPK().getProfMotivo());
                                         retorno = "T<html>Se ingresó la proforma con la siguiente información:<br><br>"
                                                 + "Periodo: <font size = 5>" + sisPeriodo.getPerDetalle()
                                                 + "</font>.<br> Motivo: <font size = 5>" + invProformaMotivo.getPmDetalle()
@@ -4825,12 +4826,12 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                 if (comprobar) {
 
                                                     sistemaWeb.entity.SisPeriodo sisPeriodo = operacionesSistemaDAOLocal.buscarPeriodo(invProformasTO.getProfEmpresa(), invProformas.getInvProformasPK().getProfPeriodo());
-                                                    inventario.entity.InvProformasMotivo invProformaMotivo = operacionesInventarioDAOLocal.getInvProformasMotivo(invProformasTO.getProfEmpresa(),  invProformas.getInvProformasPK().getProfMotivo());
-                                                    retorno = "T<html>Se  " + (invProformasTO.getProfAnulado() ? "anuló" : "modificó") + "  la Proforma con la siguiente información:<br><br>" + 
-                                                            "Periodo: <font size = 5>" + sisPeriodo.getPerDetalle() + 
-                                                            "</font>.<br> Motivo: <font size = 5>" + invProformaMotivo.getPmDetalle()+ 
-                                                            "</font>.<br> Número: <font size = 5>" + invProformas.getInvProformasPK().getProfNumero() + 
-                                                            "</font>.</html>" + invProformas.getInvProformasPK().getProfNumero() + "," + sisPeriodo.getSisPeriodoPK().getPerCodigo();
+                                                    inventario.entity.InvProformasMotivo invProformaMotivo = operacionesInventarioDAOLocal.getInvProformasMotivo(invProformasTO.getProfEmpresa(), invProformas.getInvProformasPK().getProfMotivo());
+                                                    retorno = "T<html>Se  " + (invProformasTO.getProfAnulado() ? "anuló" : "modificó") + "  la Proforma con la siguiente información:<br><br>"
+                                                            + "Periodo: <font size = 5>" + sisPeriodo.getPerDetalle()
+                                                            + "</font>.<br> Motivo: <font size = 5>" + invProformaMotivo.getPmDetalle()
+                                                            + "</font>.<br> Número: <font size = 5>" + invProformas.getInvProformasPK().getProfNumero()
+                                                            + "</font>.</html>" + invProformas.getInvProformasPK().getProfNumero() + "," + sisPeriodo.getSisPeriodoPK().getPerCodigo();
                                                     mensajeTO.setFechaCreacion(invProformas.getUsrFechaInserta().toString());
                                                 } else {
                                                     retorno = "FHubo un error al modificar la Proforma...\nIntente de nuevo o contacte con el administrador";
@@ -9763,7 +9764,7 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
 
     @Override
     public JasperPrint generarReporteProformaDetalleImpresion(SisUsuarioEmpresaTO sisUsuarioEmpresaTO,
-            List<ReporteProformaDetalle> lista, String nombreReporte) throws Exception{
+            List<ReporteProformaDetalle> lista, String nombreReporte) throws Exception {
         return generarReporteInventarioLocal.generarReporteProformaDetalleImpresion(sisUsuarioEmpresaTO, lista, nombreReporte);
     }
 
