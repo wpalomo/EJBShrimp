@@ -20,32 +20,22 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
     private String medidaDetalle;
     private java.math.BigDecimal precioProducto;
     private java.math.BigDecimal parcialProducto;
+    private java.math.BigDecimal porcentajeRecargo;
     private java.math.BigDecimal porcentajeDescuento;
-    private java.math.BigDecimal valordescuento;//10
-    private java.math.BigDecimal detalleSubTotal;
-    private Boolean grabaIva;
+    private java.math.BigDecimal ivaCobrado;
+    private java.math.BigDecimal detalleTotal;
+    private Boolean gravaIva;
     private Boolean editarFila;
     private java.math.BigDecimal detCantidadCaja;
     private String detEmpaque;
     private String detPresentacionUnidad;
     private String detPresentacionCaja;
     private String detProductoTipo;
-    
 
     public InvListaDetalleProformasTO() {
     }
-    
-    
 
-  
-//    @Override
-//    public String toString(){
-//        return this.secuencial + " " +this.codigoProducto + " " + this.nombreProducto + " " + this.cantidadProducto + " " + this.medidaDetalle + " " +
-//                " " + this.precioProducto + " " + this.parcialProducto + " " + this.porcentajeDescuento + " " +
-//                this.detalleDescuento + this.detalleSubtotal + " " + this.gravaIva;
-//    }
-
-    public InvListaDetalleProformasTO(Integer secuencial, String codigoProducto, String nombreProducto, BigDecimal cantidadProducto, String medidaDetalle, BigDecimal precioProducto, BigDecimal parcialProducto, BigDecimal porcentajeDescuento, BigDecimal valordescuento, BigDecimal detalleSubTotal, boolean grabaIva, Boolean editarFila, BigDecimal detCantidadCaja, String detEmpaque, String detPresentacionUnidad, String detPresentacionCaja, String detProductoTipo) {
+    public InvListaDetalleProformasTO(Integer secuencial, String codigoProducto, String nombreProducto, BigDecimal cantidadProducto, String medidaDetalle, BigDecimal precioProducto, BigDecimal parcialProducto, BigDecimal porcentajeRecargo, BigDecimal porcentajeDescuento, BigDecimal ivaCobrado, BigDecimal detalleTotal, Boolean gravaIva, Boolean editarFila, BigDecimal detCantidadCaja, String detEmpaque, String detPresentacionUnidad, String detPresentacionCaja, String detProductoTipo) {
         this.secuencial = secuencial;
         this.codigoProducto = codigoProducto;
         this.nombreProducto = nombreProducto;
@@ -53,10 +43,11 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
         this.medidaDetalle = medidaDetalle;
         this.precioProducto = precioProducto;
         this.parcialProducto = parcialProducto;
+        this.porcentajeRecargo = porcentajeRecargo;
         this.porcentajeDescuento = porcentajeDescuento;
-        this.valordescuento = valordescuento;
-        this.detalleSubTotal = detalleSubTotal;
-        this.grabaIva = grabaIva;
+        this.ivaCobrado = ivaCobrado;
+        this.detalleTotal = detalleTotal;
+        this.gravaIva = gravaIva;
         this.editarFila = editarFila;
         this.detCantidadCaja = detCantidadCaja;
         this.detEmpaque = detEmpaque;
@@ -64,6 +55,9 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
         this.detPresentacionCaja = detPresentacionCaja;
         this.detProductoTipo = detProductoTipo;
     }
+    
+   
+   
 
     public BigDecimal getCantidadProducto() {
         return cantidadProducto;
@@ -121,12 +115,12 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
         this.detProductoTipo = detProductoTipo;
     }
 
-    public BigDecimal getDetalleSubTotal() {
-        return detalleSubTotal;
+    public BigDecimal getDetalleTotal() {
+        return detalleTotal;
     }
 
-    public void setDetalleSubTotal(BigDecimal detalleSubTotal) {
-        this.detalleSubTotal = detalleSubTotal;
+    public void setDetalleTotal(BigDecimal detalleTotal) {
+        this.detalleTotal = detalleTotal;
     }
 
     public Boolean getEditarFila() {
@@ -137,12 +131,21 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
         this.editarFila = editarFila;
     }
 
-    public Boolean getGrabaIva() {
-        return grabaIva;
+    public Boolean getGravaIva() {
+        return gravaIva;
     }
 
-    public void setGrabaIva(Boolean grabaIva) {
-        this.grabaIva = grabaIva;
+    public void setGravaIva(Boolean gravaIva) {
+        this.gravaIva = gravaIva;
+    }
+
+  
+    public BigDecimal getIvaCobrado() {
+        return ivaCobrado;
+    }
+
+    public void setIvaCobrado(BigDecimal ivaCobrado) {
+        this.ivaCobrado = ivaCobrado;
     }
 
     public String getMedidaDetalle() {
@@ -177,6 +180,14 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
         this.porcentajeDescuento = porcentajeDescuento;
     }
 
+    public BigDecimal getPorcentajeRecargo() {
+        return porcentajeRecargo;
+    }
+
+    public void setPorcentajeRecargo(BigDecimal porcentajeRecargo) {
+        this.porcentajeRecargo = porcentajeRecargo;
+    }
+
     public BigDecimal getPrecioProducto() {
         return precioProducto;
     }
@@ -192,13 +203,4 @@ public class InvListaDetalleProformasTO implements java.io.Serializable {
     public void setSecuencial(Integer secuencial) {
         this.secuencial = secuencial;
     }
-
-    public BigDecimal getValordescuento() {
-        return valordescuento;
-    }
-
-    public void setValordescuento(BigDecimal valordescuento) {
-        this.valordescuento = valordescuento;
-    }
-    
 }

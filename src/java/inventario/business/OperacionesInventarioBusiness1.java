@@ -2097,6 +2097,13 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                             if (existeConcepto) {
                                                 if (operacionesSistemaDAOLocal.buscarEmpresaParametros(invComprasTO.getEmpCodigo()).getParObligadoLlevarContabilidad()) {
                                                     anxCompra = anexos.helper.ConversionesAnexos.convertirAnxCompraTO_AnxCompra(anxCompraTO);
+                                                    if (!invComprasTO.getCompDocumentoTipo().equals("04") && !invComprasTO.getCompDocumentoTipo().equals("05")) {
+                                                        anxCompra.setCompModificadoDocumentoEmpresa(null);
+                                                        anxCompra.setCompModificadoDocumentoTipo(null);
+                                                        anxCompra.setCompModificadoDocumentoNumero(null);
+                                                        anxCompra.setCompModificadoAutorizacion(null);
+                                                    }
+
                                                     ///
                                                     for (int i = 0; i < anxCompraDetalleTO.size(); i++) {
                                                         anexos.entity.AnxConcepto anxConcepto = operacionesAnexoDAOLocal.getAnexoConcepto(anxCompraDetalleTO.get(i).getDetConcepto());
@@ -3284,6 +3291,12 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                         if (invComprasTO.getCompDocumentoTipo().equals("04")) {
                                                             if (anxCompraTO != null) {
                                                                 anxCompra = anexos.helper.ConversionesAnexos.convertirAnxCompraTO_AnxCompra(anxCompraTO);
+                                                                if (!invComprasTO.getCompDocumentoTipo().equals("04") && !invComprasTO.getCompDocumentoTipo().equals("05")) {
+                                                                    anxCompra.setCompModificadoDocumentoEmpresa(null);
+                                                                    anxCompra.setCompModificadoDocumentoTipo(null);
+                                                                    anxCompra.setCompModificadoDocumentoNumero(null);
+                                                                    anxCompra.setCompModificadoAutorizacion(null);
+                                                                }
                                                                 for (int i = 0; i < anxCompraFormaPagoTO.size(); i++) {
                                                                     anexos.entity.AnxFormaPago anxFormaPago = operacionesAnexoDAOLocal.getAnexoFormaPago(anxCompraFormaPagoTO.get(i).getFpCodigo());
                                                                     if (anxFormaPago != null) {
@@ -3968,9 +3981,6 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                         inventario.entity.InvCliente invCliente = operacionesInventarioDAOLocal.buscarInvCliente(invVentasTO.getVtaEmpresa(), invVentasTO.getCliCodigo());
 
                         if (invCliente != null) {
-                            /**
-                             *
-                             */
                             String detalleError = "";
                             if (desmayorizar && listaInvVentasDetalleTO == null) {
                                 List<inventario.TO.InvListaDetalleVentasTO> invListaDetalleTO = operacionesInventarioDAOLocal.getListaInvVentasDetalleTO(invVentasTO.getVtaEmpresa(), invVentasTO.getVtaPeriodo(), invVentasTO.getVtaMotivo(), invVentasTO.getVtaNumero());
@@ -4188,6 +4198,8 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                         ////// CREANDO NUMERACION DE VENTA
                                                         inventario.entity.InvVentasNumeracion invVentasNumeracion = new inventario.entity.InvVentasNumeracion(new inventario.entity.InvVentasNumeracionPK(invVentasTO.getVtaEmpresa(), invVentasTO.getVtaPeriodo(), invVentasTO.getVtaMotivo()));
                                                         ////// CREANDO VENTAS
+
+
                                                         inventario.entity.InvVentas invVentas = inventario.helper.ConversionesInventario.convertirInvVentasTO_InvVentas(invVentasTO);
                                                         invVentas.setInvCliente(operacionesInventarioDAOLocal.buscarInvCliente(invVentasTO.getCliEmpresa(), invVentasTO.getCliCodigo()));
 
@@ -4211,6 +4223,7 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
 
                                                                 if (invBodega != null) {
                                                                     invVentasDetalle.setInvBodega(invBodega);
+                                                                    System.out.println("invVentasDetalle.getInvBodega().getBodNombre()  " + invVentasDetalle.getInvBodega().getBodNombre());
                                                                     listInvVentasDetalle.add(invVentasDetalle);
                                                                 } else {
                                                                     estadoDetalle = 2;
@@ -4395,13 +4408,11 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
 
                                                                                                 listaInvProductoSaldos.add(invProductoSaldos);
                                                                                             } else {
-                                                                                                System.out.println("3");
                                                                                                 retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
                                                                                                 mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
                                                                                                         + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
                                                                                             }
                                                                                         } else {
-                                                                                            System.out.println("4");
                                                                                             retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
                                                                                             mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
                                                                                                     + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
@@ -4767,6 +4778,7 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                             for (inventario.TO.InvProformasDetalleTO invProformasDetalleTO : listaInvProformasDetalleTO) {
                                                 invProformasDetalle = new inventario.entity.InvProformasDetalle();
                                                 invProformasDetalleTO.setProfPeriodo(invProformasTO.getProfPeriodo());
+
                                                 invProformasDetalle = inventario.helper.ConversionesInventario.convertirInvProformasDetalleTO_InvProformasDetalle(invProformasDetalleTO);
 
                                                 ///// BUSCANDO EL PRODUCTO EN DETALLE

@@ -944,14 +944,13 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
         if (numeracion == 0) {
             nuevo = true;
         }
-        String tipoComprobante = conNumeracion.getConNumeracionPK().getNumTipo().length()>5?conNumeracion.getConNumeracionPK().getNumTipo().substring(0, 5):conNumeracion.getConNumeracionPK().getNumTipo();
+        //String tipoComprobante = conNumeracion.getConNumeracionPK().getNumTipo().length()>5?conNumeracion.getConNumeracionPK().getNumTipo().substring(0, 5):conNumeracion.getConNumeracionPK().getNumTipo();
         if (operacionesContabilidadDAOLocal.buscarContable(
                 conContable.getConContablePK().getConEmpresa(),
                 conContable.getConContablePK().getConPeriodo(),
                 conContable.getConContablePK().getConTipo(),
                 String.format("%07d", conNumeracion.getNumSecuencia())) == null
-                && (tipoComprobante.equals("C-COM") || 
-                tipoComprobante.equals("C-VEN"))) {
+                && (invCompras != null || invVentas != null)) {
             conContable.setConContablePK(new ConContablePK(
                     conNumeracion.getConNumeracionPK().getNumEmpresa(),
                     conNumeracion.getConNumeracionPK().getNumPeriodo(),

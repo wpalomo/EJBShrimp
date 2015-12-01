@@ -508,6 +508,8 @@ public class OperacionesInventarioDAOTransaccion implements OperacionesInventari
         em.merge(invProformas);
         for (int i = 0; i < listaInvDetalle.size(); i++) {
             listaInvDetalle.get(i).setInvProformas(invProformas);
+            System.out.println("Descuento    "+ listaInvDetalle.get(i).getDetPorcentajeDescuento());
+            System.out.println("Recargo      "+ listaInvDetalle.get(i).getDetPorcentajeRecargo());
             em.merge(listaInvDetalle.get(i));
         }
 

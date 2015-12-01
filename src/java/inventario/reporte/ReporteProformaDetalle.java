@@ -26,6 +26,10 @@ public class ReporteProformaDetalle implements Serializable{
     private java.math.BigDecimal profBaseimponible;//--
     private java.math.BigDecimal profDescuentoBase0;
     private java.math.BigDecimal profDescuentoBaseImponible;
+    
+    private java.math.BigDecimal profRecargoBase0;
+    private java.math.BigDecimal profRecargoImponible;
+    
 //    private java.math.BigDecimal profDescuentoGeneralBase0;
 //    private java.math.BigDecimal profDescuentoGeneralBaseImponible;
 //    private java.math.BigDecimal profDescuentoIva;
@@ -50,9 +54,9 @@ public class ReporteProformaDetalle implements Serializable{
     private String detMedida;//
     private java.math.BigDecimal detPrecio;//
     private java.math.BigDecimal detParcial;//
-    private java.math.BigDecimal detPorcentaje;//--
-    private java.math.BigDecimal detDescuento;//
-    private java.math.BigDecimal detSubtotal;//--
+    private java.math.BigDecimal detPorcentajeRecargo;//--
+    private java.math.BigDecimal detPorcentajeDescuento;//
+    private java.math.BigDecimal detTotal;//--
     private Boolean detIva;
     private java.math.BigDecimal detCantidadCaja;
     private String detEmpaque;
@@ -63,7 +67,7 @@ public class ReporteProformaDetalle implements Serializable{
     public ReporteProformaDetalle() {
     }
 
-    public ReporteProformaDetalle(String empCodigo, String perCodigo, String motCodigo, String profNumero, String profFecha, BigDecimal profIvaVigente, String profObservaciones, Boolean profPendiente, BigDecimal profBase0, BigDecimal profBaseimponible, BigDecimal profDescuentoBase0, BigDecimal profDescuentoBaseImponible, BigDecimal profSubtotalBase0, BigDecimal profSubtotalBaseImponible, BigDecimal profMontoiva, BigDecimal profTotal, String cliCodigo, String cliNombre, String cliDireccion, String cliTelefono, String cliRuc, String cliCiudad, String usrInsertaCompra, String usrFechaInsertaCompra, String bodCodigo, Boolean detPendiente, String proCodigoPrincipal, String proNombre, BigDecimal detCantidad, String detMedida, BigDecimal detPrecio, BigDecimal detParcial, BigDecimal detPorcentaje, BigDecimal detDescuento, BigDecimal detSubtotal, Boolean detIva, BigDecimal detCantidadCaja, String detEmpaque, String detPresentacionUnidad, String detPresentacionCaja, String pisNumero) {
+    public ReporteProformaDetalle(String empCodigo, String perCodigo, String motCodigo, String profNumero, String profFecha, BigDecimal profIvaVigente, String profObservaciones, Boolean profPendiente, BigDecimal profBase0, BigDecimal profBaseimponible, BigDecimal profDescuentoBase0, BigDecimal profDescuentoBaseImponible, BigDecimal profRecargoBase0, BigDecimal profRecargoImponible, BigDecimal profSubtotalBase0, BigDecimal profSubtotalBaseImponible, BigDecimal profMontoiva, BigDecimal profTotal, String cliCodigo, String cliNombre, String cliDireccion, String cliTelefono, String cliRuc, String cliCiudad, String usrInsertaCompra, String usrFechaInsertaCompra, String bodCodigo, Boolean detPendiente, String proCodigoPrincipal, String proNombre, BigDecimal detCantidad, String detMedida, BigDecimal detPrecio, BigDecimal detParcial, BigDecimal detPorcentajeRecargo, BigDecimal detPorcentajeDescuento, BigDecimal detTotal, Boolean detIva, BigDecimal detCantidadCaja, String detEmpaque, String detPresentacionUnidad, String detPresentacionCaja, String pisNumero) {
         this.empCodigo = empCodigo;
         this.perCodigo = perCodigo;
         this.motCodigo = motCodigo;
@@ -76,6 +80,8 @@ public class ReporteProformaDetalle implements Serializable{
         this.profBaseimponible = profBaseimponible;
         this.profDescuentoBase0 = profDescuentoBase0;
         this.profDescuentoBaseImponible = profDescuentoBaseImponible;
+        this.profRecargoBase0 = profRecargoBase0;
+        this.profRecargoImponible = profRecargoImponible;
         this.profSubtotalBase0 = profSubtotalBase0;
         this.profSubtotalBaseImponible = profSubtotalBaseImponible;
         this.profMontoiva = profMontoiva;
@@ -96,9 +102,9 @@ public class ReporteProformaDetalle implements Serializable{
         this.detMedida = detMedida;
         this.detPrecio = detPrecio;
         this.detParcial = detParcial;
-        this.detPorcentaje = detPorcentaje;
-        this.detDescuento = detDescuento;
-        this.detSubtotal = detSubtotal;
+        this.detPorcentajeRecargo = detPorcentajeRecargo;
+        this.detPorcentajeDescuento = detPorcentajeDescuento;
+        this.detTotal = detTotal;
         this.detIva = detIva;
         this.detCantidadCaja = detCantidadCaja;
         this.detEmpaque = detEmpaque;
@@ -106,6 +112,48 @@ public class ReporteProformaDetalle implements Serializable{
         this.detPresentacionCaja = detPresentacionCaja;
         this.pisNumero = pisNumero;
     }
+
+    public BigDecimal getDetPorcentajeDescuento() {
+        return detPorcentajeDescuento;
+    }
+
+    public void setDetPorcentajeDescuento(BigDecimal detPorcentajeDescuento) {
+        this.detPorcentajeDescuento = detPorcentajeDescuento;
+    }
+
+    public BigDecimal getDetPorcentajeRecargo() {
+        return detPorcentajeRecargo;
+    }
+
+    public void setDetPorcentajeRecargo(BigDecimal detPorcentajeRecargo) {
+        this.detPorcentajeRecargo = detPorcentajeRecargo;
+    }
+
+    
+    public BigDecimal getDetTotal() {
+        return detTotal;
+    }
+
+    public void setDetTotal(BigDecimal detTotal) {
+        this.detTotal = detTotal;
+    }
+
+    public BigDecimal getProfRecargoBase0() {
+        return profRecargoBase0;
+    }
+
+    public void setProfRecargoBase0(BigDecimal profRecargoBase0) {
+        this.profRecargoBase0 = profRecargoBase0;
+    }
+
+    public BigDecimal getProfRecargoImponible() {
+        return profRecargoImponible;
+    }
+
+    public void setProfRecargoImponible(BigDecimal profRecargoImponible) {
+        this.profRecargoImponible = profRecargoImponible;
+    }
+
 
     public String getBodCodigo() {
         return bodCodigo;
@@ -179,13 +227,7 @@ public class ReporteProformaDetalle implements Serializable{
         this.detCantidadCaja = detCantidadCaja;
     }
 
-    public BigDecimal getDetDescuento() {
-        return detDescuento;
-    }
-
-    public void setDetDescuento(BigDecimal detDescuento) {
-        this.detDescuento = detDescuento;
-    }
+    
 
     public String getDetEmpaque() {
         return detEmpaque;
@@ -227,13 +269,7 @@ public class ReporteProformaDetalle implements Serializable{
         this.detPendiente = detPendiente;
     }
 
-    public BigDecimal getDetPorcentaje() {
-        return detPorcentaje;
-    }
-
-    public void setDetPorcentaje(BigDecimal detPorcentaje) {
-        this.detPorcentaje = detPorcentaje;
-    }
+    
 
     public BigDecimal getDetPrecio() {
         return detPrecio;
@@ -259,13 +295,6 @@ public class ReporteProformaDetalle implements Serializable{
         this.detPresentacionUnidad = detPresentacionUnidad;
     }
 
-    public BigDecimal getDetSubtotal() {
-        return detSubtotal;
-    }
-
-    public void setDetSubtotal(BigDecimal detSubtotal) {
-        this.detSubtotal = detSubtotal;
-    }
 
     public String getEmpCodigo() {
         return empCodigo;

@@ -23,9 +23,10 @@ public class InvProformasTO implements java.io.Serializable {
     private Boolean profAnulado;
     private java.math.BigDecimal profBase0;
     private java.math.BigDecimal profBaseImponible;
+    private java.math.BigDecimal profRecargoBase0;
+    private java.math.BigDecimal profRecargoBaseImponible;
     private java.math.BigDecimal profDescuentoBase0;
     private java.math.BigDecimal profDescuentoBaseImponible;
-    
     private java.math.BigDecimal profSubtotalBase0;
     private java.math.BigDecimal profSubtotalBaseImponible;
     private java.math.BigDecimal profMontoIva;
@@ -39,7 +40,7 @@ public class InvProformasTO implements java.io.Serializable {
     public InvProformasTO() {
     }
 
-    public InvProformasTO(String profEmpresa, String profPeriodo, String profMotivo, String profNumero, String profFecha, BigDecimal profIvaVigente, String profObservaciones, Boolean profPendiente, Boolean profAnulado, BigDecimal profBase0, BigDecimal profBaseImponible, BigDecimal profDescuentoBase0, BigDecimal profDescuentoBaseImponible, BigDecimal profSubtotalBase0, BigDecimal profSubtotalBaseImponible, BigDecimal profMontoIva, BigDecimal profTotal, String cliEmpresa, String cliCodigo, String usrEmpresa, String usrCodigo, String usrFechaInserta) {
+    public InvProformasTO(String profEmpresa, String profPeriodo, String profMotivo, String profNumero, String profFecha, BigDecimal profIvaVigente, String profObservaciones, Boolean profPendiente, Boolean profAnulado, BigDecimal profBase0, BigDecimal profBaseImponible, BigDecimal profRecargoBase0, BigDecimal profRecargoBaseImponible, BigDecimal profDescuentoBase0, BigDecimal profDescuentoBaseImponible, BigDecimal profSubtotalBase0, BigDecimal profSubtotalBaseImponible, BigDecimal profMontoIva, BigDecimal profTotal, String cliEmpresa, String cliCodigo, String usrEmpresa, String usrCodigo, String usrFechaInserta) {
         this.profEmpresa = profEmpresa;
         this.profPeriodo = profPeriodo;
         this.profMotivo = profMotivo;
@@ -51,6 +52,8 @@ public class InvProformasTO implements java.io.Serializable {
         this.profAnulado = profAnulado;
         this.profBase0 = profBase0;
         this.profBaseImponible = profBaseImponible;
+        this.profRecargoBase0 = profRecargoBase0;
+        this.profRecargoBaseImponible = profRecargoBaseImponible;
         this.profDescuentoBase0 = profDescuentoBase0;
         this.profDescuentoBaseImponible = profDescuentoBaseImponible;
         this.profSubtotalBase0 = profSubtotalBase0;
@@ -62,6 +65,23 @@ public class InvProformasTO implements java.io.Serializable {
         this.usrEmpresa = usrEmpresa;
         this.usrCodigo = usrCodigo;
         this.usrFechaInserta = usrFechaInserta;
+    }
+
+    
+    public BigDecimal getProfRecargoBase0() {
+        return profRecargoBase0;
+    }
+
+    public void setProfRecargoBase0(BigDecimal profRecargoBase0) {
+        this.profRecargoBase0 = profRecargoBase0;
+    }
+
+    public BigDecimal getProfRecargoBaseImponible() {
+        return profRecargoBaseImponible;
+    }
+
+    public void setProfRecargoBaseImponible(BigDecimal profRecargoBaseImponible) {
+        this.profRecargoBaseImponible = profRecargoBaseImponible;
     }
 
     public String getCliCodigo() {

@@ -1011,15 +1011,29 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
     }
 
     public inventario.TO.InvProformaCabeceraTO getInvProformaCabeceraTO(String empresa, String periodo, String motivo, String numeroProforma) throws Exception {
-        return inventario.helper.ConversionesInventario.convertirInvProformaCabecera_InvProformaCabeceraTO(em.createNativeQuery("SELECT SUBSTRING(prof_fecha::TEXT, 1, 10), prof_iva_vigente, "
-                + "prof_observaciones, prof_pendiente, prof_anulado, prof_base0, prof_baseimponible, "
-                + "prof_descuento_base0, prof_descuento_baseimponible, prof_descuento_general_base0, "
-                + "prof_descuento_general_baseimponible, prof_descuento_iva, prof_subtotal_base0, "
-                + "prof_subtotal_baseimponible, prof_montoiva, prof_total, cli_empresa, cli_codigo, "
-                + "usr_empresa, usr_codigo, usr_fecha_inserta FROM inventario.inv_proformas "
+        String sql = "SELECT SUBSTRING(prof_fecha::TEXT, 1, 10), "
+                + "prof_iva_vigente, "
+                + "prof_observaciones, "
+                + "prof_pendiente, "
+                + "prof_anulado, "
+                + "prof_base0, "
+                + "prof_baseimponible, "
+                + "prof_descuento_base0, "
+                + "prof_descuento_baseimponible, "
+                + "prof_subtotal_base0, "
+                + "prof_subtotal_baseimponible, "
+                + "prof_montoiva, "
+                + "prof_total, "
+                + "cli_empresa, "
+                + "cli_codigo, "
+                + "usr_empresa, "
+                + "usr_codigo, "
+                + "usr_fecha_inserta FROM inventario.inv_proformas "
                 + "WHERE (inventario.inv_proformas.prof_empresa = '" + empresa + "') AND "
                 + "inventario.inv_proformas.prof_periodo = ('" + periodo + "') AND inventario.inv_proformas.prof_motivo = ('" + motivo + "') "
-                + "AND inventario.inv_proformas.prof_numero = ('" + numeroProforma + "')").getResultList());
+                + "AND inventario.inv_proformas.prof_numero = ('" + numeroProforma + "')";
+        System.out.println(""+sql);
+        return inventario.helper.ConversionesInventario.convertirInvProformaCabecera_InvProformaCabeceraTO(em.createNativeQuery(sql).getResultList());
 
     }
 
@@ -1067,8 +1081,10 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
 //                + "AND vta_motivo = ('" + motivo + "') AND vta_numero = ('" + numeroVentas + "') ORDER BY det_orden").getResultList());
     }
 
-    public java.util.List<inventario.TO.InvListaDetalleProformasTO> getListaInvProformasDetalleTO(String empresa, String periodo, String motivo, String numeroProformas) throws Exception {        
+    public java.util.List<inventario.TO.InvListaDetalleProformasTO> getListaInvProformasDetalleTO(String empresa, String periodo, String motivo, String numeroProformas) throws Exception { 
+        
         String sql = "SELECT * FROM inventario.fun_listado_proformas_detalle('" + empresa + "', "+ "'" + periodo + "', '" + motivo + "', '" + numeroProformas + "')";
+        System.out.println("sql :   "+sql);
         return inventario.helper.ConversionesInventario.convertirInvListaProformasDetalle_InvListaProformasDetalleTO(em.createNativeQuery(sql).getResultList());
 //        return inventario.helper.ConversionesInventario.convertirInvListaVentasDetalle_InvListaVentasDetalleTO(em.
 //                createNativeQuery("SELECT inv_ventas_detalle.det_secuencial, inv_ventas_detalle.bod_codigo, "

@@ -706,7 +706,9 @@ public class ConversionesInventario {
         invVentas.setVtaPagado(invVentasTO.getVtaPagado());
         invVentas.setInvCliente(new inventario.entity.InvCliente(invVentasTO.getCliEmpresa(), invVentasTO.getCliCodigo()));
 //        invVentas.setInvBodega(new inventario.entity.InvBodega(invVentasTO.getBodEmpresa(), invVentasTO.getBodCodigo()));
-        invVentas.setInvBodega(new  inventario.entity.InvBodega(invVentasTO.getBodEmpresa(), invVentasTO.getBodCodigo()));
+        System.out.println("invVentasTO.getBodCodigo() "+invVentasTO.getBodCodigo());
+        System.out.println("invVentasTO.getBodEmpresa() "+invVentasTO.getBodEmpresa());
+        //invVentas.setInvBodega(new  inventario.entity.InvBodega(invVentasTO.getBodEmpresa(), invVentasTO.getBodCodigo()));
 //        invVentas.setBodCodigo(invVentasTO.getBodCodigo());
 //        invVentas.setBodEmpresa(invVentasTO.getBodEmpresa());
 
@@ -1046,7 +1048,9 @@ public class ConversionesInventario {
 
 //        invVentasDetalle.setDetValorPromedio(new java.math.BigDecimal("0.00"));
 //        invVentasDetalle.setDetValorUltimaCompra(new java.math.BigDecimal("0.00"));
-
+        System.out.println("invProformasDetalleTO.getDetPorcentajeRecargo()  "+invProformasDetalleTO.getDetPorcentajeRecargo());
+        System.out.println("invProformasDetalleTO.getDetPorcentajeDescuento()  "+invProformasDetalleTO.getDetPorcentajeDescuento());
+        invProformasDetalle.setDetPorcentajeRecargo(invProformasDetalleTO.getDetPorcentajeRecargo());
         invProformasDetalle.setDetPorcentajeDescuento(invProformasDetalleTO.getDetPorcentajeDescuento());
 //        invVentasDetalle.setBodEmpresa(invVentasDetalleTO.getBodEmpresa());
         invProformasDetalle.setProNombre(invProformasDetalleTO.getProNombre());
@@ -3097,159 +3101,137 @@ public class ConversionesInventario {
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
-            String dato1;
+            String prof_fecha;
             try {//fecha
-                dato1 = array[0].toString();
+                prof_fecha = array[0].toString();
             } catch (Exception e) {
-                dato1 = null;
+                prof_fecha = null;
             }
-            java.math.BigDecimal dato2;
+            java.math.BigDecimal prof_iva_vigente;
             try {//iva vigente
-                dato2 = new java.math.BigDecimal(array[1].toString());
+                prof_iva_vigente = new java.math.BigDecimal(array[1].toString());
             } catch (Exception e) {
-                dato2 = null;
+                prof_iva_vigente = null;
             }
-            String dato3;
+            String prof_observaciones;
             try {//observaciones
-                dato3 = array[2].toString();
+                prof_observaciones = array[2].toString();
             } catch (Exception e) {
-                dato3 = null;
+                prof_observaciones = null;
             }
-            Boolean dato4;
+            Boolean prof_pendiente;
             try {//pendiente
-                dato4 = Boolean.parseBoolean(array[3].toString());;
+                prof_pendiente = Boolean.parseBoolean(array[3].toString());;
             } catch (Exception e) {
-                dato4 = null;
+                prof_pendiente = null;
             }
-            Boolean dato5;
+            Boolean prof_anulado;
             try {//anulado
-                dato5 = Boolean.parseBoolean(array[4].toString());;
+                prof_anulado = Boolean.parseBoolean(array[4].toString());;
             } catch (Exception e) {
-                dato5 = null;
+                prof_anulado = null;
             }
-            java.math.BigDecimal dato6;
+            java.math.BigDecimal prof_base0;
             try {//base0
-                dato6 = new java.math.BigDecimal(array[5].toString());
+                prof_base0 = new java.math.BigDecimal(array[5].toString());
             } catch (Exception e) {
-                dato6 = java.math.BigDecimal.ZERO;
+                prof_base0 = java.math.BigDecimal.ZERO;
             }
-            java.math.BigDecimal dato7;
+            java.math.BigDecimal prof_baseimponible;
             try {//base imponible
-                dato7 = new java.math.BigDecimal(array[6].toString());
+                prof_baseimponible = new java.math.BigDecimal(array[6].toString());
             } catch (Exception e) {
-                dato7 = null;
+                prof_baseimponible = null;
             }
-            java.math.BigDecimal dato8;
+            java.math.BigDecimal prof_descuento_base0;
             try {//descuento base0
-                dato8 = new java.math.BigDecimal(array[7].toString());
+                prof_descuento_base0 = new java.math.BigDecimal(array[7].toString());
             } catch (Exception e) {
-                dato8 = null;
+                prof_descuento_base0 = null;
             }
-            java.math.BigDecimal dato9;
+            java.math.BigDecimal prof_descuento_baseimponible;
             try {//descuento base imponible
-                dato9 = new java.math.BigDecimal(array[8].toString());
+                prof_descuento_baseimponible = new java.math.BigDecimal(array[8].toString());
             } catch (Exception e) {
-                dato9 = null;
+                prof_descuento_baseimponible = null;
             }
-            java.math.BigDecimal dato10;
+            java.math.BigDecimal prof_subtotal_base0;
             try {//descuento general base 0
-                dato10 = new java.math.BigDecimal(array[9].toString());
+                prof_subtotal_base0 = new java.math.BigDecimal(array[9].toString());
             } catch (Exception e) {
-                dato10 = null;
+                prof_subtotal_base0 = null;
             }
-            java.math.BigDecimal dato11;
+            java.math.BigDecimal prof_subtotal_baseimponible;
             try {//descuento general base imponible
-                dato11 = new java.math.BigDecimal(array[10].toString());
+                prof_subtotal_baseimponible = new java.math.BigDecimal(array[10].toString());
             } catch (Exception e) {
-                dato11 = null;
+                prof_subtotal_baseimponible = null;
             }
-            java.math.BigDecimal dato12;
-            try {//descuento iva
-                dato12 = new java.math.BigDecimal(array[11].toString());
+            java.math.BigDecimal prof_montoiva;
+            try {//
+                prof_montoiva = new java.math.BigDecimal(array[11].toString());
             } catch (Exception e) {
-                dato12 = java.math.BigDecimal.ZERO;
+                prof_montoiva = java.math.BigDecimal.ZERO;
             }
-            java.math.BigDecimal dato13;
-            try {//subtotal base 0
-                dato13 = new java.math.BigDecimal(array[12].toString());
+            java.math.BigDecimal prof_total;
+            try {//
+                prof_total = new java.math.BigDecimal(array[12].toString());
             } catch (Exception e) {
-                dato13 = java.math.BigDecimal.ZERO;
+                prof_total = java.math.BigDecimal.ZERO;
             }
-            java.math.BigDecimal dato14;
-            try {//sub total base imponible
-                dato14 = new java.math.BigDecimal(array[13].toString());
-            } catch (Exception e) {
-                dato14 = java.math.BigDecimal.ZERO;
-            }
-            java.math.BigDecimal dato15;
-            try {//monto iva
-                dato15 = new java.math.BigDecimal(array[14].toString());
-            } catch (Exception e) {
-                dato15 = java.math.BigDecimal.ZERO;
-            }
-            java.math.BigDecimal dato16;
-            try {//total
-                dato16 = new java.math.BigDecimal(array[15].toString());
-            } catch (Exception e) {
-                dato16 = java.math.BigDecimal.ZERO;
-            }
-            String dato17;
+           
+            String cli_empresa;
             try {//cli empresa
-                dato17 = array[16].toString();
+                cli_empresa = array[13].toString();
             } catch (Exception e) {
-                dato17 = null;
+                cli_empresa = null;
             }
-            String dato18;
+            String cli_codigo;
             try {//cli codigo
-                dato18 = array[17].toString();
+                cli_codigo = array[14].toString();
             } catch (Exception e) {
-                dato18 = null;
+                cli_codigo = null;
             }
-            String dato19;
+            String usr_empresa;
             try {//usr  empresa
-                dato19 = array[18].toString();
+                usr_empresa = array[15].toString();
             } catch (Exception e) {
-                dato19 = null;
+                usr_empresa = null;
             }
-            String dato20;
+            String usr_codigo;
             try {//usr codigo
-                dato20 = array[19].toString();
+                usr_codigo = array[16].toString();
             } catch (Exception e) {
-                dato20 = null;
+                usr_codigo = null;
             }
-            String dato21;
+            String usr_fecha_inserta;
             try {//fecha
-                dato21 = array[20].toString();
+                usr_fecha_inserta = array[16].toString();
             } catch (Exception e) {
-                dato21 = null;
+                usr_fecha_inserta = null;
             }
             if (datos.isEmpty()) {
                 invProformaCabeceraTO = null;
             } else {
                 invProformaCabeceraTO = new inventario.TO.InvProformaCabeceraTO();
-                invProformaCabeceraTO.setProfFecha(dato1);
-                invProformaCabeceraTO.setProfIvaVigente(dato2);
-                invProformaCabeceraTO.setProfObservaciones(dato3);
-                invProformaCabeceraTO.setProfPendiente(dato4);
-                invProformaCabeceraTO.setProfAnulado(dato5);
-                invProformaCabeceraTO.setProfBase0(dato6);
-                invProformaCabeceraTO.setProfBaseimponible(dato7);
-                invProformaCabeceraTO.setProfDescuentoBase0(dato8);
-                invProformaCabeceraTO.setProfBaseimponible(dato9);
-                invProformaCabeceraTO.setProfDescuentoGeneralBase0(dato10);
-                invProformaCabeceraTO.setProfDescuentoGeneralBaseImponible(dato11);
-                invProformaCabeceraTO.setProfDescuentoIva(dato12);
-                invProformaCabeceraTO.setProfSubtotalBase0(dato13);
-                invProformaCabeceraTO.setProfSubtotalBaseImponible(dato14);
-                invProformaCabeceraTO.setProfMontoiva(dato15);
-                invProformaCabeceraTO.setProfTotal(dato16);
-                invProformaCabeceraTO.setCliEmpresa(dato17);
-                invProformaCabeceraTO.setCliCodigo(dato18);
-                invProformaCabeceraTO.setUserEmpresa(dato19);
-                invProformaCabeceraTO.setUsuarioInserto(dato20);
-                invProformaCabeceraTO.setFechaUsuarioInserto(dato21);
+                invProformaCabeceraTO.setProfFecha(prof_fecha);
+                invProformaCabeceraTO.setProfIvaVigente(prof_iva_vigente);
+                invProformaCabeceraTO.setProfObservaciones(prof_observaciones);
+                invProformaCabeceraTO.setProfPendiente(prof_pendiente);
+                invProformaCabeceraTO.setProfAnulado(prof_anulado);
+                invProformaCabeceraTO.setProfBase0(prof_base0);
+                invProformaCabeceraTO.setProfBaseimponible(prof_baseimponible);
+                invProformaCabeceraTO.setProfDescuentoBase0(prof_descuento_base0);
+                invProformaCabeceraTO.setProfSubtotalBase0(prof_subtotal_base0);
+                invProformaCabeceraTO.setProfSubtotalBaseImponible(prof_descuento_baseimponible);
+                invProformaCabeceraTO.setProfMontoiva(prof_montoiva);
+                invProformaCabeceraTO.setProfTotal(prof_total);
+                invProformaCabeceraTO.setCliEmpresa(cli_empresa);
+                invProformaCabeceraTO.setCliCodigo(cli_codigo);
+                invProformaCabeceraTO.setUserEmpresa(usr_empresa);
+                invProformaCabeceraTO.setUsuarioInserto(usr_codigo);
+                invProformaCabeceraTO.setFechaUsuarioInserto(usr_fecha_inserta);
             }
-//            new inventario.TO.InvCompraCabeceraTO(dato1, dato2, dato3, dato4, dato5, dato6, dato7, dato8, dato9, dato10, dato11, dato12, dato13, dato14, dato15, dato16, dato17, dato18);
         }
         return invProformaCabeceraTO;
     }
@@ -3259,28 +3241,7 @@ public class ConversionesInventario {
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
-            /*
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             *
-             */
+            
             Integer cd_secuencial;
             try {
                 cd_secuencial = Integer.parseInt(array[0].toString());
@@ -3597,6 +3558,7 @@ public class ConversionesInventario {
         for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
+    
             Integer lpdSecuencial;
             try {
                 lpdSecuencial = Integer.parseInt(array[0].toString());
@@ -3639,88 +3601,101 @@ public class ConversionesInventario {
             } catch (Exception e) {
                 lpdParcial = java.math.BigDecimal.ZERO;
             }
+            java.math.BigDecimal lpdRecargoPorcentaje;
+            try {
+                lpdRecargoPorcentaje = new java.math.BigDecimal(array[7].toString());
+            } catch (Exception e) {
+                lpdRecargoPorcentaje = java.math.BigDecimal.ZERO;
+            }
             java.math.BigDecimal lpdDescuentoPorcentaje;
             try {
-                lpdDescuentoPorcentaje = new java.math.BigDecimal(array[7].toString());
+                lpdDescuentoPorcentaje = new java.math.BigDecimal(array[8].toString());
             } catch (Exception e) {
                 lpdDescuentoPorcentaje = java.math.BigDecimal.ZERO;
             }
             java.math.BigDecimal lpdDescuentoValor;
             try {
-                lpdDescuentoValor = new java.math.BigDecimal(array[8].toString());
+                lpdDescuentoValor = new java.math.BigDecimal(array[9].toString());
             } catch (Exception e) {
                 lpdDescuentoValor = java.math.BigDecimal.ZERO;
             }
-            java.math.BigDecimal lpdSubtotal;
+            java.math.BigDecimal lpdIvaCobrado;
             try {
-                lpdSubtotal = new java.math.BigDecimal(array[9].toString());
+                lpdIvaCobrado = new java.math.BigDecimal(array[10].toString());
             } catch (Exception e) {
-                lpdSubtotal = java.math.BigDecimal.ZERO;
+                lpdIvaCobrado = java.math.BigDecimal.ZERO;
+            }
+            java.math.BigDecimal lpdTotal;
+            try {
+                lpdTotal = new java.math.BigDecimal(array[11].toString());
+            } catch (Exception e) {
+                lpdTotal = java.math.BigDecimal.ZERO;
             }
             Boolean lpdIva;
             try {
-                lpdIva = Boolean.parseBoolean(array[10].toString());
+                lpdIva = Boolean.parseBoolean(array[12].toString());
             } catch (Exception e) {
                 lpdIva = null;
             }
 
             Boolean lpdModificarPrecio;
             try {
-                lpdModificarPrecio = Boolean.parseBoolean(array[11].toString());
+                lpdModificarPrecio = Boolean.parseBoolean(array[13].toString());
             } catch (Exception e) {
                 lpdModificarPrecio = null;
             }
 
             java.math.BigDecimal lpdCantidadCaja;
             try {
-                lpdCantidadCaja = new java.math.BigDecimal(array[12].toString());
+                lpdCantidadCaja = new java.math.BigDecimal(array[14].toString());
             } catch (Exception e) {
                 lpdCantidadCaja = java.math.BigDecimal.ZERO;
             }
 
             String lvdEmpaque;
             try {
-                lvdEmpaque = array[13].toString();
+                lvdEmpaque = array[15].toString();
             } catch (Exception e) {
                 lvdEmpaque = null;
             }
 
             String lvdLvdPresentacionUnidad;
             try {
-                lvdLvdPresentacionUnidad = array[14].toString();
+                lvdLvdPresentacionUnidad = array[16].toString();
             } catch (Exception e) {
                 lvdLvdPresentacionUnidad = null;
             }
             String lvdPresentacionCaja;
             try {
-                lvdPresentacionCaja = array[15].toString();
+                lvdPresentacionCaja = array[17].toString();
             } catch (Exception e) {
                 lvdPresentacionCaja = null;
             }
             String lvdProductoTipo;
             try {
-                lvdProductoTipo = array[16].toString();
+                lvdProductoTipo = array[18].toString();
             } catch (Exception e) {
                 lvdProductoTipo = null;
             }
-
+            
             lista.add(new inventario.TO.InvListaDetalleProformasTO(
-                    lpdSecuencial,
-                    lpdProductoCodigo,
-                    lpdProductoNombre,
-                    lpdCantidad,
-                    lpdMedida,
-                    lpdPrecio,
-                    lpdParcial,
-                    lpdDescuentoPorcentaje,
-                    lpdDescuentoValor,
-                    lpdSubtotal,
-                    lpdIva,
-                    lpdModificarPrecio,
-                    lpdCantidadCaja,
-                    lvdEmpaque,
-                    lvdLvdPresentacionUnidad,
-                    lvdPresentacionCaja,
+                    lpdSecuencial,  
+                    lpdProductoCodigo,  
+                    lpdProductoNombre,  
+                    lpdCantidad,  
+                    lpdMedida,  
+                    lpdPrecio,  
+                    lpdParcial,  
+                    lpdRecargoPorcentaje,  
+                    lpdDescuentoPorcentaje,  
+                    lpdIvaCobrado,  
+                    lpdTotal,  
+                    lpdIva, 
+                    lpdModificarPrecio,  
+                    lpdCantidadCaja,  
+                    lvdEmpaque,  
+                    lvdLvdPresentacionUnidad,  
+                    lvdPresentacionCaja,  
                     lvdProductoTipo));
         }
         return lista;

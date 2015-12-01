@@ -16,6 +16,7 @@ public class InvProformasDetalleTO implements java.io.Serializable{
     private Integer detOrden;
     private java.math.BigDecimal detCantidad;
     private java.math.BigDecimal detPrecio;
+    private java.math.BigDecimal detPorcentajeRecargo;
     private java.math.BigDecimal detPorcentajeDescuento;
     private String proEmpresa;
     private String proCodigoPrincipal;
@@ -28,11 +29,12 @@ public class InvProformasDetalleTO implements java.io.Serializable{
     public InvProformasDetalleTO() {
     }
 
-    public InvProformasDetalleTO(Integer detSecuencia, Integer detOrden, BigDecimal detCantidad, BigDecimal detPrecio, BigDecimal detPorcentajeDescuento, String proEmpresa, String proCodigoPrincipal, String proNombre, String profEmpresa, String profPeriodo, String profMotivo, String profNumero) {
+    public InvProformasDetalleTO(Integer detSecuencia, Integer detOrden, BigDecimal detCantidad, BigDecimal detPrecio, BigDecimal detPorcentajeRecargo, BigDecimal detPorcentajeDescuento, String proEmpresa, String proCodigoPrincipal, String proNombre, String profEmpresa, String profPeriodo, String profMotivo, String profNumero) {
         this.detSecuencia = detSecuencia;
         this.detOrden = detOrden;
         this.detCantidad = detCantidad;
         this.detPrecio = detPrecio;
+        this.detPorcentajeRecargo = detPorcentajeRecargo;
         this.detPorcentajeDescuento = detPorcentajeDescuento;
         this.proEmpresa = proEmpresa;
         this.proCodigoPrincipal = proCodigoPrincipal;
@@ -42,6 +44,16 @@ public class InvProformasDetalleTO implements java.io.Serializable{
         this.profMotivo = profMotivo;
         this.profNumero = profNumero;
     }
+
+    public BigDecimal getDetPorcentajeRecargo() {
+        return detPorcentajeRecargo;
+    }
+
+    public void setDetPorcentajeRecargo(BigDecimal detPorcentajeRecargo) {
+        this.detPorcentajeRecargo = detPorcentajeRecargo;
+    }
+
+   
 
     public BigDecimal getDetCantidad() {
         return detCantidad;
