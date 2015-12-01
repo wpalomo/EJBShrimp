@@ -73,7 +73,7 @@ public interface OperacionesCarDAOLocal {
 
     java.util.List<cartera.TO.CarListaPagosCobrosTO> getCarListaCobrosTO(String empresa, String cliente) throws Exception;
 
-    java.util.List<cartera.TO.CarListaPagosCobrosDetalleFormaTO> getCobrosConsultaDetalleForma(java.lang.String empresa, java.lang.String periodo, java.lang.String numero) throws java.lang.Exception;
+    java.util.List<cartera.TO.CarListaPagosCobrosDetalleFormaTO> getCobrosConsultaDetalleForma(java.lang.String empresa, java.lang.String periodo, java.lang.String numero, boolean hayPostfechados) throws java.lang.Exception;
     
     java.util.List<cartera.TO.CarListaPagosCobrosDetalleAnticipoTO> getCobrosConsultaDetalleAnticipo(String empresa, String periodo, String numero) throws Exception ;
 

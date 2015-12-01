@@ -5,20 +5,7 @@
 package cartera.helper;
 
 import cartera.TO.*;
-import cartera.entity.CarCobros;
-import cartera.entity.CarCobrosAnticipos;
-import cartera.entity.CarCobrosAnticiposPK;
-import cartera.entity.CarCobrosDetalleForma;
-import cartera.entity.CarCobrosDetalleVentas;
-import cartera.entity.CarCobrosForma;
-import cartera.entity.CarCobrosPK;
-import cartera.entity.CarPagos;
-import cartera.entity.CarPagosAnticipos;
-import cartera.entity.CarPagosAnticiposPK;
-import cartera.entity.CarPagosDetalleCompras;
-import cartera.entity.CarPagosDetalleForma;
-import cartera.entity.CarPagosForma;
-import cartera.entity.CarPagosPK;
+import cartera.entity.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -102,9 +89,18 @@ public class ConversionesCar {
     public static CarCobrosDetalleForma convertirCarCobrosDetalleFormaTO_CarCobrosDetalleForma(CarCobrosDetalleFormaTO carCobrosDetalleFormaTO) throws Exception {
         CarCobrosDetalleForma carCobrosDetalleForma = new CarCobrosDetalleForma();
         carCobrosDetalleForma.setDetSecuencial(0);
+        
+        carCobrosDetalleForma.setDetBanco(carCobrosDetalleFormaTO.getDetBanco());
+        carCobrosDetalleForma.setDetCuenta(carCobrosDetalleFormaTO.getDetCuenta());
+//        invCompras.setCompFecha(validaciones.Validacion.fecha(invComprasTO.getCompFecha(), "yyyy-MM-dd"));
+        carCobrosDetalleForma.setDetFechaVencimiento(validaciones.Validacion.fecha(
+                carCobrosDetalleFormaTO.getDetFechaPst(),"yyyy-MM-dd"));
+        
         carCobrosDetalleForma.setDetValor(carCobrosDetalleFormaTO.getDetValor());
         carCobrosDetalleForma.setDetReferencia(carCobrosDetalleFormaTO.getDetReferencia());
         carCobrosDetalleForma.setDetObservaciones(carCobrosDetalleFormaTO.getDetObservaciones());
+        carCobrosDetalleForma.setBanCodigo(carCobrosDetalleFormaTO.getBanCodigo());
+        carCobrosDetalleForma.setBanEmpresa(carCobrosDetalleFormaTO.getBanEmpresa());
         carCobrosDetalleForma.setCarCobros(
                 new CarCobros(
                 new CarCobrosPK(
@@ -115,6 +111,22 @@ public class ConversionesCar {
         carCobrosDetalleForma.setFpSecuencial(new CarCobrosForma(
                 carCobrosDetalleFormaTO.getFpSecuencial()));
         return carCobrosDetalleForma;
+        
+//        CarPagosDetalleForma carPagosDetalleForma = new CarPagosDetalleForma();
+//        carPagosDetalleForma.setDetSecuencial(0);
+//        carPagosDetalleForma.setDetValor(carPagosDetalleFormaTO.getDetValor());
+//        carPagosDetalleForma.setDetReferencia(carPagosDetalleFormaTO.getDetReferencia());
+//        carPagosDetalleForma.setDetObservaciones(carPagosDetalleFormaTO.getDetObservaciones());
+//        carPagosDetalleForma.setCarPagos(
+//                new CarPagos(
+//                new CarPagosPK(
+//                carPagosDetalleFormaTO.getPagEmpresa(),
+//                carPagosDetalleFormaTO.getPagPeriodo(),
+//                carPagosDetalleFormaTO.getPagMotivo(),
+//                carPagosDetalleFormaTO.getPagNumero())));
+//        carPagosDetalleForma.setFpSecuencial(new CarPagosForma(
+//                carPagosDetalleFormaTO.getFpSecuencial()));
+//        return carPagosDetalleForma;
     }
 
     public static cartera.entity.CarCobrosDetalleAnticipos convertirCarCobrosDetalleAnticiposTO_CarCobrosDetalleAnticipos(cartera.TO.CarCobrosDetalleAnticiposTO carCobrosDetalleAnticiposTO) throws Exception {
@@ -399,6 +411,7 @@ public class ConversionesCar {
     public static List<CarComboPagosCobrosFormaTO> convertirCarComboPagosCobrosForma_CarComboPagosCobrosFormaTO(List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
+     
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray(); //Object[] array = (Object[]) obj;
             Integer dato1;
@@ -425,7 +438,13 @@ public class ConversionesCar {
             } catch (Exception e) {
                 dato4 = null;
             }
-            lista.add(new CarComboPagosCobrosFormaTO(dato1, dato2, dato3, dato4));
+            Boolean dato5;
+            try {
+                dato5 = Boolean.parseBoolean(array[2].toString());                
+            } catch (Exception e) {                
+                dato5 = null;
+            }
+            lista.add(new CarComboPagosCobrosFormaTO(dato1, dato2, dato3, dato4, dato5));
         }
         return lista;
     }
@@ -732,36 +751,61 @@ public class ConversionesCar {
         return lista;
     }
 
-    public static List<CarListaPagosCobrosDetalleFormaTO> convertirCarListaPagosCobrosDetalleForma_CarListaPagosCobrosDetalleFormaTO(List datos) {
-        List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
+    public static List<CarListaPagosCobrosDetalleFormaTO> convertirCarListaPagosCobrosDetalleForma_CarListaPagosCobrosDetalleFormaTO(List datos, boolean hayPostfechados) {
+        List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion        
+        
         for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray(); //Object[] array = (Object[]) obj;
-            String dato1;
+//            dfColumnas = {"Forma",   "Referencia",     "Valor",       "Observaciones"};
+//            // =               {"Forma",    "Bacno",          "Cuenta",         "Fecha",                   "Referencia", "Valor", "Observaciones"};
+            String dato1, dato2,  dato3,  dato4,  dato5, dato7;
+            BigDecimal valor;
+            
             try {
                 dato1 = array[0].toString();
             } catch (Exception e) {
                 dato1 = null;
             }
-            String dato2;
             try {
                 dato2 = array[1].toString();
             } catch (Exception e) {
                 dato2 = null;
-            }
-            BigDecimal dato3;
+            }            
             try {
-                dato3 = new BigDecimal(array[2].toString());
+                dato3 = array[2].toString();
             } catch (Exception e) {
-                dato3 = cero;
+                dato3 = null;
             }
-            String dato4;
+            if(!hayPostfechados){                     
+                try {
+                    valor =  new BigDecimal(array[2].toString());
+                } catch (Exception e) {
+                    valor = cero;
+                }                
+            }else{                
+                try {
+                    valor =  new BigDecimal(array[5].toString());
+                } catch (Exception e) {
+                    valor = cero;
+                }            
+            }            
             try {
                 dato4 = array[3].toString();
             } catch (Exception e) {
                 dato4 = null;
             }
-            lista.add(new CarListaPagosCobrosDetalleFormaTO(dato1, dato2, dato3, dato4));
+            try {
+                dato5 = array[4].toString();
+            } catch (Exception e) {
+                dato5 = null;
+            }
+            try {
+                dato7 = array[6].toString();
+            } catch (Exception e) {
+                dato7 = null;
+            }            
+            lista.add(new CarListaPagosCobrosDetalleFormaTO(dato1, dato2, dato3, dato4, dato5, valor, dato7));
         }
         return lista;
     }

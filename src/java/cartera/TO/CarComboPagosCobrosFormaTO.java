@@ -16,15 +16,19 @@ public class CarComboPagosCobrosFormaTO implements Serializable{
     private String fpDetalle;
     private String ctaCodigo;
     private Boolean validar;
+    private Boolean postFechados;
+    
 
     public CarComboPagosCobrosFormaTO() {
     }
 
-    public CarComboPagosCobrosFormaTO(Integer fpSecuencial, String fpDetalle, String ctaCodigo, Boolean validar) {
+    public CarComboPagosCobrosFormaTO(Integer fpSecuencial, String fpDetalle, String ctaCodigo, Boolean validar,
+            Boolean postFechados) {
         this.fpSecuencial = fpSecuencial;
         this.fpDetalle = fpDetalle;
         this.ctaCodigo = ctaCodigo;
         this.validar = validar;
+        this.postFechados = postFechados;
     }
 
     public String getCtaCodigo() {
@@ -58,6 +62,16 @@ public class CarComboPagosCobrosFormaTO implements Serializable{
     public void setValidar(Boolean validar) {
         this.validar = validar;
     }
+
+    public Boolean getPostFechados() {
+        return postFechados;
+    }
+
+    public void setPostFechados(Boolean postFechados) {
+        this.postFechados = postFechados;
+    }
+    
+    
     
     @Override
     public String toString(){

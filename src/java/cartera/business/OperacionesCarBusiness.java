@@ -763,8 +763,8 @@ public class OperacionesCarBusiness implements OperacionesCarBusinessLocal {
     }
 
     @Override
-    public List<CarListaPagosCobrosDetalleFormaTO> getCobrosConsultaDetalleFormaTO(String empresa, String periodo, String numero) throws Exception {
-        return operacionesCarDAOLocal.getCobrosConsultaDetalleForma(empresa, periodo, numero);
+    public List<CarListaPagosCobrosDetalleFormaTO> getCobrosConsultaDetalleFormaTO(String empresa, String periodo, String numero, boolean hayPostfechados) throws Exception {
+        return operacionesCarDAOLocal.getCobrosConsultaDetalleForma(empresa, periodo, numero, hayPostfechados);
     }
 
     @Override
