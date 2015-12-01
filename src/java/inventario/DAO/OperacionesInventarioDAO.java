@@ -1401,15 +1401,17 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
     public java.util.List<inventario.TO.InvKardexTO> getListaInvKardexTO(String empresa, String bodega, String producto, String desde, String hasta, String promedio) throws Exception {
         producto = producto == null ? producto : "'" + producto + "'";
         desde = desde == null ? desde : "'" + desde + "'";
-        hasta = hasta == null ? hasta : "'" + hasta + "'";        
-        return ConversionesInventario.convertirListaInvKardex_ListaInvKardexTO(
-                em.createNativeQuery("SELECT * FROM inventario.fun_kardex("
+        hasta = hasta == null ? hasta : "'" + hasta + "'";       
+        String sql = "SELECT * FROM inventario.fun_kardex("
                 + "'" + empresa + "', "
                 + "'" + bodega + "', "
                 + "" + producto + ", "
                 + "" + desde + ", "
                 + "" + hasta + ", "
-                + "CASE WHEN '" + promedio + "' = 'SERVICIOS' THEN TRUE ELSE FALSE END);").getResultList());
+                + "CASE WHEN '" + promedio + "' = 'SERVICIOS' THEN TRUE ELSE FALSE END);";
+        System.out.println(sql);
+        return ConversionesInventario.convertirListaInvKardex_ListaInvKardexTO(
+                em.createNativeQuery(sql).getResultList());
     }
 
     public inventario.TO.InvComprasRecepcionTO getInvComprasRecepcionTO(String empresa, String periodo, String motivo, String numero) throws Exception {
