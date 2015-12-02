@@ -475,7 +475,7 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
                 + "'" + fechaDesde + "', "
                 + "'" + fechaHasta + "', "
                 + "" + categoria + ", "
-                + "" + sector + ");";        
+                + "" + sector + ");";
         return ConversionesRRHH.convertirRhFunPlantillaSueldosLotePreliminar_RhFunPlantillaSueldosLotePreliminarTO(em.createNativeQuery(
                 sql).getResultList());
     }
@@ -1277,6 +1277,12 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
     @Override
     public String buscarCtaRhSalarioNeto(String empCodigo, String empId) throws Exception {
         try {
+            System.out.println("SELECT rh_categoria.cta_gasto_aporteindividual "
+                    + "FROM recursoshumanos.rh_empleado INNER JOIN recursoshumanos.rh_categoria "
+                    + "ON (rh_empleado.cat_empresa || rh_empleado.cat_nombre) = "
+                    + "(rh_categoria.cat_empresa || rh_categoria.cat_nombre) "
+                    + "WHERE (rh_empleado.emp_empresa = '" + empCodigo + "') "
+                    + "AND (rh_empleado.emp_id = '" + empId + "')");
             return (validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery("SELECT rh_categoria.cta_gasto_aporteindividual "
                     + "FROM recursoshumanos.rh_empleado INNER JOIN recursoshumanos.rh_categoria "
                     + "ON (rh_empleado.cat_empresa || rh_empleado.cat_nombre) = "
@@ -2155,17 +2161,17 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
         fechaHasta = fechaHasta == null ? fechaHasta : "'" + fechaHasta + "'";
         if (tipo.equals("PRESTAMOS")) //se convierte la consulta nativeQuery en un List para obtener la posicion 0,0
         {
-         
+
             return ConversionesRRHH.convertirRhSaldoIndividualAnticiposPrestamos_SaldoIndividualAnticiposPrestamosTO(em.createNativeQuery("SELECT * FROM recursoshumanos.fun_saldo_individual_anticipos_prestamos('" + empCodigo + "', "
                     + "" + fechaDesde + ", " + fechaHasta + ", '" + empId + "', '" + tipo + "');").getResultList());
         } else if (tipo.equals("ANTICIPOS")) //se convierte la consulta nativeQuery en un List para obtener la posicion 0,0
         {
-            
+
             return ConversionesRRHH.convertirRhSaldoIndividualAnticiposPrestamos_SaldoIndividualAnticiposPrestamosTO(em.createNativeQuery("SELECT * FROM recursoshumanos.fun_saldo_individual_anticipos_prestamos('" + empCodigo + "', "
                     + "" + fechaDesde + ", " + fechaHasta + ", '" + empId + "', '" + tipo + "');").getResultList());
         } else //se convierte la consulta nativeQuery en un List para obtener la posicion 0,0
         {
-           
+
             return ConversionesRRHH.convertirRhSaldoIndividualAnticiposPrestamos_SaldoIndividualAnticiposPrestamosTO(em.createNativeQuery("SELECT * FROM recursoshumanos.fun_saldo_individual_anticipos_prestamos('" + empCodigo + "', "
                     + "" + fechaDesde + ", " + fechaHasta + ", '" + empId + "', 'AMBOS');").getResultList());
         }
