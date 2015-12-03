@@ -732,11 +732,18 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
                 getResultList(), 0)[0].toString());
     }
 
-    public AnxCuentasContablesTO getAnxCuentasContablesTO(String empresa) throws Exception {
-        return ConversionesAnexos.convertirAnxCuentasContables_AnxCuentasContablesTO(
-                em.createNativeQuery("SELECT * "
-                + "FROM anexo.anx_cuentascontables "
-                + "WHERE (cta_empresa = '" + empresa + "');").getResultList());
+    public AnxCuentasContablesTO getAnxCuentasContablesTO(String empresa, String nombreCuenta) throws Exception {
+        if(nombreCuenta == null){
+            System.out.println("nombreCuenta es nullll");
+            return ConversionesAnexos.convertirAnxCuentasContables_AnxCuentasContablesTO(
+                    em.createNativeQuery("SELECT * "
+                    + "FROM anexo.anx_cuentascontables "
+                    + "WHERE (cta_empresa = '" + empresa + "');").getResultList());
+        }else{
+            System.out.println("nombreCuenta: "+nombreCuenta);
+            return ConversionesAnexos.convertirAnxCuentasContables_AnxCuentasContablesTO(
+                    em.createNativeQuery("SELECT * FROM anexo.fun_nombres_cuentas_parametrizacion('" + empresa + "');").getResultList());
+        }
     }
 
     public anexos.entity.AnxVenta getAnxVenta(String empresa, String periodo, String motivo, String numero) throws Exception {

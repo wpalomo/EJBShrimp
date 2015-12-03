@@ -841,8 +841,8 @@ public class OperacionesAnexoBusiness1 implements OperacionesAnexoBusinessLocal1
     }
 
     // <editor-fold defaultstate="collapsed" desc="ANEXOS CUENTAS CONTABLES">
-    public anexos.TO.AnxCuentasContablesTO getAnxCuentasContablesTO(String empresa) throws Exception {
-        return operacionesAnexoDAOLocal.getAnxCuentasContablesTO(empresa);
+    public anexos.TO.AnxCuentasContablesTO getAnxCuentasContablesTO(String empresa, String nombreCuenta) throws Exception {
+        return operacionesAnexoDAOLocal.getAnxCuentasContablesTO(empresa, nombreCuenta);
     }
 
     @Override
@@ -862,7 +862,7 @@ public class OperacionesAnexoBusiness1 implements OperacionesAnexoBusinessLocal1
                     susDetalle,
                     sisInfoTO);
             ///// CREANDO anxCuentasContables
-            AnxCuentasContablesTO auxAnxCuentasContablesTO = getAnxCuentasContablesTO(anxCuentasContablesTO.getCtaEmpresa());
+            AnxCuentasContablesTO auxAnxCuentasContablesTO = getAnxCuentasContablesTO(anxCuentasContablesTO.getCtaEmpresa(), null);
             anxCuentasContablesTO.setCtaSecuencial(auxAnxCuentasContablesTO.getCtaSecuencial());
 
             AnxCuentascontables anxCuentascontables = ConversionesAnexos.convertirAnxCuentasContablesTO_AnxCuentasContables(anxCuentasContablesTO);
