@@ -834,12 +834,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
         tipo = tipo == null ? tipo : "'" + tipo + "'";
         numero = numero == null ? numero : "'" + numero + "'";
         if (accion == 'P') {
-            System.out.println("sql\n: " + "SELECT ant_valor, fp_secuencial, sec_codigo "
-                    + "FROM cartera.car_pagos_anticipos "
-                    + "WHERE ant_empresa = " + empresa + " AND "
-                    + "ant_periodo = " + periodo + " AND "
-                    + "ant_tipo = " + tipo + " AND "
-                    + "ant_numero = " + numero + ";");
+         
             return ConversionesCar.convertirCarPagosCobrosAnticipo_CarPagosCobrosAnticipoTO(em.createNativeQuery("SELECT ant_valor, fp_secuencial, sec_codigo "
                     + "FROM cartera.car_pagos_anticipos "
                     + "WHERE ant_empresa = " + empresa + " AND "
@@ -847,12 +842,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                     + "ant_tipo = " + tipo + " AND "
                     + "ant_numero = " + numero + ";").getResultList());
         } else {
-            System.out.println("SQL: \n" + "SELECT ant_valor, fp_secuencial, sec_codigo "
-                    + "FROM cartera.car_cobros_anticipos "
-                    + "WHERE ant_empresa = " + empresa + " AND "
-                    + "ant_periodo = " + periodo + " AND "
-                    + "ant_tipo = " + tipo + " AND "
-                    + "ant_numero = " + numero + ";");
+          
             return ConversionesCar.convertirCarPagosCobrosAnticipo_CarPagosCobrosAnticipoTO(em.createNativeQuery("SELECT ant_valor, fp_secuencial, sec_codigo "
                     + "FROM cartera.car_cobros_anticipos "
                     + "WHERE ant_empresa = " + empresa + " AND "
@@ -883,8 +873,6 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + sector + ", "
                 + proveedor + ", "
                 + hasta + ")";
-        System.out.println(sql);
-
         return ConversionesCar.convertirCarListaCuentasPorPagarDetallado_CarCuentasPorPagarDetalladoTO(em.createNativeQuery(sql).getResultList());
     }
 
@@ -945,14 +933,8 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + desde + ", "
                 + hasta + ", "
                 + ichfa + ")";
-        return ConversionesCar.convertirCarListaCuentasPorPagarDetallado_CarCuentasPorPagarDetalladoTO(em.createNativeQuery(
-                "SELECT * FROM cartera.fun_cuentas_por_cobrar_detallado("
-                + "'" + empresa + "', "
-                + sector + ", "
-                + cliente + ", "
-                + desde + ", "
-                + hasta + ", "
-                + ichfa + ")").getResultList());
+        return ConversionesCar.convertirCarListaCuentasPorPagarDetallado_CarCuentasPorPagarDetalladoTO(
+                em.createNativeQuery(sql).getResultList());
     }
 
     /**

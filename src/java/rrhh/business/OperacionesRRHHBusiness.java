@@ -477,6 +477,7 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                 categoria,
                 sector);
     }
+
     @Override
     public List<RhFunPlantillaSueldosLotePreliminarTO> getFunPlantillaSueldosLotePreliminar(
             String empCodigo,
@@ -3163,17 +3164,17 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                             rhRolTO.setRolOtrosIngresos(redondeoDecimalBigDecimal((rhEmpleado.getEmpOtrosIngresos().multiply(BigDecimal.valueOf(rhRolTO.getRolDiasLaboradosReales()))).divide(BigDecimal.valueOf(rhEmpleado.getEmpDiasTrabajados()), 9, RoundingMode.HALF_UP)));
                             rhRolTO.setRolOtrosIngresosNd(redondeoDecimalBigDecimal((rhEmpleado.getEmpOtrosIngresosNd().multiply(BigDecimal.valueOf(rhRolTO.getRolDiasLaboradosReales()))).divide(BigDecimal.valueOf(rhEmpleado.getEmpDiasTrabajados()), 9, RoundingMode.HALF_UP)));
 
-                            System.out.println("bono fijo "+rhRolTO.getRolBonosFijo());
-                            System.out.println("bono fijo Nd "+rhRolTO.getRolBonosFijoNd());
-                            System.out.println("otros ingresos "+rhRolTO.getRolOtrosIngresos());
-                            System.out.println("otros ingresos Nd "+rhRolTO.getRolOtrosIngresosNd());
+                            System.out.println("bono fijo " + rhRolTO.getRolBonosFijo());
+                            System.out.println("bono fijo Nd " + rhRolTO.getRolBonosFijoNd());
+                            System.out.println("otros ingresos " + rhRolTO.getRolOtrosIngresos());
+                            System.out.println("otros ingresos Nd " + rhRolTO.getRolOtrosIngresosNd());
                             //rhRolTO.setRolBonosFijo(redondeoDecimalBigDecimal((BigDecimal.valueOf(rhRolTO.getEmpDiasLaborados()).multiply(rhRolTO.getRolBonosFijo())).divide(new BigDecimal(31), 9, RoundingMode.HALF_UP)));
                             //rhRolTO.setRolBonosFijoNd(redondeoDecimalBigDecimal((rhRolTO.getRolIngresos().multiply(rhRolTO.getRolBonosFijoNd())).divide(rhRolTO.getEmpSueldo(), 9, RoundingMode.HALF_UP)));
                             //rhRolTO.setRolOtrosIngresos(redondeoDecimalBigDecimal((rhRolTO.getRolIngresos().multiply(rhRolTO.getRolOtrosIngresos())).divide(rhRolTO.getEmpSueldo(), 9, RoundingMode.HALF_UP)));
                             //rhRolTO.setRolOtrosIngresosNd(redondeoDecimalBigDecimal((rhRolTO.getRolIngresos().multiply(rhRolTO.getRolOtrosIngresosNd())).divide(rhRolTO.getEmpSueldo(), 9, RoundingMode.HALF_UP)));
-                            
+
                             BigDecimal valorBaseImponible = rhRolTO.getRolOtrosIngresos().add(rhRolTO.getRolIngresos().add(rhRolTO.getRolBonosFijo()).add(rhRolTO.getRolBonos().add(rolIngresosExtras)));
-                            
+
                             //CUADRO PROVICIONES
                             rhRolTO.setRolFondoReserva(redondeoDecimalBigDecimal(valorBaseImponible.multiply(new BigDecimal("8.33")).divide(new BigDecimal(100), 9, RoundingMode.HALF_UP)));
                             rhRolTO.setRolXiii(redondeoDecimalBigDecimal(valorBaseImponible.divide(new BigDecimal(12), 9, RoundingMode.HALF_UP)));
@@ -3195,12 +3196,12 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                                 mensaje = "No se encuentra la cuenta contable (IESS)...";
                             }
 
-                            
+
                             //BigDecimal valorIess = redondeoDecimalBigDecimal(rhRolTO.getRolIngresos().add(rhRolTO.getRolBonosFijo()).add(rhRolSaldoEmpleadoTO.getSaldoBono().add(rolIngresosExtras)).multiply(aporteIndividual.divide(new BigDecimal(100), 9, RoundingMode.HALF_UP)));
-                            BigDecimal valorIess =           redondeoDecimalBigDecimal(valorBaseImponible.multiply(aporteIndividual.divide(new BigDecimal(100), 9, RoundingMode.HALF_UP)));
+                            BigDecimal valorIess = redondeoDecimalBigDecimal(valorBaseImponible.multiply(aporteIndividual.divide(new BigDecimal(100), 9, RoundingMode.HALF_UP)));
                             BigDecimal valorAportePatronal = redondeoDecimalBigDecimal(valorBaseImponible.multiply(rhParametrosTO.getParIessPorcentajeAportePatronal().divide(new BigDecimal(100), 9, RoundingMode.HALF_UP)));
-                            BigDecimal valorIece =           redondeoDecimalBigDecimal(valorBaseImponible.multiply(rhParametrosTO.getParIessPorcentajeIece().divide(new BigDecimal(100), 9, RoundingMode.HALF_UP)));
-                            BigDecimal valorSecap =          redondeoDecimalBigDecimal(valorBaseImponible.multiply(rhParametrosTO.getParIessPorcentajeSecap().divide(new BigDecimal(100), 9, RoundingMode.HALF_UP)));
+                            BigDecimal valorIece = redondeoDecimalBigDecimal(valorBaseImponible.multiply(rhParametrosTO.getParIessPorcentajeIece().divide(new BigDecimal(100), 9, RoundingMode.HALF_UP)));
+                            BigDecimal valorSecap = redondeoDecimalBigDecimal(valorBaseImponible.multiply(rhParametrosTO.getParIessPorcentajeSecap().divide(new BigDecimal(100), 9, RoundingMode.HALF_UP)));
 
                             Integer diasTrabajadosTotales = 0;
                             if (rhCtaIessTO != null) {
@@ -3795,7 +3796,9 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                                                 listaConDetalle.add(conDetalle);
                                                 orden++;
                                             } else {
-                                                mensaje = "FNo se encuentra la cuenta contable (Salario Neto)...";
+                                                if (valorIess.compareTo(new BigDecimal("0")) > 0) {
+                                                    mensaje = "FNo se encuentra la cuenta contable (Salario Neto)...";
+                                                }
                                             }
                                         }
                                     }
@@ -6366,9 +6369,9 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
             String fechaHasta,
             List<RhListaConsolidadoAnticiposPrestamosTO> listaConsolidadoAnticiposPrestamosTO) throws Exception {
         return generarReporteRrhhLocal.generarReporteConsolidadoAnticiposPrestamos(
-                sisUsuarioEmpresaTO, 
-                fechaDesde, 
-                fechaHasta, 
+                sisUsuarioEmpresaTO,
+                fechaDesde,
+                fechaHasta,
                 listaConsolidadoAnticiposPrestamosTO);
     }
 
