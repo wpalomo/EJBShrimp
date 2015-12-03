@@ -530,33 +530,36 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
 //                + "AND comp_documento_tipo = ('" + compDocumentoTipo + "') AND comp_documento_numero = ('" + compDocumentoNumero + "');").
 //                getResultList().get(0)).get(0).toString());
 //    }
-    public java.util.List<inventario.TO.InvListaProductosTO> getListaProductosTO(String empresa, String busqueda, String bodega, String fecha, boolean incluirInactivos, boolean limite) throws Exception {
+    public java.util.List<inventario.TO.InvListaProductosTO> getListaProductosTO(String empresa, 
+            String busqueda, String bodega,  String categoria, String fecha, boolean incluirInactivos, boolean limite) throws Exception {
         String porcionConsulta = "";
         if (limite) {
             porcionConsulta = " LIMIT 30";
         }
        
-        String sql = "SELECT "
-                + "lpsp_codigo_principal, "
-                + "lpsp_codigo_barra, "
-                + "lpsp_codigo_barra2, "
-                + "lpsp_codigo_barra3, "
-                + "lpsp_codigo_barra4, "
-                + "lpsp_codigo_barra5, "
-                + "lpsp_nombre, "
-                + "lpsp_categoria, "
-                + "lpsp_empaque, "
-                + "lpsp_saldo, "
-                + "lpsp_costo, "
-                + "lpsp_medida, "
-                + "lpsp_precio1, "
-                + "lpsp_precio2, "
-                + "lpsp_precio3, "
-                + "lpsp_precio4, "
-                + "lpsp_precio5, "
-                + "lpsp_precio3 * lpsp_cantidad3 lpsp_precio_caja, "
-                + "lpsp_iva "
-                + "FROM inventario.fun_lista_productos_saldos_precios('" + empresa + "', '" + bodega + "', '" + busqueda + "', " + fecha + ", " + incluirInactivos + ")" + porcionConsulta;
+        String sql = "SELECT * FROM inventario.fun_lista_productos_saldos_precios('"+empresa+"', '"+bodega+"', '"
+                +categoria+"', '"+busqueda+"', "+fecha+", "+incluirInactivos+");";
+//        String sql = "SELECT "
+//                + "lpsp_codigo_principal, "
+//                + "lpsp_codigo_barra, "
+//                + "lpsp_codigo_barra2, "
+//                + "lpsp_codigo_barra3, "
+//                + "lpsp_codigo_barra4, "
+//                + "lpsp_codigo_barra5, "
+//                + "lpsp_nombre, "
+//                + "lpsp_categoria, "
+//                + "lpsp_empaque, "
+//                + "lpsp_saldo, "
+//                + "lpsp_costo, "
+//                + "lpsp_medida, "
+//                + "lpsp_precio1, "
+//                + "lpsp_precio2, "
+//                + "lpsp_precio3, "
+//                + "lpsp_precio4, "
+//                + "lpsp_precio5, "
+//                + "lpsp_precio3 * lpsp_cantidad3 lpsp_precio_caja, "
+//                + "lpsp_iva "
+//                + "FROM inventario.fun_lista_productos_saldos_precios('" + empresa + "', '" + bodega + "', '" + busqueda + "', " + fecha + ", " + incluirInactivos + ")" + porcionConsulta;
         return inventario.helper.ConversionesInventario.convertirListaInvProducto_ListaInvProductoTO(em.createNativeQuery(sql).getResultList());
 //        return inventario.helper.ConversionesInventario.convertirListaInvProducto_ListaInvProductoTO(em.
 //                createNativeQuery("SELECT inv_producto.pro_codigo_principal, inv_producto.pro_nombre, inv_producto_categoria.cat_detalle, "

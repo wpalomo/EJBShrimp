@@ -60,6 +60,7 @@ public interface OperacionesInventarioFacadeRemote1 {
             String empresa,
             String busqueda,
             String bodega,
+             String categoria, 
             String fecha,
             boolean incluirInactivos,
             boolean limite) throws Exception;

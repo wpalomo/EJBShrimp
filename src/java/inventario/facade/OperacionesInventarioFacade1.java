@@ -386,10 +386,11 @@ public class OperacionesInventarioFacade1 implements OperacionesInventarioFacade
             String empresa,
             String busqueda,
             String bodega,
+            String categoria, 
             String fecha,
             boolean incluirInactivos,
             boolean limite) throws Exception {
-        return operacionesInventarioBusinessLocal.getListaProductosTO(empresa, busqueda, bodega, fecha, incluirInactivos, limite);
+        return operacionesInventarioBusinessLocal.getListaProductosTO(empresa, busqueda, bodega, categoria, fecha, incluirInactivos, limite);
     }
 
     public java.util.List<inventario.TO.InvListaClienteTO> getListaClienteTO(
