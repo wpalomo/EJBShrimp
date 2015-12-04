@@ -140,8 +140,9 @@ public class OperacionesCajaDAO implements OperacionesCajaDAOLocal {
 
         return caja.helper.ConversionesCaja.convertirCajCuadreCaja_CajCuadreCajaTO(
                 em.createNativeQuery("SELECT * FROM caja.fun_cuadre_de_caja("
-                + "'" + (empresa) + "',"
-                + (codigoMotivo == null ? codigoMotivo : "'" + codigoMotivo + "'") + ","
+                + "'" + (empresa) + "', "
+                + (codigoMotivo == null ? codigoMotivo : "'" + codigoMotivo + "'") + ", "
+                + (fechaDesde == null ?fechaDesde : "'" + fechaDesde + "'") + ", "
                 + (fechaHasta == null ? fechaHasta : "'" + fechaHasta + "'") + ");").getResultList());
     }
 
