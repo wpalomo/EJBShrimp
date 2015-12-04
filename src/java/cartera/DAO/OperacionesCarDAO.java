@@ -499,7 +499,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
      */
     @Override
     public List<CarListaPagosCobrosDetalleFormaTO> getCobrosConsultaDetalleForma(String empresa, String periodo, String numero, boolean hayPostfechados) throws Exception {
-        String sql = "SELECT car_cobros_forma.fp_detalle as forma, replace(ban_nombre,'BANCO ','') as banco, "
+        String sql = "SELECT car_cobros_forma.fp_detalle as forma, ban_nombre , "
                 + "car_cobros_detalle_forma.det_cuenta as cuenta, car_cobros_detalle_forma.det_fecha_vencimiento "
                 + "as fecha, car_cobros_detalle_forma.det_referencia as referencia, car_cobros_detalle_forma.det_valor as valor, "
                 + "car_cobros_detalle_forma.det_observaciones as observaciones FROM cartera.car_cobros INNER JOIN "

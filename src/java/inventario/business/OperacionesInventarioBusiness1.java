@@ -7065,8 +7065,8 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
         return operacionesInventarioDAOLocal.getListaInvConsumoDetalleTO(empresa, periodo, motivo, numeroConsumos);
     }
 
-    public List<inventario.TO.InvListaProductosTO> getListaProductosTO(String empresa, String busqueda, String bodega, String fecha, boolean incluirInactivos, boolean limite) throws Exception {
-        return operacionesInventarioDAOLocal.getListaProductosTO(empresa, busqueda, bodega, fecha, incluirInactivos, limite);
+    public List<inventario.TO.InvListaProductosTO> getListaProductosTO(String empresa, String busqueda, String bodega,  String categoria, String fecha, boolean incluirInactivos, boolean limite) throws Exception {
+        return operacionesInventarioDAOLocal.getListaProductosTO(empresa, busqueda, bodega, categoria,  fecha, incluirInactivos, limite);
     }
 
     public List<inventario.TO.InvListaClienteTO> getListaClienteTO(String empresa, String busqueda, boolean activo_Cliente) throws Exception {

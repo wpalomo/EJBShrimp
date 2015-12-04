@@ -181,7 +181,7 @@ public interface OperacionesAnexosFacadeRemote1 {
             anexos.TO.AnxAnuladosTO anxAnuladosTO,
             sistema.TO.SisInfoTO sisInfoTO) throws Exception;
 
-    anexos.TO.AnxCuentasContablesTO getAnxCuentasContablesTO(java.lang.String empresa) throws java.lang.Exception;
+    anexos.TO.AnxCuentasContablesTO getAnxCuentasContablesTO(java.lang.String empresa, String nombreCuenta) throws java.lang.Exception;
 
     java.lang.String actualizarAnxCuentasContables(
             anexos.TO.AnxCuentasContablesTO anxCuentasContablesTO,

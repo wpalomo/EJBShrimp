@@ -129,7 +129,7 @@ public interface OperacionesAnexoDAOLocal {
 
     boolean comprobarAnxCuentascontables(java.lang.String empresa) throws java.lang.Exception;
 
-    anexos.TO.AnxCuentasContablesTO getAnxCuentasContablesTO(java.lang.String empresa) throws java.lang.Exception;
+    anexos.TO.AnxCuentasContablesTO getAnxCuentasContablesTO(java.lang.String empresa, String nombreCuenta) throws java.lang.Exception;
 
     anexos.entity.AnxVenta getAnxVenta(java.lang.String empresa, java.lang.String periodo, java.lang.String motivo, java.lang.String numero) throws java.lang.Exception;
 

@@ -328,8 +328,8 @@ public class OperacionesAnexosFacade1 implements OperacionesAnexosFacadeRemote1 
 
     @Override
     public anexos.TO.AnxCuentasContablesTO getAnxCuentasContablesTO(
-            java.lang.String empresa) throws java.lang.Exception {
-        return operacionesAnexoBusinessLocal.getAnxCuentasContablesTO(empresa);
+            java.lang.String empresa, String nombreCuenta) throws java.lang.Exception {
+        return operacionesAnexoBusinessLocal.getAnxCuentasContablesTO(empresa, nombreCuenta);
     }
 
     @Override

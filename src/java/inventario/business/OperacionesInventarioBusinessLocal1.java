@@ -58,7 +58,7 @@ public interface OperacionesInventarioBusinessLocal1 {
 
     inventario.TO.InvConsumosTO getInvConsumoCabeceraTO(String empresa, String codigoPeriodo, String motivo, String numeroConsumo) throws Exception;
 
-    java.util.List<inventario.TO.InvListaProductosTO> getListaProductosTO(String empresa, String busqueda, String bodega, String fecha, boolean incluirInactivos, boolean limite) throws Exception;
+    java.util.List<inventario.TO.InvListaProductosTO> getListaProductosTO(String empresa, String busqueda, String bodega,  String categoria, String fecha, boolean incluirInactivos, boolean limite) throws Exception;
 
     java.util.List<inventario.TO.InvListaClienteTO> getListaClienteTO(String empresa, String busqueda, boolean activo_Cliente) throws Exception;
 
