@@ -987,12 +987,12 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
                     + conContable.getConContablePK().getConNumero());
         }
         
-        if(listaConDetalle!= null){
-            for (int i = 0; i < listaConDetalle.size(); i++) {
-                listaConDetalle.get(i).setDetSaldo(new BigDecimal("0.00"));
-                listaConDetalle.get(i).setSecEmpresa(listaConDetalle.get(i).getConContable().getConContablePK().getConEmpresa());
-            }
-        }
+//        if(listaConDetalle!= null){
+//            for (int i = 0; i < listaConDetalle.size(); i++) {
+//                listaConDetalle.get(i).setDetSaldo(new BigDecimal("0.00"));
+//                listaConDetalle.get(i).setSecEmpresa(listaConDetalle.get(i).getConContable().getConContablePK().getConEmpresa());
+//            }
+//        }
 
         sisSuceso.setSusClave(conContable.getConContablePK().getConPeriodo() + " "
                 + conContable.getConContablePK().getConTipo() + " "

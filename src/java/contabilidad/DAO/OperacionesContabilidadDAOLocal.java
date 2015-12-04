@@ -238,4 +238,9 @@ public interface OperacionesContabilidadDAOLocal {
            java.lang.String fechaInicio, 
            java.lang.String fechaFin)throws Exception;
   java.util.List<contabilidad.TO.PersonaTO> getFunPersonaTOs(String empresa, String busquedad) throws Exception;
+  java.util.List<contabilidad.TO.ConFunContabilizarComprasDetalleTO> getConFunContabilizarComprasDetalle(
+          String empresa, 
+          String periodo, 
+          String motivo, 
+          String numeroCompra) throws Exception;
 }

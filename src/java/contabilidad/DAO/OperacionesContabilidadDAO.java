@@ -760,11 +760,22 @@ public class OperacionesContabilidadDAO implements OperacionesContabilidadDAOLoc
         return contabilidad.helper.ConversionesContabilidad.convertirConFunContablesVerificacionesCompras_ConFunContablesVerificacionesComprasTO(em.createNativeQuery("SELECT * "
                 + "FROM contabilidad.fun_contables_verificaciones_compras( " + empresa + ", " + fechaInicio + ", " + fechaFin + ");").getResultList());
     }
+
     @Override
     public java.util.List<contabilidad.TO.PersonaTO> getFunPersonaTOs(String empresa, String busquedad) throws Exception {
         busquedad = busquedad.isEmpty() ? null : "'" + busquedad + "'";
         empresa = "'" + empresa + "'";
         return contabilidad.helper.ConversionesContabilidad.convertirFunPerson_FunPersonaTO(em.createNativeQuery(
-                "SELECT * FROM fun_personas( " + empresa + ", " + busquedad +");").getResultList());
+                "SELECT * FROM fun_personas( " + empresa + ", " + busquedad + ");").getResultList());
+    }
+
+    /////////////////DETALLE DE CONTABLE COMPRA Y VENTA
+    //'UTN', '2015-11', '101', '0000002'
+    @Override
+    public java.util.List<contabilidad.TO.ConFunContabilizarComprasDetalleTO> getConFunContabilizarComprasDetalle(String empresa, String periodo, String motivo, String numeroCompra) throws Exception {
+        String sql = "SELECT * FROM contabilidad.fun_contabilizar_compras('" + empresa + "','" + periodo + "', '" + motivo + "', '" + numeroCompra + "');";
+        System.out.println("" + sql);
+        return contabilidad.helper.ConversionesContabilidad.convertirgetConFunContabilizarComprasDetalle_ConFunContabilizarComprasDetalleTO(
+                em.createNativeQuery(sql).getResultList());
     }
 }

@@ -11,6 +11,7 @@ import banco.TO.BanChequeTO;
 import banco.entity.BanCheque;
 import banco.helper.ConversionesBanco;
 import contabilidad.TO.ConDetalleTO;
+import contabilidad.TO.ConFunContabilizarComprasDetalleTO;
 import contabilidad.entity.ConContablePK;
 import contabilidad.entity.ConDetalle;
 import inventario.TO.*;
@@ -5893,7 +5894,7 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
             String conNumero,
             boolean recontabilizarSinPendiente,
             String tipCodigo,
-            sistema.TO.SisInfoTO sisInfoTO) throws Exception {
+            sistema.TO.SisInfoTO sisInfoTO) throws Exception{
         Map<String, Object> map = new HashMap<String, Object>();
         inventario.TO.MensajeTO mensajeTO = new inventario.TO.MensajeTO();
         List<String> mensajeClase = new ArrayList(1);
@@ -5919,319 +5920,345 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                     int contador = 0;
                     boolean encontro = false;
                     boolean puedeContinuar = true;
-                    //METODO PARA VERIFICAR CUENTAS EN LOS PRODUCTOS ANTES DE CANTABILIZAR COMPRA
-                    for (int i = 0; i < listaDetalleTO.size(); i++) {
-                        for (inventario.TO.InvListaDetalleComprasTO invComprasDetalleTOAux : listaDetalleFinal) {
-                            if (listaDetalleTO.get(i).getCodigoProducto().equals(invComprasDetalleTOAux.getCodigoProducto())) {
-                                encontro = true;
-                                break;
-                            } else {
-                                encontro = false;
-                            }
-                        }
-                        if (!encontro) {
-                            listaDetalleFinal.add(listaDetalleTO.get(i));
-                        }
-                    }
-                    for (inventario.TO.InvListaDetalleComprasTO invComprasDetalleTOAux : listaDetalleFinal) {
-                        inventario.entity.InvProducto invProducto = operacionesInventarioDAOLocal.buscarInvProducto(empresa, invComprasDetalleTOAux.getCodigoProducto());
-                        if (invProducto.getProCuentaInventario() == null || invProducto.getProCuentaInventario().isEmpty()) {
-                            mensajeClase.add(invProducto.getInvProductoPK().getProCodigoPrincipal() + "\t" + invProducto.getProNombre());
-                            puedeContinuar = false;
-                        }
-                    }
-                    if (puedeContinuar) {
-                        List<anexos.TO.AnxCompraDetalleTO> anxCompraDetalleTOs = null;
-                        anexos.TO.AnxCompraTO anxCompraTO = null;
-                        if (!invCompras.getCompDocumentoTipo().equals("00")) {
-                            anxCompraTO = operacionesAnexoDAOLocal.getAnexoCompraTO(empresa, periodo, motivo, compraNumero);
-                            if (anxCompraTO != null) {
-                                anxCompraDetalleTOs = operacionesAnexoDAOLocal.getAnexoCompraDetalleTO(empresa, periodo, motivo, compraNumero);
-//                                List<sistema.TO.SisListaPeriodoTO> listaSisPeriodoTO = new ArrayList();
-//                                listaSisPeriodoTO = operacionesSistemaDAOLocal.getListaSisPeriodo(empresa);
-//                                for (sistema.TO.SisListaPeriodoTO sisListaPeriodoTO : listaSisPeriodoTO) {
-//                                    if (validaciones.Validacion.fecha(anxCompraTO.getCompRetencionFechaEmision(), "yyyy-MM-dd").getTime()
-//                                            >= validaciones.Validacion.fecha(sisListaPeriodoTO.getPerDesde(), "yyyy-MM-dd").getTime()
-//                                            && validaciones.Validacion.fecha(anxCompraTO.getCompRetencionFechaEmision(), "yyyy-MM-dd").getTime()
-//                                            <= validaciones.Validacion.fecha(sisListaPeriodoTO.getPerHasta(), "yyyy-MM-dd").getTime()) {
-//                                        periodo = sisListaPeriodoTO.getPerCodigo();
-//                                    }
-//                                }
-                            }
-//                            else {
-//                                periodo = invCompras.getInvComprasPK().getCompPeriodo();
+//                    //METODO PARA VERIFICAR CUENTAS EN LOS PRODUCTOS ANTES DE CANTABILIZAR COMPRA
+//                    for (int i = 0; i < listaDetalleTO.size(); i++) {
+//                        for (inventario.TO.InvListaDetalleComprasTO invComprasDetalleTOAux : listaDetalleFinal) {
+//                            if (listaDetalleTO.get(i).getCodigoProducto().equals(invComprasDetalleTOAux.getCodigoProducto())) {
+//                                encontro = true;
+//                                break;
+//                            } else {
+//                                encontro = false;
 //                            }
-                        }
-                        //////CREANDO CONTABLE TO
-                        contabilidad.TO.ConContableTO conContableTO = new contabilidad.TO.ConContableTO();
-                        conContableTO.setEmpCodigo(empresa);
-                        conContableTO.setPerCodigo(periodo);
-                        conContableTO.setTipCodigo(tipoCodigo);
-                        conContableTO.setConFecha(validaciones.Validacion.fecha(invCompras.getCompFecha(), "yyyy-MM-dd"));//"yyyy-MM-dd"
-
-                        //conContableTO.setConFecha(anxCompraTO != null ? anxCompraTO.getCompRetencionFechaEmision() : validaciones.Validacion.fecha(invCompras.getCompFecha(), "yyyy-MM-dd"));
-
-                        conContableTO.setConPendiente(false);
-                        conContableTO.setConBloqueado(false);
-                        conContableTO.setConAnulado(false);
-                        conContableTO.setConGenerado(true);
-                        conContableTO.setConConcepto(invCompras.getInvProveedor().getProvNombre().toString().trim());
-                        conContableTO.setConDetalle("CONTABLE GENERADO POR EL SISTEMA");
-                        conContableTO.setConObservaciones(invCompras.getCompObservaciones());
-                        conContableTO.setUsrFechaInsertaContable(validaciones.Validacion.fechaSistema());
-                        conContableTO.setUsrInsertaContable(invCompras.getUsrCodigo());
-                        ////// CREANDO SUCESO
-                        susSuceso = "INSERT";
-                        susTabla = "contabilidad.con_contable";
-                        conContableTO.setUsrFechaInsertaContable(validaciones.Validacion.fechaSistema());
-                        ////// CREANDO NUMERACION
-                        contabilidad.entity.ConNumeracion conNumeracion = new contabilidad.entity.ConNumeracion(new contabilidad.entity.ConNumeracionPK(
-                                conContableTO.getEmpCodigo(),
-                                conContableTO.getPerCodigo(),
-                                conContableTO.getTipCodigo()));
-                        conNumeracion.setNumSecuencia(new Integer(invCompras.getInvComprasPK().getCompNumero()));
-                        ////// CREANDO CONTABLE
-                        contabilidad.entity.ConContable conContable;
-                        if (!recontabilizar) {
-                            conContable = contabilidad.helper.ConversionesContabilidad.convertirConContableTO_ConContable(conContableTO);
-                        } else {
-                            conContable = operacionesContabilidadDAOLocal.buscarContable(empresa, periodo, tipoCodigo, conNumero);
-                            conContable.setConConcepto(invCompras.getInvProveedor().getProvNombre().toString().trim());
-                            conContable.setConObservaciones(invCompras.getCompObservaciones());
-                            conContable.setConFecha(invCompras.getCompFecha());///----------
-                            //conContable.setConFecha(anxCompraTO != null ? validaciones.Validacion.fecha(anxCompraTO.getCompRetencionFechaEmision(), "yyyy-MM-dd") : invCompras.getCompFecha());///----------
-
-
-                        }
-                        ////// CONVIRTIENDO A ENTIDAD EL DETALLE
-                        List<contabilidad.entity.ConDetalle> listConDetalle = new ArrayList(0);
-                        List<contabilidad.entity.ConDetalle> listConDetalleEliminar = new ArrayList(0);
-                        contabilidad.entity.ConDetalle conDetalle = null;
-
-
-                        boolean existeConcepto = true;
-                        String nombreConcepto = "";
+//                        }
+//                        if (!encontro) {
+//                            listaDetalleFinal.add(listaDetalleTO.get(i));
+//                        }
+//                    }
+//                    for (inventario.TO.InvListaDetalleComprasTO invComprasDetalleTOAux : listaDetalleFinal) {
+//                        inventario.entity.InvProducto invProducto = operacionesInventarioDAOLocal.buscarInvProducto(empresa, invComprasDetalleTOAux.getCodigoProducto());
+//                        if (invProducto.getProCuentaInventario() == null || invProducto.getProCuentaInventario().isEmpty()) {
+//                            mensajeClase.add(invProducto.getInvProductoPK().getProCodigoPrincipal() + "\t" + invProducto.getProNombre());
+//                            puedeContinuar = false;
+//                        }
+//                    }
+//                    if (puedeContinuar) {
+                    List<anexos.TO.AnxCompraDetalleTO> anxCompraDetalleTOs = null;
+                    anexos.TO.AnxCompraTO anxCompraTO = null;
+                    if (!invCompras.getCompDocumentoTipo().equals("00")) {
+                        anxCompraTO = operacionesAnexoDAOLocal.getAnexoCompraTO(empresa, periodo, motivo, compraNumero);
                         if (anxCompraTO != null) {
-                            if (anxCompraDetalleTOs != null) {
-                                if (!anxCompraDetalleTOs.isEmpty()) {
-                                    for (int i = 0; i < anxCompraDetalleTOs.size(); i++) {
-                                        anexos.entity.AnxConcepto anxConcepto = operacionesAnexoDAOLocal.getAnexoConcepto(anxCompraDetalleTOs.get(i).getDetConcepto());
-                                        if (anxConcepto != null) {
-                                            existeConcepto = true;
-                                        } else {
-                                            existeConcepto = false;
-                                        }
-                                        if (!existeConcepto) {
-                                            nombreConcepto = anxCompraDetalleTOs.get(i).getDetConcepto();
-                                            i = anxCompraDetalleTOs.size();
-                                        }
-                                    }
-                                    if (existeConcepto) {
-                                        puedeContinuar = true;
+                            anxCompraDetalleTOs = operacionesAnexoDAOLocal.getAnexoCompraDetalleTO(empresa, periodo, motivo, compraNumero);
+                        }
+                    }
+                    //////CREANDO CONTABLE TO
+                    contabilidad.TO.ConContableTO conContableTO = new contabilidad.TO.ConContableTO();
+                    conContableTO.setEmpCodigo(empresa);
+                    conContableTO.setPerCodigo(periodo);
+                    conContableTO.setTipCodigo(tipoCodigo);
+                    conContableTO.setConFecha(validaciones.Validacion.fecha(invCompras.getCompFecha(), "yyyy-MM-dd"));//"yyyy-MM-dd"
 
+                    //conContableTO.setConFecha(anxCompraTO != null ? anxCompraTO.getCompRetencionFechaEmision() : validaciones.Validacion.fecha(invCompras.getCompFecha(), "yyyy-MM-dd"));
+
+                    conContableTO.setConPendiente(false);
+                    conContableTO.setConBloqueado(false);
+                    conContableTO.setConAnulado(false);
+                    conContableTO.setConGenerado(true);
+                    conContableTO.setConConcepto(invCompras.getInvProveedor().getProvNombre().toString().trim());
+                    conContableTO.setConDetalle("CONTABLE GENERADO POR EL SISTEMA");
+                    conContableTO.setConObservaciones(invCompras.getCompObservaciones());
+                    conContableTO.setUsrFechaInsertaContable(validaciones.Validacion.fechaSistema());
+                    conContableTO.setUsrInsertaContable(invCompras.getUsrCodigo());
+                    ////// CREANDO SUCESO
+                    susSuceso = "INSERT";
+                    susTabla = "contabilidad.con_contable";
+                    conContableTO.setUsrFechaInsertaContable(validaciones.Validacion.fechaSistema());
+                    ////// CREANDO NUMERACION
+                    contabilidad.entity.ConNumeracion conNumeracion = new contabilidad.entity.ConNumeracion(new contabilidad.entity.ConNumeracionPK(
+                            conContableTO.getEmpCodigo(),
+                            conContableTO.getPerCodigo(),
+                            conContableTO.getTipCodigo()));
+                    conNumeracion.setNumSecuencia(new Integer(invCompras.getInvComprasPK().getCompNumero()));
+                    ////// CREANDO CONTABLE
+                    contabilidad.entity.ConContable conContable;
+                    if (!recontabilizar) {
+                        conContable = contabilidad.helper.ConversionesContabilidad.convertirConContableTO_ConContable(conContableTO);
+                    } else {
+                        conContable = operacionesContabilidadDAOLocal.buscarContable(empresa, periodo, tipoCodigo, conNumero);
+                        conContable.setConConcepto(invCompras.getInvProveedor().getProvNombre().toString().trim());
+                        conContable.setConObservaciones(invCompras.getCompObservaciones());
+                        conContable.setConFecha(invCompras.getCompFecha());///----------
+                        //conContable.setConFecha(anxCompraTO != null ? validaciones.Validacion.fecha(anxCompraTO.getCompRetencionFechaEmision(), "yyyy-MM-dd") : invCompras.getCompFecha());///----------
+
+
+                    }
+                    ////// CONVIRTIENDO A ENTIDAD EL DETALLE
+                    List<contabilidad.entity.ConDetalle> listConDetalle = new ArrayList(0);
+                    List<contabilidad.entity.ConDetalle> listConDetalleEliminar = new ArrayList(0);
+                    contabilidad.entity.ConDetalle conDetalle = null;
+
+
+                    boolean existeConcepto = true;
+                    String nombreConcepto = "";
+                    if (anxCompraTO != null) {
+                        if (anxCompraDetalleTOs != null) {
+                            if (!anxCompraDetalleTOs.isEmpty()) {
+                                for (int i = 0; i < anxCompraDetalleTOs.size(); i++) {
+                                    anexos.entity.AnxConcepto anxConcepto = operacionesAnexoDAOLocal.getAnexoConcepto(anxCompraDetalleTOs.get(i).getDetConcepto());
+                                    if (anxConcepto != null) {
+                                        existeConcepto = true;
                                     } else {
-                                        puedeContinuar = false;
-                                        retorno = "F<html>El CONCEPTO DE RETENCION " + nombreConcepto + " ya no se encuentra disponible.\nContacte con el administrador.";
+                                        existeConcepto = false;
                                     }
+                                    if (!existeConcepto) {
+                                        nombreConcepto = anxCompraDetalleTOs.get(i).getDetConcepto();
+                                        i = anxCompraDetalleTOs.size();
+                                    }
+                                }
+                                if (existeConcepto) {
+                                    puedeContinuar = true;
+
                                 } else {
                                     puedeContinuar = false;
-                                    retorno = "F<html>Hubo problemas al recuperar los CONCEPTOS DE RETENCION de la RETENCIÓN.";
+                                    retorno = "F<html>El CONCEPTO DE RETENCION " + nombreConcepto + " ya no se encuentra disponible.\nContacte con el administrador.";
                                 }
                             } else {
                                 puedeContinuar = false;
                                 retorno = "F<html>Hubo problemas al recuperar los CONCEPTOS DE RETENCION de la RETENCIÓN.";
                             }
+                        } else {
+                            puedeContinuar = false;
+                            retorno = "F<html>Hubo problemas al recuperar los CONCEPTOS DE RETENCION de la RETENCIÓN.";
                         }
-                        if (puedeContinuar) {
-                            List<contabilidad.TO.ConDetalleTO> listaConDetalleTO;
+                    }
+                    if (puedeContinuar) {
+                        // List<contabilidad.TO.ConDetalleTO> listaConDetalleTO = null;
+
+                        //if(!recontabilizar){
+                        List<contabilidad.TO.ConFunContabilizarComprasDetalleTO> listaConDetalleTO = operacionesContabilidadDAOLocal.getConFunContabilizarComprasDetalle(
+                                empresa,
+                                periodo,
+                                motivo,
+                                compraNumero);
+
+                        //} 
+
+
+//                            if (!recontabilizar) {
+//                                listaConDetalleTO = agruparProductoSectorParaContableCompras(empresa, invCompras.getCompDocumentoNumero(), listaDetalleTO, conContableTO, invCompras, anxCompraTO, anxCompraDetalleTOs);
+//                            } else if (recontabilizarSinPendiente) {
+//                                listaConDetalleTO = agruparProductoSectorParaContableCompras(empresa, invCompras.getCompDocumentoNumero(), listaDetalleTO, conContableTO, invCompras, anxCompraTO, anxCompraDetalleTOs);
+//                            } else {
+//                          listaConDetalleTO = agruparProductoSectorParaRecontabilizarCompras(empresa, invCompras.getCompDocumentoNumero(), listaDetalleTO, conContableTO, invCompras, anxCompraTO, anxCompraDetalleTOs);
+//                            }
+
+                        System.out.println("antes del if");
+                        if(listaConDetalleTO!= null){
+                            System.out.println("vhkhfkdhskjfhklsdhfkl");
+                            
+                        }
+
+                        BigDecimal acumHaber = cero;
+                        BigDecimal acumDebe = cero;
+                        boolean existeCuentaContableDetalle = true;
+                        String cuentaContableProblemas = "";
+                        for (ConFunContabilizarComprasDetalleTO conDetalleTO : listaConDetalleTO) {
+                            conDetalle = new contabilidad.entity.ConDetalle();
+                            conDetalle = contabilidad.helper.ConversionesContabilidad.convertirConFunContabilizarDetalleTO_ConDetalle(conDetalleTO);
+                            listConDetalle.add(conDetalle);
+                            if (conDetalleTO.getDetDebitoCredito().equals('C')) {
+                                acumHaber = acumHaber.add(validaciones.Validacion.redondeoDecimalBigDecimal(conDetalleTO.getDetValor(), 2, java.math.RoundingMode.HALF_UP));
+                            }
+                            if (conDetalleTO.getDetDebitoCredito().equals('D')) {
+                                acumDebe = acumDebe.add(validaciones.Validacion.redondeoDecimalBigDecimal(conDetalleTO.getDetValor(), 2, java.math.RoundingMode.HALF_UP));
+                            }
+                            //existeCuentaContableDetalle = true;                               
+                        }
+                        if (acumDebe.compareTo(acumHaber) != 0) {
+                            conContable.setConPendiente(true);
+                            contablePendiente = true;
+                        }
+//                            BigDecimal acumHaber = cero;
+//                            BigDecimal acumDebe = cero;
+//                            for (ConDetalleTO conDetalleTO : listaConDetalleTO) {
+//                                if (conDetalleTO.getDetDebitoCredito().equals('C')) {
+//                                    acumHaber = acumHaber.add(validaciones.Validacion.redondeoDecimalBigDecimal(conDetalleTO.getDetValor(), 2, java.math.RoundingMode.HALF_UP));
+//                                }
+//                                if (conDetalleTO.getDetDebitoCredito().equals('D')) {
+//                                    acumDebe = acumDebe.add(validaciones.Validacion.redondeoDecimalBigDecimal(conDetalleTO.getDetValor(), 2, java.math.RoundingMode.HALF_UP));
+//                                }
+//                            }
+//                            if (acumDebe.compareTo(acumHaber) != 0) {
+//                                conContable.setConPendiente(true);
+//                                contablePendiente = true;
+//                            }
+//                            boolean existeCuentaContableDetalle = false;
+//                            String cuentaContableProblemas = "";
+//                            for (contabilidad.TO.ConDetalleTO conDetalleTO : listaConDetalleTO) {
+//                                contabilidad.entity.ConCuentas conCuentas = operacionesContabilidadDAOLocal.buscarCuentas(conDetalleTO.getEmpCodigo(),
+//                                        conDetalleTO.getConCtaCodigo());
+//                                if (conCuentas != null) {
+//                                    conDetalle = new contabilidad.entity.ConDetalle();
+//                                    conDetalleTO.setPerCodigo(conContableTO.getPerCodigo());
+//                                    conDetalle = contabilidad.helper.ConversionesContabilidad.convertirConDetalleTO_ConDetalle(conDetalleTO);
+//                                    conDetalle.setConContable(conContable);
+//                                    conDetalle.setDetSaldo(cero);
+//                                    conDetalle.setConCuentas(operacionesContabilidadDAOLocal.buscarCuentas(conDetalleTO.getEmpCodigo(),
+//                                            conDetalleTO.getConCtaCodigo()));
+//                                    listConDetalle.add(conDetalle);
+//                                    existeCuentaContableDetalle = true;
+//                                } else {
+//                                    cuentaContableProblemas = conDetalleTO.getConCtaCodigo();
+//                                    existeCuentaContableDetalle = false;
+//                                    //REVISAR (cuando falta o sobra 1 ctv)
+//                                    break;
+//                                }
+//                            }
+                        if (existeCuentaContableDetalle) {
+                            susDetalle = "Se recontabilizó contable del periodo "
+                                    + conContable.getConContablePK().getConPeriodo() + ", del tipo contable "
+                                    + conContable.getConContablePK().getConTipo() + ", de la numeracion "
+                                    + conNumero;
+                            susClave = conContable.getConContablePK().getConPeriodo() + " "
+                                    + conContable.getConContablePK().getConTipo() + " "
+                                    + conNumero;
+                            sistemaWeb.entity.SisSuceso sisSuceso = validaciones.Suceso.crearSisSuceso(
+                                    susTabla,
+                                    susClave,
+                                    susSuceso,
+                                    susDetalle,
+                                    sisInfoTO);
                             if (!recontabilizar) {
-                                listaConDetalleTO = agruparProductoSectorParaContableCompras(empresa, invCompras.getCompDocumentoNumero(), listaDetalleTO, conContableTO, invCompras, anxCompraTO, anxCompraDetalleTOs);
-                            } else if (recontabilizarSinPendiente) {
-                                listaConDetalleTO = agruparProductoSectorParaContableCompras(empresa, invCompras.getCompDocumentoNumero(), listaDetalleTO, conContableTO, invCompras, anxCompraTO, anxCompraDetalleTOs);
-                            } else {
-                                listaConDetalleTO = agruparProductoSectorParaRecontabilizarCompras(empresa, invCompras.getCompDocumentoNumero(), listaDetalleTO, conContableTO, invCompras, anxCompraTO, anxCompraDetalleTOs);
-                            }
-                            BigDecimal acumHaber = cero;
-                            BigDecimal acumDebe = cero;
-                            for (ConDetalleTO conDetalleTO : listaConDetalleTO) {
-                                if (conDetalleTO.getDetDebitoCredito().equals('C')) {
-                                    acumHaber = acumHaber.add(validaciones.Validacion.redondeoDecimalBigDecimal(conDetalleTO.getDetValor(), 2, java.math.RoundingMode.HALF_UP));
-                                }
-                                if (conDetalleTO.getDetDebitoCredito().equals('D')) {
-                                    acumDebe = acumDebe.add(validaciones.Validacion.redondeoDecimalBigDecimal(conDetalleTO.getDetValor(), 2, java.math.RoundingMode.HALF_UP));
-                                }
-                            }
-                            if (acumDebe.compareTo(acumHaber) != 0) {
-                                conContable.setConPendiente(true);
-                                contablePendiente = true;
-                            }
-                            boolean existeCuentaContableDetalle = false;
-                            String cuentaContableProblemas = "";
-                            for (contabilidad.TO.ConDetalleTO conDetalleTO : listaConDetalleTO) {
-                                contabilidad.entity.ConCuentas conCuentas = operacionesContabilidadDAOLocal.buscarCuentas(conDetalleTO.getEmpCodigo(),
-                                        conDetalleTO.getConCtaCodigo());
-                                if (conCuentas != null) {
-                                    conDetalle = new contabilidad.entity.ConDetalle();
-                                    conDetalleTO.setPerCodigo(conContableTO.getPerCodigo());
-                                    conDetalle = contabilidad.helper.ConversionesContabilidad.convertirConDetalleTO_ConDetalle(conDetalleTO);
-                                    conDetalle.setConContable(conContable);
-                                    conDetalle.setDetSaldo(cero);
-                                    conDetalle.setConCuentas(operacionesContabilidadDAOLocal.buscarCuentas(conDetalleTO.getEmpCodigo(),
-                                            conDetalleTO.getConCtaCodigo()));
-                                    listConDetalle.add(conDetalle);
-                                    existeCuentaContableDetalle = true;
-                                } else {
-                                    cuentaContableProblemas = conDetalleTO.getConCtaCodigo();
-                                    existeCuentaContableDetalle = false;
-                                    //REVISAR (cuando falta o sobra 1 ctv)
-                                    break;
-                                }
-                            }
-                            if (existeCuentaContableDetalle) {
-                                susDetalle = "Se recontabilizó contable del periodo "
-                                        + conContable.getConContablePK().getConPeriodo() + ", del tipo contable "
-                                        + conContable.getConContablePK().getConTipo() + ", de la numeracion "
-                                        + conNumero;
-                                susClave = conContable.getConContablePK().getConPeriodo() + " "
-                                        + conContable.getConContablePK().getConTipo() + " "
-                                        + conNumero;
-                                sistemaWeb.entity.SisSuceso sisSuceso = validaciones.Suceso.crearSisSuceso(
-                                        susTabla,
-                                        susClave,
-                                        susSuceso,
-                                        susDetalle,
+                                comprobar = operacionesContabilidadDAOTransaccionLocal.insertarTransaccionContable(
+                                        conContable,
+                                        listConDetalle,
+                                        sisSuceso,
+                                        conNumeracion,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        false,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        invCompras,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
                                         sisInfoTO);
-                                if (!recontabilizar) {
-                                    comprobar = operacionesContabilidadDAOTransaccionLocal.insertarTransaccionContable(
-                                            conContable,
-                                            listConDetalle,
-                                            sisSuceso,
-                                            conNumeracion,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            false,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            invCompras,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            null,
-                                            sisInfoTO);
+                            } else {
+                                inventario.entity.InvCompras invComprasAux = inventario.helper.ConversionesInventario.convertirInvCompras_InvCompras(invCompras);
+                                invComprasAux.setCompRevisado(true);
+                                if (!recontabilizarSinPendiente) {
+                                    comprobar = operacionesContabilidadDAOTransaccionLocal.modificarConContableCompras(conContable, listConDetalle, invComprasAux, sisSuceso);
                                 } else {
-                                    inventario.entity.InvCompras invComprasAux = inventario.helper.ConversionesInventario.convertirInvCompras_InvCompras(invCompras);
-                                    invComprasAux.setCompRevisado(true);
-                                    if (!recontabilizarSinPendiente) {
-                                        comprobar = operacionesContabilidadDAOTransaccionLocal.modificarConContableCompras(conContable, listConDetalle, invComprasAux, sisSuceso);
-                                    } else {
-                                        List<contabilidad.TO.ConDetalleTO> listaConDetalleEliminar = operacionesContabilidadDAOLocal.getConDetalleTO(empresa, periodo, tipoCodigo, conNumero);
-                                        existeCuentaContableDetalle = false;
-                                        cuentaContableProblemas = "";
-                                        for (contabilidad.TO.ConDetalleTO conDetalleTO : listaConDetalleEliminar) {
-                                            contabilidad.entity.ConCuentas conCuentas = operacionesContabilidadDAOLocal.buscarCuentas(conDetalleTO.getEmpCodigo(),
-                                                    conDetalleTO.getConCtaCodigo());
-                                            if (conCuentas != null) {
-                                                conDetalle = new contabilidad.entity.ConDetalle();
-                                                conDetalleTO.setPerCodigo(conContableTO.getPerCodigo());
-                                                conDetalle = contabilidad.helper.ConversionesContabilidad.convertirConDetalleTO_ConDetalle(conDetalleTO);
-                                                conDetalle.setConContable(conContable);
-                                                conDetalle.setConCuentas(operacionesContabilidadDAOLocal.buscarCuentas(conDetalleTO.getEmpCodigo(),
-                                                        conDetalleTO.getConCtaCodigo()));
-                                                conDetalle.setDetSaldo(cero);
-                                                listConDetalleEliminar.add(conDetalle);
-                                                existeCuentaContableDetalle = true;
-                                            } else {
-                                                cuentaContableProblemas = conDetalleTO.getConCtaCodigo();
-                                                existeCuentaContableDetalle = false;
+                                    List<contabilidad.TO.ConDetalleTO> listaConDetalleEliminar = operacionesContabilidadDAOLocal.getConDetalleTO(empresa, periodo, tipoCodigo, conNumero);
+                                    existeCuentaContableDetalle = false;
+                                    cuentaContableProblemas = "";
+                                    for (contabilidad.TO.ConDetalleTO conDetalleTO : listaConDetalleEliminar) {
+                                        contabilidad.entity.ConCuentas conCuentas = operacionesContabilidadDAOLocal.buscarCuentas(conDetalleTO.getEmpCodigo(),
+                                                conDetalleTO.getConCtaCodigo());
+                                        if (conCuentas != null) {
+                                            conDetalle = new contabilidad.entity.ConDetalle();
+                                            conDetalleTO.setPerCodigo(conContableTO.getPerCodigo());
+                                            conDetalle = contabilidad.helper.ConversionesContabilidad.convertirConDetalleTO_ConDetalle(conDetalleTO);
+                                            conDetalle.setConContable(conContable);
+                                            conDetalle.setConCuentas(operacionesContabilidadDAOLocal.buscarCuentas(conDetalleTO.getEmpCodigo(),
+                                                    conDetalleTO.getConCtaCodigo()));
+                                            conDetalle.setDetSaldo(cero);
+                                            listConDetalleEliminar.add(conDetalle);
+                                            existeCuentaContableDetalle = true;
+                                        } else {
+                                            cuentaContableProblemas = conDetalleTO.getConCtaCodigo();
+                                            existeCuentaContableDetalle = false;
+                                            break;
+                                        }
+                                    }
+                                    if (existeCuentaContableDetalle) {
+                                        ///aqui se elimina el cheque para seguir con la recontabilizacion
+                                        BanChequeTO bcto = null;
+                                        ConDetalle c = null;
+                                        for (ConDetalle cd : listConDetalleEliminar) {
+                                            bcto = operacionesBancoDAOLocal.buscarBanChequeTO(cd.getConCuentas().getConCuentasPK().getCtaEmpresa(), cd.getConCuentas().getConCuentasPK().getCtaCodigo(), cd.getDetDocumento());
+                                            if (bcto.getChqSecuencia() != null && bcto.getChqSecuencia() != 0) {
+                                                c = cd;
                                                 break;
                                             }
                                         }
-                                        if (existeCuentaContableDetalle) {
-                                            ///aqui se elimina el cheque para seguir con la recontabilizacion
-                                            BanChequeTO bcto = null;
-                                            ConDetalle c = null;
-                                            for (ConDetalle cd : listConDetalleEliminar) {
-                                                bcto = operacionesBancoDAOLocal.buscarBanChequeTO(cd.getConCuentas().getConCuentasPK().getCtaEmpresa(), cd.getConCuentas().getConCuentasPK().getCtaCodigo(), cd.getDetDocumento());
-                                                if (bcto.getChqSecuencia() != null && bcto.getChqSecuencia() != 0) {
-                                                    c = cd;
-                                                    break;
-                                                }
-                                            }
 
-                                            if (bcto != null && bcto.getChqSecuencia() != null && bcto.getChqSecuencia() != 0) {
-                                                map.put("cheque", bcto);
-                                                map.put("contable", conContableTO);
-                                                map.put("detCon", c);
-                                                mensajeTO.setMap(map);
-                                                BanCheque banCheque = ConversionesBanco.convertirBanChequeTO_BanCheque(bcto);
-                                                operacionesBancoDAOTransaccionLocal.eliminarBanCheques(banCheque, sisSuceso);
-                                            }
-                                            ///
-                                            comprobar = operacionesContabilidadDAOTransaccionLocal.modificarConContableComprasMayorizar(conContable, listConDetalle, listConDetalleEliminar, invComprasAux, sisSuceso);
-
-                                        } else {
-                                            mensaje = "F<html>La cuenta: " + cuentaContableProblemas + " no está en el Plan de Cuentas.<br>Corrija el error...</html>";
+                                        if (bcto != null && bcto.getChqSecuencia() != null && bcto.getChqSecuencia() != 0) {
+                                            map.put("cheque", bcto);
+                                            map.put("contable", conContableTO);
+                                            map.put("detCon", c);
+                                            mensajeTO.setMap(map);
+                                            BanCheque banCheque = ConversionesBanco.convertirBanChequeTO_BanCheque(bcto);
+                                            operacionesBancoDAOTransaccionLocal.eliminarBanCheques(banCheque, sisSuceso);
                                         }
+                                        ///
+                                        comprobar = operacionesContabilidadDAOTransaccionLocal.modificarConContableComprasMayorizar(conContable, listConDetalle, listConDetalleEliminar, invComprasAux, sisSuceso);
+
+                                    } else {
+                                        mensaje = "F<html>La cuenta: " + cuentaContableProblemas + " no está en el Plan de Cuentas.<br>Corrija el error...</html>";
                                     }
                                 }
-                                if (comprobar) {
-                                    sistemaWeb.entity.SisPeriodo sisPeriodo = operacionesSistemaDAOLocal.buscarPeriodo(conContableTO.getEmpCodigo(), conContable.getConContablePK().getConPeriodo());
+                            }
+                            if (comprobar) {
+                                sistemaWeb.entity.SisPeriodo sisPeriodo = operacionesSistemaDAOLocal.buscarPeriodo(conContableTO.getEmpCodigo(), conContable.getConContablePK().getConPeriodo());
 
-                                    contabilidad.entity.ConTipo conTipo = operacionesContabilidadDAOLocal.buscarTipo(conContableTO.getEmpCodigo(), conContable.getConContablePK().getConTipo());
+                                contabilidad.entity.ConTipo conTipo = operacionesContabilidadDAOLocal.buscarTipo(conContableTO.getEmpCodigo(), conContable.getConContablePK().getConTipo());
 
-                                    if (!recontabilizar) {
-                                        retorno = "T<html>Se ingresó el contable con la siguiente información:<br><br>"
-                                                + "Periodo: <font size = 5>" + sisPeriodo.getPerDetalle()
-                                                + "</font>.<br> Tipo: <font size = 5>" + conTipo.getTipDetalle()
-                                                + "</font>.<br> Número: <font size = 5>" + conContable.getConContablePK().getConNumero()
-                                                + (contablePendiente == true ? "</font>.<font size = 5 color= " + "red" + " ><br><b><small>Observación: PENDIENTE POR DIFERENCIA</small></b></font>" : "") + ".</html>"
-                                                + conTipo.getConTipoPK().getTipCodigo() + ", " + conContable.getConContablePK().getConNumero() + "*  " + conContable.getConContablePK().getConPeriodo();
-                                    } else {
-                                        retorno = "T<html>Se recontabilizó el contable de esta compra con la siguiente información:<br><br>"
-                                                + "Periodo: <font size = 5>" + sisPeriodo.getPerDetalle()
-                                                + "</font>.<br> Tipo: <font size = 5>" + conTipo.getTipDetalle()
-                                                + "</font>.<br> Número: <font size = 5>" + conContable.getConContablePK().getConNumero()
-                                                + (contablePendiente == true ? "</font>.<font size = 5 color= " + "red" + " ><br><b><small>Observación: PENDIENTE POR DIFERENCIA</small></b></font>" : "") + ".</html>"
-                                                + conTipo.getConTipoPK().getTipCodigo() + ", " + conContable.getConContablePK().getConNumero() + "*  " + conContable.getConContablePK().getConPeriodo();
-                                    }
+                                if (!recontabilizar) {
+                                    retorno = "T<html>Se ingresó el contable con la siguiente información:<br><br>"
+                                            + "Periodo: <font size = 5>" + sisPeriodo.getPerDetalle()
+                                            + "</font>.<br> Tipo: <font size = 5>" + conTipo.getTipDetalle()
+                                            + "</font>.<br> Número: <font size = 5>" + conContable.getConContablePK().getConNumero()
+                                            + (contablePendiente == true ? "</font>.<font size = 5 color= " + "red" + " ><br><b><small>Observación: PENDIENTE POR DIFERENCIA</small></b></font>" : "") + ".</html>"
+                                            + conTipo.getConTipoPK().getTipCodigo() + ", " + conContable.getConContablePK().getConNumero() + "*  " + conContable.getConContablePK().getConPeriodo();
                                 } else {
-                                    retorno = "F<html>Ocurrió un error al recontabilizar, inténtelo de nuevo...</html>";
+                                    retorno = "T<html>Se recontabilizó el contable de esta compra con la siguiente información:<br><br>"
+                                            + "Periodo: <font size = 5>" + sisPeriodo.getPerDetalle()
+                                            + "</font>.<br> Tipo: <font size = 5>" + conTipo.getTipDetalle()
+                                            + "</font>.<br> Número: <font size = 5>" + conContable.getConContablePK().getConNumero()
+                                            + (contablePendiente == true ? "</font>.<font size = 5 color= " + "red" + " ><br><b><small>Observación: PENDIENTE POR DIFERENCIA</small></b></font>" : "") + ".</html>"
+                                            + conTipo.getConTipoPK().getTipCodigo() + ", " + conContable.getConContablePK().getConNumero() + "*  " + conContable.getConContablePK().getConPeriodo();
                                 }
                             } else {
-                                retorno = "F<html>La cuenta: " + cuentaContableProblemas + " no está en el Plan de Cuentas.<br>Corrija el error...</html>";
+                                retorno = "F<html>Ocurrió un error al recontabilizar, inténtelo de nuevo...</html>";
                             }
-                        }///
-                    } else {
-                        mensajeTO.setListaErrores(mensajeClase);
-                        retorno = "F<html>No se encuentra las cuentas contables en los siguientes productos...</html>";
+                        } else {
+                            retorno = "F<html>La cuenta: " + cuentaContableProblemas + " no está en el Plan de Cuentas.<br>Corrija el error...</html>";
+                        }
                     }
+//                    } else {
+//                        mensajeTO.setListaErrores(mensajeClase);
+//                        retorno = "F<html>No se encuentra las cuentas contables en los siguientes productos...</html>";
+//                    }
                 }
             } else {
                 retorno = "F<html>No se encuentra tipo de contable...</html>";
             }
         } catch (Exception e) {
-            retorno = "F<html>Error al guardar datos...</html>";
+            retorno = "F<html>Error al guardar datos..."+e.toString()+"</html>";
             validaciones.Excepciones.guardarExcepcionesEJB(
                     e,
                     getClass().getName(),
                     "insertarInvContableComprasTO",
                     sisInfoTO,
                     operacionesSistemaDAOTransaccionLocal);
+            
         } finally {
             //map.put("mensaje", retorno);
             mensajeTO.setMensaje(retorno);

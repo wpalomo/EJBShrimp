@@ -20,6 +20,10 @@ public class MensajeTO implements java.io.Serializable{
     private java.util.List<String> listaErrores = new java.util.ArrayList();
     private java.util.List<String> listaMensajes = new java.util.ArrayList();
     private Map<String, Object> map = new HashMap<String, Object>();
+    private Exception exeption;
+
+  
+
 
     public MensajeTO() {
     }
@@ -29,6 +33,22 @@ public class MensajeTO implements java.io.Serializable{
         this.mensaje = mensaje;
         this.fechaCreacion = fechaCreacion;
     }
+
+    public MensajeTO(Boolean correcto, String mensaje, String fechaCreacion, Exception exeption) {
+        this.correcto = correcto;
+        this.mensaje = mensaje;
+        this.fechaCreacion = fechaCreacion;
+        this.exeption = exeption;
+    }
+    
+      public Exception getExeption() {
+        return exeption;
+    }
+
+    public void setExeption(Exception exeption) {
+        this.exeption = exeption;
+    }
+    
 
     public Map<String, Object> getMap() {
         return map;
