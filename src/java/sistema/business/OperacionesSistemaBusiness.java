@@ -402,7 +402,7 @@ public class OperacionesSistemaBusiness implements OperacionesSistemaBusinessLoc
                     comprobar = false;
                     if (operacionesSistemaDAOLocal.buscarUsuario(sisUsuarioTO.getUsrCodigo()) != null) {
 //                        if (sisUsuarioTO.getGruCodigo().equals("ASIGNADO")) {
-                        sisUsuarioTO.setUsrActivo(true);
+                        //sisUsuarioTO.setUsrActivo(true);
                         //sisUsuarioTO.setUsrCambiarContrasenia(false);
 
                         if (sisUsuarioTO.getUsrCaduca() == null) {
