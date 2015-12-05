@@ -536,30 +536,34 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
         if (limite) {
             porcionConsulta = " LIMIT 30";
         }
+        if(categoria == null){
+            categoria = "";
+        }
        
-        String sql = "SELECT * FROM inventario.fun_lista_productos_saldos_precios('"+empresa+"', '"+bodega+"', '"
-                +categoria+"', '"+busqueda+"', "+fecha+", "+incluirInactivos+");";
-//        String sql = "SELECT "
-//                + "lpsp_codigo_principal, "
-//                + "lpsp_codigo_barra, "
-//                + "lpsp_codigo_barra2, "
-//                + "lpsp_codigo_barra3, "
-//                + "lpsp_codigo_barra4, "
-//                + "lpsp_codigo_barra5, "
-//                + "lpsp_nombre, "
-//                + "lpsp_categoria, "
-//                + "lpsp_empaque, "
-//                + "lpsp_saldo, "
-//                + "lpsp_costo, "
-//                + "lpsp_medida, "
-//                + "lpsp_precio1, "
-//                + "lpsp_precio2, "
-//                + "lpsp_precio3, "
-//                + "lpsp_precio4, "
-//                + "lpsp_precio5, "
-//                + "lpsp_precio3 * lpsp_cantidad3 lpsp_precio_caja, "
-//                + "lpsp_iva "
-//                + "FROM inventario.fun_lista_productos_saldos_precios('" + empresa + "', '" + bodega + "', '" + busqueda + "', " + fecha + ", " + incluirInactivos + ")" + porcionConsulta;
+//        String sql = "SELECT * FROM inventario.fun_lista_productos_saldos_precios('"+empresa+"', '"+bodega+"', '"
+//                +categoria+"', '"+busqueda+"', "+fecha+", "+incluirInactivos+");";
+        String sql = "SELECT "
+                + "lpsp_codigo_principal, "
+                + "lpsp_codigo_barra, "
+                + "lpsp_codigo_barra2, "
+                + "lpsp_codigo_barra3, "
+                + "lpsp_codigo_barra4, "
+                + "lpsp_codigo_barra5, "
+                + "lpsp_nombre, "
+                + "lpsp_categoria, "
+                + "lpsp_empaque, "
+                + "lpsp_saldo, "
+                + "lpsp_costo, "
+                + "lpsp_medida, "
+                + "lpsp_precio1, "
+                + "lpsp_precio2, "
+                + "lpsp_precio3, "
+                + "lpsp_precio4, "
+                + "lpsp_precio5, "
+                + "lpsp_precio3 * lpsp_cantidad3 lpsp_precio_caja, "
+                + "lpsp_iva "
+                + "FROM inventario.fun_lista_productos_saldos_precios('"+empresa+"', '"+bodega+"', '"
+                +categoria+"', '"+busqueda+"', "+fecha+", "+incluirInactivos+");";// + porcionConsulta;
         return inventario.helper.ConversionesInventario.convertirListaInvProducto_ListaInvProductoTO(em.createNativeQuery(sql).getResultList());
 //        return inventario.helper.ConversionesInventario.convertirListaInvProducto_ListaInvProductoTO(em.
 //                createNativeQuery("SELECT inv_producto.pro_codigo_principal, inv_producto.pro_nombre, inv_producto_categoria.cat_detalle, "
@@ -1584,13 +1588,13 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
                 + "lpsp_categoria, "
                 + "lpsp_saldo, lpsp_costo, lpsp_medida, lpsp_precio1, lpsp_descuento1, "
                 + "lpsp_precio2, lpsp_descuento2, lpsp_precio3, lpsp_descuento3, lpsp_precio4, lpsp_descuento4, lpsp_precio5, lpsp_descuento5, lpsp_iva FROM "
-                + "inventario.fun_lista_productos_saldos_precios('" + empresa + "', '" + bodega + "', '" + busqueda + "', " + fecha + ", FALSE)").getResultList());
+                + "inventario.fun_lista_productos_saldos_precios('" + empresa + "', '" + bodega + "', '', '" + busqueda + "', " + fecha + ", FALSE)").getResultList());
     }
 
     public java.util.List<inventario.TO.InvListaProductosCambiarPrecioCantidadTO> getListaProductosCambiarPrecioCantidadTO(String empresa, String busqueda, String bodega, String fecha) throws Exception {
         String sql = "SELECT lpsp_codigo_principal, lpsp_nombre, lpsp_categoria, lpsp_saldo, lpsp_costo, lpsp_medida, lpsp_precio1, lpsp_cantidad1, "
                 + "lpsp_precio2, lpsp_cantidad2, lpsp_precio3, lpsp_cantidad3, lpsp_precio4, lpsp_cantidad4, lpsp_precio5, lpsp_cantidad5, lpsp_iva FROM "
-                + "inventario.fun_lista_productos_saldos_precios('" + empresa + "', '" + bodega + "', '" + busqueda + "', " + fecha + ", FALSE)";
+                + "inventario.fun_lista_productos_saldos_precios('" + empresa + "', '" + bodega + "', '', '" + busqueda + "', " + fecha + ", FALSE)";
         return inventario.helper.ConversionesInventario.convertirListaInvProductoCambiarPrecioCantidad_ListaInvProductoCambiarPrecioCantidadTO(
                 em.createNativeQuery(sql).getResultList());
     }
@@ -2221,7 +2225,7 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
 
     @Override
     public java.util.List<inventario.TO.InvFunUltimasComprasTO> getInvFunUltimasComprasTOs(java.lang.String empresa, java.lang.String producto) throws Exception {
-        producto = producto == null ? producto : "'" + producto + "'";
+        producto = producto == null ? "" : "'" + producto + "'";
         return inventario.helper.ConversionesInventario.convertirInvFunUltimasCompras_InvFunUltimasComprasTO(em.createNativeQuery("SELECT * FROM inventario.fun_ultimas_compras('" + empresa + "', " + producto + ");").getResultList());
     }
 
