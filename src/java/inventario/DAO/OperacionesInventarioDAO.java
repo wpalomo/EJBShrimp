@@ -9,6 +9,7 @@ import inventario.entity.InvProformasMotivo;
 import inventario.helper.ConversionesInventario;
 import java.util.List;
 import javax.ejb.Stateless;
+import produccion.TO.PrdConsumosPorPiscinaPeriodoTO;
 
 /**
  *
@@ -2232,5 +2233,20 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
     @Override
     public inventario.TO.InvComprasTO getComprasTO(String empresa, String periodo, String motivo, String numeroCompra) throws Exception {
         return inventario.helper.ConversionesInventario.convertirInvCompras_InvComprasTO(invComprasFacadeLocal.find(new inventario.entity.InvComprasPK(empresa, periodo, motivo, numeroCompra)));
+    }
+
+    public java.util.List<inventario.TO.InvComprasPorPeriodoTO> getComprasPorPeriodo(String empresa, 
+            String codigoSector, String fechaInicio, String fechaFin) throws Exception {
+        fechaInicio = fechaInicio.isEmpty() ? null : "'" + fechaInicio + "'";
+        fechaFin = fechaFin.isEmpty() ? null : "'" + fechaFin + "'";
+        codigoSector = codigoSector.isEmpty() ? null : "'" + codigoSector + "'";        
+
+        String sql = "SELECT * FROM inventario.fun_compras_por_periodo('" + empresa + "', " + codigoSector + ", "
+                + fechaInicio + ", " + fechaFin + ");";
+        
+        System.out.println("SQLLL: "+sql);
+        return inventario.helper.ConversionesInventario.convertirInvComprasPorPeriodo_InvComprasPorPeriodoTO(em.createNativeQuery(
+                sql).getResultList());
+        
     }
 }

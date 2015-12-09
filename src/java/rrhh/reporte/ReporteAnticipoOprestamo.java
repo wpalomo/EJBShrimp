@@ -23,6 +23,7 @@ public class ReporteAnticipoOprestamo implements Serializable{
     private String formaPago;
     private String referencia;
     private String observaciones;
+    private BigDecimal sueldo;
 
     public ReporteAnticipoOprestamo() {
     }
@@ -119,4 +120,14 @@ public class ReporteAnticipoOprestamo implements Serializable{
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
+
+    public BigDecimal getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(BigDecimal sueldo) {
+        this.sueldo = sueldo;
+    }
+    
+    
 }

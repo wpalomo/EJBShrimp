@@ -39,6 +39,7 @@ public class RhXiiiSueldo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "xiii_secuencial")
     private Integer xiiiSecuencial;

@@ -12,7 +12,11 @@ import banco.entity.BanCheque;
 import banco.helper.ConversionesBanco;
 import contabilidad.TO.ConDetalleTO;
 import contabilidad.TO.ConFunContabilizarComprasDetalleTO;
-import contabilidad.entity.*;
+
+import contabilidad.entity.ConContablePK;
+import contabilidad.entity.ConDetalle;
+import helper.RetornoTO;
+
 import inventario.TO.*;
 import inventario.entity.InvComprasMotivoAnulacion;
 import inventario.entity.InvProductoSaldos;
@@ -9687,4 +9691,34 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                 sisUsuarioEmpresaTO, reporteCompraDetalles, cmFormaImprimir);
     }
     // </editor-fold>
+
+    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, 
+            String fechaFin, SisInfoTO sisInfoTO) throws Exception {
+        String mensaje = "";
+        helper.RetornoTO retornoTO = new helper.RetornoTO();
+        try {
+            java.util.List<inventario.TO.InvComprasPorPeriodoTO> prdComprasPorPeriodoTOs = operacionesInventarioDAOLocal.getComprasPorPeriodo(empresa, codigoSector, fechaInicio, fechaFin);
+            mensaje = "T";
+            inventario.helper.NumeroColumnaDesconocidadComprasPorPeriodo obj = new inventario.helper.NumeroColumnaDesconocidadComprasPorPeriodo();
+            obj.agruparCabeceraColumnas(prdComprasPorPeriodoTOs);
+            obj.agruparProductos(prdComprasPorPeriodoTOs);
+            obj.llenarObjetoParaTabla(prdComprasPorPeriodoTOs);
+            retornoTO.setColumnasFaltantes(obj.getColumnasFaltantes());
+            retornoTO.setColumnas(obj.getColumnas());
+            retornoTO.setDatos(obj.getDatos());
+        } catch (Exception e) {
+            comprobar = false;
+            mensaje = "FOcurrió un error al obtener los datos de la Base de Datos. \nContacte con el administrador...";
+            validaciones.Excepciones.guardarExcepcionesEJB(
+                    e,
+                    getClass().getName(),
+                    "getConsumoProductosProceso",
+                    sisInfoTO,
+                    operacionesSistemaDAOTransaccionLocal);
+        } finally {
+            retornoTO.setMensaje(mensaje);
+            return retornoTO;
+        }
+        
+    }
 }

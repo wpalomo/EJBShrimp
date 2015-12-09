@@ -4,6 +4,7 @@
  */
 package inventario.facade;
 
+import helper.RetornoTO;
 import inventario.TO.*;
 import inventario.reporte.*;
 import java.util.LinkedList;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import javax.ejb.Remote;
 import net.sf.jasperreports.engine.JasperPrint;
+import sistema.TO.SisInfoTO;
 import sistema.TO.SisUsuarioEmpresaTO;
 
 /**
@@ -870,6 +872,9 @@ public interface OperacionesInventarioFacadeRemote1 {
             java.lang.String compNumero) throws java.lang.Exception;
 
     public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero) throws java.lang.Exception;
+
+    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, 
+            String fechaFin, SisInfoTO sisInfoTO)throws java.lang.Exception;
     
 
 
