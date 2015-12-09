@@ -4,6 +4,7 @@
  */
 package inventario.business;
 
+import helper.RetornoTO;
 import inventario.TO.*;
 import inventario.reporte.*;
 import java.util.LinkedList;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import javax.ejb.Local;
 import net.sf.jasperreports.engine.JasperPrint;
+import sistema.TO.SisInfoTO;
 import sistema.TO.SisUsuarioEmpresaTO;
 
 /**
@@ -155,6 +157,12 @@ public interface OperacionesInventarioBusinessLocal1 {
 
     inventario.TO.MensajeTO insertarInvProformasTO(inventario.TO.InvProformasTO invProformasTO, java.util.List<inventario.TO.InvProformasDetalleTO> listaInvProformasDetalleTOs, sistema.TO.SisInfoTO sisInfoTO) throws Exception;
 
+    inventario.TO.MensajeTO validarInvContableComprasDetalleTO(
+            String empresa,
+            String periodo,
+            String motivo,
+            String compraNumero,
+            sistema.TO.SisInfoTO sisInfoTO) throws Exception;
     inventario.TO.MensajeTO insertarInvContableComprasTO(
             String empresa,
             String periodo,
@@ -483,6 +491,8 @@ public interface OperacionesInventarioBusinessLocal1 {
             java.lang.String compNumero)throws Exception;
 
     public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception;
+
+    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, String fechaFin, SisInfoTO sisInfoTO)throws Exception;
  
     
     

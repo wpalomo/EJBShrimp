@@ -319,6 +319,7 @@ public class ConversionesContabilidad {
         conContable.setConDetalle(conContableTO.getConDetalle());
         conContable.setConObservaciones(conContableTO.getConObservaciones());
         conContable.setUsrCodigo(conContableTO.getUsrInsertaContable());
+        System.out.println("en conversion codigo emp: "+conContableTO.getEmpCodigo());
         conContable.setUsrEmpresa(conContableTO.getEmpCodigo());
         conContable.setUsrFechaInserta(Validacion.fechaString_Date(conContableTO.getUsrFechaInsertaContable()));
         return conContable;
@@ -361,32 +362,26 @@ public class ConversionesContabilidad {
 
     public static ConDetalle convertirConDetalleTO_ConDetalle(ConDetalleTO conDetalleTO) {
         ConDetalle conDetalle = new ConDetalle();
-//        conDetalle.setEmpCodigo(conDetalleTO.getEmpCodigo());
-//        conDetalle.setPerCodigo(conDetalleTO.getPerCodigo());
-//        conDetalle.setTipCodigo(conDetalleTO.getTipCodigo());
-//        conDetalle.setTipCodigo(conDetalleTO.getTipCodigo());
-//        conDetalle.setConNumero(conDetalleTO.getConNumero()); ////objeto contable
         conDetalle.setDetSecuencia(conDetalleTO.getDetSecuencia() == 0 ? 0 : conDetalleTO.getDetSecuencia());
-//        conDetalle.setCtaCodigo(conDetalleTO.getConCtaCodigo()); ////objeto cuentas
-        conDetalle.setDetSaldo(BigDecimal.ZERO);
-        conDetalle.setSecCodigo(conDetalleTO.getSecCodigo());
-        conDetalle.setSecEmpresa(conDetalleTO.getEmpCodigo());
-        conDetalle.setPisEmpresa(conDetalleTO.getEmpCodigo());
-        conDetalle.setPisNumero(conDetalleTO.getPisNumero());
-        conDetalle.setPisSector(conDetalleTO.getPisSector());
         conDetalle.setDetDocumento(conDetalleTO.getDetDocumento());
         conDetalle.setDetDebitoCredito(conDetalleTO.getDetDebitoCredito());
         conDetalle.setDetValor(conDetalleTO.getDetValor());
+        conDetalle.setDetSaldo(BigDecimal.ZERO);
         conDetalle.setDetGenerado(conDetalleTO.getDetGenerado());
         conDetalle.setDetReferencia(conDetalleTO.getDetReferencia());
         conDetalle.setDetObservaciones(conDetalleTO.getDetObservaciones());
         conDetalle.setDetOrden(conDetalleTO.getDetOrden());
+        conDetalle.setSecEmpresa(conDetalleTO.getEmpCodigo());
+        conDetalle.setSecCodigo(conDetalleTO.getSecCodigo());
+        conDetalle.setPisEmpresa(conDetalleTO.getEmpCodigo());
+        conDetalle.setPisSector(conDetalleTO.getPisSector());
+        conDetalle.setPisNumero(conDetalleTO.getPisNumero());
         return conDetalle;
     }
 
     public static ConDetalle convertirConFunContabilizarDetalleTO_ConDetalle(ConFunContabilizarComprasDetalleTO conDetalleTO) {
         ConDetalle conDetalle = new ConDetalle();
-        conDetalle.setDetSecuencia(conDetalleTO.getDetSecuencia() == 0 ? 0 : conDetalleTO.getDetSecuencia());
+        conDetalle.setDetSecuencia(new Integer( conDetalleTO.getDetSecuencia() == 0 ? "0" : conDetalleTO.getDetSecuencia().toString()));
         conDetalle.setDetDocumento(conDetalleTO.getDetDocumento());
         conDetalle.setDetDebitoCredito(conDetalleTO.getDetDebitoCredito());
         conDetalle.setDetValor(conDetalleTO.getDetValor());
@@ -400,61 +395,17 @@ public class ConversionesContabilidad {
         conDetalle.setPisEmpresa(conDetalleTO.getPisEmpresa());
         conDetalle.setPisSector(conDetalleTO.getPisSector());
         conDetalle.setPisNumero(conDetalleTO.getPisNumero());
-        //conDetalle.setConContable(new ConContable(new ConContablePK(conDetalleTO.getCtaEmpresa(), conDetalleTO.getCtaCodigo())));
-        conDetalle.setConContable(new ConContable(new ConContablePK(conDetalleTO.getConEmpresa(),
-                conDetalleTO.getConPeriodo(), conDetalleTO.getConTipo(),
+        conDetalle.setConContable(new ConContable(new ConContablePK(
+                conDetalleTO.getConEmpresa(),
+                conDetalleTO.getConPeriodo(), 
+                conDetalleTO.getConTipo(),
                 conDetalleTO.getConNumero())));
+        System.out.println("conDetalleTO.getCtaEmpresa()   "+conDetalleTO.getCtaEmpresa());
+        System.out.println("conDetalleTO.getCtaCodigo()   "+conDetalleTO.getCtaCodigo());
         conDetalle.setConCuentas(new ConCuentas(new ConCuentasPK(conDetalleTO.getCtaEmpresa(), conDetalleTO.getCtaCodigo())));
-        
-        System.out.println("setSecEmpresa   "+conDetalle.getSecEmpresa());
         return conDetalle;
     }
 
-//    public static List<ConContableTO> convertirListaConContable_ListaConContableTO(List datos) {
-//        List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
-//        for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
-//            Object obj = i$.next();
-//            Object[] array = ((java.util.List) obj).toArray(); //Object[] array = (Object[]) obj;
-//            String dato1;
-//            try {
-//                dato1 = array[0].toString();
-//            } catch (Exception e) {
-//                dato1 = null;
-//            }
-//            String dato2;
-//            try {
-//                dato2 = array[1].toString();
-//            } catch (Exception e) {
-//                dato2 = null;
-//            }
-//            String dato3;
-//            try {
-//                dato3 = array[2].toString();
-//            } catch (Exception e) {
-//                dato3 = null;
-//            }
-//            Boolean dato4;
-//            try {
-//                dato4 = Boolean.valueOf(array[3].toString());
-//            } catch (Exception e) {
-//                dato4 = null;
-//            }
-//            String dato5;
-//            try {
-//                dato5 = array[4].toString();
-//            } catch (Exception e) {
-//                dato5 = null;
-//            }
-//            String dato6;
-//            try {
-//                dato6 = array[5].toString();
-//            } catch (Exception e) {
-//                dato6 = null;
-//            }
-//            lista.add(new ConCuentasTO(dato1, dato2, dato3, dato4, dato5, dato6));
-//        }
-//        return lista;
-//    }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="CONVERSIONES DE ESTRUCTURA CONTABLE">
     public static ConEstructura convertirConEstructuraTO_ConEstructura(ConEstructuraTO conEstructuraTO) {
@@ -2094,9 +2045,9 @@ public class ConversionesContabilidad {
             Object obj = i$.next();
             Object[] array = ((java.util.List) obj).toArray();
 
-            Integer detSecuencia;
+            Long detSecuencia;
             try {
-                detSecuencia = Integer.parseInt(array[0].toString());
+                detSecuencia = Long.parseLong(array[0].toString());
             } catch (Exception e) {
                 detSecuencia = null;
             }

@@ -40,6 +40,7 @@ public class GenerarReporteRrhh implements GenerarReporteRrhhLocal {
             parametros.put("p_empresa_telefono", sisUsuario.getEmpTelefono());
             parametros.put("p_usuario_nick", sisUsuario.getUsrNick());
             parametros.put("p_fecha_hora", Validacion.fechaSistema());
+//            parametros.put("p_", Validacion.fechaSistema());
 
             return JasperFillManager.fillReport(JasperCompileManager.compileReport(JRXmlLoader.load(rutaReportes + nombreReporte)),
                     parametros, new JRBeanCollectionDataSource(list));

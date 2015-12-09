@@ -5,6 +5,7 @@
 package inventario.facade;
 
 import anexos.TO.AnxVentaTO;
+import helper.RetornoTO;
 import inventario.TO.*;
 import inventario.entity.InvVentasMotivoAnulacion;
 import inventario.reporte.*;
@@ -197,6 +198,20 @@ public class OperacionesInventarioFacade1 implements OperacionesInventarioFacade
         return operacionesInventarioBusinessLocal.insertarInvProformasTO(invProformasTO, listaInvProformasDetalleTOs, sisInfoTO);
     }
 
+    public inventario.TO.MensajeTO validarInvContableComprasDetalleTO(
+            String empresa,
+            String periodo,
+            String motivo,
+            String compraNumero,
+            sistema.TO.SisInfoTO sisInfoTO) throws Exception{
+        return operacionesInventarioBusinessLocal.validarInvContableComprasDetalleTO(
+                empresa, 
+                periodo, 
+                motivo, 
+                compraNumero, 
+                sisInfoTO);
+    }
+            
     public inventario.TO.MensajeTO insertarInvContableComprasTO(
             String empresa,
             String periodo,
@@ -1270,4 +1285,10 @@ public class OperacionesInventarioFacade1 implements OperacionesInventarioFacade
                 sisUsuarioEmpresaTO, reporteCompraDetalles, cmFormaImprimir);
     }
     // </editor-fold>
+
+    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, 
+            String fechaFin, SisInfoTO sisInfoTO) throws Exception {
+        return operacionesInventarioBusinessLocal.getComprasPorPeriodo(empresa, codigoSector, fechaInicio, 
+                fechaFin, sisInfoTO);
+    }
 }

@@ -57,6 +57,7 @@ public class OperacionesContabilidadDAO implements OperacionesContabilidadDAOLoc
     ConDetalleFacadeLocal conDetalleFacadeLocal;
     @EJB
     contabilidad.entity.DAO.ConCuentasFlujoFacadeLocal conCuentasFlujoFacadeLocal;
+    
 
     // <editor-fold defaultstate="collapsed" desc="BUSCAR ENTIDADES">
     @Override
@@ -68,6 +69,7 @@ public class OperacionesContabilidadDAO implements OperacionesContabilidadDAOLoc
     public ConCuentas buscarCuentas(String empCodigo, String codCuenta) throws Exception {
         return conCuentasFacadeLocal.find(new ConCuentasPK(empCodigo, codCuenta));
     }
+  
 
     @Override
     public contabilidad.entity.ConCuentasFlujoDetalle buscarCuentasFlujoDetalle(String codEmpresa, String codCuenta, char detCreditoDebito) throws Exception {
@@ -772,10 +774,25 @@ public class OperacionesContabilidadDAO implements OperacionesContabilidadDAOLoc
     /////////////////DETALLE DE CONTABLE COMPRA Y VENTA
     //'UTN', '2015-11', '101', '0000002'
     @Override
-    public java.util.List<contabilidad.TO.ConFunContabilizarComprasDetalleTO> getConFunContabilizarComprasDetalle(String empresa, String periodo, String motivo, String numeroCompra) throws Exception {
-        String sql = "SELECT * FROM contabilidad.fun_contabilizar_compras('" + empresa + "','" + periodo + "', '" + motivo + "', '" + numeroCompra + "');";
+    public java.util.List<contabilidad.TO.ConFunContabilizarComprasDetalleTO> getConFunContabilizarComprasDetalle(
+            String empresa, 
+            String periodo, 
+            String motivo, 
+            String numeroCompra,
+            String validar) throws Exception {
+        validar= validar == null ? null : "'"+validar+"'";
+        String sql = "SELECT * FROM contabilidad.fun_contabilizar_compras('" + empresa + "','" + periodo + "', '" + motivo + "', '" + numeroCompra + "',"+validar+");";
         System.out.println("" + sql);
         return contabilidad.helper.ConversionesContabilidad.convertirgetConFunContabilizarComprasDetalle_ConFunContabilizarComprasDetalleTO(
                 em.createNativeQuery(sql).getResultList());
     }
+    @Override
+    public List<contabilidad.TO.ConFunContabilizarComprasDetalleTO> getConDetalleEliminarTO(String empresa,
+            String perCodigo, String tipCodigo, String numContable) throws Exception {
+         String sql= "SELECT * FROM contabilidad.con_detalle WHERE con_empresa = ('" + empresa + "') AND con_tipo "
+                + "= ('" + tipCodigo + "') AND con_periodo = ('" + perCodigo + "') AND "
+                + "con_numero = ('" + numContable + "') ORDER BY det_orden";
+        return ConversionesContabilidad.convertirgetConFunContabilizarComprasDetalle_ConFunContabilizarComprasDetalleTO(em.createNativeQuery(sql).getResultList());
+    }
+    
 }

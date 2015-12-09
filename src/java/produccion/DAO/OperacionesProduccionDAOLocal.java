@@ -152,4 +152,6 @@ public interface OperacionesProduccionDAOLocal {
     
     Boolean comprobarPrdBalanceado(String empresa, String codigoPrincipal) throws Exception;
     java.util.List<produccion.TO.PrdListaConsultaGrameajePromedioPorPiscinaTO> getListaConsultaGrameajePromedioPorPiscinaTOs(String empresa, String sector) throws Exception ;
+
+    
 }

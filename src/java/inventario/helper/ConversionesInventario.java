@@ -4,6 +4,7 @@
  */
 package inventario.helper;
 
+import inventario.TO.InvComprasPorPeriodoTO;
 import inventario.TO.InvListaConsultaTransferenciaTO;
 import inventario.TO.InvListaConsultaVentaTO;
 import inventario.entity.InvProveedor;
@@ -6930,5 +6931,45 @@ public class ConversionesInventario {
         }
 
 
+    }
+
+    public static List<InvComprasPorPeriodoTO> convertirInvComprasPorPeriodo_InvComprasPorPeriodoTO(List datos) {
+        java.util.List lista = new java.util.ArrayList(1);
+        for (java.util.Iterator i$ = datos.iterator(); i$.hasNext();) {
+            Object obj = i$.next();
+            Object[] array = ((java.util.List) obj).toArray(); //Object[] array = (Object[]) obj;
+            String dato1;
+            try {
+                dato1 = array[0].toString();
+            } catch (Exception e) {
+                dato1 = null;
+            }
+            String dato2;
+            try {
+                dato2 = array[1].toString();
+            } catch (Exception e) {
+                dato2 = null;
+            }
+            String dato3;
+            try {
+                dato3 = array[2].toString();
+            } catch (Exception e) {
+                dato3 = null;
+            }
+            String dato4;
+            try {
+                dato4 = array[3].toString();
+            } catch (Exception e) {
+                dato4 = null;
+            }
+            java.math.BigDecimal dato5;
+            try {
+                dato5 = new java.math.BigDecimal(array[4].toString());
+            } catch (Exception e) {
+                dato5 = null;
+            }
+            lista.add(new inventario.TO.InvComprasPorPeriodoTO(dato1, dato2, dato3, dato4, dato5));
+        }
+        return lista;
     }
 }

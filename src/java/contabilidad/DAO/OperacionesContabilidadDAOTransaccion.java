@@ -231,7 +231,13 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override
-    public boolean modificarConContableComprasMayorizar(ConContable conContable, List<ConDetalle> listaConDetalle, List<ConDetalle> listaConDetalleEliminar, inventario.entity.InvCompras invCompras, SisSuceso sisSuceso) throws Exception {
+    public boolean modificarConContableComprasMayorizar(
+            ConContable conContable, 
+            List<ConDetalle> listaConDetalle, 
+            List<ConDetalle> listaConDetalleEliminar, 
+            inventario.entity.InvCompras invCompras,
+            List<banco.entity.BanCheque> listaBanChequeEliminar,
+            SisSuceso sisSuceso) throws Exception {
         for (int i = 0; i < listaConDetalle.size(); i++) {
             listaConDetalle.get(i).setConContable(conContable);
             em.persist(listaConDetalle.get(i));
@@ -240,11 +246,15 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
             listaConDetalleEliminar.get(i).setConContable(conContable);
             em.remove(em.merge(listaConDetalleEliminar.get(i)));
         }
+        
+        for (int i = 0; i < listaBanChequeEliminar.size(); i++) {
+            if(listaBanChequeEliminar.get(i)!= null)
+                em.remove(em.merge(listaBanChequeEliminar.get(i)));
+        }
         em.merge(invCompras);
 
         em.merge(conContable);
         em.persist(sisSuceso);
-
         return true;
     }
 
@@ -497,7 +507,7 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
 //                listaConDetalle.get(i).setConNumero(conContable.getConContablePK().getConNumero());
 //                listaConDetalle.get(i).setPerCodigo(conContable.getConContablePK().getPerCodigo());
             //listaConDetalle.get(i).setDetSaldo(BigDecimal.ZERO);
-           // listaConDetalle.get(i).setSecEmpresa(conContable);
+            // listaConDetalle.get(i).setSecEmpresa(conContable);
             em.persist(listaConDetalle.get(i));
         }
         if (nuevo) {
@@ -570,7 +580,7 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
         }
         em.persist(conContable);
         for (RhXiiiSueldo rhXiiiSueldo : rhXiiiSueldos) {
-            em.merge(rhXiiiSueldo);
+            em.persist(rhXiiiSueldo);
         }
         for (int i = 0; i < sisSucesos.size(); i++) {
             em.persist(sisSucesos.get(i));
@@ -986,13 +996,15 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
                     + conContable.getConContablePK().getConTipo() + ", de la numeracion "
                     + conContable.getConContablePK().getConNumero());
         }
+
         
-//        if(listaConDetalle!= null){
-//            for (int i = 0; i < listaConDetalle.size(); i++) {
-//                listaConDetalle.get(i).setDetSaldo(new BigDecimal("0.00"));
-//                listaConDetalle.get(i).setSecEmpresa(listaConDetalle.get(i).getConContable().getConContablePK().getConEmpresa());
-//            }
-//        }
+        if(listaConDetalle!= null && invCompras == null){
+            for (int i = 0; i < listaConDetalle.size(); i++) {
+                listaConDetalle.get(i).setDetSaldo(new BigDecimal("0.00"));
+                listaConDetalle.get(i).setSecEmpresa(listaConDetalle.get(i).getConContable().getConContablePK().getConEmpresa());
+            }
+        }
+
 
         sisSuceso.setSusClave(conContable.getConContablePK().getConPeriodo() + " "
                 + conContable.getConContablePK().getConTipo() + " "
@@ -1017,9 +1029,9 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
                     && carPagosAnticipos == null
                     && carCobrosAnticipos == null
                     && banCheque == null) {
-                
+
                 retorno = insertarConContable(conContable, listaConDetalle, sisSuceso, conNumeracion, nuevo);
-            
+
             } else {
                 //ANTICIPO
                 if (rhAnticipos != null) {
@@ -1084,11 +1096,13 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
                     retorno = insertarRhProvisionesConContable(conContable, listaConDetalle, sisSucesos, conNumeracion, nuevo, rhRoles);
                 }
                 //PROVISIONES
+                System.out.println("antes del if "+rhXiiiSueldos.get(0).getXiiiBaseImponible());
                 if ((rhXiiiSueldos != null)) {
                     java.util.List<sistemaWeb.entity.SisSuceso> sisSucesos = new java.util.ArrayList();
                     sisSucesos.add(sisSuceso);
 
                     for (RhXiiiSueldo rhXiiiSueldo : rhXiiiSueldos) {
+                        System.out.println("tabla xii sueldos base imp::::: "+rhXiiiSueldo.getXiiiBaseImponible());
                         rhXiiiSueldo.setConNumero(rellenarConCeros + String.valueOf(conNumeracion.getNumSecuencia()));
                     }
                     retorno = insertarRhXiiiSueldoConContable(conContable, listaConDetalle, sisSucesos, conNumeracion, nuevo, rhXiiiSueldos);

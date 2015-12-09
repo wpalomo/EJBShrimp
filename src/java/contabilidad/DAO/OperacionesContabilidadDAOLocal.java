@@ -242,5 +242,8 @@ public interface OperacionesContabilidadDAOLocal {
           String empresa, 
           String periodo, 
           String motivo, 
-          String numeroCompra) throws Exception;
+          String numeroCompra,
+          String validar) throws Exception;
+  List<contabilidad.TO.ConFunContabilizarComprasDetalleTO> getConDetalleEliminarTO(String empresa,
+            String perCodigo, String tipCodigo, String numContable) throws Exception;
 }

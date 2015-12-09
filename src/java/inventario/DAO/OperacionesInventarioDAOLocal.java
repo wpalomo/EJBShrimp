@@ -8,7 +8,9 @@ package inventario.DAO;
 import inventario.TO.InvFunComprasConsolidandoProductosTO;
 import inventario.TO.InvFunConsumosTO;
 import inventario.TO.InvFunVentasTO;
+import java.util.List;
 import javax.ejb.Local;
+import produccion.TO.PrdConsumosPorPiscinaPeriodoTO;
 
 /**
  *
@@ -297,4 +299,7 @@ public interface OperacionesInventarioDAOLocal {
     public Object[] getCompra(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception;
 
     public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception;
+
+    public java.util.List<inventario.TO.InvComprasPorPeriodoTO> getComprasPorPeriodo(String empresa, 
+            String codigoSector, String fechaInicio, String fechaFin)throws Exception;
 }
