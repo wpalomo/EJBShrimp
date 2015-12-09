@@ -1096,13 +1096,12 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
                     retorno = insertarRhProvisionesConContable(conContable, listaConDetalle, sisSucesos, conNumeracion, nuevo, rhRoles);
                 }
                 //PROVISIONES
-                System.out.println("antes del if "+rhXiiiSueldos.get(0).getXiiiBaseImponible());
+               
                 if ((rhXiiiSueldos != null)) {
                     java.util.List<sistemaWeb.entity.SisSuceso> sisSucesos = new java.util.ArrayList();
                     sisSucesos.add(sisSuceso);
 
                     for (RhXiiiSueldo rhXiiiSueldo : rhXiiiSueldos) {
-                        System.out.println("tabla xii sueldos base imp::::: "+rhXiiiSueldo.getXiiiBaseImponible());
                         rhXiiiSueldo.setConNumero(rellenarConCeros + String.valueOf(conNumeracion.getNumSecuencia()));
                     }
                     retorno = insertarRhXiiiSueldoConContable(conContable, listaConDetalle, sisSucesos, conNumeracion, nuevo, rhXiiiSueldos);
