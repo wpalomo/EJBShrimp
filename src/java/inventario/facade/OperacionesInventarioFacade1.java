@@ -5,6 +5,7 @@
 package inventario.facade;
 
 import anexos.TO.AnxVentaTO;
+import helper.RetornoTO;
 import inventario.TO.*;
 import inventario.entity.InvVentasMotivoAnulacion;
 import inventario.reporte.*;
@@ -1270,4 +1271,10 @@ public class OperacionesInventarioFacade1 implements OperacionesInventarioFacade
                 sisUsuarioEmpresaTO, reporteCompraDetalles, cmFormaImprimir);
     }
     // </editor-fold>
+
+    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, 
+            String fechaFin, SisInfoTO sisInfoTO) throws Exception {
+        return operacionesInventarioBusinessLocal.getComprasPorPeriodo(empresa, codigoSector, fechaInicio, 
+                fechaFin, sisInfoTO);
+    }
 }

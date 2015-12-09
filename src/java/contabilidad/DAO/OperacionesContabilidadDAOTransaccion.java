@@ -570,7 +570,7 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
         }
         em.persist(conContable);
         for (RhXiiiSueldo rhXiiiSueldo : rhXiiiSueldos) {
-            em.merge(rhXiiiSueldo);
+            em.persist(rhXiiiSueldo);
         }
         for (int i = 0; i < sisSucesos.size(); i++) {
             em.persist(sisSucesos.get(i));
@@ -987,12 +987,12 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
                     + conContable.getConContablePK().getConNumero());
         }
         
-//        if(listaConDetalle!= null){
-//            for (int i = 0; i < listaConDetalle.size(); i++) {
-//                listaConDetalle.get(i).setDetSaldo(new BigDecimal("0.00"));
-//                listaConDetalle.get(i).setSecEmpresa(listaConDetalle.get(i).getConContable().getConContablePK().getConEmpresa());
-//            }
-//        }
+        if(listaConDetalle!= null && invCompras == null){
+            for (int i = 0; i < listaConDetalle.size(); i++) {
+                listaConDetalle.get(i).setDetSaldo(new BigDecimal("0.00"));
+                listaConDetalle.get(i).setSecEmpresa(listaConDetalle.get(i).getConContable().getConContablePK().getConEmpresa());
+            }
+        }
 
         sisSuceso.setSusClave(conContable.getConContablePK().getConPeriodo() + " "
                 + conContable.getConContablePK().getConTipo() + " "
@@ -1084,11 +1084,13 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
                     retorno = insertarRhProvisionesConContable(conContable, listaConDetalle, sisSucesos, conNumeracion, nuevo, rhRoles);
                 }
                 //PROVISIONES
+                System.out.println("antes del if "+rhXiiiSueldos.get(0).getXiiiBaseImponible());
                 if ((rhXiiiSueldos != null)) {
                     java.util.List<sistemaWeb.entity.SisSuceso> sisSucesos = new java.util.ArrayList();
                     sisSucesos.add(sisSuceso);
 
                     for (RhXiiiSueldo rhXiiiSueldo : rhXiiiSueldos) {
+                        System.out.println("tabla xii sueldos base imp::::: "+rhXiiiSueldo.getXiiiBaseImponible());
                         rhXiiiSueldo.setConNumero(rellenarConCeros + String.valueOf(conNumeracion.getNumSecuencia()));
                     }
                     retorno = insertarRhXiiiSueldoConContable(conContable, listaConDetalle, sisSucesos, conNumeracion, nuevo, rhXiiiSueldos);

@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class PrdListaSectorTO implements Serializable{
 
     private String secCodigo;
-    private String secNombre;
+    private String nomSector;
     private String secLatitud;
     private String secLongitud;
     private Boolean secActivo;
@@ -22,9 +22,9 @@ public class PrdListaSectorTO implements Serializable{
     public PrdListaSectorTO() {
     }
 
-    public PrdListaSectorTO(String secCodigo, String secNombre, String secLatitud, String secLongitud, Boolean secActivo) {
+    public PrdListaSectorTO(String secCodigo, String nomSector, String secLatitud, String secLongitud, Boolean secActivo) {
         this.secCodigo = secCodigo;
-        this.secNombre = secNombre;
+        this.nomSector = nomSector;
         this.secLatitud = secLatitud;
         this.secLongitud = secLongitud;
         this.secActivo = secActivo;
@@ -63,16 +63,16 @@ public class PrdListaSectorTO implements Serializable{
     }
 
     public String getSecNombre() {
-        return secNombre;
+        return nomSector;
     }
 
-    public void setSecNombre(String secNombre) {
-        this.secNombre = secNombre;
+    public void setSecNombre(String nomSector) {
+        this.nomSector = nomSector;
     }
 
     @Override
     public String toString(){
-        return this.secCodigo + " " + this.secNombre;
+        return this.secCodigo + " " + this.nomSector;
     }
 
 }

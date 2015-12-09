@@ -63,6 +63,7 @@ public class ReportesRol implements Serializable{
     private String referencia;
     private BigDecimal valor;
     private String nacionalidad;
+    private String nomSector;
 
     public ReportesRol(String comprobante, String cedula, String nombres, String fecha, String rolCargo, String rolDesde, String rolHasta, Integer rolDiasLaboradosReales, Integer rolDiasFaltasReales, Integer rolDiasExtrasReales, Integer rolDiasDescansoReales, Integer rolDiasPagadosReales, Integer rolDiasPermisoMedico, BigDecimal empSueldo, boolean empAcumulaFondoReserva, BigDecimal rolSaldoAnterior, BigDecimal rolIngresos, BigDecimal rolBonos, BigDecimal rolBonosnd, BigDecimal rolBonosFijo, BigDecimal rolBonosFijoNd, BigDecimal rolOtrosIngresos, BigDecimal rolOtrosIngresosNd, BigDecimal rolViaticos, BigDecimal rolFondoReserva, BigDecimal totalIngresos, BigDecimal rolDescuento, BigDecimal rolLiqXiii, BigDecimal rolLiqXiv, BigDecimal rolLiqVacaciones, BigDecimal rolLiqSalarioDigno, BigDecimal rolLiqDesahucio, BigDecimal rolLiqDesahucioIntempestivo, BigDecimal rolLiqBonificacion, BigDecimal rolAnticipos, BigDecimal rolPrestamos, BigDecimal empDescuentoPermisoMedico, BigDecimal rolIess, BigDecimal rolRetencionFuente, String sedConcepto, String sedDetalle, String sedCp, String sedCc, String sedFecha, BigDecimal sedValor, String sedObservaciones, String formaPago, String referencia, BigDecimal valor, String nacionalidad) {
         this.comprobante = comprobante;
@@ -117,6 +118,62 @@ public class ReportesRol implements Serializable{
         this.nacionalidad = nacionalidad;
     }
 
+    public ReportesRol(String comprobante, String cedula, String nombres, String fecha, String rolCargo, String rolDesde, String rolHasta, Integer rolDiasLaboradosReales, Integer rolDiasFaltasReales, Integer rolDiasExtrasReales, Integer rolDiasDescansoReales, Integer rolDiasPagadosReales, Integer rolDiasPermisoMedico, BigDecimal empSueldo, boolean empAcumulaFondoReserva, BigDecimal rolSaldoAnterior, BigDecimal rolIngresos, BigDecimal rolBonos, BigDecimal rolBonosnd, BigDecimal rolBonosFijo, BigDecimal rolBonosFijoNd, BigDecimal rolOtrosIngresos, BigDecimal rolOtrosIngresosNd, BigDecimal rolViaticos, BigDecimal rolFondoReserva, BigDecimal totalIngresos, BigDecimal rolDescuento, BigDecimal rolLiqXiii, BigDecimal rolLiqXiv, BigDecimal rolLiqVacaciones, BigDecimal rolLiqSalarioDigno, BigDecimal rolLiqDesahucio, BigDecimal rolLiqDesahucioIntempestivo, BigDecimal rolLiqBonificacion, BigDecimal rolAnticipos, BigDecimal rolPrestamos, BigDecimal empDescuentoPermisoMedico, BigDecimal rolIess, BigDecimal rolRetencionFuente, String sedConcepto, String sedDetalle, String sedCp, String sedCc, String sedFecha, BigDecimal sedValor, String sedObservaciones, String formaPago, String referencia, BigDecimal valor, String nacionalidad, String nomSector) {
+        this.comprobante = comprobante;
+        this.cedula = cedula;
+        this.nombres = nombres;
+        this.fecha = fecha;
+        this.rolCargo = rolCargo;
+        this.rolDesde = rolDesde;
+        this.rolHasta = rolHasta;
+        this.rolDiasLaboradosReales = rolDiasLaboradosReales;
+        this.rolDiasFaltasReales = rolDiasFaltasReales;
+        this.rolDiasExtrasReales = rolDiasExtrasReales;
+        this.rolDiasDescansoReales = rolDiasDescansoReales;
+        this.rolDiasPagadosReales = rolDiasPagadosReales;
+        this.rolDiasPermisoMedico = rolDiasPermisoMedico;
+        this.empSueldo = empSueldo;
+        this.empAcumulaFondoReserva = empAcumulaFondoReserva;
+        this.rolSaldoAnterior = rolSaldoAnterior;
+        this.rolIngresos = rolIngresos;
+        this.rolBonos = rolBonos;
+        this.rolBonosnd = rolBonosnd;
+        this.rolBonosFijo = rolBonosFijo;
+        this.rolBonosFijoNd = rolBonosFijoNd;
+        this.rolOtrosIngresos = rolOtrosIngresos;
+        this.rolOtrosIngresosNd = rolOtrosIngresosNd;
+        this.rolViaticos = rolViaticos;
+        this.rolFondoReserva = rolFondoReserva;
+        this.totalIngresos = totalIngresos;
+        this.rolDescuento = rolDescuento;
+        this.rolLiqXiii = rolLiqXiii;
+        this.rolLiqXiv = rolLiqXiv;
+        this.rolLiqVacaciones = rolLiqVacaciones;
+        this.rolLiqSalarioDigno = rolLiqSalarioDigno;
+        this.rolLiqDesahucio = rolLiqDesahucio;
+        this.rolLiqDesahucioIntempestivo = rolLiqDesahucioIntempestivo;
+        this.rolLiqBonificacion = rolLiqBonificacion;
+        this.rolAnticipos = rolAnticipos;
+        this.rolPrestamos = rolPrestamos;
+        this.empDescuentoPermisoMedico = empDescuentoPermisoMedico;
+        this.rolIess = rolIess;
+        this.rolRetencionFuente = rolRetencionFuente;
+        this.sedConcepto = sedConcepto;
+        this.sedDetalle = sedDetalle;
+        this.sedCp = sedCp;
+        this.sedCc = sedCc;
+        this.sedFecha = sedFecha;
+        this.sedValor = sedValor;
+        this.sedObservaciones = sedObservaciones;
+        this.formaPago = formaPago;
+        this.referencia = referencia;
+        this.valor = valor;
+        this.nacionalidad = nacionalidad;
+        this.nomSector = nomSector;
+    }
+
+    
+    
     public String getCedula() {
         return cedula;
     }
@@ -516,4 +573,16 @@ public class ReportesRol implements Serializable{
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
+
+    public String getNomSector() {
+        return nomSector;
+    }
+
+    public void setNomSector(String nomSector) {
+        this.nomSector = nomSector;
+    }
+
+    
+    
+    
 }

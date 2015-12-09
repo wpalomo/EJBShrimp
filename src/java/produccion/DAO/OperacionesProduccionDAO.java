@@ -611,6 +611,10 @@ public class OperacionesProduccionDAO implements OperacionesProduccionDAOLocal {
         codigoSector = codigoSector.isEmpty() ? null : "'" + codigoSector + "'";
         numeroPiscina = numeroPiscina.isEmpty() ? null : "'" + numeroPiscina + "'";
 
+        String sql = "SELECT * FROM produccion.fun_consumos_por_piscina_periodo('" + empresa + "', " + codigoSector + ", "
+                + numeroPiscina + ", " + fechaInicio + ", " + fechaFin + ", '" + periodo + "')";
+        
+        System.out.println("SQLLL: "+sql);
         return produccion.helper.ConversionesProduccion.convertirPrdConsumosPorPiscinaPeriodoTO_PrdConsumosPorPiscinaPeriodoTO(em.createNativeQuery(
                 "SELECT * FROM produccion.fun_consumos_por_piscina_periodo('" + empresa + "', " + codigoSector + ", "
                 + numeroPiscina + ", " + fechaInicio + ", " + fechaFin + ", '" + periodo + "')").getResultList());
