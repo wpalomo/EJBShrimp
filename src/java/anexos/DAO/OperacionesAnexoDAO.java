@@ -1048,6 +1048,34 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
          * compRetencionFechaEmision; private String eAutorizacionFecha; private
          * String eAutorizacionNumero; private Boolean eEnviadoPorCorreo;
          */
+        String sql ="SELECT  "
+                + "e_secuencial, "
+                + "anx_compra_electronica.comp_periodo, "
+                + "anx_compra_electronica.comp_motivo, "
+                + "anx_compra_electronica.comp_numero, "
+                + "prov_nombre, "
+                + "comp_retencion_numero, "
+                + "comp_retencion_fecha_emision, "
+                + "e_autorizacion_fecha, "
+                + "e_autorizacion_numero, "
+                + "e_enviado_por_correo "
+                + "FROM inventario.inv_proveedor INNER JOIN inventario.inv_compras INNER "
+                + "JOIN anexo.anx_compra INNER JOIN anexo.anx_compra_electronica "
+                + "ON anx_compra.comp_empresa = anx_compra_electronica.comp_empresa AND "
+                + "anx_compra.comp_periodo = anx_compra_electronica.comp_periodo AND "
+                + "anx_compra.comp_motivo = anx_compra_electronica.comp_motivo AND "
+                + "anx_compra.comp_numero = anx_compra_electronica.comp_numero "
+                + "ON inv_compras.comp_empresa = anx_compra.comp_empresa AND "
+                + "inv_compras.comp_periodo = anx_compra.comp_periodo AND "
+                + "inv_compras.comp_motivo = anx_compra.comp_motivo AND "
+                + "inv_compras.comp_numero = anx_compra.comp_numero "
+                + "ON inv_proveedor.prov_empresa = inv_compras.prov_empresa AND "
+                + "inv_proveedor.prov_codigo = inv_compras.prov_codigo "
+                + "WHERE emp_codigo = " + empresa + " AND "
+                + complemetoQuery + " AND "
+                + "NOT (inv_compras.comp_pendiente OR inv_compras.comp_anulado) "
+                + "ORDER BY anx_compra.comp_retencion_numero;";
+        System.out.println("SQL:"+sql);
         return anexos.helper.ConversionesAnexos.convertirAnxCompraElectronica_AnxCompraElectronicaTO(
                 em.createNativeQuery(
                 "SELECT  "

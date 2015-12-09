@@ -6183,6 +6183,9 @@ public class ConversionesRRHH {
                     dato7, dato8, dato9, dato10, dato11, dato12, dato13, dato14,
                     dato15, dato16, dato17));
         }
+        
+        //Esto es para agregar a la ultima fila de la lista la fecha de generacion de archivoPreavisoAnticipo
+        //Y no se lo toma en cuenta en la tabla ni en el excel, sino en el label de fecha de generación
         if (lista.size() > 0) {
             
             lista.add(new rrhh.TO.RhPreavisoAnticiposPrestamosSueldoTO(
