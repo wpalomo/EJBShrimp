@@ -3139,18 +3139,27 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                             rhRolTO.setRolDiasPagadosReales(rhRolTO.getRolDiasLaboradosReales() + rhRolTO.getRolDiasDescansoReales());
                             //operaciones matematicas
                             rolIngresosExtras = rhRolTO.getRolDiasExtrasReales();
+                            BigDecimal multiplicador = rhRolTO.getRolDiasPermisoMedico() >= 3 ? new BigDecimal("3") : new BigDecimal(rhRolTO.getRolDiasPermisoMedico());
+                            BigDecimal ingresoPermisoMedico2=null;
                             if (rhRolEmpleadoTO.getEmpFormaPago().equals("MENSUAL")) {
                                 //rolIngresosExtras = redondeoDecimalBigDecimal((rhRolTO.getEmpSueldo().divide(new BigDecimal(rhRolTO.getEmpDiasLaborados()), 9, RoundingMode.HALF_UP)).multiply(rhRolTO.getRolDiasExtrasReales()));
                                 rhRolTO.setRolIngresos(redondeoDecimalBigDecimal((rhRolTO.getEmpSueldo().divide(new BigDecimal(rhRolTO.getEmpDiasLaborados()), 9, RoundingMode.HALF_UP)).multiply(new BigDecimal(rhRolTO.getRolDiasLaboradosReales()))));
                                 ingresoPermisoMedico = redondeoDecimalBigDecimal((rhRolTO.getEmpSueldo().divide(new BigDecimal(rhRolTO.getEmpDiasLaborados()), 9, RoundingMode.HALF_UP)).multiply(new BigDecimal(rhRolTO.getRolDiasPermisoMedico())));
+                                ingresoPermisoMedico2 = redondeoDecimalBigDecimal((rhRolTO.getEmpSueldo().divide(new BigDecimal(rhRolTO.getEmpDiasLaborados()), 9, RoundingMode.HALF_UP)).multiply(multiplicador));
                             }
                             if (rhRolEmpleadoTO.getEmpFormaPago().equals("DIARIO")) {
                                 //rolIngresosExtras = redondeoDecimalBigDecimal((rhRolTO.getEmpSueldo().divide(new BigDecimal(rhRolTO.getEmpDiasLaborados() + rhRolTO.getEmpDiasDescanso()), 9, RoundingMode.HALF_UP)).multiply(rhRolTO.getRolDiasExtrasReales()));
                                 rhRolTO.setRolIngresos(redondeoDecimalBigDecimal((rhRolTO.getEmpSueldo().divide(new BigDecimal(rhRolTO.getEmpDiasLaborados() + rhRolTO.getEmpDiasDescanso()), 9, RoundingMode.HALF_UP)).multiply(new BigDecimal(rhRolTO.getRolDiasPagadosReales()))));
                                 ingresoPermisoMedico = redondeoDecimalBigDecimal((rhRolTO.getEmpSueldo().divide(new BigDecimal(rhRolTO.getEmpDiasLaborados() + rhRolTO.getEmpDiasDescanso()), 9, RoundingMode.HALF_UP)).multiply(new BigDecimal(rhRolTO.getRolDiasPermisoMedico())));
+                                ingresoPermisoMedico2 = redondeoDecimalBigDecimal((rhRolTO.getEmpSueldo().divide(new BigDecimal(rhRolTO.getEmpDiasLaborados() + rhRolTO.getEmpDiasDescanso()), 9, RoundingMode.HALF_UP)).multiply(multiplicador));
                             }
                             if (rhRolTO.getRolDiasPermisoMedico() > 0) {
-                                rhRolTO.setRolDescuentoPermisoMedico(redondeoDecimalBigDecimal(ingresoPermisoMedico.multiply(new BigDecimal(0.75))));
+                                if (sisInfoTO.getInfEmpresa().equals("MRC")) {
+                                    rhRolTO.setRolDescuentoPermisoMedico(redondeoDecimalBigDecimal(ingresoPermisoMedico.multiply(new BigDecimal(1.00))));
+                                    rhRolTO.setRolDescuentoPermisoMedico(rhRolTO.getRolDescuentoPermisoMedico().subtract(ingresoPermisoMedico2.multiply(new BigDecimal("0.50"))));
+                                } else {
+                                    rhRolTO.setRolDescuentoPermisoMedico(redondeoDecimalBigDecimal(ingresoPermisoMedico.multiply(new BigDecimal(0.75))));
+                                }
                             }
 
                             rhRolTO.setRolTotal(redondeoDecimalBigDecimal(rhRolTO.getRolIngresos().add(rhRolSaldoEmpleadoTO.getSaldoBono().add(rhRolSaldoEmpleadoTO.getSaldoBonond().add(rhRolSaldoEmpleadoTO.getSaldoViaticos()).add(rhRolSaldoEmpleadoTO.getSaldoAnterior()).subtract(rhRolSaldoEmpleadoTO.getSaldoAnticipo()).subtract(rhRolTO.getRolPrestamos())))));
