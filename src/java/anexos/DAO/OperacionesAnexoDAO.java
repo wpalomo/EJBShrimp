@@ -734,15 +734,15 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
 
     public AnxCuentasContablesTO getAnxCuentasContablesTO(String empresa, String nombreCuenta) throws Exception {
         if(nombreCuenta == null){
-            System.out.println("nombreCuenta es nullll");
-            return ConversionesAnexos.convertirAnxCuentasContables_AnxCuentasContablesTO(
-                    em.createNativeQuery("SELECT * "
+            String sql = "SELECT * "
                     + "FROM anexo.anx_cuentascontables "
-                    + "WHERE (cta_empresa = '" + empresa + "');").getResultList());
-        }else{
-            System.out.println("nombreCuenta: "+nombreCuenta);
+                    + "WHERE (cta_empresa = '" + empresa + "');";
             return ConversionesAnexos.convertirAnxCuentasContables_AnxCuentasContablesTO(
-                    em.createNativeQuery("SELECT * FROM anexo.fun_nombres_cuentas_parametrizacion('" + empresa + "');").getResultList());
+                    em.createNativeQuery(sql).getResultList());
+        }else{
+            String sql = "SELECT * FROM anexo.fun_nombres_cuentas_parametrizacion('" + empresa + "');";
+            return ConversionesAnexos.convertirAnxCuentasContables_AnxCuentasContablesTO(
+                    em.createNativeQuery(sql).getResultList());
         }
     }
 

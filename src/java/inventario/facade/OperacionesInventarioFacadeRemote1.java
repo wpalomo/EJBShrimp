@@ -284,6 +284,13 @@ public interface OperacionesInventarioFacadeRemote1 {
             java.util.List<inventario.TO.InvProformasDetalleTO> listaInvProformasDetalleTOs,
             sistema.TO.SisInfoTO sisInfoTO) throws Exception;
 
+    inventario.TO.MensajeTO validarInvContableComprasDetalleTO(
+            String empresa,
+            String periodo,
+            String motivo,
+            String compraNumero,
+            sistema.TO.SisInfoTO sisInfoTO) throws Exception;
+    
     inventario.TO.MensajeTO insertarInvContableComprasTO(
             String empresa,
             String periodo,

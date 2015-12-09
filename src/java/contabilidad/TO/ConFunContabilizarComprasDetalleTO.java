@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 public class ConFunContabilizarComprasDetalleTO implements Serializable  {
 
-    private Integer detSecuencia;
+    private Long detSecuencia;
     private String detDocumento;
     private Character detDebitoCredito;
     private BigDecimal detValor;
@@ -37,7 +37,7 @@ public class ConFunContabilizarComprasDetalleTO implements Serializable  {
     public ConFunContabilizarComprasDetalleTO() {
     }
 
-    public ConFunContabilizarComprasDetalleTO(Integer detSecuencia, String detDocumento, Character detDebitoCredito, BigDecimal detValor, BigDecimal detSaldo, Boolean detGenerado, String detReferencia, String detObservaciones, Integer detOrden, String secEmpresa, String secCodigo, String pisEmpresa, String pisSector, String pisNumero, String conEmpresa, String conPeriodo, String conTipo, String conNumero, String ctaEmpresa, String ctaCodigo) {
+    public ConFunContabilizarComprasDetalleTO(Long detSecuencia, String detDocumento, Character detDebitoCredito, BigDecimal detValor, BigDecimal detSaldo, Boolean detGenerado, String detReferencia, String detObservaciones, Integer detOrden, String secEmpresa, String secCodigo, String pisEmpresa, String pisSector, String pisNumero, String conEmpresa, String conPeriodo, String conTipo, String conNumero, String ctaEmpresa, String ctaCodigo) {
         this.detSecuencia = detSecuencia;
         this.detDocumento = detDocumento;
         this.detDebitoCredito = detDebitoCredito;
@@ -165,11 +165,11 @@ public class ConFunContabilizarComprasDetalleTO implements Serializable  {
         this.detSaldo = detSaldo;
     }
 
-    public Integer getDetSecuencia() {
+    public Long getDetSecuencia() {
         return detSecuencia;
     }
 
-    public void setDetSecuencia(Integer detSecuencia) {
+    public void setDetSecuencia(Long detSecuencia) {
         this.detSecuencia = detSecuencia;
     }
 
