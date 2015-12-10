@@ -2236,15 +2236,16 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
     }
 
     public java.util.List<inventario.TO.InvComprasPorPeriodoTO> getComprasPorPeriodo(String empresa, 
-            String codigoSector, String fechaInicio, String fechaFin) throws Exception {
+            String codigoSector, String fechaInicio, String fechaFin, boolean chk) throws Exception {
         fechaInicio = fechaInicio.isEmpty() ? null : "'" + fechaInicio + "'";
         fechaFin = fechaFin.isEmpty() ? null : "'" + fechaFin + "'";
         codigoSector = codigoSector.isEmpty() ? null : "'" + codigoSector + "'";        
 
-        String sql = "SELECT * FROM inventario.fun_compras_por_periodo('" + empresa + "', " + codigoSector + ", "
-                + fechaInicio + ", " + fechaFin + ");";
+        //inventario.fun_compras_consolidando_productos_mensual('UTN', 'IN', '2015-05-15', '2015-11-30', false);        
+        String sql = "SELECT * FROM inventario.fun_compras_consolidando_productos_mensual('" + empresa + "', " + codigoSector + ", "
+                + fechaInicio + ", " + fechaFin + ", "+chk+");";
         
-        System.out.println("SQLLL: "+sql);
+        
         return inventario.helper.ConversionesInventario.convertirInvComprasPorPeriodo_InvComprasPorPeriodoTO(em.createNativeQuery(
                 sql).getResultList());
         

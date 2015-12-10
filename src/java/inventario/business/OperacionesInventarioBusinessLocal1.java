@@ -492,7 +492,8 @@ public interface OperacionesInventarioBusinessLocal1 {
 
     public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception;
 
-    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, String fechaFin, SisInfoTO sisInfoTO)throws Exception;
+    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, String fechaFin, boolean chk,
+            SisInfoTO sisInfoTO)throws Exception;
  
     
     

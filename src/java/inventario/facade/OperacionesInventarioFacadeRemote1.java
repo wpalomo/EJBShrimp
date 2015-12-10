@@ -873,7 +873,7 @@ public interface OperacionesInventarioFacadeRemote1 {
 
     public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero) throws java.lang.Exception;
 
-    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, 
+    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, boolean chk, 
             String fechaFin, SisInfoTO sisInfoTO)throws java.lang.Exception;
     
 

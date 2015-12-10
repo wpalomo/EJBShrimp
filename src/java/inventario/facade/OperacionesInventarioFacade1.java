@@ -1286,9 +1286,9 @@ public class OperacionesInventarioFacade1 implements OperacionesInventarioFacade
     }
     // </editor-fold>
 
-    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, 
+    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, boolean chk,
             String fechaFin, SisInfoTO sisInfoTO) throws Exception {
         return operacionesInventarioBusinessLocal.getComprasPorPeriodo(empresa, codigoSector, fechaInicio, 
-                fechaFin, sisInfoTO);
+                fechaFin,  chk, sisInfoTO);
     }
 }

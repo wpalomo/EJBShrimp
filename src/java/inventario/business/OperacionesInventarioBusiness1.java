@@ -9692,12 +9692,13 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
     }
     // </editor-fold>
 
-    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, 
-            String fechaFin, SisInfoTO sisInfoTO) throws Exception {
+    public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio,  
+            String fechaFin,  boolean chk, SisInfoTO sisInfoTO) throws Exception {
         String mensaje = "";
         helper.RetornoTO retornoTO = new helper.RetornoTO();
         try {
-            java.util.List<inventario.TO.InvComprasPorPeriodoTO> prdComprasPorPeriodoTOs = operacionesInventarioDAOLocal.getComprasPorPeriodo(empresa, codigoSector, fechaInicio, fechaFin);
+            java.util.List<inventario.TO.InvComprasPorPeriodoTO> prdComprasPorPeriodoTOs = operacionesInventarioDAOLocal.getComprasPorPeriodo(
+                    empresa, codigoSector, fechaInicio, fechaFin, chk);
             mensaje = "T";
             inventario.helper.NumeroColumnaDesconocidadComprasPorPeriodo obj = new inventario.helper.NumeroColumnaDesconocidadComprasPorPeriodo();
             obj.agruparCabeceraColumnas(prdComprasPorPeriodoTOs);

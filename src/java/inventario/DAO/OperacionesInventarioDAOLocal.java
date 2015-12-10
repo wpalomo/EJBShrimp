@@ -301,5 +301,5 @@ public interface OperacionesInventarioDAOLocal {
     public Object[] getVenta(String empresa, String perCodigo, String motCodigo, String compNumero)throws Exception;
 
     public java.util.List<inventario.TO.InvComprasPorPeriodoTO> getComprasPorPeriodo(String empresa, 
-            String codigoSector, String fechaInicio, String fechaFin)throws Exception;
+            String codigoSector, String fechaInicio, String fechaFin,  boolean chk)throws Exception;
 }
