@@ -5959,6 +5959,7 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                 tipoCodigo = tipCodigo;
             }
             if (operacionesContabilidadDAOLocal.buscarTipoContable(empresa, tipoCodigo)) {
+                System.out.println("compras    "+empresa+"  "+periodo+"  "+motivo+"  "+compraNumero);
                 inventario.entity.InvCompras invCompras = operacionesInventarioDAOLocal.buscarInvCompras(empresa, periodo, motivo, compraNumero);
                 if (invCompras.getCompRevisado() || (invCompras.getConNumero() != null && !recontabilizar)) {
                     retorno = "F<html>La compra ya ha sido recontabilizada.</html>";
