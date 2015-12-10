@@ -2597,6 +2597,7 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
         if (tipoPreAviso.equals("UTILIDADES")) {
             sql = "SELECT * FROM recursoshumanos.fun_preaviso_vacaciones('" + empresa + "', '" + fecha + "', '" + cuenta + "', '" + servicio + "')";
         }
+        System.out.println("sql: "+sql);
         return ConversionesRRHH.convertirRhPreavisoAnticipos_RhPreavisoAnticiposTO(em.createNativeQuery(sql).getResultList());
 
     }
