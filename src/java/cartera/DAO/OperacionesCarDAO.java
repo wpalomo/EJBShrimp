@@ -544,6 +544,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + "AND car_cobros.cob_periodo = '" + periodo + "' "
                 + "AND car_cobros.cob_tipo = 'C-COB' "
                 + "AND car_cobros.cob_numero = '" + numero + "';";
+        System.out.println("SQL Cobro Anticipo:: "+sql);
         return ConversionesCar.convertirCarListaPagosCobrosDetalleAnticipo_CarListaPagosCobrosDetalleAnticipoTO(em.createNativeQuery(sql).
                 getResultList());
     }
@@ -618,6 +619,11 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + null + ", "
                 + cliente + ", "
                 + null + ");";
+        
+//        "SELECT * FROM cartera.fun_cuentas_por_pagar_saldo_anticipos('"
+//                + empresa + "', "
+//                + "null, "
+//                + proveedor + ", null);").getResultList());
         return ConversionesCar.convertirCarFunCobrosSaldoAnticipo_CarFunCobrosSaldoAnticipoTO(em.createNativeQuery(sql).getResultList());
     }
     // </editor-fold>
@@ -1068,5 +1074,26 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
         String sql = "SELECT * FROM cartera.fun_cuentas_por_cobrar_saldo_anticipos('" + empresa + "', " + sector + ", " + clienteCodigo + ", " + hasta + ")";
         return ConversionesContabilidad.convertirCuentasPorPagarCobrarSaldoAnticipos_CuentasPorCobrarSaldoAnticiposTO(em.createNativeQuery(sql).getResultList());
 
+    }
+
+    public List<CarListaPagosCobrosDetalleAnticipoTO> getPagosConsultaDetalleAnticipo(String empresa, String periodo, String numero) throws Exception {
+        String sql = "SELECT  ant_periodo, ant_tipo, ant_numero, con_contable.con_fecha, "
+                + "car_pagos_detalle_anticipos.det_valor as valor "
+                + "FROM  cartera.car_pagos INNER JOIN cartera.car_pagos_detalle_anticipos INNER JOIN contabilidad.con_contable "
+                + "ON car_pagos_detalle_anticipos.ant_empresa = con_contable.con_empresa AND "
+                + "car_pagos_detalle_anticipos.ant_periodo = con_contable.con_periodo AND "
+                + "car_pagos_detalle_anticipos.ant_tipo = con_contable.con_tipo AND "
+                + "car_pagos_detalle_anticipos.ant_numero = con_contable.con_numero "
+                + "ON car_pagos.pag_empresa = car_pagos_detalle_anticipos.pag_empresa AND "
+                + "car_pagos.pag_periodo = car_pagos_detalle_anticipos.pag_periodo AND "
+                + "car_pagos.pag_tipo = car_pagos_detalle_anticipos.pag_tipo AND "
+                + "car_pagos.pag_numero = car_pagos_detalle_anticipos.pag_numero "                                                
+                + "WHERE car_pagos.pag_empresa = '" + empresa + "' "
+                + "AND car_pagos.pag_periodo = '" + periodo + "' "
+                + "AND car_pagos.pag_tipo = 'C-PAG' "
+                + "AND car_pagos.pag_numero = '" + numero + "';";
+        System.out.println("SQL PAGO Anticipo:: "+sql);
+        return ConversionesCar.convertirCarListaPagosCobrosDetalleAnticipo_CarListaPagosCobrosDetalleAnticipoTO(em.createNativeQuery(sql).
+                getResultList());
     }
 }

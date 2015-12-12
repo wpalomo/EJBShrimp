@@ -6,6 +6,8 @@ package cartera.DAO;
 
 import cartera.TO.CarCuentasPorPagarCobrarSaldoAnticiposTO;
 import cartera.TO.CarFunPagosPruebaTO;
+import cartera.TO.CarListaPagosCobrosDetalleAnticipoTO;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -75,7 +77,7 @@ public interface OperacionesCarDAOLocal {
 
     java.util.List<cartera.TO.CarListaPagosCobrosDetalleFormaTO> getCobrosConsultaDetalleForma(java.lang.String empresa, java.lang.String periodo, java.lang.String numero, boolean hayPostfechados) throws java.lang.Exception;
     
-    java.util.List<cartera.TO.CarListaPagosCobrosDetalleAnticipoTO> getCobrosConsultaDetalleAnticipo(String empresa, String periodo, String numero) throws Exception ;
+    java.util.List<cartera.TO.CarListaPagosCobrosDetalleAnticipoTO> getCobrosConsultaDetalleAnticipo(String empresa, String periodo, String numero  ) throws Exception ;
 
     java.util.List<cartera.TO.CarFunCobrosTO> getCarFunCobrosTO(java.lang.String empresa, 
             String sector,
@@ -128,4 +130,6 @@ public interface OperacionesCarDAOLocal {
     java.util.List<CarCuentasPorPagarCobrarSaldoAnticiposTO> getCarListaCuentasPorPagarSaldoAnticiposTO(String empresa, String sector,  String proveedorCodigo,String hasta) throws Exception;
 
     java.util.List<CarCuentasPorPagarCobrarSaldoAnticiposTO> getCarListaCuentasPorCobrarSaldoAnticiposTO(String empresa, String sector, String clienteCodigo, String hasta) throws Exception;
+
+    public List<CarListaPagosCobrosDetalleAnticipoTO> getPagosConsultaDetalleAnticipo(String empresa, String periodo, String numero)throws Exception;
 }

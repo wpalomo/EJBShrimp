@@ -39,7 +39,14 @@ public class ReporteCobros implements Serializable {
     private java.math.BigDecimal valorDetalleInferior;
     private String observacionesDetalleInferior;
     private java.math.BigDecimal totalDetalleInferior;
-
+    ////Detalle Anticipos
+    private String antPeriodo;
+    private String antTipo;
+    private String antNumero;
+    private String antFecha;
+    private java.math.BigDecimal antValor;
+    private java.math.BigDecimal antTotal;
+    
     public ReporteCobros() {
     }
 
@@ -253,6 +260,56 @@ public class ReporteCobros implements Serializable {
         this.vence = vence;
     }
 
+    public String getAntFecha() {
+        return antFecha;
+    }
+
+    public void setAntFecha(String antFecha) {
+        this.antFecha = antFecha;
+    }
+
+    public String getAntNumero() {
+        return antNumero;
+    }
+
+    public void setAntNumero(String antNumero) {
+        this.antNumero = antNumero;
+    }
+
+    public String getAntPeriodo() {
+        return antPeriodo;
+    }
+
+    public void setAntPeriodo(String antPeriodo) {
+        this.antPeriodo = antPeriodo;
+    }
+
+    public String getAntTipo() {
+        return antTipo;
+    }
+
+    public void setAntTipo(String antTipo) {
+        this.antTipo = antTipo;
+    }
+
+    public BigDecimal getAntValor() {
+        return antValor;
+    }
+
+    public void setAntValor(BigDecimal antValor) {
+        this.antValor = antValor;
+    }
+
+    public BigDecimal getAntTotal() {
+        return antTotal;
+    }
+
+    public void setAntTotal(BigDecimal antTotal) {
+        this.antTotal = antTotal;
+    }
+
+    
+    
     @Override
     public String toString() {
         return this.fecha + " " + this.cliente + " " + this.id + " " + this.nombre + " " + this.direccion + " "

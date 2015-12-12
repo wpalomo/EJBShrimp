@@ -441,4 +441,8 @@ public class OperacionesCarFacade implements OperacionesCarFacadeRemote {
             String hasta) throws Exception {
         return operacionesCarBusinessLocal.getCarListaCuentasPorCobrarSaldoAnticiposTO(empresa, sector, clienteCodigo,hasta);
     }
+
+    public List<CarListaPagosCobrosDetalleAnticipoTO> getPagosConsultaDetalleAnticipo(String empresa, String periodo, String numero) throws Exception {
+        return operacionesCarBusinessLocal.getPagosConsultaDetalleAnticipo(empresa, periodo, numero);
+    }
 }

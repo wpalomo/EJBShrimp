@@ -6,6 +6,7 @@ package cartera.facade;
 
 import cartera.TO.CarCuentasPorPagarCobrarSaldoAnticiposTO;
 import cartera.TO.CarFunPagosDetalleTO;
+import cartera.TO.CarListaPagosCobrosDetalleAnticipoTO;
 import cartera.reporte.*;
 import java.util.List;
 import javax.ejb.Remote;
@@ -284,4 +285,6 @@ public interface OperacionesCarFacadeRemote {
             String sector,
             String clienteCodigo,
             String hasta) throws Exception;
+
+    java.util.List<CarListaPagosCobrosDetalleAnticipoTO> getPagosConsultaDetalleAnticipo(String empresa, String periodo, String numero) throws Exception;
 }

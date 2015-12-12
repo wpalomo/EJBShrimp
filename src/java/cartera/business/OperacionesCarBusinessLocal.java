@@ -6,6 +6,7 @@ package cartera.business;
 
 import cartera.TO.CarCuentasPorPagarCobrarSaldoAnticiposTO;
 import cartera.TO.CarFunPagosDetalleTO;
+import cartera.TO.CarListaPagosCobrosDetalleAnticipoTO;
 import cartera.reporte.*;
 import java.util.List;
 import javax.ejb.Local;
@@ -284,4 +285,6 @@ public interface OperacionesCarBusinessLocal {
             String sector,
             String clienteCodigo,
             String hasta) throws Exception;
+
+    public List<CarListaPagosCobrosDetalleAnticipoTO> getPagosConsultaDetalleAnticipo(String empresa, String periodo, String numero)throws Exception;
 }

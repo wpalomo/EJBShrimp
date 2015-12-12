@@ -768,7 +768,7 @@ public class OperacionesCarBusiness implements OperacionesCarBusinessLocal {
     }
 
     @Override
-    public java.util.List<cartera.TO.CarListaPagosCobrosDetalleAnticipoTO> getCobrosConsultaDetalleAnticipo(String empresa, String periodo, String numero) throws Exception{
+    public java.util.List<cartera.TO.CarListaPagosCobrosDetalleAnticipoTO> getCobrosConsultaDetalleAnticipo(String empresa, String periodo, String numero  ) throws Exception{
         return operacionesCarDAOLocal.getCobrosConsultaDetalleAnticipo(empresa, periodo, numero);
     }
     @Override
@@ -1480,5 +1480,9 @@ public class OperacionesCarBusiness implements OperacionesCarBusinessLocal {
     @Override
     public List<CarCuentasPorPagarCobrarSaldoAnticiposTO> getCarListaCuentasPorCobrarSaldoAnticiposTO(String empresa, String sector, String clienteCodigo, String hasta) throws Exception {
         return operacionesCarDAOLocal.getCarListaCuentasPorCobrarSaldoAnticiposTO(empresa, sector,clienteCodigo, hasta);
+    }
+
+    public List<CarListaPagosCobrosDetalleAnticipoTO> getPagosConsultaDetalleAnticipo(String empresa, String periodo, String numero) throws Exception {
+        return operacionesCarDAOLocal.getPagosConsultaDetalleAnticipo(empresa, periodo, numero);
     }
 }

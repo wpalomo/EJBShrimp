@@ -168,6 +168,7 @@ public class GenerarReporteCartera implements GenerarReporteCarteraLocal {
     private <T> JasperPrint generarReporte(SisUsuarioEmpresaTO sisUsuario, String nombreReporte, Map parametros, List<T> list) throws Exception {
         try {
             String rutaReportes = getRutaReportes() + "cartera/";
+            System.out.println("ruta repot cartera: "+rutaReportes+nombreReporte);
             parametros.put("SUBREPORT_DIR", rutaReportes);
             parametros.put("p_empresa_nombre", sisUsuario.getEmpNombre());
             parametros.put("p_empresa_ruc", sisUsuario.getEmpRuc());
