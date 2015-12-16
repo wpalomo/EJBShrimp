@@ -782,7 +782,6 @@ public class OperacionesContabilidadDAO implements OperacionesContabilidadDAOLoc
             String validar) throws Exception {
         validar= validar == null ? null : "'"+validar+"'";
         String sql = "SELECT * FROM contabilidad.fun_contabilizar_compras('" + empresa + "','" + periodo + "', '" + motivo + "', '" + numeroCompra + "',"+validar+");";
-        System.out.println("" + sql);
         return contabilidad.helper.ConversionesContabilidad.convertirgetConFunContabilizarComprasDetalle_ConFunContabilizarComprasDetalleTO(
                 em.createNativeQuery(sql).getResultList());
     }

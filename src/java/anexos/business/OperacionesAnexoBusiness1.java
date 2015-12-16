@@ -416,7 +416,7 @@ public class OperacionesAnexoBusiness1 implements OperacionesAnexoBusinessLocal1
                         anxAnuladosTO.getAnuSecuencialInicio(), anxAnuladosTO.getAnuSecuencialFin());
 
                 if (anxAnuladosTO.getTcCodigo().compareToIgnoreCase("07") == 0
-                        && anxAnuladosTO.getAnuAutorizacion().length() == 37
+                        && (anxAnuladosTO.getAnuAutorizacion().length() == 37 || anxAnuladosTO.getAnuAutorizacion().length() == 49)
                         && anxAnuladosTO.getAnuSecuencialInicio().compareToIgnoreCase(anxAnuladosTO.getAnuSecuencialFin()) == 0) {
                     comprobanteVerificarAutorizacion = false;
                 }
@@ -506,7 +506,7 @@ public class OperacionesAnexoBusiness1 implements OperacionesAnexoBusinessLocal1
 
                     //proceso de anulacion de retencion electronica
                     if (anxAnuladosTO.getTcCodigo().compareToIgnoreCase("07") == 0
-                            && anxAnuladosTO.getAnuAutorizacion().length() == 37
+                            && (anxAnuladosTO.getAnuAutorizacion().length() == 37 || anxAnuladosTO.getAnuAutorizacion().length() == 49)
                             && anxAnuladosTO.getAnuSecuencialInicio().compareToIgnoreCase(anxAnuladosTO.getAnuSecuencialFin()) == 0) {
                         InvConsultaVentasFacturasPorNumeroTO retencionPK = operacionesAnexoDAOLocal.getConsultaPKRetencion(anxAnuladosTO.getUsrEmpresa(), anxAnuladosTO.getAnuComprobanteEstablecimiento()
                                 + anxAnuladosTO.getAnuComprobantePuntoEmision() + anxAnuladosTO.getAnuSecuencialInicio(), anxAnuladosTO.getAnuAutorizacion());
