@@ -319,7 +319,6 @@ public class ConversionesContabilidad {
         conContable.setConDetalle(conContableTO.getConDetalle());
         conContable.setConObservaciones(conContableTO.getConObservaciones());
         conContable.setUsrCodigo(conContableTO.getUsrInsertaContable());
-        System.out.println("en conversion codigo emp: "+conContableTO.getEmpCodigo());
         conContable.setUsrEmpresa(conContableTO.getEmpCodigo());
         conContable.setUsrFechaInserta(Validacion.fechaString_Date(conContableTO.getUsrFechaInsertaContable()));
         return conContable;
@@ -400,8 +399,6 @@ public class ConversionesContabilidad {
                 conDetalleTO.getConPeriodo(), 
                 conDetalleTO.getConTipo(),
                 conDetalleTO.getConNumero())));
-        System.out.println("conDetalleTO.getCtaEmpresa()   "+conDetalleTO.getCtaEmpresa());
-        System.out.println("conDetalleTO.getCtaCodigo()   "+conDetalleTO.getCtaCodigo());
         conDetalle.setConCuentas(new ConCuentas(new ConCuentasPK(conDetalleTO.getCtaEmpresa(), conDetalleTO.getCtaCodigo())));
         return conDetalle;
     }

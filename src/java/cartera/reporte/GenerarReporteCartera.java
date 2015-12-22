@@ -130,7 +130,6 @@ public class GenerarReporteCartera implements GenerarReporteCarteraLocal {
 
     public JasperPrint generarReportePagos(SisUsuarioEmpresaTO sisUsuarioEmpresaTO, List<ReportePagos> reportePagos) throws Exception {
         try {
-            System.out.println("jjjjjjjj");
             return generarReporte(sisUsuarioEmpresaTO, "reportPagos.jrxml", new HashMap(), reportePagos);
         } catch (Exception e) {
             e.printStackTrace();
@@ -168,7 +167,6 @@ public class GenerarReporteCartera implements GenerarReporteCarteraLocal {
     private <T> JasperPrint generarReporte(SisUsuarioEmpresaTO sisUsuario, String nombreReporte, Map parametros, List<T> list) throws Exception {
         try {
             String rutaReportes = getRutaReportes() + "cartera/";
-            System.out.println("ruta repot cartera: "+rutaReportes+nombreReporte);
             parametros.put("SUBREPORT_DIR", rutaReportes);
             parametros.put("p_empresa_nombre", sisUsuario.getEmpNombre());
             parametros.put("p_empresa_ruc", sisUsuario.getEmpRuc());
@@ -176,9 +174,7 @@ public class GenerarReporteCartera implements GenerarReporteCarteraLocal {
             parametros.put("p_empresa_telefono", sisUsuario.getEmpTelefono());
             parametros.put("p_usuario_nick", sisUsuario.getUsrNick());
             parametros.put("p_fecha_hora", Validacion.fechaSistema());
-            for (T t : list) {
-                System.out.println("fffffffff   "+t.toString());
-            }
+          
             return JasperFillManager.fillReport(JasperCompileManager.compileReport(JRXmlLoader.load(rutaReportes + nombreReporte)),
                     parametros, new JRBeanCollectionDataSource(list));
         } catch (Exception e) {

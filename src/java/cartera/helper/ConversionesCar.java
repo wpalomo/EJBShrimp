@@ -91,7 +91,6 @@ public class ConversionesCar {
         carCobrosDetalleForma.setDetSecuencial(0);
         
         carCobrosDetalleForma.setDetBanco(carCobrosDetalleFormaTO.getDetBanco());
-        System.out.println("cuenta en conversiones: "+carCobrosDetalleFormaTO.getDetCuenta());
         carCobrosDetalleForma.setDetCuenta(carCobrosDetalleFormaTO.getDetCuenta());
 //        invCompras.setCompFecha(validaciones.Validacion.fecha(invComprasTO.getCompFecha(), "yyyy-MM-dd"));
         carCobrosDetalleForma.setDetFechaVencimiento(validaciones.Validacion.fecha(
@@ -778,7 +777,6 @@ public class ConversionesCar {
             } catch (Exception e) {
                 dato3 = null;
             }
-            System.out.println("Hay postFech : "+hayPostfechados);
             if(!hayPostfechados){                     
                 try {
                     valor =  new BigDecimal(array[5].toString());
@@ -792,7 +790,6 @@ public class ConversionesCar {
                     valor = cero;
                 }            
             }     
-            System.out.println("valorrrr: "+valor);
             try {
                 dato4 = array[3].toString();
             } catch (Exception e) {

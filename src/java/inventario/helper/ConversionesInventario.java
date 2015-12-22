@@ -707,8 +707,6 @@ public class ConversionesInventario {
         invVentas.setVtaPagado(invVentasTO.getVtaPagado());
         invVentas.setInvCliente(new inventario.entity.InvCliente(invVentasTO.getCliEmpresa(), invVentasTO.getCliCodigo()));
 //        invVentas.setInvBodega(new inventario.entity.InvBodega(invVentasTO.getBodEmpresa(), invVentasTO.getBodCodigo()));
-        System.out.println("invVentasTO.getBodCodigo() "+invVentasTO.getBodCodigo());
-        System.out.println("invVentasTO.getBodEmpresa() "+invVentasTO.getBodEmpresa());
         //invVentas.setInvBodega(new  inventario.entity.InvBodega(invVentasTO.getBodEmpresa(), invVentasTO.getBodCodigo()));
 //        invVentas.setBodCodigo(invVentasTO.getBodCodigo());
 //        invVentas.setBodEmpresa(invVentasTO.getBodEmpresa());
@@ -1049,8 +1047,6 @@ public class ConversionesInventario {
 
 //        invVentasDetalle.setDetValorPromedio(new java.math.BigDecimal("0.00"));
 //        invVentasDetalle.setDetValorUltimaCompra(new java.math.BigDecimal("0.00"));
-        System.out.println("invProformasDetalleTO.getDetPorcentajeRecargo()  "+invProformasDetalleTO.getDetPorcentajeRecargo());
-        System.out.println("invProformasDetalleTO.getDetPorcentajeDescuento()  "+invProformasDetalleTO.getDetPorcentajeDescuento());
         invProformasDetalle.setDetPorcentajeRecargo(invProformasDetalleTO.getDetPorcentajeRecargo());
         invProformasDetalle.setDetPorcentajeDescuento(invProformasDetalleTO.getDetPorcentajeDescuento());
 //        invVentasDetalle.setBodEmpresa(invVentasDetalleTO.getBodEmpresa());
