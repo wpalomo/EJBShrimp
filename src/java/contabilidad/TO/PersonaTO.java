@@ -5,7 +5,6 @@
 
 package contabilidad.TO;
 
-import sistema.TO.*;
 import java.io.Serializable;
 
 /**
