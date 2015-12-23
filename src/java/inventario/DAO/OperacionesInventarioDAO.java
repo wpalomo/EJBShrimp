@@ -2146,19 +2146,22 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
         return invVentasMotivoAnulacionFacadeLocal.find(new inventario.entity.InvVentasMotivoAnulacionPK(empresa, periodo, motivo, numero));
     }
 
-    public java.util.List<inventario.TO.SaldoBodegaTO> getListaSaldoBodegaTO(String empresa, String bodega, String hasta) throws Exception {
+    public java.util.List<inventario.TO.SaldoBodegaTO> getListaSaldoBodegaTO(String empresa, String bodega, String hasta, String categoria, boolean resumido ) throws Exception {
         hasta = hasta == null ? hasta : "'" + hasta + "'";
-        return inventario.helper.ConversionesInventario.convertirListaSaldoBodega_ListaSaldoBodegaTO(em.createNativeQuery("SELECT * FROM inventario.fun_saldo_bodega('" + empresa + "', "
-                + "'" + bodega + "', " + hasta + ")").getResultList());
+        categoria = categoria == null ? categoria : "'" + categoria + "'";
+        String sql = "SELECT * FROM inventario.fun_saldo_bodega('" + empresa + "', "
+                + "'" + bodega + "', "+categoria+", " + hasta + ", "+resumido+")";
+        return inventario.helper.ConversionesInventario.convertirListaSaldoBodega_ListaSaldoBodegaTO(em.createNativeQuery(sql).getResultList());
     }
 
     public java.util.List<inventario.TO.SaldoBodegaComprobacionTO> getInvFunSaldoBodegaComprobacionTO(String empresa, String bodega, String desde, String hasta) throws java.lang.Exception {
         desde = desde == null ? desde : "'" + desde + "'";
         hasta = hasta == null ? hasta : "'" + hasta + "'";
-        bodega = "'¬'".equals(bodega) ? bodega : "'" + bodega + "'";
+        bodega = bodega == null ? bodega : "'" + bodega + "'";
+        String sql ="SELECT * FROM inventario.fun_saldo_bodega_comprobacion("
+                + "'" + empresa + "', " + bodega + ", " + desde + ", " + hasta + ");";
         return inventario.helper.ConversionesInventario.convertirInvFunSaldoBodegaComprobacion_InvFunSaldoBodegaComprobacionTO(
-                em.createNativeQuery("SELECT * FROM inventario.fun_saldo_bodega_comprobacion("
-                + "'" + empresa + "', " + bodega + ", " + desde + ", " + hasta + ");").getResultList());
+                em.createNativeQuery(sql).getResultList());
     }
 
     public List<SaldoBodegaComprobacionTO> getInvFunSaldoBodegaComprobacionCantidadesTO(String empresa, String bodega, String desde, String hasta) throws Exception {

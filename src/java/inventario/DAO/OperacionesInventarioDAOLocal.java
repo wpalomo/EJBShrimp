@@ -159,7 +159,12 @@ public interface OperacionesInventarioDAOLocal {
 
     java.util.List<inventario.TO.InvKardexTO> getListaInvKardexTO(java.lang.String empresa, java.lang.String bodega, java.lang.String producto, java.lang.String desde, java.lang.String hasta, java.lang.String promedio) throws java.lang.Exception;
 
-    java.util.List<inventario.TO.SaldoBodegaTO> getListaSaldoBodegaTO(String empresa, String bodega, String hasta) throws Exception;
+    java.util.List<inventario.TO.SaldoBodegaTO> getListaSaldoBodegaTO(
+            String empresa, 
+            String bodega, 
+            String hasta,
+            String categoria,
+            boolean resumido) throws Exception;
 
     inventario.TO.InvComprasRecepcionTO getInvComprasRecepcionTO(String empresa, String periodo, String motivo, String numero) throws Exception;
 

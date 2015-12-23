@@ -798,8 +798,15 @@ public class OperacionesInventarioFacade1 implements OperacionesInventarioFacade
     public java.util.List<inventario.TO.SaldoBodegaTO> getListaSaldoBodegaTO(
             java.lang.String empresa,
             java.lang.String bodega,
-            java.lang.String hasta) throws java.lang.Exception {
-        return operacionesInventarioBusinessLocal.getListaSaldoBodegaTO(empresa, bodega, hasta);
+            java.lang.String hasta,
+            java.lang.String categoria,
+            boolean resumido) throws java.lang.Exception {
+        return operacionesInventarioBusinessLocal.getListaSaldoBodegaTO(
+                empresa, 
+                bodega, 
+                hasta,
+                categoria,
+                resumido);
     }
 
     public inventario.TO.InvComprasRecepcionTO getInvComprasRecepcionTO(

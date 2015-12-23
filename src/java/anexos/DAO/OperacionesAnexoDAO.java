@@ -1319,10 +1319,15 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
 
     @Override
     public boolean comprobarRetencionAutorizadaProcesamiento(String empresa, String periodo, String motivo, String numero) throws Exception {
-        return Boolean.parseBoolean(validaciones.ConvertirListaObject.convertirListToArray(
-                em.createNativeQuery("SELECT COUNT(*)!=0 FROM anexo.anx_compra_electronica "
+        /*
+         "SELECT COUNT(*)!=0 FROM anexo.anx_compra_electronica "
                 + "WHERE (comp_empresa = '" + empresa + "' AND comp_periodo = '" + periodo + " ' AND comp_motivo = '" + motivo + " ' AND comp_numero = '" + numero + "' AND  "
-                + "(e_estado = 'AUTORIZADO' OR e_autorizacion_numero = 'CE(70): CLAVE DE ACCESO EN PROCESAMIENTO'))").
+                + "(e_estado = 'AUTORIZADO' OR e_autorizacion_numero = 'CE(70): CLAVE DE ACCESO EN PROCESAMIENTO'))"
+         */
+        String sql = "SELECT COUNT(*)!=0 FROM anexo.anx_compra_electronica "
+                + "WHERE (comp_empresa = '" + empresa + "' AND comp_periodo = '" + periodo + " ' AND comp_motivo = '" + motivo + " ' AND comp_numero = '" + numero + "')";
+        return Boolean.parseBoolean(validaciones.ConvertirListaObject.convertirListToArray(
+                em.createNativeQuery(sql).
                 getResultList(), 0)[0].toString());
     }
 

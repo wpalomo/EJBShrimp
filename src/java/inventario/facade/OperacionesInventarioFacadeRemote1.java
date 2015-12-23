@@ -536,7 +536,9 @@ public interface OperacionesInventarioFacadeRemote1 {
     java.util.List<inventario.TO.SaldoBodegaTO> getListaSaldoBodegaTO(
             java.lang.String empresa,
             java.lang.String bodega,
-            java.lang.String hasta) throws java.lang.Exception;
+            java.lang.String hasta,
+            java.lang.String categoria,
+            boolean resumido) throws java.lang.Exception;
 
     inventario.TO.InvComprasRecepcionTO getInvComprasRecepcionTO(
             String empresa,

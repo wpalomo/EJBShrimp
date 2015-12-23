@@ -7970,8 +7970,18 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
         return operacionesInventarioDAOLocal.getListaInvKardexTO(empresa, bodega, producto, desde, hasta, promedio);
     }
 
-    public List<inventario.TO.SaldoBodegaTO> getListaSaldoBodegaTO(java.lang.String empresa, java.lang.String bodega, java.lang.String hasta) throws java.lang.Exception {
-        return operacionesInventarioDAOLocal.getListaSaldoBodegaTO(empresa, bodega, hasta);
+    public List<inventario.TO.SaldoBodegaTO> getListaSaldoBodegaTO(
+            java.lang.String empresa, 
+            java.lang.String bodega, 
+            java.lang.String hasta,
+            java.lang.String categoria,
+            boolean resumido) throws java.lang.Exception {
+        return operacionesInventarioDAOLocal.getListaSaldoBodegaTO(
+                empresa, 
+                bodega, 
+                hasta,
+                categoria,
+                resumido);
     }
 
     public inventario.TO.InvComprasRecepcionTO getInvComprasRecepcionTO(String empresa, String periodo, String motivo, String numero) throws Exception {
