@@ -1021,6 +1021,7 @@ public class OperacionesContabilidadBusiness implements OperacionesContabilidadB
             java.lang.String fecha,
             java.lang.Boolean ocultar,
             java.lang.Boolean ocultarDetalle,
+            java.lang.Boolean validacionCtaModulo,
             java.lang.Integer columnasEstadosFinancieros) throws java.lang.Exception {
         return operacionesContabilidadDAOLocal.getConFunBalanceGeneralNecTO(
                 empresa,
@@ -1028,6 +1029,7 @@ public class OperacionesContabilidadBusiness implements OperacionesContabilidadB
                 fecha,
                 ocultar,
                 ocultarDetalle,
+                validacionCtaModulo,
                 columnasEstadosFinancieros);
     }
 
@@ -1227,7 +1229,8 @@ public class OperacionesContabilidadBusiness implements OperacionesContabilidadB
                             //                        conDetalleTO.setPerCodigo(conContableTO.getPerCodigo());
                             conDetalle = ConversionesContabilidad.convertirConDetalleTO_ConDetalle(conDetalleTO);
                             conDetalle.setConContable(conContable);
-                            contabilidad.entity.ConCuentas conCuentas = operacionesContabilidadDAOLocal.buscarCuentas(conDetalleTO.getEmpCodigo(),
+                            contabilidad.entity.ConCuentas conCuentas = operacionesContabilidadDAOLocal.buscarCuentas(
+                                    conDetalleTO.getEmpCodigo(),
                                     conDetalleTO.getConCtaCodigo());
                             if (conCuentas != null) {
                                 conDetalle.setConCuentas(conCuentas);

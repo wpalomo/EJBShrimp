@@ -1373,12 +1373,12 @@ public class OperacionesAnexoBusiness1 implements OperacionesAnexoBusinessLocal1
                 if (accion == 'M') {
                     ////// BUSCANDO existencia Categoría
                     if (operacionesAnexoDAOLocal.comprobarAnxVentaElectronica(
-                            anxVentaElectronicaTO.getUsrEmpresa(),
+                            anxVentaElectronicaTO.getVtaEmpresa(),
                             anxVentaElectronicaTO.getVtaPeriodo(),
                             anxVentaElectronicaTO.getVtaMotivo(),
                             anxVentaElectronicaTO.getVtaNumero())) {
                         anexos.entity.AnxVentaElectronica anxVentaElectronicaAux = operacionesAnexoDAOLocal.buscarAnxVentaElectronica(
-                                anxVentaElectronicaTO.getUsrEmpresa(),
+                                anxVentaElectronicaTO.getVtaEmpresa(),
                                 anxVentaElectronicaTO.getVtaPeriodo(),
                                 anxVentaElectronicaTO.getVtaMotivo(),
                                 anxVentaElectronicaTO.getVtaNumero());
@@ -1600,18 +1600,16 @@ public class OperacionesAnexoBusiness1 implements OperacionesAnexoBusinessLocal1
     }
 
     @Override
-    public boolean comprobarAnxVentaElectronicaAutorizacion(
+    public String comprobarAnxVentaElectronicaAutorizacion(
             String empresa,
             String periodo,
             String motivo,
-            String numero,
-            String estado) throws Exception {
+            String numero) throws Exception {
         return operacionesAnexoDAOLocal.comprobarAnxVentaElectronicaAutorizacion(
                 empresa,
                 periodo,
                 motivo,
-                numero,
-                estado);
+                numero);
     }
 
     @Override

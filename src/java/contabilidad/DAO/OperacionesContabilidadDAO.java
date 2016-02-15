@@ -67,7 +67,7 @@ public class OperacionesContabilidadDAO implements OperacionesContabilidadDAOLoc
 
     @Override
     public ConCuentas buscarCuentas(String empCodigo, String codCuenta) throws Exception {
-        return conCuentasFacadeLocal.find(new ConCuentasPK(empCodigo, codCuenta));
+        return conCuentasFacadeLocal.find(new contabilidad.entity.ConCuentasPK(empCodigo, codCuenta));
     }
   
 
@@ -327,19 +327,22 @@ public class OperacionesContabilidadDAO implements OperacionesContabilidadDAOLoc
     @Override
     public List<ConCuentasTO> getListaBuscarConCuentasTO(String empresa, String buscar, String ctaGrupo) throws Exception {
         ctaGrupo = ctaGrupo == null ? ctaGrupo : "'" + ctaGrupo + "'";
+        String sql = "SELECT * from contabilidad.fun_busqueda_cuentas_contables('" + empresa + "', '"+buscar+"', "+ctaGrupo+", true)";
         return ConversionesContabilidad.convertirListaConCuentas_ListaConCuentasTO(em.createNativeQuery(
-                "SELECT "
-                + "cta_empresa, "
-                + "cta_codigo, "
-                + "REPEAT(' ', CHAR_LENGTH(TRIM(BOTH ' ' FROM cta_codigo))) || cta_detalle cta_detalle, "
-                + "cta_activo "
-                + "FROM contabilidad.con_cuentas "
-                + "WHERE cta_empresa = ('" + empresa + "') AND "
-                + "CASE WHEN ('" + buscar + "') = '' THEN TRUE "
-                + "ELSE (cta_codigo || UPPER(cta_detalle) LIKE '%' || TRANSLATE('" + buscar + "', ' ', '%') || '%') END AND "
-                + "CASE WHEN " + ctaGrupo + " IS NULL THEN TRUE "
-                + "ELSE SUBSTRING(cta_codigo,1,LENGTH(" + ctaGrupo + "))=" + ctaGrupo + " END "
-                + "ORDER BY cta_codigo;").getResultList());
+                sql
+//                "SELECT "
+//                + "cta_empresa, "
+//                + "cta_codigo, "
+//                + "REPEAT(' ', CHAR_LENGTH(TRIM(BOTH ' ' FROM cta_codigo))) || cta_detalle cta_detalle, "
+//                + "cta_activo "
+//                + "FROM contabilidad.con_cuentas "
+//                + "WHERE cta_empresa = ('" + empresa + "') AND "
+//                + "CASE WHEN ('" + buscar + "') = '' THEN TRUE "
+//                + "ELSE (cta_codigo || UPPER(cta_detalle) LIKE '%' || TRANSLATE('" + buscar + "', ' ', '%') || '%') END AND "
+//                + "CASE WHEN " + ctaGrupo + " IS NULL THEN TRUE "
+//                + "ELSE SUBSTRING(cta_codigo,1,LENGTH(" + ctaGrupo + "))=" + ctaGrupo + " END "
+//                + "ORDER BY cta_codigo;"
+                ).getResultList());
     }
 
     @Override
@@ -372,8 +375,9 @@ public class OperacionesContabilidadDAO implements OperacionesContabilidadDAOLoc
         if (nRegistros != null && nRegistros.compareTo("") != 0 && nRegistros.compareTo("0") != 0) {
             limit = " limit " + nRegistros;
         }
-        return ConversionesContabilidad.convertirListaBusquedaConContable_ListaBusquedaConContableTO(em.createNativeQuery("SELECT * FROM contabilidad.fun_contables_listado('" + empresa + "', '"
-                + perCodigo + "', '" + tipCodigo + "', '" + busqueda + "')" + limit + ";").getResultList());
+        String sql = "SELECT * FROM contabilidad.fun_contables_listado('" + empresa + "', '"
+                + perCodigo + "', '" + tipCodigo + "', '" + busqueda + "')" + limit + ";";
+        return ConversionesContabilidad.convertirListaBusquedaConContable_ListaBusquedaConContableTO(em.createNativeQuery(sql).getResultList());
 //        return ConversionesContabilidad.convertirListaBusquedaConContable_ListaBusquedaConContableTO(em.
 //                createNativeQuery("SELECT "
 //                + "con_empresa, "
@@ -504,7 +508,8 @@ public class OperacionesContabilidadDAO implements OperacionesContabilidadDAOLoc
 
     @Override
     public List<contabilidad.TO.ConFunBalanceGeneralNecTO> getConFunBalanceGeneralNecTO(String empresa,
-            String sector, String fecha, Boolean ocultar, Boolean ocultarDetalle, Integer columnasEstadosFinancieros) throws Exception {
+            String sector, String fecha, Boolean ocultar, Boolean ocultarDetalle, 
+            java.lang.Boolean validacionCtaModulo, Integer columnasEstadosFinancieros) throws Exception {
         fecha = fecha == null ? fecha : "'" + fecha + "'";
         sector = sector == null ? sector : "'" + sector + "'";
         if (columnasEstadosFinancieros == 0) {

@@ -454,8 +454,9 @@ public class OperacionesProduccionDAO implements OperacionesProduccionDAOLocal {
 
     @Override
     public List<produccion.TO.PrdListadoGrameajeTO> getPrdListadoGrameajeTO(String empresa, String sector, String piscina, String desde, String hasta) throws Exception {
-        return ConversionesProduccion.convertirPrdListadoGrameaje_PrdListadoGrameajeTO(em.createNativeQuery("SELECT * FROM produccion.fun_listado_grameaje('" + empresa + "', '" + sector + "', "
-                + "'" + piscina + "', " + desde + ", " + hasta + ")").getResultList());
+        String sql = "SELECT * FROM produccion.fun_listado_grameaje('" + empresa + "', '" + sector + "', "
+                + "'" + piscina + "', " + desde + ", " + hasta + ")";
+        return ConversionesProduccion.convertirPrdListadoGrameaje_PrdListadoGrameajeTO(em.createNativeQuery(sql).getResultList());
     }
 
     // </editor-fold>
@@ -614,7 +615,6 @@ public class OperacionesProduccionDAO implements OperacionesProduccionDAOLocal {
         String sql = "SELECT * FROM produccion.fun_consumos_por_piscina_periodo('" + empresa + "', " + codigoSector + ", "
                 + numeroPiscina + ", " + fechaInicio + ", " + fechaFin + ", '" + periodo + "')";
         
-        System.out.println("SQLLL: "+sql);
         return produccion.helper.ConversionesProduccion.convertirPrdConsumosPorPiscinaPeriodoTO_PrdConsumosPorPiscinaPeriodoTO(em.createNativeQuery(
                 "SELECT * FROM produccion.fun_consumos_por_piscina_periodo('" + empresa + "', " + codigoSector + ", "
                 + numeroPiscina + ", " + fechaInicio + ", " + fechaFin + ", '" + periodo + "')").getResultList());
@@ -803,14 +803,15 @@ public class OperacionesProduccionDAO implements OperacionesProduccionDAOLocal {
     }
 
     public List<produccion.TO.PrdListaFunAnalisisPesosTO> getFunAnalisisPesos(String empresa, String sector, String fechaHasta) throws Exception {
+        String sql ="SELECT * "
+                + "FROM produccion.fun_analisis_pesos('" + empresa + "', '" + sector + "', " + fechaHasta + " )"; 
         List<PrdListaFunAnalisisPesosTO> lista = produccion.helper.ConversionesProduccion.convertirPrdListaFunAnalisisPesos_PrdListaFunAnalisisPesosTO(em.createNativeQuery(
-                "SELECT * "
-                + "FROM produccion.fun_analisis_pesos('" + empresa + "', '" + sector + "', " + fechaHasta + " )").getResultList());
+                sql).getResultList());
         List<PrdListaFunAnalisisPesosComplementoTO> listaComplemento = produccion.helper.ConversionesProduccion.convertirPrdListaFunAnalisisPesosComplemento_PrdListaFunAnalisisPesosComplementoTO(em.createNativeQuery(
                 "SELECT * "
                 + "FROM produccion.fun_analisis_pesos_complemento('" + empresa + "', '" + sector + "', " + fechaHasta + " )").getResultList());
 
-
+    
         String fechaAuxiliar = "";
         Integer ncolumnas = 0;
         String piscina = "";

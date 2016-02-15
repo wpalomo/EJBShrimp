@@ -603,18 +603,16 @@ public class OperacionesAnexosFacade1 implements OperacionesAnexosFacadeRemote1 
     }
 
     @Override
-    public boolean comprobarAnxVentaElectronicaAutorizacion(
+    public String comprobarAnxVentaElectronicaAutorizacion(
             String empresa,
             String periodo,
             String motivo,
-            String numero,
-            String estado) throws Exception {
+            String numero) throws Exception {
         return operacionesAnexoBusinessLocal.comprobarAnxVentaElectronicaAutorizacion(
                 empresa,
                 periodo,
                 motivo,
-                numero,
-                estado);
+                numero);
     }
 
     @Override

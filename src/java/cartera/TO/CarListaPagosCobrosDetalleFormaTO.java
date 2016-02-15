@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cartera.TO;
 
 import java.io.Serializable;
@@ -12,16 +11,15 @@ import java.math.BigDecimal;
  *
  * @author misael
  */
-public class CarListaPagosCobrosDetalleFormaTO implements Serializable{
+public class CarListaPagosCobrosDetalleFormaTO implements Serializable {
+
     private String fpForma;
-    private String fpBanco;
-   private String fpCuenta;
-   private String fpFecha;
     private String fpReferencia;
     private BigDecimal fpValor;
-   private String fpObservaciones;
-   
-   
+    private String fpObservaciones;
+    private String fpBanco;
+    private String fpCuenta;
+    private String fpFecha;
 
     public CarListaPagosCobrosDetalleFormaTO() {
     }
@@ -33,19 +31,26 @@ public class CarListaPagosCobrosDetalleFormaTO implements Serializable{
         this.fpObservaciones = fpObservaciones;
     }
 
-    public CarListaPagosCobrosDetalleFormaTO(String fpForma, String fpBanco, String fpCuenta, String fpFecha, String fpReferencia, BigDecimal fpValor, String fpObservaciones) {
+    public CarListaPagosCobrosDetalleFormaTO(String fpForma, String fpReferencia, BigDecimal fpValor, String fpObservaciones, String fpBanco, String fpCuenta, String fpFecha) {
         this.fpForma = fpForma;
-        this.fpBanco = fpBanco;
-        this.fpCuenta = fpCuenta;
-        this.fpFecha = fpFecha;
         this.fpReferencia = fpReferencia;
         this.fpValor = fpValor;
         this.fpObservaciones = fpObservaciones;
+        this.fpBanco = fpBanco;
+        this.fpCuenta = fpCuenta;
+        this.fpFecha = fpFecha;
     }
 
-
-    
-    
+   
+//    public CarListaPagosCobrosDetalleFormaTO(String fpForma, String fpBanco, String fpCuenta, String fpFecha, String fpReferencia, BigDecimal fpValor, String fpObservaciones) {
+//        this.fpForma = fpForma;
+//        this.fpBanco = fpBanco;
+//        this.fpCuenta = fpCuenta;
+//        this.fpFecha = fpFecha;
+//        this.fpReferencia = fpReferencia;
+//        this.fpValor = fpValor;
+//        this.fpObservaciones = fpObservaciones;
+//    }
 
     public String getFpForma() {
         return fpForma;
@@ -102,7 +107,4 @@ public class CarListaPagosCobrosDetalleFormaTO implements Serializable{
     public void setFpFecha(String fpFecha) {
         this.fpFecha = fpFecha;
     }
-    
-    
-    
 }

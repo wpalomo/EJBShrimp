@@ -211,12 +211,11 @@ public interface OperacionesAnexoDAOLocal {
             String motivo,
             String numero) throws Exception;
 
-    boolean comprobarAnxVentaElectronicaAutorizacion(
+    String  comprobarAnxVentaElectronicaAutorizacion(
             String empresa,
             String periodo,
             String motivo,
-            String numero,
-            String estado) throws Exception;
+            String numero) throws Exception;
 
     anexos.entity.AnxVentaElectronica buscarAnxVentaElectronica(
             String empresa,

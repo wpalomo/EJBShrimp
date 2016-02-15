@@ -100,7 +100,6 @@ public class GenerarReporteRrhh implements GenerarReporteRrhhLocal {
                 rhConsolidadoAnticiposPrestamos.setCapPrestamos(listaConsolidadoAnticiposPrestamosTO.get(i).getCapPrestamos());
                 rhConsolidadoAnticiposPrestamos.setCapTotal(listaConsolidadoAnticiposPrestamosTO.get(i).getCapTotal());
                 rhConsolidadoAnticiposPrestamos.setCapOrden(listaConsolidadoAnticiposPrestamosTO.get(i).getCapOrden());
-                System.out.println(listaConsolidadoAnticiposPrestamosTO.get(i).getCapId());
                 rhConsolidadoAnticiposPrestamoses.add(rhConsolidadoAnticiposPrestamos);
                 
             }

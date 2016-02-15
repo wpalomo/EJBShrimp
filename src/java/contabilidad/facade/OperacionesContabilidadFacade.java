@@ -175,8 +175,12 @@ public class OperacionesContabilidadFacade implements OperacionesContabilidadFac
             java.lang.String fecha,
             java.lang.Boolean ocultar,
             java.lang.Boolean ocultarDetalle,
+            java.lang.Boolean validacionCtaModulo,
             java.lang.Integer columnasEstadosFinancieros) throws java.lang.Exception {
-        return operacionesContabilidadBusinessLocal.getConFunBalanceGeneralNecTO(empresa, sector, fecha, ocultar, ocultarDetalle, columnasEstadosFinancieros);
+        return operacionesContabilidadBusinessLocal.getConFunBalanceGeneralNecTO(
+                empresa, sector, fecha, ocultar, ocultarDetalle, 
+                validacionCtaModulo, 
+                columnasEstadosFinancieros);
     }
 
     @Override

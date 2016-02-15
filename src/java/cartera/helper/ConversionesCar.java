@@ -750,7 +750,81 @@ public class ConversionesCar {
         }
         return lista;
     }
-
+    
+    
+      public static List<CarListaPagosCobrosDetalleFormaTO> convertirCarListaPagosCobrosDetalleForma_CarListaPagosCobrosDetalleFormaTO(List datos, boolean hayPostfechados) {
+        List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion        
+        
+        for (Iterator i$ = datos.iterator(); i$.hasNext();) {//clase iteracion(no todo se puede iterar, solo listas)
+            Object obj = i$.next();
+            Object[] array = ((java.util.List) obj).toArray(); //Object[] array = (Object[]) obj;
+//            dfColumnas = {"Forma",   "Referencia",     "Valor",       "Observaciones"};
+//            // =               {"Forma",    "Bacno",          "Cuenta",         "Fecha",                   "Referencia", "Valor", "Observaciones"};
+            
+            String forma;
+            try {
+                forma = array[0].toString();
+            } catch (Exception e) {
+                forma = null;
+            }
+            String  referencia;
+            try {
+                referencia = array[1].toString();
+            } catch (Exception e) {
+                referencia = null;
+            } 
+            
+            BigDecimal valor;
+            try {
+                valor =  new BigDecimal(array[2].toString());
+            } catch (Exception e) {
+                valor = cero;
+            }    
+            
+//             if(!hayPostfechados){                     
+//                try {
+//                    valor =  new BigDecimal(array[2].toString());
+//                } catch (Exception e) {
+//                    valor = cero;
+//                }    
+//            }else{                
+//                try {
+//                    valor =  new BigDecimal(array[2].toString());
+//                } catch (Exception e) {
+//                    valor = cero;
+//                }   
+//            } 
+            String   observaciones;
+            try {
+                observaciones = array[3].toString();
+            } catch (Exception e) {
+                observaciones = null;
+            }
+            
+            String ban_nombre;
+            try {
+                ban_nombre = array[4].toString();
+            } catch (Exception e) {
+                ban_nombre = null;
+            }
+            String cuenta;
+            try {
+                cuenta = array[5].toString();
+            } catch (Exception e) {
+                cuenta = null;
+            }            
+            String fecha;
+            try {
+                fecha = array[5].toString();
+            } catch (Exception e) {
+                fecha = null;
+            }            
+            lista.add(new CarListaPagosCobrosDetalleFormaTO(forma, referencia, valor, observaciones, ban_nombre, cuenta,fecha));
+        }
+        return lista;
+    }
+     
+/*
     public static List<CarListaPagosCobrosDetalleFormaTO> convertirCarListaPagosCobrosDetalleForma_CarListaPagosCobrosDetalleFormaTO(List datos, boolean hayPostfechados) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion        
         
@@ -782,13 +856,13 @@ public class ConversionesCar {
                     valor =  new BigDecimal(array[5].toString());
                 } catch (Exception e) {
                     valor = cero;
-                }                
+                }    
             }else{                
                 try {
                     valor =  new BigDecimal(array[5].toString());
                 } catch (Exception e) {
                     valor = cero;
-                }            
+                }   
             }     
             try {
                 dato4 = array[3].toString();
@@ -808,7 +882,7 @@ public class ConversionesCar {
             lista.add(new CarListaPagosCobrosDetalleFormaTO(dato1, dato2, dato3, dato4, dato5, valor, dato7));
         }
         return lista;
-    }
+    }*/
     public static List<CarListaPagosCobrosDetalleAnticipoTO> convertirCarListaPagosCobrosDetalleAnticipo_CarListaPagosCobrosDetalleAnticipoTO(List datos) {
         List lista = new ArrayList(1);//interface que extiende de array list, recibe parametros de dimencion
         /*

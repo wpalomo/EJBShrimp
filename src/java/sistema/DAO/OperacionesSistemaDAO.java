@@ -339,11 +339,6 @@ public class OperacionesSistemaDAO implements OperacionesSistemaDAOLocal {
             String parametro,
             sistema.TO.SisInfoTO sisInfoTO) throws Exception {
         String empresa = "('" + sisInfoTO.getInfEmpresa().trim() + "')";
-        System.out.println("SELECT usuarios.*, sis_usuario_detalle.gru_codigo "
-                + "FROM (SELECT * FROM sistemaweb.fun_usuario('" + sisInfoTO.getInfUsuario() + "','" + parametro + "')) "
-                + "AS usuarios INNER JOIN sistemaweb.sis_usuario_detalle "
-                + "ON usuarios.usr_codigo = sis_usuario_detalle.usr_codigo "
-                + "WHERE sis_usuario_detalle.gru_empresa=" + empresa + ";");
         return ConversionesSistema.convertirTOSisUsuarioTO_ListaSisUsuario(
                 em.createNativeQuery(
                 "SELECT usuarios.*, sis_usuario_detalle.gru_codigo "

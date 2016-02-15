@@ -148,12 +148,6 @@ public class OperacionesInventarioDAOTransaccion implements OperacionesInventari
 
     @javax.ejb.TransactionAttribute(javax.ejb.TransactionAttributeType.REQUIRED)
     public boolean insertarInvProducto(inventario.entity.InvProducto invProducto, sistemaWeb.entity.SisSuceso sisSuceso, inventario.entity.InvNumeracionVarios invNumeracionVarios) throws Exception {
-         System.out.println("-----------------------DAO------------------------");
-                                System.out.println("1   " + invProducto.getProCodigoBarra());
-                                System.out.println("2   " + invProducto.getProCodigoBarra2());
-                                System.out.println("3   " + invProducto.getProCodigoBarra3());
-                                System.out.println("4   " + invProducto.getProCodigoBarra4());
-                                System.out.println("5   " + invProducto.getProCodigoBarra5());
         
         em.persist(invProducto);
         em.persist(sisSuceso);
@@ -166,12 +160,7 @@ public class OperacionesInventarioDAOTransaccion implements OperacionesInventari
 
     @javax.ejb.TransactionAttribute(javax.ejb.TransactionAttributeType.REQUIRED)
     public boolean modificarInvProducto(inventario.entity.InvProducto invProducto, sistemaWeb.entity.SisSuceso sisSuceso) throws Exception {
-         System.out.println("-----------------------DAO------------------------");
-                                System.out.println("1   " + invProducto.getProCodigoBarra());
-                                System.out.println("2   " + invProducto.getProCodigoBarra2());
-                                System.out.println("3   " + invProducto.getProCodigoBarra3());
-                                System.out.println("4   " + invProducto.getProCodigoBarra4());
-                                System.out.println("5   " + invProducto.getProCodigoBarra5());
+     
         em.merge(invProducto);
         em.persist(sisSuceso);
         em.flush();
@@ -508,8 +497,6 @@ public class OperacionesInventarioDAOTransaccion implements OperacionesInventari
         em.merge(invProformas);
         for (int i = 0; i < listaInvDetalle.size(); i++) {
             listaInvDetalle.get(i).setInvProformas(invProformas);
-            System.out.println("Descuento    "+ listaInvDetalle.get(i).getDetPorcentajeDescuento());
-            System.out.println("Recargo      "+ listaInvDetalle.get(i).getDetPorcentajeRecargo());
             em.merge(listaInvDetalle.get(i));
         }
 

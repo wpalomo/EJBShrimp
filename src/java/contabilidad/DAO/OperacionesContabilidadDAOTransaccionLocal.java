@@ -77,8 +77,14 @@ public interface OperacionesContabilidadDAOTransaccionLocal {
             List <ConDetalle> listaConDetalle, 
             List <ConDetalle> listaConDetalleEliminar, 
             inventario.entity.InvCompras invCompras, 
-             List<banco.entity.BanCheque> listaBanChequeEliminar,
             SisSuceso sisSuceso) throws Exception;
+//    boolean modificarConContableComprasMayorizar(
+//            ConContable conContable, 
+//            List <ConDetalle> listaConDetalle, 
+//            List <ConDetalle> listaConDetalleEliminar, 
+//            inventario.entity.InvCompras invCompras, 
+//             List<banco.entity.BanCheque> listaBanChequeEliminar,
+//            SisSuceso sisSuceso) throws Exception;
     boolean modificarConContableVentasMayorizar(ConContable conContable, List <ConDetalle> listaConDetalle, List <ConDetalle> listaConDetalleEliminar, inventario.entity.InvVentas invVentas,  SisSuceso sisSuceso) throws Exception;
     boolean anularConContable(ConContable conContable, SisSuceso sisSuceso) throws Exception;
     boolean anularReversarConContable(

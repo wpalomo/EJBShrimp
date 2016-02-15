@@ -291,7 +291,7 @@ public class OperacionesCarBusiness implements OperacionesCarBusinessLocal {
                             } else {
                                 ctaProveedorPagos = anexoDAOLocal.getCuentasContablesTO(carPagosTO.getUsrEmpresa()).getCtaCuentasPorPagar();
                             }
-
+                          
                             conDetalle.setConCuentas(
                                     operacionesContabilidadDAOLocal.buscarCuentas(
                                     carPagosTO.getUsrEmpresa(),

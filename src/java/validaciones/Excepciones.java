@@ -72,9 +72,7 @@ public class Excepciones {
             String metodo, 
             sistema.TO.SisInfoTO sisInfoTO, 
             sistema.DAO.OperacionesSistemaDAOTransaccionLocal operacionesSistemaDAOTransaccionLocal){
-        System.out.println("\n\nwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
         e.printStackTrace();
-        System.out.println("fffffffffffffffffffffffffffffffffffffff");
         sisErrorTO = new sistema.TO.SisErrorTO();
         try {
             sisErrorTO = validaciones.Excepciones.guardarExcepciones(

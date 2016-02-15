@@ -228,15 +228,14 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
         em.persist(sisSuceso);
         return true;
     }
-
+  /////ojo modificar
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override
     public boolean modificarConContableComprasMayorizar(
             ConContable conContable, 
             List<ConDetalle> listaConDetalle, 
             List<ConDetalle> listaConDetalleEliminar, 
-            inventario.entity.InvCompras invCompras,
-            List<banco.entity.BanCheque> listaBanChequeEliminar,
+            inventario.entity.InvCompras invCompras, 
             SisSuceso sisSuceso) throws Exception {
         for (int i = 0; i < listaConDetalle.size(); i++) {
             listaConDetalle.get(i).setConContable(conContable);
@@ -246,17 +245,43 @@ public class OperacionesContabilidadDAOTransaccion implements OperacionesContabi
             listaConDetalleEliminar.get(i).setConContable(conContable);
             em.remove(em.merge(listaConDetalleEliminar.get(i)));
         }
-        
-        for (int i = 0; i < listaBanChequeEliminar.size(); i++) {
-            if(listaBanChequeEliminar.get(i)!= null)
-                em.remove(em.merge(listaBanChequeEliminar.get(i)));
-        }
         em.merge(invCompras);
 
         em.merge(conContable);
         em.persist(sisSuceso);
+
         return true;
     }
+    
+ //   @Override
+//    public boolean modificarConContableComprasMayorizar(
+//            ConContable conContable, 
+//            List<ConDetalle> listaConDetalle, 
+//            List<ConDetalle> listaConDetalleEliminar, 
+//            inventario.entity.InvCompras invCompras,
+//            List<banco.entity.BanCheque> listaBanChequeEliminar,
+//            SisSuceso sisSuceso) throws Exception {
+//        for (int i = 0; i < listaConDetalle.size(); i++) {
+//            listaConDetalle.get(i).setConContable(conContable);
+//            em.persist(listaConDetalle.get(i));
+//        }
+//        for (int i = 0; i < listaConDetalleEliminar.size(); i++) {
+//            listaConDetalleEliminar.get(i).setConContable(conContable);
+//            em.remove(em.merge(listaConDetalleEliminar.get(i)));
+//        }
+//        
+//        for (int i = 0; i < listaBanChequeEliminar.size(); i++) {
+//            if(listaBanChequeEliminar.get(i)!= null)
+//                em.remove(em.merge(listaBanChequeEliminar.get(i)));
+//        }
+//        em.merge(invCompras);
+//
+//        em.merge(conContable);
+//        em.persist(sisSuceso);
+//        return true;
+//    }
+
+    
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Override

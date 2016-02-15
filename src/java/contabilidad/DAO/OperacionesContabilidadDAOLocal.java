@@ -140,6 +140,7 @@ public interface OperacionesContabilidadDAOLocal {
             java.lang.String fecha, 
             java.lang.Boolean ocultar, 
             java.lang.Boolean ocultarDetalle, 
+            java.lang.Boolean validacionCtaModulo,
             java.lang.Integer columnasEstadosFinancieros) throws java.lang.Exception;
     java.util.List<contabilidad.TO.ConBalanceGeneralTO> getFunBalanceGeneralTO(
             String empresa, 

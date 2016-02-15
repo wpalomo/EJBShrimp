@@ -73,6 +73,7 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
     @Override
     public anexos.TO.AnxNumeracionLineaTO getNumeroAutorizacion(String empresa, String numeroRetencion, String numeroComprobante, String fechaVencimiento) throws Exception {
         anexos.TO.AnxNumeracionLineaTO anxNumeracionLineaTO = null;
+        String sql = "SELECT * FROM anexo.fun_comprobante_verificar_autorizacion('" + empresa + "', '" + numeroComprobante + "', '" + numeroRetencion + "', " + fechaVencimiento + ")";
         Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery(
                 "SELECT * FROM anexo.fun_comprobante_verificar_autorizacion('" + empresa + "', '" + numeroComprobante + "', '" + numeroRetencion + "', " + fechaVencimiento + ")").getResultList(), 0);
         if (array != null) {
@@ -185,31 +186,40 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
 
     @Override
     public String getCodigoAnxTipoTransaccionTO(String codigoTipoIdentificacion, String tipoTransaccion) throws Exception {
+        String sql ="";
         if (tipoTransaccion.equals("COMPRA")) {
-            return String.valueOf(validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery(
-                    "SELECT tt_codigo "
-                    + "FROM anexo.anx_tipotransaccion WHERE tt_codigo <= '03' AND tt_id = ('" + codigoTipoIdentificacion + "')").
-                    getResultList(), 0)[0].toString());
+            sql = "SELECT tt_codigo "
+                    + "FROM anexo.anx_tipotransaccion WHERE tt_codigo <= '03' AND tt_id = ('" + codigoTipoIdentificacion + "')";
+//            return String.valueOf(validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery(
+//                    sql).
+//                    getResultList(), 0)[0].toString());
         } else {
-            return String.valueOf(validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery(
-                    "SELECT tt_codigo "
-                    + "FROM anexo.anx_tipotransaccion WHERE tt_codigo > '03' AND tt_id = ('" + codigoTipoIdentificacion + "')").
-                    getResultList(), 0)[0].toString());
+            sql = "SELECT tt_codigo "
+                    + "FROM anexo.anx_tipotransaccion WHERE tt_codigo > '03' AND tt_id = ('" + codigoTipoIdentificacion + "')";
+//            return String.valueOf(validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery(
+//                    sql).
+//                    getResultList(), 0)[0].toString());
         }
+        return String.valueOf(validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery(
+                    sql).
+                    getResultList(), 0)[0].toString());
+        
     }
 
     @Override
     public java.util.List<anexos.TO.AnxTipoComprobanteComboTO> getListaAnxTipoComprobanteComboTO(String codigoTipoTransaccion) throws Exception {
+        String sql;
         if (codigoTipoTransaccion != null) {
+            sql = "SELECT tc_codigo, tc_descripcion, tc_reporte FROM anexo."
+                    + "anx_tipocomprobante WHERE POSITION(('" + codigoTipoTransaccion + "~') in tc_transaccion)!=0 ORDER BY tc_codigo";
             return anexos.helper.ConversionesAnexos.convertirListaAnxTipoComprobanteCombo_ListaAnxTipoComprobanteComboTO(
-                    em.createNativeQuery("SELECT tc_codigo, tc_descripcion, tc_reporte FROM anexo."
-                    + "anx_tipocomprobante WHERE POSITION(('" + codigoTipoTransaccion + "~') in tc_transaccion)!=0 ORDER BY tc_codigo").getResultList());
+                    em.createNativeQuery(sql).getResultList());
         } else {
+            sql = "SELECT tc_codigo, tc_descripcion FROM anexo."
+                    + "anx_tipocomprobante ORDER BY tc_codigo";
             return anexos.helper.ConversionesAnexos.convertirListaAnxTipoComprobanteCombo_ListaAnxTipoComprobanteComboTO(
-                    em.createNativeQuery("SELECT tc_codigo, tc_descripcion FROM anexo."
-                    + "anx_tipocomprobante ORDER BY tc_codigo").getResultList());
+                    em.createNativeQuery(sql).getResultList());
         }
-
     }
 
     @Override
@@ -336,7 +346,6 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
     public java.util.List<anexos.TO.AnxListaRetencionesFuenteIvaTO> getAnexoListaRetencionesFuenteIvaTO(String empresa, String fechaDesde, String fechaHasta) throws Exception {
         String sql = "SELECT * FROM anexo.fun_listado_retenciones_iva"
                 + "('" + empresa + "', '" + fechaDesde + "', '" + fechaHasta + "')";
-        System.out.println(""+sql);
         return anexos.helper.ConversionesAnexos.convertirListaRetencionesFuenteIva_ListaRetencionesFuenteIvaTO(
                 em.createNativeQuery(sql).getResultList());
     }
@@ -492,8 +501,8 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
     @Override
     public anexos.TO.AnxCuentasContablesTO getCuentasContablesTO(String empresa) throws Exception {
         anexos.TO.AnxCuentasContablesTO anxCuentasContablesTO = new anexos.TO.AnxCuentasContablesTO();
-        Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery("SELECT * FROM anexo.anx_cuentascontables "
-                + "WHERE cta_empresa = ('" + empresa + "');").getResultList(), 0);
+        String sql = "SELECT * FROM anexo.anx_cuentascontables WHERE cta_empresa = ('" + empresa + "');";
+        Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery(sql).getResultList(), 0);
         /*
          * 0 cta_secuencial serial NOT NULL, 1 cta_empresa character(7) NOT
          * NULL, 2 cta_iva_pagado character(18), 3 cta_iva_cobrado
@@ -733,13 +742,13 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
     }
 
     public AnxCuentasContablesTO getAnxCuentasContablesTO(String empresa, String nombreCuenta) throws Exception {
-        if(nombreCuenta == null){
+        if (nombreCuenta == null) {
             String sql = "SELECT * "
                     + "FROM anexo.anx_cuentascontables "
                     + "WHERE (cta_empresa = '" + empresa + "');";
             return ConversionesAnexos.convertirAnxCuentasContables_AnxCuentasContablesTO(
                     em.createNativeQuery(sql).getResultList());
-        }else{
+        } else {
             String sql = "SELECT * FROM anexo.fun_nombres_cuentas_parametrizacion('" + empresa + "');";
             return ConversionesAnexos.convertirAnxCuentasContables_AnxCuentasContablesTO(
                     em.createNativeQuery(sql).getResultList());
@@ -1048,7 +1057,7 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
          * compRetencionFechaEmision; private String eAutorizacionFecha; private
          * String eAutorizacionNumero; private Boolean eEnviadoPorCorreo;
          */
-        String sql ="SELECT  "
+        String sql = "SELECT  "
                 + "e_secuencial, "
                 + "anx_compra_electronica.comp_periodo, "
                 + "anx_compra_electronica.comp_motivo, "
@@ -1075,7 +1084,6 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
                 + complemetoQuery + " AND "
                 + "NOT (inv_compras.comp_pendiente OR inv_compras.comp_anulado) "
                 + "ORDER BY anx_compra.comp_retencion_numero;";
-        System.out.println("SQL:"+sql);
         return anexos.helper.ConversionesAnexos.convertirAnxCompraElectronica_AnxCompraElectronicaTO(
                 em.createNativeQuery(
                 "SELECT  "
@@ -1177,33 +1185,38 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
 
     @Override
     public anexos.entity.AnxVentaElectronica buscarAnxVentaElectronica(String empresa, String periodo, String motivo, String numero) throws Exception {
-        Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery(
-                "SELECT e_secuencial  "
+        String sql = "SELECT e_secuencial  "
                 + "FROM anexo.anx_venta_electronica  "
                 + "WHERE vta_empresa = '" + empresa + "' AND vta_periodo = '" + periodo + "' AND   "
-                + "vta_motivo = '" + motivo + "' and vta_numero = '" + numero + "';").getResultList(), 0);
+                + "vta_motivo = '" + motivo + "' and vta_numero = '" + numero + "';";
+        Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery(
+                sql).getResultList(), 0);
 
         return anxVentaElectronicaFacadeLocal.find(new Integer(array[0].toString().trim()));
     }
 
     @Override
     public boolean comprobarAnxVentaElectronica(String empresa, String periodo, String motivo, String numero) throws Exception {
+        String sql = "SELECT COUNT(*)!=0 FROM anexo.anx_venta_electronica "
+                + "WHERE (vta_empresa = '" + empresa + "' AND vta_periodo = '" + periodo + "' AND vta_motivo = '" + motivo + "' AND vta_numero = '" + numero + "');";
         return Boolean.parseBoolean(validaciones.ConvertirListaObject.convertirListToArray(
-                em.createNativeQuery("SELECT COUNT(*)!=0 FROM anexo.anx_venta_electronica "
-                + "WHERE (vta_empresa = '" + empresa + "' AND vta_periodo = '" + periodo + " 'AND vta_motivo = '" + motivo + " 'AND vta_numero = '" + numero + "');").
+                em.createNativeQuery(sql).
                 getResultList(), 0)[0].toString());
     }
 
     @Override
-    public boolean comprobarAnxVentaElectronicaAutorizacion(String empresa, String periodo, String motivo, String numero, String estado) throws Exception {
-        /*
-         * vta_empresa character(7) NOT NULL, vta_periodo character(7) NOT NULL,
-         * vta_motivo character(7) NOT NULL, vta_numero character(7) NOT NULL,
-         */
-        return Boolean.parseBoolean(validaciones.ConvertirListaObject.convertirListToArray(
-                em.createNativeQuery("SELECT COUNT(*)!=0 FROM anexo.anx_venta_electronica "
-                + "WHERE (vta_empresa = '" + empresa + "' AND vta_periodo = '" + periodo + " 'AND vta_motivo = '" + motivo + " 'AND vta_numero = '" + numero + "' AND e_estado = '" + estado + "');").
-                getResultList(), 0)[0].toString());
+    public String comprobarAnxVentaElectronicaAutorizacion(String empresa, String periodo, String motivo, String numero) throws Exception {
+        String sql = "SELECT e_estado FROM anexo.anx_venta_electronica "
+                + "WHERE (vta_empresa = '" + empresa + "' AND vta_periodo = '" + periodo + " 'AND vta_motivo = '" + motivo + " 'AND vta_numero = '" + numero + "');";
+        try {
+            String estadoAutorizacion = validaciones.ConvertirListaObject.convertirListToArray(
+                    em.createNativeQuery(sql).
+                    getResultList(), 0)[0].toString();
+            return estadoAutorizacion;
+        } catch (NullPointerException e) {
+            return "";
+        }
+
     }
 
 //    @Override
@@ -1313,16 +1326,18 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
 
         return Boolean.parseBoolean(validaciones.ConvertirListaObject.convertirListToArray(
                 em.createNativeQuery("SELECT COUNT(*)!=0 FROM anexo.anx_compra_electronica "
-                + "WHERE (comp_empresa = '" + empresa + "' AND comp_periodo = '" + periodo + " 'AND comp_motivo = '" + motivo + " 'AND comp_numero = '" + numero + "');").
+                + "WHERE (comp_empresa = '" + empresa + "' AND comp_periodo = '" + periodo + "' AND comp_motivo = '" + motivo + "' AND comp_numero = '" + numero + "');").
                 getResultList(), 0)[0].toString());
     }
 
     @Override
     public boolean comprobarRetencionAutorizadaProcesamiento(String empresa, String periodo, String motivo, String numero) throws Exception {
         /*
-         "SELECT COUNT(*)!=0 FROM anexo.anx_compra_electronica "
-                + "WHERE (comp_empresa = '" + empresa + "' AND comp_periodo = '" + periodo + " ' AND comp_motivo = '" + motivo + " ' AND comp_numero = '" + numero + "' AND  "
-                + "(e_estado = 'AUTORIZADO' OR e_autorizacion_numero = 'CE(70): CLAVE DE ACCESO EN PROCESAMIENTO'))"
+         * "SELECT COUNT(*)!=0 FROM anexo.anx_compra_electronica " + "WHERE
+         * (comp_empresa = '" + empresa + "' AND comp_periodo = '" + periodo + "
+         * ' AND comp_motivo = '" + motivo + " ' AND comp_numero = '" + numero +
+         * "' AND " + "(e_estado = 'AUTORIZADO' OR e_autorizacion_numero =
+         * 'CE(70): CLAVE DE ACCESO EN PROCESAMIENTO'))"
          */
         String sql = "SELECT COUNT(*)!=0 FROM anexo.anx_compra_electronica "
                 + "WHERE (comp_empresa = '" + empresa + "' AND comp_periodo = '" + periodo + " ' AND comp_motivo = '" + motivo + " ' AND comp_numero = '" + numero + "')";

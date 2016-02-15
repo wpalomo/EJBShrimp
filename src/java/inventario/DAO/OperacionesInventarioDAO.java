@@ -218,26 +218,26 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
             return 0;
         }
     }
-    
-    public Object[] getCompra(String empresa, String periodo, String conTipo, String numero){          
-            Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery("select comp_empresa, comp_periodo, comp_motivo, comp_numero "+ 
-            "from inventario.inv_compras where con_empresa='"+empresa+"' AND "+
-                "con_periodo='"+periodo+"' AND con_tipo='"+conTipo+"' AND con_numero='"+numero+"';").getResultList(),0);
-            if (array != null) {
-                return array;
-            } 
-            return null;
-        
+
+    public Object[] getCompra(String empresa, String periodo, String conTipo, String numero) {
+        Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery("select comp_empresa, comp_periodo, comp_motivo, comp_numero "
+                + "from inventario.inv_compras where con_empresa='" + empresa + "' AND "
+                + "con_periodo='" + periodo + "' AND con_tipo='" + conTipo + "' AND con_numero='" + numero + "';").getResultList(), 0);
+        if (array != null) {
+            return array;
+        }
+        return null;
+
     }
-    
-    public Object[] getVenta(String empresa, String periodo, String conTipo, String numero){
-        Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery("select vta_empresa, vta_periodo, vta_motivo, vta_numero "+ 
-	"from inventario.inv_ventas where con_empresa='"+empresa+"' AND "+
-	     "con_periodo='"+periodo+"' AND con_tipo='"+conTipo+"' AND con_numero='"+numero+"';").getResultList(),0);
-            if (array != null) {
-                return array;
-            } 
-            return null;
+
+    public Object[] getVenta(String empresa, String periodo, String conTipo, String numero) {
+        Object[] array = validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery("select vta_empresa, vta_periodo, vta_motivo, vta_numero "
+                + "from inventario.inv_ventas where con_empresa='" + empresa + "' AND "
+                + "con_periodo='" + periodo + "' AND con_tipo='" + conTipo + "' AND con_numero='" + numero + "';").getResultList(), 0);
+        if (array != null) {
+            return array;
+        }
+        return null;
     }
 
     public inventario.TO.InvTransferenciasTO getInvTransferenciasCabeceraTO(String empresa, String periodo, String motivo, String numeroConsumo) throws Exception {
@@ -305,7 +305,7 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
 
     public inventario.entity.InvProducto buscarInvProducto(String empresa, String codigoProducto) throws Exception {
         inventario.entity.InvProducto invProducto = invProductoFacadeLocal.find(new inventario.entity.InvProductoPK(empresa, codigoProducto));
-        
+
         return invProducto != null ? inventario.helper.ConversionesInventario.convertirInvProducto_InvProducto(invProducto) : null;
     }
 
@@ -355,7 +355,7 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
 
     public inventario.entity.InvProductoSaldos buscarProductosSaldosStock(String empresa, String bodega, String producto) throws Exception {
         inventario.entity.InvProductoSaldos invProductoSaldos = inventario.helper.ConversionesInventario.convertirInvProductoSaldosConsultaStock_InvProductoSaldosStock(em.createNativeQuery("SELECT stk_saldo FROM inventario.inv_producto_saldos where stk_empresa = '"
-                + empresa + "' AND stk_bodega = '" + bodega + "' AND stk_producto = '" + producto + "'").getResultList());        
+                + empresa + "' AND stk_bodega = '" + bodega + "' AND stk_producto = '" + producto + "'").getResultList());
         return invProductoSaldos;
     }
 
@@ -531,16 +531,16 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
 //                + "AND comp_documento_tipo = ('" + compDocumentoTipo + "') AND comp_documento_numero = ('" + compDocumentoNumero + "');").
 //                getResultList().get(0)).get(0).toString());
 //    }
-    public java.util.List<inventario.TO.InvListaProductosTO> getListaProductosTO(String empresa, 
-            String busqueda, String bodega,  String categoria, String fecha, boolean incluirInactivos, boolean limite) throws Exception {
+    public java.util.List<inventario.TO.InvListaProductosTO> getListaProductosTO(String empresa,
+            String busqueda, String bodega, String categoria, String fecha, boolean incluirInactivos, boolean limite) throws Exception {
         String porcionConsulta = "";
         if (limite) {
             porcionConsulta = " LIMIT 30";
         }
-        if(categoria == null){
+        if (categoria == null) {
             categoria = "";
         }
-       
+
 //        String sql = "SELECT * FROM inventario.fun_lista_productos_saldos_precios('"+empresa+"', '"+bodega+"', '"
 //                +categoria+"', '"+busqueda+"', "+fecha+", "+incluirInactivos+");";
         String sql = "SELECT "
@@ -563,8 +563,8 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
                 + "lpsp_precio5, "
                 + "lpsp_precio3 * lpsp_cantidad3 lpsp_precio_caja, "
                 + "lpsp_iva "
-                + "FROM inventario.fun_lista_productos_saldos_precios('"+empresa+"', '"+bodega+"', '"
-                +categoria+"', '"+busqueda+"', "+fecha+", "+incluirInactivos+");";// + porcionConsulta;
+                + "FROM inventario.fun_lista_productos_saldos_precios('" + empresa + "', '" + bodega + "', '"
+                + categoria + "', '" + busqueda + "', " + fecha + ", " + incluirInactivos + ");";// + porcionConsulta;
         return inventario.helper.ConversionesInventario.convertirListaInvProducto_ListaInvProductoTO(em.createNativeQuery(sql).getResultList());
 //        return inventario.helper.ConversionesInventario.convertirListaInvProducto_ListaInvProductoTO(em.
 //                createNativeQuery("SELECT inv_producto.pro_codigo_principal, inv_producto.pro_nombre, inv_producto_categoria.cat_detalle, "
@@ -605,36 +605,29 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
     }
 
     public java.util.List<inventario.TO.InvListaClienteTO> getListaClienteTO(String empresa, String busqueda, boolean incluirClienteInactivo) throws Exception {
-
+        String sql = "SELECT * from inventario.fun_busqueda_clientes('" + empresa + "', '" + busqueda + "', " + incluirClienteInactivo + ")";
         return inventario.helper.ConversionesInventario.convertirListaInvCliente_ListaInvClienteTO(em.createNativeQuery(
-                "SELECT "
-                + "inv_cliente.cli_codigo, "
-                + "inv_cliente.cli_id_numero, "
-                + "inv_cliente.cli_nombre, "
-                + "inv_cliente.cli_direccion "
-                + "FROM inventario.inv_cliente "
-                + "WHERE " + (incluirClienteInactivo ? "" : "NOT cli_inactivo "
-                + "AND ") + "inv_cliente.cli_empresa = ('" + empresa + "') "
-                + "AND (cli_codigo || COALESCE(cli_id_numero,'') || cli_nombre || cli_direccion "
-                + "LIKE TRANSLATE(' ' || CASE WHEN ('" + busqueda + "') = ''  THEN '~' ELSE ('" + busqueda + "') END || ' ', ' ', '%')) ORDER BY cli_nombre").getResultList());
+                sql).getResultList());
+
     }
 
     public java.util.List<inventario.TO.InvListaProveedoresTO> getListaProveedoresTO(String empresa, String busqueda, boolean incluirProveedorInactivo) throws Exception {
 
         return inventario.helper.ConversionesInventario.convertirListaInvProveedores_ListaInvProveedoresTO(em.createNativeQuery(
-                "SELECT "
-                + "inv_proveedor.prov_codigo, "
-                + "inv_proveedor.prov_id_numero, "
-                + "inv_proveedor.prov_nombre, "
-                + "inv_proveedor_categoria.pc_detalle as prov_categoria "
-                + "FROM inventario.inv_proveedor "
-                + "LEFT JOIN inventario.inv_proveedor_categoria "
-                + "ON inv_proveedor.pc_empresa = inv_proveedor_categoria.pc_empresa "
-                + "AND inv_proveedor.pc_codigo = inv_proveedor_categoria.pc_codigo "
-                + "WHERE " + (incluirProveedorInactivo ? "" : "NOT prov_inactivo "
-                + "AND ") + " inv_proveedor.prov_empresa = ('" + empresa + "') "
-                + "AND (prov_codigo || COALESCE(prov_id_numero,'') || prov_nombre || CASE WHEN pc_detalle IS NULL THEN ('') ELSE (pc_detalle) END "
-                + "LIKE TRANSLATE(' ' || CASE WHEN ('" + busqueda + "') = ''  THEN '~' ELSE ('" + busqueda + "') END || ' ', ' ', '%')) ORDER BY prov_nombre").getResultList());
+                "SELECT * from inventario.fun_busqueda_proveedores('" + empresa + "', '" + busqueda + "', " + incluirProveedorInactivo + ")").getResultList());
+//                "SELECT "
+//                + "inv_proveedor.prov_codigo, "
+//                + "inv_proveedor.prov_id_numero, "
+//                + "inv_proveedor.prov_nombre, "
+//                + "inv_proveedor_categoria.pc_detalle as prov_categoria "
+//                + "FROM inventario.inv_proveedor "
+//                + "LEFT JOIN inventario.inv_proveedor_categoria "
+//                + "ON inv_proveedor.pc_empresa = inv_proveedor_categoria.pc_empresa "
+//                + "AND inv_proveedor.pc_codigo = inv_proveedor_categoria.pc_codigo "
+//                + "WHERE " + (incluirProveedorInactivo ? "" : "NOT prov_inactivo "
+//                + "AND ") + " inv_proveedor.prov_empresa = ('" + empresa + "') "
+//                + "AND (prov_codigo || COALESCE(prov_id_numero,'') || prov_nombre || CASE WHEN pc_detalle IS NULL THEN ('') ELSE (pc_detalle) END "
+//                + "LIKE TRANSLATE(' ' || CASE WHEN ('" + busqueda + "') = ''  THEN '~' ELSE ('" + busqueda + "') END || ' ', ' ', '%')) ORDER BY prov_nombre").getResultList());
 
 
     }
@@ -731,7 +724,6 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
                 + "pro_cantidad3, "
                 + "pro_cantidad4, "
                 + "pro_cantidad5, "
-                
                 + "pro_precio1, "
                 + "pro_precio2, "
                 + "pro_precio3, "
@@ -788,9 +780,9 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
                 "SELECT * FROM inventario.inv_cliente WHERE cli_empresa = ('" + empresa + "') AND "
                 + "cli_codigo = ('" + codigo + "')").getResultList());
         /*
-         
-                SELECT * FROM inventario.inv_cliente WHERE cli_empresa = ('" + empresa + "') AND "
-               + "cli_codigo = ('" + codigo + "')"
+         *
+         * SELECT * FROM inventario.inv_cliente WHERE cli_empresa = ('" +
+         * empresa + "') AND " + "cli_codigo = ('" + codigo + "')"
          */
     }
 
@@ -958,7 +950,7 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
 
     public inventario.TO.InvVentaCabeceraTO getInvVentaCabeceraTO(String empresa, String periodo, String motivo, String numeroVenta) throws Exception {
         return inventario.helper.ConversionesInventario.convertirInvVentaCabecera_InvVentaCabeceraTO(em.createNativeQuery(
-                  "SELECT "
+                "SELECT "
                 + "vta_numero_alterno, "
                 + "vta_documento_tipo, "
                 + "vta_documento_numero, "
@@ -1040,7 +1032,6 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
                 + "WHERE (inventario.inv_proformas.prof_empresa = '" + empresa + "') AND "
                 + "inventario.inv_proformas.prof_periodo = ('" + periodo + "') AND inventario.inv_proformas.prof_motivo = ('" + motivo + "') "
                 + "AND inventario.inv_proformas.prof_numero = ('" + numeroProforma + "')";
-        System.out.println(""+sql);
         return inventario.helper.ConversionesInventario.convertirInvProformaCabecera_InvProformaCabeceraTO(em.createNativeQuery(sql).getResultList());
 
     }
@@ -1049,9 +1040,9 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
         return inventario.helper.ConversionesInventario.convertirInvConsumosCabecera_InvConsumosCabeceraTO(invConsumosFacadeLocal.find(new inventario.entity.InvConsumosPK(empresa, periodo, motivo, numeroConsumo)));
     }
 
-
     public java.util.List<inventario.TO.InvListaDetalleComprasTO> getListaInvCompraDetalleTO(String empresa, String periodo, String motivo, String numeroCompra) throws Exception {
-        return inventario.helper.ConversionesInventario.convertirInvListaDetalle_InvListaDetalleTO(em.createNativeQuery("SELECT * FROM inventario.fun_compras_detalle('" + empresa + "', '" + periodo + "', '" + motivo + "', '" + numeroCompra + "')").getResultList());
+        String sql = "SELECT * FROM inventario.fun_compras_detalle('" + empresa + "', '" + periodo + "', '" + motivo + "', '" + numeroCompra + "')";
+        return inventario.helper.ConversionesInventario.convertirInvListaDetalle_InvListaDetalleTO(em.createNativeQuery(sql).getResultList());
 //        return inventario.helper.ConversionesInventario.convertirInvListaDetalle_InvListaDetalleTO(em.
 //                createNativeQuery("SELECT inv_compras_detalle.det_secuencial, inv_compras_detalle.bod_codigo, "
 //                + "inv_compras_detalle.det_pendiente, inv_compras_detalle.pro_codigo_principal, inv_producto.pro_nombre, "
@@ -1089,10 +1080,9 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
 //                + "AND vta_motivo = ('" + motivo + "') AND vta_numero = ('" + numeroVentas + "') ORDER BY det_orden").getResultList());
     }
 
-    public java.util.List<inventario.TO.InvListaDetalleProformasTO> getListaInvProformasDetalleTO(String empresa, String periodo, String motivo, String numeroProformas) throws Exception { 
-        
-        String sql = "SELECT * FROM inventario.fun_listado_proformas_detalle('" + empresa + "', "+ "'" + periodo + "', '" + motivo + "', '" + numeroProformas + "')";
-        System.out.println("sql :   "+sql);
+    public java.util.List<inventario.TO.InvListaDetalleProformasTO> getListaInvProformasDetalleTO(String empresa, String periodo, String motivo, String numeroProformas) throws Exception {
+
+        String sql = "SELECT * FROM inventario.fun_listado_proformas_detalle('" + empresa + "', " + "'" + periodo + "', '" + motivo + "', '" + numeroProformas + "')";
         return inventario.helper.ConversionesInventario.convertirInvListaProformasDetalle_InvListaProformasDetalleTO(em.createNativeQuery(sql).getResultList());
 //        return inventario.helper.ConversionesInventario.convertirInvListaVentasDetalle_InvListaVentasDetalleTO(em.
 //                createNativeQuery("SELECT inv_ventas_detalle.det_secuencial, inv_ventas_detalle.bod_codigo, "
@@ -1409,7 +1399,7 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
     public java.util.List<inventario.TO.InvKardexTO> getListaInvKardexTO(String empresa, String bodega, String producto, String desde, String hasta, String promedio) throws Exception {
         producto = producto == null ? producto : "'" + producto + "'";
         desde = desde == null ? desde : "'" + desde + "'";
-        hasta = hasta == null ? hasta : "'" + hasta + "'";       
+        hasta = hasta == null ? hasta : "'" + hasta + "'";
         String sql = "SELECT * FROM inventario.fun_kardex("
                 + "'" + empresa + "', "
                 + "'" + bodega + "', "
@@ -1417,7 +1407,6 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
                 + "" + desde + ", "
                 + "" + hasta + ", "
                 + "CASE WHEN '" + promedio + "' = 'SERVICIOS' THEN TRUE ELSE FALSE END);";
-        System.out.println(sql);
         return ConversionesInventario.convertirListaInvKardex_ListaInvKardexTO(
                 em.createNativeQuery(sql).getResultList());
     }
@@ -1602,30 +1591,38 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
 
     public inventario.TO.InvEstadoCCCVT getEstadoCCCVT(String empresa, String periodo, String motivoTipo, String numero, String proceso) throws Exception {
         inventario.TO.InvEstadoCCCVT invEstadoCCVT = null;
+        String sql = "";
         if (proceso.trim().equals("COMPRA")) {
-            invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery("SELECT comp_pendiente, comp_anulado, comp_activo_fijo FROM inventario.inv_compras WHERE "
+            sql = "SELECT comp_pendiente, comp_anulado, comp_activo_fijo FROM inventario.inv_compras WHERE "
                     + "comp_empresa = '" + empresa + "' AND comp_periodo = '" + periodo + "' "
-                    + "AND comp_motivo = '" + motivoTipo + "' AND comp_numero = '" + numero + "'").getResultList());
+                    + "AND comp_motivo = '" + motivoTipo + "' AND comp_numero = '" + numero + "'";
+            //invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery(sql).getResultList());
         } else if (proceso.trim().equals("CONSUMO")) {
-            invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery("SELECT cons_pendiente, cons_anulado FROM inventario.inv_consumos WHERE "
+            sql = "SELECT cons_pendiente, cons_anulado FROM inventario.inv_consumos WHERE "
                     + "cons_empresa = '" + empresa + "' AND cons_periodo = '" + periodo + "' "
-                    + "AND cons_motivo = '" + motivoTipo + "' AND cons_numero = '" + numero + "'").getResultList());
+                    + "AND cons_motivo = '" + motivoTipo + "' AND cons_numero = '" + numero + "'";
+            //invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery(sql).getResultList());
         } else if (proceso.trim().equals("VENTA")) {
-            invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery("SELECT vta_pendiente, vta_anulado FROM inventario.inv_ventas WHERE "
+            sql = "SELECT vta_pendiente, vta_anulado FROM inventario.inv_ventas WHERE "
                     + "vta_empresa = '" + empresa + "' AND vta_periodo = '" + periodo + "' "
-                    + "AND vta_motivo = '" + motivoTipo + "' AND vta_numero = '" + numero + "'").getResultList());
+                    + "AND vta_motivo = '" + motivoTipo + "' AND vta_numero = '" + numero + "'";
+            //invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery(sql).getResultList());
         } else if (proceso.trim().equals("PROFORMA")) {
-            invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery("SELECT prof_pendiente, prof_anulado FROM inventario.inv_proformas WHERE "
+            sql = "SELECT prof_pendiente, prof_anulado FROM inventario.inv_proformas WHERE "
                     + "prof_empresa = '" + empresa + "' AND prof_periodo = '" + periodo + "' "
-                    + "AND prof_motivo = '" + motivoTipo + "' AND prof_numero = '" + numero + "'").getResultList());
+                    + "AND prof_motivo = '" + motivoTipo + "' AND prof_numero = '" + numero + "'";
+            //invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery(sql).getResultList());
         } else if (proceso.trim().equals("TRANSFERENCIA")) {
-            invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery("SELECT trans_pendiente, trans_anulado FROM inventario.inv_transferencias WHERE "
+            sql = "SELECT trans_pendiente, trans_anulado FROM inventario.inv_transferencias WHERE "
                     + "trans_empresa = '" + empresa + "' AND trans_periodo = '" + periodo + "' "
-                    + "AND trans_motivo = '" + motivoTipo + "' AND trans_numero = '" + numero + "'").getResultList());
+                    + "AND trans_motivo = '" + motivoTipo + "' AND trans_numero = '" + numero + "'";
+            //invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery(sql).getResultList());
         } else if (proceso.trim().equals("CONTABLE")) {
-            invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery("SELECT con_pendiente, con_anulado, con_bloqueado, con_generado FROM contabilidad.con_contable "
-                    + "WHERE con_empresa = '" + empresa + "' AND con_periodo = '" + periodo + "' AND con_tipo = '" + motivoTipo + "' AND con_numero = '" + numero + "'").getResultList());
+            sql = "SELECT con_pendiente, con_anulado, con_bloqueado, con_generado FROM contabilidad.con_contable "
+                    + "WHERE con_empresa = '" + empresa + "' AND con_periodo = '" + periodo + "' AND con_tipo = '" + motivoTipo + "' AND con_numero = '" + numero + "'";
+
         }
+        invEstadoCCVT = inventario.helper.ConversionesInventario.convertirInvEstadoCCVTConsulta_InvEstadoCCVT(em.createNativeQuery(sql).getResultList());
         return invEstadoCCVT;
     }
 
@@ -2146,11 +2143,11 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
         return invVentasMotivoAnulacionFacadeLocal.find(new inventario.entity.InvVentasMotivoAnulacionPK(empresa, periodo, motivo, numero));
     }
 
-    public java.util.List<inventario.TO.SaldoBodegaTO> getListaSaldoBodegaTO(String empresa, String bodega, String hasta, String categoria, boolean resumido ) throws Exception {
+    public java.util.List<inventario.TO.SaldoBodegaTO> getListaSaldoBodegaTO(String empresa, String bodega, String hasta, String categoria, boolean resumido) throws Exception {
         hasta = hasta == null ? hasta : "'" + hasta + "'";
         categoria = categoria == null ? categoria : "'" + categoria + "'";
         String sql = "SELECT * FROM inventario.fun_saldo_bodega('" + empresa + "', "
-                + "'" + bodega + "', "+categoria+", " + hasta + ", "+resumido+")";
+                + "'" + bodega + "', " + categoria + ", " + hasta + ", " + resumido + ")";
         return inventario.helper.ConversionesInventario.convertirListaSaldoBodega_ListaSaldoBodegaTO(em.createNativeQuery(sql).getResultList());
     }
 
@@ -2158,7 +2155,7 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
         desde = desde == null ? desde : "'" + desde + "'";
         hasta = hasta == null ? hasta : "'" + hasta + "'";
         bodega = bodega == null ? bodega : "'" + bodega + "'";
-        String sql ="SELECT * FROM inventario.fun_saldo_bodega_comprobacion("
+        String sql = "SELECT * FROM inventario.fun_saldo_bodega_comprobacion("
                 + "'" + empresa + "', " + bodega + ", " + desde + ", " + hasta + ");";
         return inventario.helper.ConversionesInventario.convertirInvFunSaldoBodegaComprobacion_InvFunSaldoBodegaComprobacionTO(
                 em.createNativeQuery(sql).getResultList());
@@ -2216,8 +2213,8 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
     public java.util.List<inventario.TO.InvFunListaProductosSaldosGeneralTO> getInvFunListaProductosSaldosGeneralTO(String empresa, String producto, String fecha, boolean estado) throws Exception {
         producto = producto == null ? producto : "'" + producto + "'";
         fecha = fecha == null ? fecha : "'" + fecha + "'";
-
-        return inventario.helper.ConversionesInventario.convertirInvFunListaProductosSaldosGeneral_InvFunListaProductosSaldosGeneralTO(em.createNativeQuery("SELECT * FROM inventario.fun_lista_productos_saldos_general('" + empresa + "', " + producto + ", " + fecha + ", " + estado + " );").getResultList());
+        String sql = "SELECT * FROM inventario.fun_lista_productos_saldos_general('" + empresa + "', " + producto + ", " + fecha + ", " + estado + " );";
+        return inventario.helper.ConversionesInventario.convertirInvFunListaProductosSaldosGeneral_InvFunListaProductosSaldosGeneralTO(em.createNativeQuery(sql).getResultList());
         /*
          * return
          * inventario.helper.ConversionesInventario.convertirInvFunListaProductosSaldosGeneral_InvFunListaProductosSaldosGeneralTO(em.
@@ -2238,19 +2235,19 @@ public class OperacionesInventarioDAO implements OperacionesInventarioDAOLocal {
         return inventario.helper.ConversionesInventario.convertirInvCompras_InvComprasTO(invComprasFacadeLocal.find(new inventario.entity.InvComprasPK(empresa, periodo, motivo, numeroCompra)));
     }
 
-    public java.util.List<inventario.TO.InvComprasPorPeriodoTO> getComprasPorPeriodo(String empresa, 
+    public java.util.List<inventario.TO.InvComprasPorPeriodoTO> getComprasPorPeriodo(String empresa,
             String codigoSector, String fechaInicio, String fechaFin, boolean chk) throws Exception {
         fechaInicio = fechaInicio.isEmpty() ? null : "'" + fechaInicio + "'";
         fechaFin = fechaFin.isEmpty() ? null : "'" + fechaFin + "'";
-        codigoSector = codigoSector.isEmpty() ? null : "'" + codigoSector + "'";        
+        codigoSector = codigoSector.isEmpty() ? null : "'" + codigoSector + "'";
 
         //inventario.fun_compras_consolidando_productos_mensual('UTN', 'IN', '2015-05-15', '2015-11-30', false);        
         String sql = "SELECT * FROM inventario.fun_compras_consolidando_productos_mensual('" + empresa + "', " + codigoSector + ", "
-                + fechaInicio + ", " + fechaFin + ", "+chk+");";
-        
-        
+                + fechaInicio + ", " + fechaFin + ", " + chk + ");";
+
+
         return inventario.helper.ConversionesInventario.convertirInvComprasPorPeriodo_InvComprasPorPeriodoTO(em.createNativeQuery(
                 sql).getResultList());
-        
+
     }
 }

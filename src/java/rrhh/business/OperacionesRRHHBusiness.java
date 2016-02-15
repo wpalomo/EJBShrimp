@@ -3173,10 +3173,6 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                             rhRolTO.setRolOtrosIngresos(redondeoDecimalBigDecimal((rhEmpleado.getEmpOtrosIngresos().multiply(BigDecimal.valueOf(rhRolTO.getRolDiasLaboradosReales()))).divide(BigDecimal.valueOf(rhEmpleado.getEmpDiasTrabajados()), 9, RoundingMode.HALF_UP)));
                             rhRolTO.setRolOtrosIngresosNd(redondeoDecimalBigDecimal((rhEmpleado.getEmpOtrosIngresosNd().multiply(BigDecimal.valueOf(rhRolTO.getRolDiasLaboradosReales()))).divide(BigDecimal.valueOf(rhEmpleado.getEmpDiasTrabajados()), 9, RoundingMode.HALF_UP)));
 
-                            System.out.println("bono fijo " + rhRolTO.getRolBonosFijo());
-                            System.out.println("bono fijo Nd " + rhRolTO.getRolBonosFijoNd());
-                            System.out.println("otros ingresos " + rhRolTO.getRolOtrosIngresos());
-                            System.out.println("otros ingresos Nd " + rhRolTO.getRolOtrosIngresosNd());
                             //rhRolTO.setRolBonosFijo(redondeoDecimalBigDecimal((BigDecimal.valueOf(rhRolTO.getEmpDiasLaborados()).multiply(rhRolTO.getRolBonosFijo())).divide(new BigDecimal(31), 9, RoundingMode.HALF_UP)));
                             //rhRolTO.setRolBonosFijoNd(redondeoDecimalBigDecimal((rhRolTO.getRolIngresos().multiply(rhRolTO.getRolBonosFijoNd())).divide(rhRolTO.getEmpSueldo(), 9, RoundingMode.HALF_UP)));
                             //rhRolTO.setRolOtrosIngresos(redondeoDecimalBigDecimal((rhRolTO.getRolIngresos().multiply(rhRolTO.getRolOtrosIngresos())).divide(rhRolTO.getEmpSueldo(), 9, RoundingMode.HALF_UP)));
@@ -4881,15 +4877,12 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                                         rhFunXiiiSueldoCalcularTOs.get(i).getXiiiId()));
                                 rhXiiiSueldo.setEmpCargo(rhFunXiiiSueldoCalcularTOs.get(i).getXiiiCargo());
                                 rhXiiiSueldo.setEmpFechaIngreso(validaciones.Validacion.fecha(rhFunXiiiSueldoCalcularTOs.get(i).getXiiiFechaIngreso(), "yyyy-MM-dd"));
-                                System.out.println("de entidad, 01 empresa: "+empresa);
                                 rhXiiiSueldo.setSecEmpresa(empresa);
-                                System.out.println("de entidad, 02 empresa: "+rhXiiiSueldo.getSecEmpresa());
                                 rhXiiiSueldo.setSecCodigo(rhFunXiiiSueldoCalcularTOs.get(i).getXiiiSector());
                                 rhXiiiSueldo.setConEmpresa(empresa);
                                 rhXiiiSueldo.setConPeriodo(periodo);
                                 rhXiiiSueldo.setConTipo(tipDetalle);
                                 rhXiiiSueldos.add(rhXiiiSueldo);
-                                System.out.println("final for: "+rhXiiiSueldos.get(i).getSecEmpresa());
                                 //armar datos para el contable (totalizar con categoria y sector)
                                 int posicion = 0;
                                 boolean estado = false;
@@ -4938,7 +4931,6 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                             //(4) XiiiCuenta;
                             for (Object listaObjeto : listaObjetos) {
                                 conDetalle = new ConDetalle();
-                                System.out.println("conContable emp: "+conContable.getUsrEmpresa());
                                 conDetalle.setConContable(conContable);
                                 conDetalle.setDetSecuencia(0);
                                 conDetalle.setDetDocumento("");

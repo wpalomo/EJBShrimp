@@ -399,7 +399,9 @@ public class ConversionesContabilidad {
                 conDetalleTO.getConPeriodo(), 
                 conDetalleTO.getConTipo(),
                 conDetalleTO.getConNumero())));
-        conDetalle.setConCuentas(new ConCuentas(new ConCuentasPK(conDetalleTO.getCtaEmpresa(), conDetalleTO.getCtaCodigo())));
+        conDetalle.setConCuentas(new ConCuentas(new ConCuentasPK(
+                conDetalleTO.getCtaEmpresa(), 
+                conDetalleTO.getCtaCodigo())));
         return conDetalle;
     }
 

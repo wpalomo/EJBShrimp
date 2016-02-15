@@ -200,7 +200,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
      */
     @Override
     public List<CarListaPagosCobrosTO> getPagosConsultaDetalleCompras(String empresa, String periodo, String numero) throws Exception {
-        return ConversionesCar.convertirCarListaPagosCobrosConsultaDetalle_CarListaPagosCobrosConsultaDetalleTO(em.createNativeQuery("SELECT car_pagos_detalle_compras.comp_periodo as periodo, "
+        String sql = "SELECT car_pagos_detalle_compras.comp_periodo as periodo, "
                 + "car_pagos_detalle_compras.comp_motivo as motivo, "
                 + "car_pagos_detalle_compras.comp_numero as numero, "
                 + "inv_compras.comp_numero_alterno as alterno, "
@@ -222,7 +222,8 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + "car_pagos.pag_periodo = '" + periodo + "' AND "
                 + "car_pagos.pag_tipo = 'C-PAG' AND "
                 + "car_pagos.pag_numero = '" + numero + "' "
-                + "ORDER BY periodo, motivo, numero;").
+                + "ORDER BY periodo, motivo, numero;";
+        return ConversionesCar.convertirCarListaPagosCobrosConsultaDetalle_CarListaPagosCobrosConsultaDetalleTO(em.createNativeQuery(sql).
                 getResultList());
     }
 
@@ -238,7 +239,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
      */
     @Override
     public List<CarListaPagosCobrosDetalleFormaTO> getPagosConsultaDetalleForma(String empresa, String periodo, String numero) throws Exception {
-        return ConversionesCar.convertirCarListaPagosCobrosDetalleForma_CarListaPagosCobrosDetalleFormaTO(em.createNativeQuery("SELECT car_pagos_forma.fp_detalle as forma, "
+        String sql = "SELECT car_pagos_forma.fp_detalle as forma, "
                 + "car_pagos_detalle_forma.det_referencia as referencia, "
                 + "car_pagos_detalle_forma.det_valor as valor, "
                 + "car_pagos_detalle_forma.det_observaciones as observaciones "
@@ -251,7 +252,8 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + "WHERE car_pagos.pag_empresa = '" + empresa + "' AND "
                 + "car_pagos.pag_periodo = '" + periodo + "' AND "
                 + "car_pagos.pag_tipo = 'C-PAG' AND "
-                + "car_pagos.pag_numero = '" + numero + "';").
+                + "car_pagos.pag_numero = '" + numero + "';";
+        return ConversionesCar.convertirCarListaPagosCobrosDetalleForma_CarListaPagosCobrosDetalleFormaTO(em.createNativeQuery(sql).
                 getResultList(), false);
     }
 
@@ -499,6 +501,7 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
      */
     @Override
     public List<CarListaPagosCobrosDetalleFormaTO> getCobrosConsultaDetalleForma(String empresa, String periodo, String numero, boolean hayPostfechados) throws Exception {
+       /*
         String sql = "SELECT car_cobros_forma.fp_detalle as forma, ban_nombre , "
                 + "car_cobros_detalle_forma.det_cuenta as cuenta, car_cobros_detalle_forma.det_fecha_vencimiento "
                 + "as fecha, car_cobros_detalle_forma.det_referencia as referencia, car_cobros_detalle_forma.det_valor as valor, "
@@ -510,7 +513,28 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + "JOIN banco.ban_banco ON car_cobros_detalle_forma.ban_empresa = ban_banco.ban_empresa AND "
                 + "car_cobros_detalle_forma.ban_codigo = ban_banco.ban_codigo WHERE car_cobros.cob_empresa ="
                 + " '" + empresa + "' AND  car_cobros.cob_periodo = '" + periodo + "' AND  car_cobros.cob_tipo = 'C-COB' AND"
+                + " car_cobros.cob_numero = '" + numero + "';";*/
+        
+        
+          String sql = "SELECT "
+                + "car_cobros_forma.fp_detalle as forma, "
+                + "car_cobros_detalle_forma.det_referencia as referencia, "
+                + "car_cobros_detalle_forma.det_valor as valor, "
+                + "car_cobros_detalle_forma.det_observaciones as observaciones, "
+                + "ban_nombre , "
+                + "car_cobros_detalle_forma.det_cuenta as cuenta, "
+                + "car_cobros_detalle_forma.det_fecha_vencimiento as fecha "
+                + "FROM cartera.car_cobros INNER JOIN "
+                + "cartera.car_cobros_detalle_forma INNER JOIN cartera.car_cobros_forma ON car_cobros_detalle_forma.fp_secuencial "
+                + "= car_cobros_forma.fp_secuencial ON car_cobros.cob_empresa = car_cobros_detalle_forma.cob_empresa AND "
+                + "car_cobros.cob_periodo = car_cobros_detalle_forma.cob_periodo AND car_cobros.cob_tipo = "
+                + "car_cobros_detalle_forma.cob_tipo AND car_cobros.cob_numero = car_cobros_detalle_forma.cob_numero LEFT "
+                + "JOIN banco.ban_banco ON car_cobros_detalle_forma.ban_empresa = ban_banco.ban_empresa AND "
+                + "car_cobros_detalle_forma.ban_codigo = ban_banco.ban_codigo WHERE car_cobros.cob_empresa ="
+                + " '" + empresa + "' AND  car_cobros.cob_periodo = '" + periodo + "' AND  car_cobros.cob_tipo = 'C-COB' AND"
                 + " car_cobros.cob_numero = '" + numero + "';";
+         
+        
         return ConversionesCar.convertirCarListaPagosCobrosDetalleForma_CarListaPagosCobrosDetalleFormaTO(em.createNativeQuery(sql).
                 getResultList(), hayPostfechados);
     }
@@ -544,7 +568,6 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + "AND car_cobros.cob_periodo = '" + periodo + "' "
                 + "AND car_cobros.cob_tipo = 'C-COB' "
                 + "AND car_cobros.cob_numero = '" + numero + "';";
-        System.out.println("SQL Cobro Anticipo:: "+sql);
         return ConversionesCar.convertirCarListaPagosCobrosDetalleAnticipo_CarListaPagosCobrosDetalleAnticipoTO(em.createNativeQuery(sql).
                 getResultList());
     }
@@ -1092,7 +1115,6 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
                 + "AND car_pagos.pag_periodo = '" + periodo + "' "
                 + "AND car_pagos.pag_tipo = 'C-PAG' "
                 + "AND car_pagos.pag_numero = '" + numero + "';";
-        System.out.println("SQL PAGO Anticipo:: "+sql);
         return ConversionesCar.convertirCarListaPagosCobrosDetalleAnticipo_CarListaPagosCobrosDetalleAnticipoTO(em.createNativeQuery(sql).
                 getResultList());
     }

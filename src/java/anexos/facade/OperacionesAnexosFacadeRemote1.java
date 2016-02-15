@@ -349,12 +349,11 @@ public interface OperacionesAnexosFacadeRemote1 {
             String eMotivo,
             String eNumero) throws Exception;
 
-    boolean comprobarAnxVentaElectronicaAutorizacion(
+    String comprobarAnxVentaElectronicaAutorizacion(
             String empresa,
             String periodo,
             String motivo,
-            String numero,
-            String estado) throws Exception;
+            String numero) throws Exception;
 
     anexos.TO.AnxUltimaAutorizacionTO getAnxUltimaAutorizacionTO(
             String empresa,

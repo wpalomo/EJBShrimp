@@ -13,14 +13,16 @@ public class SisInfoTO implements java.io.Serializable {
     private String infEmpresa;
     private String infUsuario;
     private String infMac;
+    private String infEmpresaRuc;
 
     public SisInfoTO() {
     }
 
-    public SisInfoTO(String infEmpresa, String infUsuario, String infMac) {
+    public SisInfoTO(String infEmpresa, String infUsuario, String infMac, String infEmpresaRuc) {
         this.infEmpresa = infEmpresa;
         this.infUsuario = infUsuario;
         this.infMac = infMac;
+        this.infEmpresaRuc = infEmpresaRuc;
     }
 
     public String getInfEmpresa() {
@@ -29,6 +31,14 @@ public class SisInfoTO implements java.io.Serializable {
 
     public void setInfEmpresa(String infEmpresa) {
         this.infEmpresa = infEmpresa;
+    }
+
+    public String getInfEmpresaRuc() {
+        return infEmpresaRuc;
+    }
+
+    public void setInfEmpresaRuc(String infEmpresaRuc) {
+        this.infEmpresaRuc = infEmpresaRuc;
     }
 
     public String getInfMac() {
@@ -45,10 +55,5 @@ public class SisInfoTO implements java.io.Serializable {
 
     public void setInfUsuario(String infUsuario) {
         this.infUsuario = infUsuario;
-    }
-
-    @Override
-    public String toString() {
-        return "SisInfoTO{" + "infEmpresa=" + infEmpresa + ", infUsuario=" + infUsuario + ", infMac=" + infMac + '}';
     }
 }

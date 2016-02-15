@@ -345,12 +345,11 @@ public interface OperacionesAnexoBusinessLocal1 {
             String motivo,
             String numero) throws Exception;
 
-    boolean comprobarAnxVentaElectronicaAutorizacion(
+    String comprobarAnxVentaElectronicaAutorizacion(
             String empresa,
             String periodo,
             String motivo,
-            String numero,
-            String estado) throws Exception;
+            String numero) throws Exception;
 
     anexos.TO.AnxUltimaAutorizacionTO getAnxUltimaAutorizacionTO(
             String empresa,

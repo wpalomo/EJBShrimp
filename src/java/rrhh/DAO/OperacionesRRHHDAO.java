@@ -1277,12 +1277,6 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
     @Override
     public String buscarCtaRhSalarioNeto(String empCodigo, String empId) throws Exception {
         try {
-            System.out.println("SELECT rh_categoria.cta_gasto_aporteindividual "
-                    + "FROM recursoshumanos.rh_empleado INNER JOIN recursoshumanos.rh_categoria "
-                    + "ON (rh_empleado.cat_empresa || rh_empleado.cat_nombre) = "
-                    + "(rh_categoria.cat_empresa || rh_categoria.cat_nombre) "
-                    + "WHERE (rh_empleado.emp_empresa = '" + empCodigo + "') "
-                    + "AND (rh_empleado.emp_id = '" + empId + "')");
             return (validaciones.ConvertirListaObject.convertirListToArray(em.createNativeQuery("SELECT rh_categoria.cta_gasto_aporteindividual "
                     + "FROM recursoshumanos.rh_empleado INNER JOIN recursoshumanos.rh_categoria "
                     + "ON (rh_empleado.cat_empresa || rh_empleado.cat_nombre) = "
@@ -1794,11 +1788,12 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
         periodo = periodo == null ? null : "'" + periodo + "'";
         tipo = tipo == null ? null : "'" + tipo + "'";
         numero = numero == null ? null : "'" + numero + "'";
-        return ConversionesRRHH.convertirRhAnulaciones_RhAnulacionesTO(em.createNativeQuery("SELECT * FROM recursoshumanos.fun_anulaciones("
+        String sql = "SELECT * FROM recursoshumanos.fun_anulaciones("
                 + "'" + empresa + "', "
                 + "" + periodo + ", "
                 + "" + tipo + ", "
-                + "" + numero + ");").getResultList());
+                + "" + numero + ");";
+        return ConversionesRRHH.convertirRhAnulaciones_RhAnulacionesTO(em.createNativeQuery(sql).getResultList());
     }
     //</editor-fold>
 
@@ -2254,12 +2249,13 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
      */
     @Override
     public RhParametrosTO getRhParametros(String fechaHasta) throws Exception {
-        return ConversionesRRHH.convertirRhParametros_RhParametrosTO(em.createNativeQuery("SELECT par_iess_porcentaje_aporte_individual, "
+        String sql = "SELECT par_iess_porcentaje_aporte_individual, "
                 + "par_iess_porcentaje_aporte_patronal, par_iess_porcentaje_iece, "
                 + "par_iess_porcentaje_secap, par_salario_minimo_vital, par_iess_porcentaje_aporte_extendido "
                 + "FROM recursoshumanos.rh_parametros "
                 + "WHERE (par_desde <= '" + fechaHasta + "' and par_hasta >= '" + fechaHasta + "') OR "
-                + "(par_desde <= '" + fechaHasta + "' and par_hasta IS NULL)").getResultList());
+                + "(par_desde <= '" + fechaHasta + "' and par_hasta IS NULL)";
+        return ConversionesRRHH.convertirRhParametros_RhParametrosTO(em.createNativeQuery(sql).getResultList());
     }
     // </editor-fold>
 
@@ -2597,7 +2593,6 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
         if (tipoPreAviso.equals("UTILIDADES")) {
             sql = "SELECT * FROM recursoshumanos.fun_preaviso_vacaciones('" + empresa + "', '" + fecha + "', '" + cuenta + "', '" + servicio + "')";
         }
-        System.out.println("sql: "+sql);
         return ConversionesRRHH.convertirRhPreavisoAnticipos_RhPreavisoAnticiposTO(em.createNativeQuery(sql).getResultList());
 
     }
