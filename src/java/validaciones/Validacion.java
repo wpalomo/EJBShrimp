@@ -227,6 +227,7 @@ public class Validacion {
     public static String fechaSistema(String mascara) {
         Date fecha = new Date();
         SimpleDateFormat formato = new SimpleDateFormat(mascara, locale);
+        //System.out.println("fecha del sistema "+formato.format(fecha));
         return formato.format(fecha);
     }
 
@@ -664,6 +665,8 @@ public class Validacion {
 
         return nueva_cadena;
     }
+    
+    
 
     public static void main(String args[]) {
 

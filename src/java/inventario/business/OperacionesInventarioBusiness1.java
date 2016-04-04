@@ -2285,7 +2285,16 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
 //                                                                                    add(invProductoSaldosConsulta.getStkSaldoFinal()));
                                                                     invProductoSaldos.setStkSaldoFinal(invProductoSaldosConsulta.getStkSaldoFinal().
                                                                             add(listadoDetalleCompra.get(i).getInvProducto().getInvProductoTipo().getTipTipo().equals("COSTO O GASTO") ? cero
-                                                                            : listadoDetalleCompra.get(i).getDetCantidad()));
+                                                                            : listadoDetalleCompra.get(i).getDetCantidad().multiply(new BigDecimal(invCompras.getCompDocumentoTipo().equals("04") ? "-1" : "1"))));
+                                                                   
+                                                                    if(invCompras.getCompDocumentoTipo().equals("04") && invProductoSaldos.getStkSaldoFinal().compareTo(cero) < 0) {
+                                                                         retorno = "F<html>No hay stock suficiente en los siguientes productos4 :</html>";
+                                                                         mensajeClase.add(listadoDetalleCompra.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleCompra.get(i).getInvBodega().getBodNombre() + " \t"
+                                                                                 + listadoDetalleCompra.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" 
+                                                                                 + listadoDetalleCompra.get(i).getInvProducto().getProNombre()+"\t Cant: "+
+                                                                                 validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleCompra.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+" \t Saldo: "+
+                                                                                 validaciones.Validacion.redondeoDecimalBigDecimal(invProductoSaldos.getStkSaldoFinal().subtract(listadoDetalleCompra.get(i).getDetCantidad().multiply(new BigDecimal(invCompras.getCompDocumentoTipo().equals("04") ? "-1" : "1"))), 2, java.math.RoundingMode.HALF_UP));
+                                                                    }
                                                                 }
                                                             }
                                                             listaInvProductoSaldos.add(invProductoSaldos);
@@ -2679,13 +2688,19 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                                                         listaInvProductoSaldos.add(invProductoSaldos);
                                                                                     } else {
                                                                                         retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                        mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleVentas.get(i).getInvBodega().getBodNombre() + "\t\t"
-                                                                                                + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                        mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + 
+                                                                                                listadoDetalleVentas.get(i).getInvBodega().getBodNombre() + "\t"
+                                                                                                + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                                listadoDetalleVentas.get(i).getInvProducto().getProNombre()+"\t Cant: "+
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleVentas.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+ " \t" +
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(invProductoSaldos.getStkSaldoFinal().add(listadoDetalleVentas.get(i).getDetCantidad()), 2, java.math.RoundingMode.HALF_UP));
                                                                                     }
                                                                                 } else {
                                                                                     retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                    mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleVentas.get(i).getInvBodega().getBodNombre() + "\t\t"
-                                                                                            + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                    mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleVentas.get(i).getInvBodega().getBodNombre() + " \t"
+                                                                                            + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                            listadoDetalleVentas.get(i).getInvProducto().getProNombre()+" \t Cant:"+ 
+                                                                                            listadoDetalleVentas.get(i).getDetCantidad());
                                                                                 }
                                                                             }
                                                                         }
@@ -3578,17 +3593,21 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                                                         invProductoSaldos.setStkSaldoInicial(invProductoSaldosConsulta.getStkSaldoInicial());
                                                                                         invProductoSaldos.setStkValorPromedioInicial(invProductoSaldosConsulta.getStkValorPromedioInicial());
                                                                                         invProductoSaldos.setStkValorPromedioFinal(invProductoSaldosConsulta.getStkValorPromedioFinal());
-
                                                                                         listaInvProductoSaldos.add(invProductoSaldos);
                                                                                     } else {
                                                                                         retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                        mensajeClase.add(listadoDetalleCompras.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleCompras.get(i).getInvBodega().getBodNombre() + "\t\t"
-                                                                                                + listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleCompras.get(i).getInvProducto().getProNombre());
+                                                                                        mensajeClase.add(listadoDetalleCompras.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleCompras.get(i).getInvBodega().getBodNombre() + " \t"
+                                                                                                + listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                                listadoDetalleCompras.get(i).getInvProducto().getProNombre()+" \t Cant: "+
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleCompras.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+ " \t Saldo: " +
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(invProductoSaldos.getStkSaldoFinal().add(listadoDetalleCompras.get(i).getDetCantidad()), 2, java.math.RoundingMode.HALF_UP));
                                                                                     }
                                                                                 } else {
                                                                                     retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                    mensajeClase.add(listadoDetalleCompras.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleCompras.get(i).getInvBodega().getBodNombre() + "\t\t"
-                                                                                            + listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleCompras.get(i).getInvProducto().getProNombre());
+                                                                                    mensajeClase.add(listadoDetalleCompras.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleCompras.get(i).getInvBodega().getBodNombre() + " \t"
+                                                                                            + listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                            listadoDetalleCompras.get(i).getInvProducto().getProNombre()+" \t Cant: "+
+                                                                                            listadoDetalleCompras.get(i).getDetCantidad()+"\t Saldo: 0.00");
                                                                                 }
                                                                             }
                                                                         }
@@ -3680,11 +3699,17 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                                                                 listaInvProductoSaldos.add(invProductoSaldos);
                                                                                             } else {
                                                                                                 retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                                mensajeClase.add(listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleCompras.get(i).getInvProducto().getProNombre());
+                                                                                                mensajeClase.add(listadoDetalleCompras.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleCompras.get(i).getInvBodega().getBodNombre() + " \t"
+                                                                                                + listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                                listadoDetalleCompras.get(i).getInvProducto().getProNombre()+" \t Cant: "+
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleCompras.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+ " \t Saldo: " +
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(invProductoSaldos.getStkSaldoFinal().add(listadoDetalleCompras.get(i).getDetCantidad()), 2, java.math.RoundingMode.HALF_UP));
                                                                                             }
                                                                                         } else {
                                                                                             retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                            mensajeClase.add(listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleCompras.get(i).getInvProducto().getProNombre());
+                                                                                            mensajeClase.add(listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                                    listadoDetalleCompras.get(i).getInvProducto().getProNombre()+" \t Cant: "+
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleCompras.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+ " \t Saldo: 0.00" );
                                                                                         }
                                                                                     }
                                                                                 }
@@ -3726,11 +3751,17 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                                                                 listaInvProductoSaldos.add(invProductoSaldos);
                                                                                             } else {
                                                                                                 retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                                mensajeClase.add(listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleCompras.get(i).getInvProducto().getProNombre());
+                                                                                                mensajeClase.add(listadoDetalleCompras.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "|" + listadoDetalleCompras.get(i).getInvBodega().getBodNombre() + " \t"
+                                                                                                + listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                                listadoDetalleCompras.get(i).getInvProducto().getProNombre()+" \t Cant: "+
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleCompras.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+ " \t Saldo: " +
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(invProductoSaldos.getStkSaldoFinal().add(listadoDetalleCompras.get(i).getDetCantidad()), 2, java.math.RoundingMode.HALF_UP));
                                                                                             }
                                                                                         } else {
                                                                                             retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                            mensajeClase.add(listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleCompras.get(i).getInvProducto().getProNombre());
+                                                                                            mensajeClase.add(listadoDetalleCompras.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                                    listadoDetalleCompras.get(i).getInvProducto().getProNombre()+" \t Cant: "+
+                                                                                                    validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleCompras.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+ " \t Saldo: 0.00");
                                                                                         }
                                                                                     }
                                                                                 }
@@ -3941,7 +3972,7 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
         boolean periodoCerrado = false;
         try {
             boolean continuar = false;
-
+            System.out.println("invVentasTO "+invVentasTO.getVtaInformacionAdicional());
             sistemaWeb.entity.SisEmpresaParametros sisEmpresaParametros = operacionesSistemaDAOLocal.buscarEmpresaParametros(invVentasTO.getVtaEmpresa());
             if (!sisEmpresaParametros.getParActividad().trim().equals("COMISARIATO")) {
                 if (!invVentasTO.getVtaAnulado() && !invVentasTO.getVtaPendiente()) {
@@ -4102,8 +4133,9 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                             }
                                             saldoTotalVentaCobros = saldoTotalCobros.add(invVentasTO.getVtaTotal());
                                         }
-                                        if (invCliente.getCliCupoCredito() != null) {
-                                            if (saldoTotalVentaCobros.compareTo(invCliente.getCliCupoCredito()) <= 0) {
+                                                                            
+                                        if (sisEmpresaParametros.getParActividad().equals("COMERCIAL") || sisEmpresaParametros.getParActividad().trim().equals("COMISARIATO")) {
+                                            if (invCliente.getCliCupoCredito() != null && saldoTotalVentaCobros.compareTo(invCliente.getCliCupoCredito()) <= 0) {
                                                 puedeContinuar = true;
                                             } else {
                                                 puedeContinuar = false;
@@ -4367,12 +4399,18 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                                                             } else {
                                                                                                 retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
                                                                                                 mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
-                                                                                                        + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                                        + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                                        listadoDetalleVentas.get(i).getInvProducto().getProNombre()+"\t Cant: "+
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleVentas.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+ " \t Saldo: " +
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(invProductoSaldos.getStkSaldoFinal().add(listadoDetalleVentas.get(i).getDetCantidad()), 2, java.math.RoundingMode.HALF_UP));
                                                                                             }
+                                                                                            
                                                                                         } else {
                                                                                             retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                            mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
-                                                                                                    + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                           mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
+                                                                                                    + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                                    listadoDetalleVentas.get(i).getInvProducto().getProNombre()+"\t Cant: "+ 
+                                                                                                    validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleVentas.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+ " \t Saldo: 0.00");
                                                                                         }
                                                                                     }
                                                                                 }
@@ -4411,13 +4449,18 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                                                                 listaInvProductoSaldos.add(invProductoSaldos);
                                                                                             } else {
                                                                                                 retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                                                mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
-                                                                                                        + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                                  mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
+                                                                                                        + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                                        listadoDetalleVentas.get(i).getInvProducto().getProNombre()+"\t Cant: "+
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleVentas.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+ " \t Saldo: " +
+                                                                                                validaciones.Validacion.redondeoDecimalBigDecimal(invProductoSaldos.getStkSaldoFinal().add(listadoDetalleVentas.get(i).getDetCantidad()), 2, java.math.RoundingMode.HALF_UP));
                                                                                             }
                                                                                         } else {
                                                                                             retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
                                                                                             mensajeClase.add(listadoDetalleVentas.get(i).getInvBodega().getInvBodegaPK().getBodCodigo() + "\t"
-                                                                                                    + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleVentas.get(i).getInvProducto().getProNombre());
+                                                                                                    + listadoDetalleVentas.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                                                    listadoDetalleVentas.get(i).getInvProducto().getProNombre()+"\t Cant: "+ 
+                                                                                                    validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleVentas.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+ " \t Saldo: 0.00");
                                                                                         }
                                                                                     }
                                                                                 }
@@ -6599,11 +6642,16 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                     listaInvProductoSaldos.add(invProductoSaldos);
                                                 } else {
                                                     retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                    mensajeClase.add(listadoDetalleConsumos.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleConsumos.get(i).getInvProducto().getProNombre());
+                                                    mensajeClase.add(listadoDetalleConsumos.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                    listadoDetalleConsumos.get(i).getInvProducto().getProNombre()+" \t Cant: "+ 
+                                                    validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleConsumos.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+" \t Saldo: "+
+                                                    validaciones.Validacion.redondeoDecimalBigDecimal(invProductoSaldos.getStkSaldoFinal().add(listadoDetalleConsumos.get(i).getDetCantidad()), 2, java.math.RoundingMode.HALF_UP));
                                                 }
                                             } else {
                                                 retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                mensajeClase.add(listadoDetalleConsumos.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleConsumos.get(i).getInvProducto().getProNombre());
+                                                mensajeClase.add(listadoDetalleConsumos.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                        listadoDetalleConsumos.get(i).getInvProducto().getProNombre()+" \t Cant:"+ 
+                                                         validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleConsumos.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+" \t Saldo: 0.00");
                                             }
                                         }
                                     }
@@ -6926,11 +6974,16 @@ public class OperacionesInventarioBusiness1 implements OperacionesInventarioBusi
                                                                 listaInvProductoSaldos.add(invProductoSaldos);
                                                             } else {
                                                                 retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                                mensajeClase.add(listadoDetalleConsumos.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleConsumos.get(i).getInvProducto().getProNombre());
+                                                              mensajeClase.add(listadoDetalleConsumos.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                listadoDetalleConsumos.get(i).getInvProducto().getProNombre()+" \t Cant: "+ 
+                                                                validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleConsumos.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+" \t Saldo: "+
+                                                                validaciones.Validacion.redondeoDecimalBigDecimal(invProductoSaldos.getStkSaldoFinal().add(listadoDetalleConsumos.get(i).getDetCantidad()), 2, java.math.RoundingMode.HALF_UP));
                                                             }
                                                         } else {
                                                             retorno = "F<html>No hay stock suficiente en los siguientes productos:</html>";
-                                                            mensajeClase.add(listadoDetalleConsumos.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t\t" + listadoDetalleConsumos.get(i).getInvProducto().getProNombre());
+                                                            mensajeClase.add(listadoDetalleConsumos.get(i).getInvProducto().getInvProductoPK().getProCodigoPrincipal() + " \t" + 
+                                                                    listadoDetalleConsumos.get(i).getInvProducto().getProNombre()+" \t Cant"+
+                                                                    validaciones.Validacion.redondeoDecimalBigDecimal(listadoDetalleConsumos.get(i).getDetCantidad(), 2, java.math.RoundingMode.HALF_UP)+" \t Saldo: 0.00");
                                                         }
                                                     }
                                                 }

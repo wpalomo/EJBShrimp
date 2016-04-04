@@ -1229,7 +1229,10 @@ public class OperacionesAnexoDAO implements OperacionesAnexoDAOLocal {
 //    }
     @Override
     public java.util.List<anexos.TO.AnxListaConsultaVentaElectronicaTO> getListaAnxConsultaVentaElectronica(String empresa, String periodo, String motivo, String busqueda) throws Exception {
-        return anexos.helper.ConversionesAnexos.convertirAnxListaConsultaVentaElectronica_AnxListaConsultaVentaElectronicaTO(em.createNativeQuery("SELECT * FROM anexo.fun_ventas_electronicas_listado('" + empresa + "', '" + periodo + "', '" + motivo + "', '" + busqueda + "')").getResultList());
+        String sql = "SELECT * FROM anexo.fun_ventas_electronicas_listado('" + empresa + "', '" + periodo + "', '" + motivo + "', '" + busqueda + "')";
+        System.out.println(sql);
+        return anexos.helper.ConversionesAnexos.convertirAnxListaConsultaVentaElectronica_AnxListaConsultaVentaElectronicaTO(
+                em.createNativeQuery(sql).getResultList());
     }
 
     @Override

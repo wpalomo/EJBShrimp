@@ -878,7 +878,7 @@ public interface OperacionesInventarioFacadeRemote1 {
     public RetornoTO getComprasPorPeriodo(String empresa, String codigoSector, String fechaInicio, boolean chk, 
             String fechaFin, SisInfoTO sisInfoTO)throws java.lang.Exception;
     
-
+    public String getfechaServidorFactura(String mascara)throws Exception;
 
     
 

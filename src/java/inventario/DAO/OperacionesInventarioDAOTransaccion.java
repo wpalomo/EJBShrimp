@@ -422,6 +422,7 @@ public class OperacionesInventarioDAOTransaccion implements OperacionesInventari
             boolean eliminarMotivoAnulacion) throws Exception {
 
         em.merge(invVentas);
+        System.out.println("merge = "+invVentas.getVtaInformacionAdicional());
         for (int i = 0; i < listaInvDetalle.size(); i++) {
             listaInvDetalle.get(i).setInvVentas(invVentas);
             em.merge(listaInvDetalle.get(i));

@@ -26,6 +26,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -316,14 +317,16 @@ public class OperacionesCarDAO implements OperacionesCarDAOLocal {
         proveedor = proveedor == null ? proveedor : "'" + proveedor + "'";
         sector = sector == null ? sector : "'" + sector + "'";
         formaPago = formaPago == null ? formaPago : "'" + formaPago + "'";
-        return ConversionesCar.convertirCarFunPagosDetalle_CarFunPagosDetalleTO(em.createNativeQuery(
-                "SELECT * FROM cartera.fun_pagos_detalle('"
+        String sql = "SELECT * FROM cartera.fun_pagos_detalle('"
                 + empresa + "', "
                 //+ sector + ", "    //Cuando ya este lista la función, descomentar esta linea
                 + desde + ", "
                 + hasta + ", "
                 + proveedor + ", "
-                + formaPago + ");").getResultList());
+                + formaPago + ");";
+        
+        return ConversionesCar.convertirCarFunPagosDetalle_CarFunPagosDetalleTO(em.createNativeQuery(
+                sql).getResultList());
     }
 
     /**

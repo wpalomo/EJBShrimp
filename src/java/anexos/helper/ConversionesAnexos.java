@@ -273,9 +273,10 @@ public class ConversionesAnexos {
             anxCompraTO.setCompRetencionNumero(anxCompra.getCompRetencionNumero());
             anxCompraTO.setCompRetencionAutorizacion(anxCompra.getCompRetencionAutorizacion());
 
-            java.text.DateFormat formato = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            //ava.text.DateFormat formato = new java.text.SimpleDateFormat("yyyy-MM-dd");
             //        return formato.format(fecha);
-            anxCompraTO.setCompRetencionFechaEmision(formato.format(anxCompra.getCompRetencionFechaEmision()));
+            //anxCompraTO.setCompRetencionFechaEmision(formato.format(anxCompra.getCompRetencionFechaEmision()));
+            anxCompraTO.setCompRetencionFechaEmision(validaciones.Validacion.fecha(anxCompra.getCompRetencionFechaEmision(), "yyyy-MM-dd"));
             anxCompraTO.setCompModificadoDocumentoTipo(anxCompra.getCompModificadoDocumentoTipo());
             anxCompraTO.setCompModificadoDocumentoNumero(anxCompra.getCompModificadoDocumentoNumero());
             anxCompraTO.setCompModificadoAutorizacion(anxCompra.getCompModificadoAutorizacion());
@@ -330,9 +331,10 @@ public class ConversionesAnexos {
             anxVentaTO.setVenValorRetenidoIva(anxVenta.getVenValorretenidoiva());
             anxVentaTO.setVenValorRetenidoRenta(anxVenta.getVenValorretenidorenta());
 
-            java.text.DateFormat formato = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            //java.text.DateFormat formato = new java.text.SimpleDateFormat("yyyy-MM-dd");
             //        return formato.format(fecha);
-            anxVentaTO.setVenRetencionFechaEmision(formato.format(anxVenta.getVenRetencionfechaemision()));
+            //anxVentaTO.setVenRetencionFechaEmision(formato.format(anxVenta.getVenRetencionfechaemision()));
+            anxVentaTO.setVenRetencionFechaEmision(validaciones.Validacion.fecha(anxVenta.getVenRetencionfechaemision(), "yyyy-MM-dd"));
             //        anxCompra.setUsrEmpresa(anxCompraTO.getEmpCodigo());
             anxVentaTO.setUsrEmpresa(anxVenta.getUsrEmpresa());
             anxVentaTO.setUsrCodigo(anxVenta.getUsrCodigo());

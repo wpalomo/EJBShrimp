@@ -357,11 +357,12 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
      */
     @Override
     public RhEmpleadoRolTO getEmpleadoRolTO(String empCodigo, String empId) throws Exception {
-        return ConversionesRRHH.convertirRhEmpleado_RhEmpleadoRolTO(em.createNativeQuery("SELECT emp_dias_trabajados, emp_dias_descanso, emp_sueldo_iess, "
+        String sql = "SELECT emp_dias_trabajados, emp_dias_descanso, emp_sueldo_iess, "
                 + "emp_retencion, emp_utilidades, emp_sueldo_otra_compania, emp_educacion, "
                 + "emp_alimentacion, emp_salud, emp_vivienda, emp_vestuario, cat_nombre "
                 + "FROM recursoshumanos.rh_empleado "
-                + "WHERE (emp_empresa = '" + empCodigo + "') AND(emp_id = '" + empId + "');").getResultList());
+                + "WHERE (emp_empresa = '" + empCodigo + "') AND(emp_id = '" + empId + "');";
+        return ConversionesRRHH.convertirRhEmpleado_RhEmpleadoRolTO(em.createNativeQuery(sql).getResultList());
     }
 
     /**
@@ -1183,14 +1184,15 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
     @Override
     public String buscarCategoriaTipo(String empCodigo, String empId, String catNombre) throws Exception {
         try {
-            return (validaciones.ConvertirListaObject.convertirListToArray(
-                    em.createNativeQuery("SELECT rh_categoria.tip_codigo "
+            String sql ="SELECT rh_categoria.tip_codigo "
                     + "FROM recursoshumanos.rh_empleado INNER JOIN recursoshumanos.rh_categoria "
                     + "ON (rh_empleado.cat_empresa || rh_empleado.cat_nombre) = "
                     + "(rh_categoria.cat_empresa || rh_categoria.cat_nombre) "
                     + "WHERE (rh_empleado.emp_empresa = '" + empCodigo + "') "
                     + "AND (rh_empleado.emp_id = '" + empId + "') "
-                    + "AND (rh_empleado.cat_nombre = '" + catNombre + "')").
+                    + "AND (rh_empleado.cat_nombre = '" + catNombre + "')";
+            return (validaciones.ConvertirListaObject.convertirListToArray(
+                    em.createNativeQuery(sql).
                     getResultList(), 0)[0].toString());
         } catch (Exception e) {
             return null;
@@ -1726,8 +1728,9 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
     @Override
     public RhRolSaldoEmpleadoTO getRhRolSaldoEmpleado(String empCodigo, String empId, String fechaDesde, String fechaHasta) throws Exception {
         //se convierte la consulta nativeQuery en un List para obtener la posicion 0,0
-        return ConversionesRRHH.convertirRhRolSaldoEmpleado_RhRolSaldoEmpleadoTO(em.createNativeQuery("SELECT * FROM recursoshumanos.fun_saldo_empleado('" + empCodigo + "', "
-                + "'" + empId + "', 'T', '" + fechaDesde + "', '" + fechaHasta + "');").getResultList());
+        String sql = "SELECT * FROM recursoshumanos.fun_saldo_empleado('" + empCodigo + "', "
+                + "'" + empId + "', 'T', '" + fechaDesde + "', '" + fechaHasta + "');";
+        return ConversionesRRHH.convertirRhRolSaldoEmpleado_RhRolSaldoEmpleadoTO(em.createNativeQuery(sql).getResultList());
     }
 
     /**
@@ -1744,9 +1747,10 @@ public class OperacionesRRHHDAO implements OperacionesRRHHDAOLocal {
     public List<RhListaRolSaldoEmpleadoDetalladoTO> getRhRolSaldoEmpleadoDetallado(String empCodigo, String empId, String fechaDesde, String fechaHasta) throws Exception {
 //    public List<RhListaRolSaldoEmpleadoDetalladoTO> getRhRolSaldoEmpleadoDetallado(String empCodigo, String empId, String fechaDesde, String fechaHasta) throws Exception{
         //se convierte la consulta nativeQuery en un List para obtener la posicion 0,0
+        String sql = "SELECT * FROM recursoshumanos.fun_saldo_empleado_detallado('" + empCodigo + "', "
+                + "'" + empId + "', 'T', '" + fechaDesde + "', '" + fechaHasta + "');";
         return ConversionesRRHH.convertirRhRolSaldoEmpleadoDetallado_RhRolSaldoEmpleadoDetalladoTO(em. //                SELECT * FROM recursoshumanos.fun_saldo_empleado_detallado('UT', '0704478817', 'T', '2010-11-01'::date,'2010-12-31'::date);
-                createNativeQuery("SELECT * FROM recursoshumanos.fun_saldo_empleado_detallado('" + empCodigo + "', "
-                + "'" + empId + "', 'T', '" + fechaDesde + "', '" + fechaHasta + "');").getResultList());
+                createNativeQuery(sql).getResultList());
     }
 
     /**

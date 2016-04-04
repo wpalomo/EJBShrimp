@@ -3065,7 +3065,8 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                             rhRolTO.setReversar(rhRolEmpleadoTO.getReversar());
                             rhRolTO.setEmpSalarioNeto(rhEmpleado.getEmpSalarioNeto());
                             rhRolTO.setRolLiqBonificacion(rhRolEmpleadoTO.getRolLiqBonificacion());
-//----------------------------------------------------------------------------------------------------------------------------------------
+
+                            //----------------------------------------------------------------------------------------------------------------------------------------
                             rhRolTO.setEmpCancelarXiiiSueldoMensualmente(rhCancelarBeneficioSocialTO.getEmpCancelarXiiiSueldoMensualmente());
                             rhRolTO.setEmpCancelarXivSueldoMensualmente(rhCancelarBeneficioSocialTO.getEmpCancelarXivSueldoMensualmente());
                             rhRolTO.setEmpBonosFijo(rhEmpleado.getEmpBonoFijo());
@@ -3120,7 +3121,6 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                              * System.out.println("diasLaborados if
                              * febrero:"+diasLaborados); }
                              */
-
                             if ((primerosDias == 0 && ultimosDias != 0) || (primerosDias != 0 && ultimosDias != 0)) {
                                 diasLaborados = validaciones.Validacion.obtenerDiasAAMMDD(rhRolTO.getRolHasta(), rhRolTO.getRolDesde()) + 1;
                             }
@@ -3154,9 +3154,11 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                                 ingresoPermisoMedico2 = redondeoDecimalBigDecimal((rhRolTO.getEmpSueldo().divide(new BigDecimal(rhRolTO.getEmpDiasLaborados() + rhRolTO.getEmpDiasDescanso()), 9, RoundingMode.HALF_UP)).multiply(multiplicador));
                             }
                             if (rhRolTO.getRolDiasPermisoMedico() > 0) {
-                                if (sisInfoTO.getInfEmpresa().equals("MRC")) {
+                                System.out.println("sisInfoTO.getInfEmpresaRuc() "+sisInfoTO.getInfEmpresaRuc());
+                                if (sisInfoTO.getInfEmpresaRuc().equals("0791749891001")) {// minereicis MRC0791749891001  0791749891001
                                     rhRolTO.setRolDescuentoPermisoMedico(redondeoDecimalBigDecimal(ingresoPermisoMedico.multiply(new BigDecimal(1.00))));
-                                    rhRolTO.setRolDescuentoPermisoMedico(rhRolTO.getRolDescuentoPermisoMedico().subtract(ingresoPermisoMedico2.multiply(new BigDecimal("0.50"))));
+                                    
+                                    rhRolTO.setRolDescuentoPermisoMedico(rhRolTO.getRolDescuentoPermisoMedico().subtract(ingresoPermisoMedico2.multiply(new BigDecimal("1.0"))));
                                 } else {
                                     rhRolTO.setRolDescuentoPermisoMedico(redondeoDecimalBigDecimal(ingresoPermisoMedico.multiply(new BigDecimal(0.75))));
                                 }
@@ -3263,7 +3265,6 @@ public class OperacionesRRHHBusiness implements OperacionesRRHHBusinessLocal {
                             }
                             //sumar horas extras
                             rhRolTO.setRolTotal(rhRolTO.getRolTotal().add(rolIngresosExtras));
-
                             if (operacionesContabilidadDAOLocal.buscarTipoContable(rhRolEmpleadoTO.getEmpCodigo(), tipDetalle)) {
                                 //llenar contable
                                 ConContableTO conContableTO = new ConContableTO();

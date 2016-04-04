@@ -56,6 +56,7 @@ public class ReporteVentaDetalle implements Serializable{
     
     private java.math.BigDecimal vtaMontoiva;
     private java.math.BigDecimal vtaTotal;
+    private String vtaTotalLetra;
     private java.math.BigDecimal vtaPagado;
     private String cliCodigo;
     private String cliNombre;
@@ -102,7 +103,7 @@ public class ReporteVentaDetalle implements Serializable{
 //    private String cliMail;
 //    
 
-    public ReporteVentaDetalle(String empCodigo, String perCodigo, String motCodigo, String vtaNumero, String vtaNumeroAlterno, String vtaDocumentoTipo, String vtaDocumentoNumero, String vtaFecha, String vtaFechaVencimiento, BigDecimal vtaIvaVigente, String vtaObservaciones, Boolean vtaPendiente, Boolean vtaRevisado, Boolean vtaAnulado, String vtaFormaPago, BigDecimal vtaBase0, BigDecimal vtaBaseimponible, BigDecimal vtaBaseNoObjeto, BigDecimal vtaBaseExenta, BigDecimal vtaRecargoBase0, BigDecimal vtaRecargoImponible, BigDecimal vtaDescuentoGeneralBase0, BigDecimal vtaDescuentoBase0, BigDecimal vtaDescuentoBaseImponible, BigDecimal vtaDescuentoBaseNoObjeto, BigDecimal vtaDescuentoBaseExenta, BigDecimal vtaSubtotalBase0, BigDecimal vtaSubtotalBaseImponible, BigDecimal vtaSubtotalBaseNoObjeto, BigDecimal vtaSubtotalBaseExenta, BigDecimal vtaMontoiva, BigDecimal vtaTotal, BigDecimal vtaPagado, String cliCodigo, String cliNombre, String cliDireccion, String cliTelefono, String cliRuc, String cliCiudad, String codigoSector, String contPeriodo, String contTipo, String contNumero, String usrInsertaCompra, String usrFechaInsertaCompra, String bodCodigo, Boolean detPendiente, String proCodigoPrincipal, String proNombre, BigDecimal detCantidad, String detMedida, BigDecimal detPrecio, BigDecimal detParcial, BigDecimal detPorcentajeRecargo, BigDecimal detPorcentajeDescuento, BigDecimal detIvaCobrado, BigDecimal detTotal, String secCodigo, String pisNumero, Boolean detIva, BigDecimal detCantidadCaja, String detEmpaque, String detPresentacionUnidad, String detPresentacionCaja, String docElectonicoClaveAcceso) {
+    public ReporteVentaDetalle(String empCodigo, String perCodigo, String motCodigo, String vtaNumero, String vtaNumeroAlterno, String vtaDocumentoTipo, String vtaDocumentoNumero, String vtaFecha, String vtaFechaVencimiento, BigDecimal vtaIvaVigente, String vtaObservaciones, Boolean vtaPendiente, Boolean vtaRevisado, Boolean vtaAnulado, String vtaFormaPago, BigDecimal vtaBase0, BigDecimal vtaBaseimponible, BigDecimal vtaBaseNoObjeto, BigDecimal vtaBaseExenta, BigDecimal vtaRecargoBase0, BigDecimal vtaRecargoImponible, BigDecimal vtaDescuentoGeneralBase0, BigDecimal vtaDescuentoGeneralBaseImponible, BigDecimal vtaDescuentoIva, BigDecimal vtaDescuentoBase0, BigDecimal vtaDescuentoBaseImponible, BigDecimal vtaDescuentoBaseNoObjeto, BigDecimal vtaDescuentoBaseExenta, BigDecimal vtaSubtotalBase0, BigDecimal vtaSubtotalBaseImponible, BigDecimal vtaSubtotalBaseNoObjeto, BigDecimal vtaSubtotalBaseExenta, BigDecimal vtaMontoiva, BigDecimal vtaTotal, String vtaTotalLetra, BigDecimal vtaPagado, String cliCodigo, String cliNombre, String cliDireccion, String cliTelefono, String cliRuc, String cliCiudad, String codigoSector, String contPeriodo, String contTipo, String contNumero, String usrInsertaCompra, String usrFechaInsertaCompra, String bodCodigo, Boolean detPendiente, String proCodigoPrincipal, String proNombre, BigDecimal detCantidad, String detMedida, BigDecimal detPrecio, BigDecimal detParcial, BigDecimal detPorcentajeRecargo, BigDecimal detPorcentajeDescuento, BigDecimal detIvaCobrado, BigDecimal detTotal, String secCodigo, String pisNumero, Boolean detIva, BigDecimal detCantidadCaja, String detEmpaque, String detPresentacionUnidad, String detPresentacionCaja, String docElectonicoClaveAcceso) {
         this.empCodigo = empCodigo;
         this.perCodigo = perCodigo;
         this.motCodigo = motCodigo;
@@ -125,6 +126,8 @@ public class ReporteVentaDetalle implements Serializable{
         this.vtaRecargoBase0 = vtaRecargoBase0;
         this.vtaRecargoImponible = vtaRecargoImponible;
         this.vtaDescuentoGeneralBase0 = vtaDescuentoGeneralBase0;
+        this.vtaDescuentoGeneralBaseImponible = vtaDescuentoGeneralBaseImponible;
+        this.vtaDescuentoIva = vtaDescuentoIva;
         this.vtaDescuentoBase0 = vtaDescuentoBase0;
         this.vtaDescuentoBaseImponible = vtaDescuentoBaseImponible;
         this.vtaDescuentoBaseNoObjeto = vtaDescuentoBaseNoObjeto;
@@ -135,6 +138,7 @@ public class ReporteVentaDetalle implements Serializable{
         this.vtaSubtotalBaseExenta = vtaSubtotalBaseExenta;
         this.vtaMontoiva = vtaMontoiva;
         this.vtaTotal = vtaTotal;
+        this.vtaTotalLetra = vtaTotalLetra;
         this.vtaPagado = vtaPagado;
         this.cliCodigo = cliCodigo;
         this.cliNombre = cliNombre;
@@ -168,6 +172,14 @@ public class ReporteVentaDetalle implements Serializable{
         this.detPresentacionUnidad = detPresentacionUnidad;
         this.detPresentacionCaja = detPresentacionCaja;
         this.docElectonicoClaveAcceso = docElectonicoClaveAcceso;
+    }
+
+    public String getVtaTotalLetra() {
+        return vtaTotalLetra;
+    }
+
+    public void setVtaTotalLetra(String vtaTotalLetra) {
+        this.vtaTotalLetra = vtaTotalLetra;
     }
 
     public BigDecimal getVtaDescuentoGeneralBaseImponible() {

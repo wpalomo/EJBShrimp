@@ -9,9 +9,8 @@ import helper.RetornoTO;
 import inventario.TO.*;
 import inventario.entity.InvVentasMotivoAnulacion;
 import inventario.reporte.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import javax.ejb.Stateless;
 import net.sf.jasperreports.engine.JasperPrint;
 import sistema.TO.SisInfoTO;
@@ -1183,6 +1182,11 @@ public class OperacionesInventarioFacade1 implements OperacionesInventarioFacade
                 empresa,
                 invListaProductosCompraTOs);
     }
+    
+    public String getfechaServidorFactura(String mascara)throws Exception {
+        return validaciones.Validacion.fechaSistema(mascara);
+    }
+    
 
      // <editor-fold defaultstate="collapsed" desc="REPORTES INVENTARIO">
       
